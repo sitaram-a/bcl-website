@@ -279,6 +279,49 @@ console.log("Cricket Standings:", cricketStandings);
       </section>
 
 
+      {/* ================= LIVE MATCH / STREAM ================= */}
+      <section className="live-section">
+        <div className="section-heading light-heading">
+          <span>LIVE NOW</span>
+          <h2>
+            Live Match Stream
+          </h2>
+        </div>
+
+        <div className="live-match-card">
+          <div className="live-match-header">
+            <span className="live-badge">
+              <span className="live-dot"></span>
+              LIVE STREAM
+            </span>
+            <span className="match-type">
+              🏆 BCL Match Day
+            </span>
+          </div>
+
+          {/* Embedded YouTube Live Stream Player */}
+          <div className="home-youtube-container" style={{ position: "relative", width: "100%", aspectRatio: "16/9", background: "#000" }}>
+            <iframe
+              src="https://www.youtube.com/embed/42xFSI6kRtM?si=go8F8JTWl6l7I4TE"
+              title="BCL Live Stream"
+              style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: 0 }}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          </div>
+
+          <div className="live-match-footer" style={{ marginTop: "15px" }}>
+            <span>
+              📍 Baharagora Stadium
+            </span>
+            <Link to="/media">
+              More Videos →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+
       {/* ================= UPCOMING MATCHES ================= */}
 
       <section className="matches-section">
