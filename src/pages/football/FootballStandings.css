@@ -1,0 +1,581 @@
+.football-standings-page {
+  width: 100%;
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.standings-header {
+  background: linear-gradient(
+    120deg,
+    #061a32,
+    #0b3b70
+  );
+
+  color: white;
+}
+
+.standings-header-content {
+  max-width: 1200px;
+  min-height: 300px;
+
+  margin: 0 auto;
+  padding: 50px 30px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 35px;
+}
+
+.standings-logo {
+  width: 150px;
+  height: 150px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.standings-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.standings-kicker {
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: #93c5fd;
+
+  font-size: 11px;
+  font-weight: 900;
+
+  letter-spacing: 3px;
+}
+
+.standings-header h1 {
+  margin: 0;
+
+  font-size: clamp(
+    38px,
+    5vw,
+    60px
+  );
+
+  font-weight: 900;
+}
+
+.standings-header p {
+  max-width: 650px;
+
+  margin-top: 18px;
+
+  color: #dbeafe;
+
+  font-size: 15px;
+
+  line-height: 1.7;
+}
+
+
+/* =========================
+   BACK BUTTON
+========================= */
+
+.standings-back-wrapper {
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  padding: 25px 30px 0;
+}
+
+.standings-back-button {
+  display: inline-block;
+
+  padding: 9px 15px;
+
+  border-radius: 6px;
+
+  background: #eff6ff;
+
+  color: #0b63ce;
+
+  font-size: 13px;
+  font-weight: 800;
+
+  border: 1px solid #dbeafe;
+}
+
+
+/* =========================
+   SECTION
+========================= */
+
+.standings-section {
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  padding: 65px 30px 90px;
+}
+
+.standings-section-heading {
+  text-align: center;
+
+  margin-bottom: 40px;
+}
+
+.standings-section-heading > span {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #0b63ce;
+
+  font-size: 11px;
+  font-weight: 900;
+
+  letter-spacing: 3px;
+}
+
+.standings-section-heading h2 {
+  margin: 0;
+
+  color: #111827;
+
+  font-size: 34px;
+  font-weight: 900;
+}
+
+.standings-section-heading p {
+  margin-top: 10px;
+
+  color: #64748b;
+
+  font-size: 14px;
+}
+
+
+/* =========================
+   TABLE
+========================= */
+
+.standings-table-wrapper {
+  overflow-x: auto;
+
+  background: white;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 12px;
+
+  box-shadow:
+    0 5px 18px rgba(
+      0,
+      0,
+      0,
+      0.04
+    );
+}
+
+.standings-table {
+  width: 100%;
+
+  border-collapse: collapse;
+
+  min-width: 650px;
+}
+
+.standings-table thead {
+  background: #071b33;
+
+  color: white;
+}
+
+.standings-table th {
+  padding: 16px 18px;
+
+  text-align: center;
+
+  font-size: 11px;
+
+  font-weight: 900;
+
+  letter-spacing: 1px;
+}
+
+.standings-table th:nth-child(2) {
+  text-align: left;
+}
+
+.standings-table td {
+  padding: 16px 18px;
+
+  border-bottom: 1px solid #eef2f7;
+
+  text-align: center;
+
+  color: #475569;
+
+  font-size: 13px;
+
+  font-weight: 700;
+}
+
+.standings-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.standings-table tbody tr {
+  transition: 0.2s;
+}
+
+.standings-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+
+/* =========================
+   POSITION
+========================= */
+
+.position-badge {
+  width: 30px;
+  height: 30px;
+
+  margin: auto;
+
+  border-radius: 50%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: 12px;
+
+  font-weight: 900;
+
+  background: #f1f5f9;
+
+  color: #475569;
+}
+
+.position-1 {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.position-2 {
+  background: #e2e8f0;
+  color: #334155;
+}
+
+.position-3 {
+  background: #fed7aa;
+  color: #9a3412;
+}
+
+
+/* =========================
+   TEAM
+========================= */
+
+.standing-team {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  text-align: left;
+}
+
+.standing-team-logo {
+  width: 45px;
+  height: 45px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #eff6ff;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+}
+
+.standing-team-logo img {
+  width: 85%;
+  height: 85%;
+
+  object-fit: contain;
+}
+
+.standing-team-logo span {
+  color: #0b63ce;
+
+  font-size: 18px;
+
+  font-weight: 900;
+}
+
+.standing-team strong {
+  display: block;
+
+  color: #111827;
+
+  font-size: 14px;
+}
+
+.standing-team small {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #94a3b8;
+
+  font-size: 10px;
+
+  font-weight: 700;
+}
+
+
+/* =========================
+   RESULTS
+========================= */
+
+.standings-win {
+  color: #15803d !important;
+}
+
+.standings-draw {
+  color: #ca8a04 !important;
+}
+
+.standings-loss {
+  color: #dc2626 !important;
+}
+
+
+/* =========================
+   POINTS
+========================= */
+
+.points-value {
+  display: inline-flex;
+
+  min-width: 38px;
+
+  height: 32px;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 6px;
+
+  background: #dbeafe;
+
+  color: #0b3b70;
+
+  font-size: 14px;
+}
+
+
+/* =========================
+   LEGEND
+========================= */
+
+.standings-legend {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 28px;
+
+  margin-top: 22px;
+}
+
+.standings-legend div {
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+}
+
+.standings-legend strong {
+  color: #334155;
+
+  font-size: 11px;
+}
+
+.standings-legend span {
+  color: #94a3b8;
+
+  font-size: 10px;
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.standings-navigation {
+  padding: 75px 30px;
+
+  background: #071b33;
+
+  color: white;
+
+  text-align: center;
+}
+
+.standings-navigation > span {
+  color: #93c5fd;
+
+  font-size: 11px;
+
+  font-weight: 900;
+
+  letter-spacing: 3px;
+}
+
+.standings-navigation h2 {
+  margin: 10px 0 0;
+
+  font-size: 34px;
+
+  font-weight: 900;
+}
+
+.standings-navigation p {
+  margin: 12px auto 0;
+
+  max-width: 550px;
+
+  color: #cbd5e1;
+
+  font-size: 14px;
+}
+
+.standings-navigation-buttons {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 12px;
+
+  margin-top: 25px;
+}
+
+.standings-primary-button,
+.standings-secondary-button {
+  padding: 11px 20px;
+
+  border-radius: 6px;
+
+  font-size: 13px;
+
+  font-weight: 800;
+}
+
+.standings-primary-button {
+  background: white;
+
+  color: #071b33;
+}
+
+.standings-secondary-button {
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.4
+    );
+
+  color: white;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 700px) {
+
+  .standings-header-content {
+    min-height: auto;
+
+    padding: 45px 20px;
+
+    flex-direction: column;
+
+    text-align: center;
+  }
+
+  .standings-logo {
+    width: 120px;
+    height: 120px;
+  }
+
+  .standings-header h1 {
+    font-size: 38px;
+  }
+
+  .standings-header p {
+    font-size: 14px;
+  }
+
+  .standings-back-wrapper {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .standings-section {
+    padding: 55px 20px 70px;
+  }
+
+  .standings-section-heading h2 {
+    font-size: 28px;
+  }
+
+  .standings-legend {
+    flex-wrap: wrap;
+
+    gap: 15px;
+  }
+
+  .standings-navigation {
+    padding: 60px 20px;
+  }
+
+  .standings-navigation h2 {
+    font-size: 28px;
+  }
+
+  .standings-navigation-buttons {
+    flex-direction: column;
+
+    max-width: 220px;
+
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

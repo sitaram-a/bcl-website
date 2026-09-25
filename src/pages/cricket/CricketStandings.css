@@ -1,0 +1,404 @@
+/* ================================
+   CRICKET STANDINGS PAGE
+================================ */
+
+.cricket-standings-page {
+  min-height: 100vh;
+  background: #f4faf7;
+  padding-bottom: 60px;
+}
+
+/* ================================
+   HEADER
+================================ */
+
+.cricket-standings-header {
+  max-width: 1100px;
+  margin: 0 auto;
+
+  padding: 55px 20px 30px;
+
+  text-align: center;
+}
+
+.cricket-section-badge {
+  display: inline-block;
+
+  padding: 7px 14px;
+
+  border-radius: 20px;
+
+  background: #dff7ea;
+  color: #075e3b;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  letter-spacing: 0.8px;
+}
+
+.cricket-standings-header h1 {
+  margin: 15px 0 8px;
+
+  color: #064d31;
+
+  font-size: 38px;
+  font-weight: 800;
+}
+
+.cricket-standings-header p {
+  margin: 0;
+
+  color: #66756d;
+
+  font-size: 16px;
+}
+
+/* ================================
+   TABLE CONTAINER
+================================ */
+
+.cricket-standings-container {
+  max-width: 950px;
+
+  margin: 0 auto;
+
+  padding: 10px 20px;
+}
+
+.cricket-table-wrapper {
+  background: white;
+
+  border: 1px solid #dcece4;
+
+  border-radius: 18px;
+
+  overflow-x: auto;
+
+  box-shadow: 0 8px 25px rgba(0, 80, 45, 0.07);
+}
+
+/* ================================
+   TABLE
+================================ */
+
+.cricket-standings-table {
+  width: 100%;
+
+  border-collapse: collapse;
+
+  min-width: 650px;
+}
+
+.cricket-standings-table thead {
+  background: #075e3b;
+  color: white;
+}
+
+.cricket-standings-table th {
+  padding: 16px 14px;
+
+  text-align: center;
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.5px;
+}
+
+.cricket-standings-table th:nth-child(2) {
+  text-align: left;
+}
+
+.cricket-standings-table td {
+  padding: 16px 14px;
+
+  border-bottom: 1px solid #edf3ef;
+
+  text-align: center;
+
+  color: #46574f;
+
+  font-size: 14px;
+}
+
+.cricket-standings-table td:nth-child(2) {
+  text-align: left;
+}
+
+.cricket-standings-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.cricket-standings-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.cricket-standings-table tbody tr:hover {
+  background: #f5fbf7;
+}
+
+/* ================================
+   POSITION
+================================ */
+
+.cricket-position {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 30px;
+  height: 30px;
+
+  border-radius: 50%;
+
+  background: #edf4f0;
+
+  color: #52655b;
+
+  font-size: 12px;
+
+  font-weight: 800;
+}
+
+.cricket-position.top-position {
+  background: #dff7ea;
+
+  color: #075e3b;
+}
+
+/* ================================
+   TEAM
+================================ */
+
+.cricket-standing-team {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+}
+
+.cricket-standing-logo {
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #e9f7ef;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  font-size: 20px;
+}
+
+.cricket-standing-logo img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+}
+
+.cricket-standing-team strong {
+  display: block;
+
+  color: #16372a;
+
+  font-size: 14px;
+}
+
+.cricket-standing-team span {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #8a968f;
+
+  font-size: 11px;
+
+  font-weight: 600;
+}
+
+/* ================================
+   WINS / LOSSES
+================================ */
+
+.cricket-wins {
+  color: #087443 !important;
+
+  font-weight: 700;
+}
+
+.cricket-losses {
+  color: #b15c5c !important;
+
+  font-weight: 700;
+}
+
+/* ================================
+   POINTS
+================================ */
+
+.cricket-points {
+  color: #075e3b;
+
+  font-size: 16px;
+}
+
+/* ================================
+   LEGEND
+================================ */
+
+.cricket-standings-legend {
+  max-width: 950px;
+
+  margin: 20px auto 0;
+
+  padding: 0 20px;
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 25px;
+
+  flex-wrap: wrap;
+}
+
+.cricket-standings-legend div {
+  display: flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  color: #718078;
+
+  font-size: 12px;
+}
+
+.cricket-standings-legend strong {
+  color: #075e3b;
+}
+
+/* ================================
+   EMPTY STATE
+================================ */
+
+.cricket-no-standings {
+  background: white;
+
+  border: 1px solid #dcece4;
+
+  border-radius: 18px;
+
+  padding: 55px 20px;
+
+  text-align: center;
+}
+
+.cricket-no-standings > div {
+  font-size: 45px;
+}
+
+.cricket-no-standings h2 {
+  margin: 15px 0 8px;
+
+  color: #164a35;
+}
+
+.cricket-no-standings p {
+  margin: 0;
+
+  color: #78877f;
+}
+
+/* ================================
+   BOTTOM
+================================ */
+
+.cricket-standings-bottom {
+  max-width: 950px;
+
+  margin: 25px auto 0;
+
+  padding: 0 20px;
+}
+
+.cricket-back-button {
+  display: inline-block;
+
+  padding: 10px 16px;
+
+  background: #075e3b;
+
+  color: white;
+
+  border-radius: 8px;
+
+  text-decoration: none;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  transition: background 0.2s ease;
+}
+
+.cricket-back-button:hover {
+  background: #064c30;
+}
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 600px) {
+
+  .cricket-standings-header {
+    padding-top: 35px;
+  }
+
+  .cricket-standings-header h1 {
+    font-size: 30px;
+  }
+
+  .cricket-standings-container {
+    padding: 10px 12px;
+  }
+
+  .cricket-standings-table {
+    min-width: 600px;
+  }
+
+  .cricket-standings-table th,
+  .cricket-standings-table td {
+    padding: 12px 10px;
+  }
+
+  .cricket-standing-logo {
+    width: 36px;
+    height: 36px;
+  }
+
+  .cricket-standing-team {
+    gap: 8px;
+  }
+
+  .cricket-standing-team strong {
+    font-size: 13px;
+  }
+
+  .cricket-standings-legend {
+    gap: 15px;
+  }
+}

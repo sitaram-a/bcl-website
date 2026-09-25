@@ -1,0 +1,356 @@
+/* ================================
+   CRICKET TEAMS PAGE
+================================ */
+
+.cricket-teams-page {
+  min-height: 100vh;
+  background: #f4faf7;
+  padding-bottom: 60px;
+}
+
+/* ================================
+   HEADER
+================================ */
+
+.cricket-teams-header {
+  max-width: 1100px;
+  margin: 0 auto;
+
+  padding: 55px 20px 30px;
+
+  text-align: center;
+}
+
+.cricket-section-badge {
+  display: inline-block;
+
+  padding: 7px 14px;
+
+  border-radius: 20px;
+
+  background: #dff7ea;
+  color: #075e3b;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  letter-spacing: 0.8px;
+}
+
+.cricket-teams-header h1 {
+  margin: 15px 0 8px;
+
+  color: #064d31;
+
+  font-size: 38px;
+  font-weight: 800;
+}
+
+.cricket-teams-header p {
+  margin: 0;
+
+  color: #66756d;
+
+  font-size: 16px;
+}
+
+/* ================================
+   TEAMS GRID
+================================ */
+
+.cricket-teams-grid {
+  max-width: 1100px;
+
+  margin: 0 auto;
+
+  padding: 10px 20px;
+
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 22px;
+}
+
+/* ================================
+   TEAM CARD
+================================ */
+
+.cricket-team-card {
+  background: white;
+
+  border: 1px solid #dcece4;
+
+  border-radius: 18px;
+
+  padding: 25px;
+
+  text-align: center;
+
+  box-shadow: 0 8px 25px rgba(0, 80, 45, 0.07);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.cricket-team-card:hover {
+  transform: translateY(-5px);
+
+  box-shadow: 0 14px 32px rgba(0, 80, 45, 0.13);
+}
+
+/* ================================
+   TEAM LOGO
+================================ */
+
+.cricket-team-card-logo {
+  width: 95px;
+  height: 95px;
+
+  margin: 0 auto 15px;
+
+  border-radius: 50%;
+
+  background: #e9f7ef;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  border: 4px solid #dff7ea;
+}
+
+.cricket-team-card-logo img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+}
+
+.cricket-team-card-logo span {
+  font-size: 42px;
+}
+
+/* ================================
+   TEAM INFO
+================================ */
+
+.cricket-team-card-info h2 {
+  margin: 0;
+
+  color: #16372a;
+
+  font-size: 22px;
+
+  font-weight: 800;
+}
+
+.cricket-team-short-name {
+  display: inline-block;
+
+  margin-top: 6px;
+
+  padding: 4px 10px;
+
+  border-radius: 12px;
+
+  background: #e7f6ed;
+
+  color: #075e3b;
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.5px;
+}
+
+.cricket-team-card-info p {
+  margin: 12px 0 0;
+
+  color: #718078;
+
+  font-size: 13px;
+}
+
+/* ================================
+   STATS
+================================ */
+
+.cricket-team-card-stats {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 10px;
+
+  margin: 22px 0;
+}
+
+.cricket-team-card-stats div {
+  padding: 12px;
+
+  background: #f4faf7;
+
+  border-radius: 10px;
+}
+
+.cricket-team-card-stats strong {
+  display: block;
+
+  color: #075e3b;
+
+  font-size: 17px;
+}
+
+.cricket-team-card-stats span {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #819088;
+
+  font-size: 11px;
+}
+
+/* ================================
+   VIEW BUTTON
+================================ */
+
+.cricket-team-view-button {
+  display: block;
+
+  padding: 11px 16px;
+
+  background: #075e3b;
+
+  color: white;
+
+  border-radius: 9px;
+
+  text-decoration: none;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  transition: background 0.2s ease;
+}
+
+.cricket-team-view-button:hover {
+  background: #064c30;
+}
+
+/* ================================
+   EMPTY STATE
+================================ */
+
+.cricket-no-teams {
+  grid-column: 1 / -1;
+
+  background: white;
+
+  border: 1px solid #dcece4;
+
+  border-radius: 18px;
+
+  padding: 55px 20px;
+
+  text-align: center;
+}
+
+.cricket-no-teams > div {
+  font-size: 45px;
+}
+
+.cricket-no-teams h2 {
+  margin: 15px 0 8px;
+
+  color: #164a35;
+}
+
+.cricket-no-teams p {
+  margin: 0;
+
+  color: #78877f;
+}
+
+/* ================================
+   BOTTOM
+================================ */
+
+.cricket-teams-bottom {
+  max-width: 1100px;
+
+  margin: 25px auto 0;
+
+  padding: 0 20px;
+}
+
+.cricket-back-button {
+  display: inline-block;
+
+  padding: 10px 16px;
+
+  background: #075e3b;
+
+  color: white;
+
+  border-radius: 8px;
+
+  text-decoration: none;
+
+  font-size: 13px;
+
+  font-weight: 700;
+}
+
+.cricket-back-button:hover {
+  background: #064c30;
+}
+
+/* ================================
+   TABLET
+================================ */
+
+@media (max-width: 750px) {
+  .cricket-teams-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 500px) {
+
+  .cricket-teams-header {
+    padding-top: 35px;
+  }
+
+  .cricket-teams-header h1 {
+    font-size: 30px;
+  }
+
+  .cricket-teams-grid {
+    padding: 10px 15px;
+  }
+
+  .cricket-team-card {
+    padding: 20px;
+  }
+
+  .cricket-team-card-logo {
+    width: 80px;
+    height: 80px;
+  }
+
+  .cricket-team-card-info h2 {
+    font-size: 19px;
+  }
+}

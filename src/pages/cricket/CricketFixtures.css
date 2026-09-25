@@ -1,0 +1,329 @@
+/* ================================
+   CRICKET FIXTURES PAGE
+================================ */
+
+.cricket-fixtures-page {
+  min-height: 100vh;
+  background: #f4faf7;
+  padding-bottom: 60px;
+}
+
+/* ================================
+   HEADER
+================================ */
+
+.cricket-fixtures-header {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 55px 20px 30px;
+  text-align: center;
+}
+
+.cricket-section-badge {
+  display: inline-block;
+
+  padding: 7px 14px;
+  border-radius: 20px;
+
+  background: #dff7ea;
+  color: #075e3b;
+
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+}
+
+.cricket-fixtures-header h1 {
+  margin: 15px 0 8px;
+
+  color: #064d31;
+
+  font-size: 38px;
+  font-weight: 800;
+}
+
+.cricket-fixtures-header p {
+  margin: 0;
+
+  color: #66756d;
+  font-size: 16px;
+}
+
+/* ================================
+   FIXTURES LIST
+================================ */
+
+.cricket-fixtures-list {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 10px 20px;
+}
+
+/* ================================
+   FIXTURE CARD
+================================ */
+
+.cricket-fixture-card {
+  background: white;
+
+  border: 1px solid #dcece4;
+  border-radius: 18px;
+
+  padding: 24px;
+  margin-bottom: 20px;
+
+  box-shadow: 0 8px 25px rgba(0, 80, 45, 0.07);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.cricket-fixture-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow: 0 12px 30px rgba(0, 80, 45, 0.12);
+}
+
+/* ================================
+   TOP
+================================ */
+
+.cricket-fixture-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 18px;
+}
+
+.cricket-fixture-status {
+  background: #e2f7eb;
+  color: #087443;
+
+  padding: 6px 12px;
+  border-radius: 20px;
+
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.cricket-fixture-id {
+  color: #84928b;
+  font-size: 12px;
+}
+
+/* ================================
+   DATE
+================================ */
+
+.cricket-fixture-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-bottom: 25px;
+
+  color: #075e3b;
+}
+
+.cricket-fixture-date strong {
+  font-size: 18px;
+}
+
+.cricket-fixture-date span {
+  margin-top: 4px;
+  color: #75847c;
+  font-size: 14px;
+}
+
+/* ================================
+   TEAMS
+================================ */
+
+.cricket-fixture-teams {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+
+  align-items: center;
+  gap: 25px;
+}
+
+.cricket-fixture-team {
+  text-align: center;
+}
+
+.cricket-team-logo {
+  width: 70px;
+  height: 70px;
+
+  margin: 0 auto 10px;
+
+  border-radius: 50%;
+
+  background: #e9f7ef;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 30px;
+
+  overflow: hidden;
+}
+
+.cricket-team-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.cricket-fixture-team h2 {
+  margin: 0;
+
+  color: #16372a;
+
+  font-size: 18px;
+}
+
+.cricket-fixture-team span {
+  display: block;
+
+  margin-top: 4px;
+
+  color: #829089;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.cricket-fixture-vs {
+  width: 48px;
+  height: 48px;
+
+  border-radius: 50%;
+
+  background: #075e3b;
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+/* ================================
+   VENUE
+================================ */
+
+.cricket-fixture-venue {
+  margin-top: 25px;
+  padding-top: 16px;
+
+  border-top: 1px solid #edf3ef;
+
+  text-align: center;
+
+  color: #697970;
+  font-size: 13px;
+}
+
+/* ================================
+   EMPTY STATE
+================================ */
+
+.cricket-no-fixtures {
+  background: white;
+
+  border: 1px solid #dcece4;
+  border-radius: 18px;
+
+  padding: 55px 20px;
+
+  text-align: center;
+}
+
+.cricket-no-fixtures > div {
+  font-size: 45px;
+}
+
+.cricket-no-fixtures h2 {
+  margin: 15px 0 8px;
+  color: #164a35;
+}
+
+.cricket-no-fixtures p {
+  margin: 0;
+  color: #78877f;
+}
+
+/* ================================
+   BOTTOM
+================================ */
+
+.cricket-fixtures-bottom {
+  max-width: 900px;
+  margin: 20px auto 0;
+  padding: 0 20px;
+}
+
+.cricket-back-button {
+  display: inline-block;
+
+  padding: 10px 16px;
+
+  background: #075e3b;
+  color: white;
+
+  border-radius: 8px;
+
+  text-decoration: none;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  transition: background 0.2s ease;
+}
+
+.cricket-back-button:hover {
+  background: #064c30;
+}
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 600px) {
+  .cricket-fixtures-header {
+    padding-top: 35px;
+  }
+
+  .cricket-fixtures-header h1 {
+    font-size: 30px;
+  }
+
+  .cricket-fixture-card {
+    padding: 18px;
+  }
+
+  .cricket-fixture-teams {
+    gap: 10px;
+  }
+
+  .cricket-team-logo {
+    width: 58px;
+    height: 58px;
+    font-size: 24px;
+  }
+
+  .cricket-fixture-team h2 {
+    font-size: 15px;
+  }
+
+  .cricket-fixture-vs {
+    width: 40px;
+    height: 40px;
+    font-size: 10px;
+  }
+}

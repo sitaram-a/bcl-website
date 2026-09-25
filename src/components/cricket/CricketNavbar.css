@@ -1,0 +1,160 @@
+/* ================================
+   CRICKET NAVBAR
+================================ */
+
+.cricket-navbar {
+  width: 100%;
+  background: #075e3b;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.cricket-navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 72px;
+  padding: 0 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+/* ================================
+   BRAND
+================================ */
+
+.cricket-navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  text-decoration: none;
+  color: white;
+
+  flex-shrink: 0;
+}
+
+.cricket-navbar-brand img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.cricket-navbar-brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.cricket-navbar-brand-text strong {
+  font-size: 20px;
+  font-weight: 800;
+  color: white;
+}
+
+.cricket-navbar-brand-text span {
+  font-size: 12px;
+  font-weight: 600;
+  color: #b7f7d7;
+  letter-spacing: 0.5px;
+}
+
+/* ================================
+   NAV LINKS
+================================ */
+
+.cricket-navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cricket-nav-link {
+  color: #e5fff1;
+  text-decoration: none;
+
+  padding: 10px 14px;
+  border-radius: 8px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.cricket-nav-link:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+  transform: translateY(-1px);
+}
+
+.cricket-nav-link.active {
+  background: white;
+  color: #075e3b;
+}
+
+/* ================================
+   TABLET
+================================ */
+
+@media (max-width: 850px) {
+  .cricket-navbar-container {
+    gap: 15px;
+  }
+
+  .cricket-navbar-links {
+    gap: 2px;
+  }
+
+  .cricket-nav-link {
+    padding: 9px 10px;
+    font-size: 13px;
+  }
+}
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 650px) {
+  .cricket-navbar-container {
+    min-height: auto;
+    padding: 12px 15px;
+
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .cricket-navbar-brand {
+    justify-content: center;
+  }
+
+  .cricket-navbar-links {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .cricket-nav-link {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 400px) {
+  .cricket-nav-link {
+    padding: 7px 8px;
+    font-size: 11px;
+  }
+}

@@ -1,0 +1,560 @@
+.cricket-home-page {
+  min-height: 100vh;
+  background: #f4faf7;
+  padding-bottom: 60px;
+}
+
+/* HERO */
+
+.cricket-home-hero {
+  background: linear-gradient(135deg, #075e3b, #0a7a4c);
+  color: white;
+  padding: 65px 20px;
+}
+
+.cricket-home-hero-content {
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  gap: 45px;
+}
+
+.cricket-home-logo {
+  width: 170px;
+  height: 170px;
+  flex-shrink: 0;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+}
+
+.cricket-home-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.cricket-home-badge {
+  display: inline-block;
+  padding: 7px 13px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.14);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+}
+
+.cricket-home-hero-text h1 {
+  margin: 13px 0 8px;
+  font-size: 48px;
+  line-height: 1.1;
+}
+
+.cricket-home-hero-text p {
+  max-width: 620px;
+  margin: 0;
+  color: #dff5e9;
+  line-height: 1.7;
+  font-size: 16px;
+}
+
+.cricket-home-hero-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.cricket-primary-button,
+.cricket-secondary-button {
+  padding: 12px 18px;
+  border-radius: 9px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.cricket-primary-button {
+  background: white;
+  color: #075e3b;
+}
+
+.cricket-secondary-button {
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: white;
+}
+
+/* STATS */
+
+.cricket-home-stats {
+  max-width: 1050px;
+  margin: -30px auto 0;
+  padding: 0 20px;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.cricket-stat-card {
+  background: white;
+  border: 1px solid #dcece4;
+  border-radius: 14px;
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 8px 25px rgba(0, 80, 45, 0.08);
+}
+
+.cricket-stat-icon {
+  width: 45px;
+  height: 45px;
+  border-radius: 10px;
+  background: #e8f7ef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 21px;
+}
+
+.cricket-stat-card strong {
+  display: block;
+  color: #075e3b;
+  font-size: 23px;
+}
+
+.cricket-stat-card span {
+  color: #77857e;
+  font-size: 12px;
+}
+
+/* SECTIONS */
+
+.cricket-home-section {
+  max-width: 1050px;
+  margin: 55px auto 0;
+  padding: 0 20px;
+}
+
+.cricket-section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  margin-bottom: 18px;
+}
+
+.cricket-section-heading span {
+  color: #7a8881;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.cricket-section-heading h2 {
+  margin: 5px 0 0;
+  color: #164a35;
+  font-size: 26px;
+}
+
+.cricket-section-heading a {
+  color: #075e3b;
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+/* MATCH CENTER */
+
+.cricket-match-center-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.cricket-home-match-card {
+  background: white;
+  border: 1px solid #dcece4;
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: 0 7px 22px rgba(0, 80, 45, 0.05);
+}
+
+.cricket-home-match-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #075e3b;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.cricket-upcoming-label,
+.cricket-finished-label {
+  padding: 5px 8px;
+  border-radius: 12px;
+  font-size: 9px;
+}
+
+.cricket-upcoming-label {
+  background: #fff4d8;
+  color: #9a6b00;
+}
+
+.cricket-finished-label {
+  background: #e5f6ec;
+  color: #075e3b;
+}
+
+.cricket-home-match-date {
+  margin-top: 18px;
+  color: #78877f;
+  font-size: 12px;
+  text-align: center;
+}
+
+.cricket-home-teams {
+  display: grid;
+  grid-template-columns: 1fr 60px 1fr;
+  align-items: center;
+  text-align: center;
+  margin: 22px 0;
+}
+
+.cricket-home-team-logo {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 8px;
+  border-radius: 50%;
+  background: #e8f7ef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.cricket-home-team strong {
+  display: block;
+  color: #164a35;
+  font-size: 18px;
+}
+
+.cricket-home-team span {
+  display: block;
+  margin-top: 4px;
+  color: #89958f;
+  font-size: 10px;
+}
+
+.cricket-home-vs,
+.cricket-result-vs {
+  color: #a0aba5;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.cricket-home-venue {
+  padding-top: 13px;
+  border-top: 1px solid #edf3ef;
+  color: #7b8982;
+  text-align: center;
+  font-size: 11px;
+}
+
+.cricket-home-card-button {
+  display: block;
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 8px;
+  background: #e9f7ef;
+  color: #075e3b;
+  text-align: center;
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.cricket-home-empty {
+  padding: 50px 10px;
+  color: #89958f;
+  text-align: center;
+}
+
+/* RESULT */
+
+.cricket-home-result {
+  display: grid;
+  grid-template-columns: 1fr 50px 1fr;
+  align-items: center;
+  text-align: center;
+  margin: 22px 0;
+}
+
+.cricket-home-result strong {
+  display: block;
+  color: #164a35;
+  font-size: 18px;
+}
+
+.cricket-home-result span {
+  display: block;
+  margin-top: 4px;
+  color: #89958f;
+  font-size: 10px;
+}
+
+.cricket-home-result b {
+  display: block;
+  margin-top: 10px;
+  color: #075e3b;
+  font-size: 19px;
+}
+
+/* TABLE */
+
+.cricket-home-table-wrapper {
+  overflow-x: auto;
+  background: white;
+  border: 1px solid #dcece4;
+  border-radius: 15px;
+  box-shadow: 0 7px 22px rgba(0, 80, 45, 0.05);
+}
+
+.cricket-home-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+.cricket-home-table th {
+  padding: 14px;
+  background: #edf8f2;
+  color: #547064;
+  text-align: left;
+  font-size: 11px;
+}
+
+.cricket-home-table td {
+  padding: 15px 14px;
+  border-top: 1px solid #edf3ef;
+  color: #596c63;
+  font-size: 12px;
+}
+
+.cricket-home-table td:first-child {
+  font-weight: 800;
+  color: #075e3b;
+}
+
+.cricket-table-team-name {
+  display: block;
+  margin-top: 3px;
+  color: #9aa69f;
+  font-size: 10px;
+}
+
+.cricket-table-points {
+  color: #075e3b;
+  font-size: 15px;
+}
+
+/* QUICK LINKS */
+
+.cricket-quick-links {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+}
+
+.cricket-quick-links a {
+  background: white;
+  border: 1px solid #dcece4;
+  border-radius: 13px;
+  padding: 18px 14px;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.cricket-quick-links a:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 80, 45, 0.08);
+}
+
+.cricket-quick-links > a > span {
+  font-size: 25px;
+}
+
+.cricket-quick-links strong {
+  display: block;
+  margin-top: 10px;
+  color: #164a35;
+  font-size: 13px;
+}
+
+.cricket-quick-links small {
+  display: block;
+  margin-top: 4px;
+  color: #89958f;
+  font-size: 10px;
+}
+
+/* CTA */
+
+.cricket-home-cta {
+  max-width: 1050px;
+  margin: 55px auto 0;
+  padding: 30px;
+  border-radius: 18px;
+  background: #075e3b;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cricket-home-cta span {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.cricket-home-cta h2 {
+  margin: 7px 0;
+  font-size: 25px;
+}
+
+.cricket-home-cta p {
+  margin: 0;
+  color: #d8f0e3;
+  font-size: 12px;
+}
+
+.cricket-home-cta a {
+  padding: 12px 18px;
+  border-radius: 9px;
+  background: white;
+  color: #075e3b;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 850px) {
+  .cricket-home-hero-content {
+    gap: 25px;
+  }
+
+  .cricket-home-logo {
+    width: 130px;
+    height: 130px;
+  }
+
+  .cricket-home-hero-text h1 {
+    font-size: 38px;
+  }
+
+  .cricket-home-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cricket-quick-links {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 650px) {
+  .cricket-home-hero {
+    padding: 45px 20px;
+  }
+
+  .cricket-home-hero-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .cricket-home-logo {
+    width: 125px;
+    height: 125px;
+  }
+
+  .cricket-home-hero-text h1 {
+    font-size: 34px;
+  }
+
+  .cricket-home-hero-buttons {
+    justify-content: center;
+  }
+
+  .cricket-match-center-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cricket-quick-links {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cricket-home-cta {
+    margin-left: 20px;
+    margin-right: 20px;
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 450px) {
+  .cricket-home-stats {
+    padding: 0 12px;
+    gap: 8px;
+  }
+
+  .cricket-stat-card {
+    padding: 13px 10px;
+  }
+
+  .cricket-stat-icon {
+    width: 38px;
+    height: 38px;
+    font-size: 18px;
+  }
+
+  .cricket-stat-card strong {
+    font-size: 19px;
+  }
+
+  .cricket-home-section {
+    padding: 0 15px;
+  }
+
+  .cricket-home-hero-buttons {
+    flex-direction: column;
+  }
+
+  .cricket-primary-button,
+  .cricket-secondary-button {
+    display: block;
+  }
+
+  .cricket-quick-links {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.cricket-live-home-button {
+  padding: 12px 18px;
+  border-radius: 9px;
+  background: #c62828;
+  color: white;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.cricket-live-home-button:hover {
+  background: #a91f1f;
+}

@@ -1,0 +1,129 @@
+.football-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #071b3a;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+}
+
+.football-navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 70px;
+  padding: 0 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+}
+
+.football-navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  text-decoration: none;
+  color: white;
+  flex-shrink: 0;
+}
+
+.football-navbar-brand img {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+  background: white;
+  border-radius: 50%;
+  padding: 3px;
+}
+
+.football-navbar-brand div {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.football-navbar-brand strong {
+  font-size: 19px;
+  letter-spacing: 1px;
+}
+
+.football-navbar-brand span {
+  font-size: 11px;
+  margin-top: 4px;
+  color: #b9c7dc;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.football-navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.football-nav-link {
+  color: #d6deeb;
+  text-decoration: none;
+  padding: 9px 13px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.football-nav-link:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.football-nav-link.active {
+  color: #071b3a;
+  background: white;
+}
+
+/* TABLET */
+
+@media (max-width: 850px) {
+  .football-navbar-container {
+    min-height: auto;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .football-navbar-brand {
+    justify-content: center;
+  }
+
+  .football-navbar-links {
+    justify-content: center;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+  .football-navbar-container {
+    gap: 12px;
+  }
+
+  .football-navbar-links {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+  }
+
+  .football-nav-link {
+    text-align: center;
+    padding: 8px 5px;
+    font-size: 12px;
+  }
+}

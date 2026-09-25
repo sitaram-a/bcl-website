@@ -1,0 +1,38 @@
+export const footballStandings = [
+  {
+    position: 1,
+    teamId: 1,
+    played: 3,
+    won: 3,
+    drawn: 0,
+    lost: 0,
+    points: 9,
+  },
+  {
+    position: 2,
+    teamId: 2,
+    played: 3,
+    won: 2,
+    drawn: 0,
+    lost: 1,
+    points: 6,
+  },
+  {
+    position: 3,
+    teamId: 3,
+    played: 3,
+    won: 1,
+    drawn: 0,
+    lost: 2,
+    points: 3,
+  },
+  {
+    position: 4,
+    teamId: 4,
+    played: 3,
+    won: 0,
+    drawn: 0,
+    lost: 3,
+    points: 0,
+  },
+];

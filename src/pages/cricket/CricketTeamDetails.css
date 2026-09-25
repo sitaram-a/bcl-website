@@ -1,0 +1,504 @@
+/* ================================
+   CRICKET TEAM DETAILS
+================================ */
+
+.cricket-team-details-page {
+  min-height: 100vh;
+  background: #f4faf7;
+  padding-bottom: 60px;
+}
+
+/* ================================
+   HERO
+================================ */
+
+.cricket-team-details-hero {
+  max-width: 1000px;
+
+  margin: 0 auto;
+
+  padding: 55px 20px 35px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 30px;
+}
+
+.cricket-team-details-logo {
+  width: 125px;
+  height: 125px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #e9f7ef;
+
+  border: 5px solid #dff7ea;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+}
+
+.cricket-team-details-logo img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+}
+
+.cricket-team-details-logo span {
+  font-size: 55px;
+}
+
+.cricket-team-details-info h1 {
+  margin: 12px 0;
+
+  color: #064d31;
+
+  font-size: 40px;
+
+  font-weight: 800;
+}
+
+.cricket-team-details-meta {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  flex-wrap: wrap;
+}
+
+.cricket-team-details-meta span {
+  display: inline-block;
+
+  padding: 7px 12px;
+
+  border-radius: 15px;
+
+  background: white;
+
+  border: 1px solid #dcece4;
+
+  color: #52655b;
+
+  font-size: 12px;
+
+  font-weight: 700;
+}
+
+/* ================================
+   STATS
+================================ */
+
+.cricket-team-details-stats {
+  max-width: 1000px;
+
+  margin: 0 auto;
+
+  padding: 0 20px 30px;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 15px;
+}
+
+.cricket-team-stat-card {
+  background: white;
+
+  border: 1px solid #dcece4;
+
+  border-radius: 14px;
+
+  padding: 20px;
+
+  text-align: center;
+
+  box-shadow: 0 5px 18px rgba(0, 80, 45, 0.05);
+}
+
+.cricket-team-stat-card strong {
+  display: block;
+
+  color: #075e3b;
+
+  font-size: 24px;
+
+  font-weight: 800;
+}
+
+.cricket-team-stat-card span {
+  display: block;
+
+  margin-top: 5px;
+
+  color: #7b8982;
+
+  font-size: 12px;
+}
+
+/* ================================
+   SQUAD
+================================ */
+
+.cricket-team-squad {
+  max-width: 1000px;
+
+  margin: 0 auto;
+
+  padding: 10px 20px;
+}
+
+.cricket-team-squad-header {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-end;
+
+  margin-bottom: 20px;
+}
+
+.cricket-team-squad-header h2 {
+  margin: 10px 0 0;
+
+  color: #16372a;
+
+  font-size: 25px;
+}
+
+.cricket-player-count {
+  color: #075e3b;
+
+  font-size: 13px;
+
+  font-weight: 700;
+}
+
+/* ================================
+   PLAYER GRID
+================================ */
+
+.cricket-player-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 15px;
+}
+
+.cricket-player-card {
+  position: relative;
+
+  background: white;
+
+  border: 1px solid #dcece4;
+
+  border-radius: 15px;
+
+  padding: 20px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  box-shadow: 0 6px 20px rgba(0, 80, 45, 0.05);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.cricket-player-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow: 0 10px 25px rgba(0, 80, 45, 0.1);
+}
+
+/* ================================
+   JERSEY NUMBER
+================================ */
+
+.cricket-player-number {
+  position: absolute;
+
+  top: 12px;
+  right: 14px;
+
+  color: #b6c4bd;
+
+  font-size: 12px;
+
+  font-weight: 800;
+}
+
+/* ================================
+   PLAYER AVATAR
+================================ */
+
+.cricket-player-avatar {
+  width: 55px;
+  height: 55px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #e9f7ef;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: 25px;
+}
+
+/* ================================
+   PLAYER INFO
+================================ */
+
+.cricket-player-info {
+  min-width: 0;
+}
+
+.cricket-player-info h3 {
+  margin: 0;
+
+  color: #16372a;
+
+  font-size: 16px;
+}
+
+.cricket-player-info span {
+  display: block;
+
+  margin-top: 5px;
+
+  color: #7b8982;
+
+  font-size: 12px;
+}
+
+/* ================================
+   ROLE
+================================ */
+
+.cricket-player-role {
+  margin-left: auto;
+
+  padding: 5px 9px;
+
+  border-radius: 12px;
+
+  background: #e7f6ed;
+
+  color: #075e3b;
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  white-space: nowrap;
+}
+
+/* ================================
+   EMPTY SQUAD
+================================ */
+
+.cricket-empty-squad {
+  background: white;
+
+  border: 1px solid #dcece4;
+
+  border-radius: 16px;
+
+  padding: 45px 20px;
+
+  text-align: center;
+}
+
+.cricket-empty-squad > div {
+  font-size: 40px;
+}
+
+.cricket-empty-squad h3 {
+  margin: 12px 0 7px;
+
+  color: #164a35;
+}
+
+.cricket-empty-squad p {
+  margin: 0;
+
+  color: #78877f;
+
+  font-size: 13px;
+}
+
+/* ================================
+   BOTTOM
+================================ */
+
+.cricket-team-details-bottom {
+  max-width: 1000px;
+
+  margin: 30px auto 0;
+
+  padding: 0 20px;
+
+  display: flex;
+
+  gap: 10px;
+
+  flex-wrap: wrap;
+}
+
+.cricket-back-button,
+.cricket-home-button {
+  display: inline-block;
+
+  padding: 10px 16px;
+
+  border-radius: 8px;
+
+  text-decoration: none;
+
+  font-size: 13px;
+
+  font-weight: 700;
+}
+
+.cricket-back-button {
+  background: #075e3b;
+  color: white;
+}
+
+.cricket-back-button:hover {
+  background: #064c30;
+}
+
+.cricket-home-button {
+  background: white;
+
+  border: 1px solid #cfe3d8;
+
+  color: #075e3b;
+}
+
+.cricket-home-button:hover {
+  background: #e9f7ef;
+}
+
+/* ================================
+   NOT FOUND
+================================ */
+
+.cricket-team-not-found {
+  max-width: 600px;
+
+  margin: 0 auto;
+
+  padding: 100px 20px;
+
+  text-align: center;
+}
+
+.cricket-team-not-found > div {
+  font-size: 55px;
+}
+
+.cricket-team-not-found h1 {
+  margin: 15px 0 8px;
+
+  color: #164a35;
+}
+
+.cricket-team-not-found p {
+  margin: 0 0 25px;
+
+  color: #78877f;
+}
+
+/* ================================
+   TABLET
+================================ */
+
+@media (max-width: 700px) {
+
+  .cricket-team-details-hero {
+    flex-direction: column;
+
+    text-align: center;
+
+    padding-top: 40px;
+  }
+
+  .cricket-team-details-meta {
+    justify-content: center;
+  }
+
+  .cricket-player-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 500px) {
+
+  .cricket-team-details-logo {
+    width: 100px;
+    height: 100px;
+  }
+
+  .cricket-team-details-logo span {
+    font-size: 45px;
+  }
+
+  .cricket-team-details-info h1 {
+    font-size: 30px;
+  }
+
+  .cricket-team-details-stats {
+    grid-template-columns: 1fr;
+
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .cricket-team-squad {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .cricket-team-squad-header {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 8px;
+  }
+
+  .cricket-player-card {
+    padding: 16px;
+  }
+
+  .cricket-player-role {
+    display: none;
+  }
+}

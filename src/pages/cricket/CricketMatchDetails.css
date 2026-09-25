@@ -1,0 +1,396 @@
+.cricket-match-details-page {
+  min-height: 100vh;
+  background: #f4faf7;
+  padding-bottom: 60px;
+}
+
+.cricket-match-details-header {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 50px 20px 25px;
+  text-align: center;
+}
+
+.cricket-match-details-badge {
+  display: inline-block;
+  padding: 7px 13px;
+  border-radius: 20px;
+  background: #dff7ea;
+  color: #075e3b;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.cricket-match-details-header h1 {
+  margin: 14px 0 7px;
+  color: #164a35;
+  font-size: 36px;
+}
+
+.cricket-match-details-header p {
+  margin: 0;
+  color: #78877f;
+  font-size: 12px;
+}
+
+/* SCORE CARD */
+
+.cricket-match-status-card {
+  max-width: 900px;
+  margin: 10px auto 0;
+  padding: 25px;
+  background: white;
+  border: 1px solid #dcece4;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0, 80, 45, 0.07);
+}
+
+.cricket-match-status-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #9aa69f;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.cricket-match-status-top strong {
+  padding: 6px 10px;
+  border-radius: 15px;
+  font-size: 9px;
+}
+
+.status-live {
+  background: #ffe7e7;
+  color: #c62828;
+}
+
+.status-other {
+  background: #edf8f2;
+  color: #075e3b;
+}
+
+/* TEAMS */
+
+.cricket-match-teams {
+  display: grid;
+  grid-template-columns: 1fr 70px 1fr;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.cricket-match-team {
+  text-align: center;
+}
+
+.cricket-match-team-logo {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  background: #e8f7ef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+}
+
+.cricket-match-team h2 {
+  margin: 0;
+  color: #164a35;
+  font-size: 24px;
+}
+
+.cricket-match-team p {
+  margin: 5px 0 12px;
+  color: #89958f;
+  font-size: 11px;
+}
+
+.cricket-match-team strong {
+  display: block;
+  color: #075e3b;
+  font-size: 30px;
+}
+
+.cricket-match-team span {
+  display: block;
+  margin-top: 3px;
+  color: #78877f;
+  font-size: 11px;
+}
+
+.cricket-match-vs {
+  text-align: center;
+  color: #a0aba5;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+/* CURRENT INNINGS */
+
+.cricket-current-innings-details {
+  margin-top: 28px;
+  padding: 16px;
+  border-radius: 10px;
+  background: #edf8f2;
+  text-align: center;
+}
+
+.cricket-current-innings-details span {
+  display: block;
+  color: #789087;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+}
+
+.cricket-current-innings-details strong {
+  display: block;
+  margin-top: 5px;
+  color: #075e3b;
+  font-size: 14px;
+}
+
+.cricket-current-innings-details p {
+  margin: 5px 0 0;
+  color: #557166;
+  font-size: 12px;
+}
+
+.cricket-match-target {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 9px;
+  background: #fff5d9;
+  color: #876600;
+  text-align: center;
+  font-size: 12px;
+}
+
+/* SECTIONS */
+
+.cricket-match-details-section {
+  max-width: 900px;
+  margin: 35px auto 0;
+  padding: 0 20px;
+}
+
+.cricket-match-section-heading span {
+  color: #7a8881;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.cricket-match-section-heading h2 {
+  margin: 5px 0 15px;
+  color: #164a35;
+  font-size: 24px;
+}
+
+/* LAST OVER */
+
+.cricket-match-last-over {
+  display: flex;
+  gap: 10px;
+  padding: 20px;
+  background: white;
+  border: 1px solid #dcece4;
+  border-radius: 14px;
+}
+
+.cricket-match-ball {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: #edf8f2;
+  color: #075e3b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.cricket-match-ball.boundary {
+  background: #dff2ff;
+  color: #1769aa;
+}
+
+.cricket-match-ball.wicket {
+  background: #ffe7e7;
+  color: #c62828;
+}
+
+/* EVENTS */
+
+.cricket-match-events {
+  background: white;
+  border: 1px solid #dcece4;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.cricket-match-event {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 18px;
+  border-bottom: 1px solid #edf3ef;
+}
+
+.cricket-match-event:last-child {
+  border-bottom: none;
+}
+
+.cricket-match-event-over {
+  width: 45px;
+  color: #89958f;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.cricket-match-event-icon {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: #edf8f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cricket-match-event-text {
+  color: #355447;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* INFO */
+
+.cricket-match-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.cricket-match-info-grid > div {
+  padding: 17px;
+  background: white;
+  border: 1px solid #dcece4;
+  border-radius: 12px;
+}
+
+.cricket-match-info-grid span {
+  display: block;
+  color: #89958f;
+  font-size: 10px;
+}
+
+.cricket-match-info-grid strong {
+  display: block;
+  margin-top: 5px;
+  color: #164a35;
+  font-size: 13px;
+}
+
+/* BUTTON */
+
+.cricket-match-details-bottom {
+  max-width: 900px;
+  margin: 30px auto 0;
+  padding: 0 20px;
+}
+
+.cricket-match-back-button {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: #075e3b;
+  color: white;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.cricket-match-back-button:hover {
+  background: #064c30;
+}
+
+/* NOT FOUND */
+
+.cricket-match-not-found {
+  max-width: 600px;
+  margin: 80px auto;
+  padding: 50px 20px;
+  background: white;
+  border: 1px solid #dcece4;
+  border-radius: 18px;
+  text-align: center;
+}
+
+.cricket-match-not-found > div {
+  font-size: 50px;
+}
+
+.cricket-match-not-found h1 {
+  margin: 15px 0 8px;
+  color: #164a35;
+}
+
+.cricket-match-not-found p {
+  margin-bottom: 25px;
+  color: #78877f;
+  font-size: 13px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 650px) {
+  .cricket-match-details-header {
+    padding-top: 35px;
+  }
+
+  .cricket-match-details-header h1 {
+    font-size: 30px;
+  }
+
+  .cricket-match-status-card {
+    margin-left: 15px;
+    margin-right: 15px;
+    padding: 18px;
+  }
+
+  .cricket-match-teams {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .cricket-match-vs {
+    display: none;
+  }
+
+  .cricket-match-team-logo {
+    width: 58px;
+    height: 58px;
+    font-size: 25px;
+  }
+
+  .cricket-match-team h2 {
+    font-size: 20px;
+  }
+
+  .cricket-match-team strong {
+    font-size: 25px;
+  }
+
+  .cricket-match-last-over {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .cricket-match-info-grid {
+    grid-template-columns: 1fr;
+  }
+}

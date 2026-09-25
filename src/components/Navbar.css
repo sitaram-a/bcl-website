@@ -1,0 +1,313 @@
+.bcl-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+.navbar-container {
+  max-width: 1400px;
+  height: 78px;
+  margin: 0 auto;
+  padding: 0 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* BRAND */
+
+.bcl-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bcl-logos {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 72px;
+  height: 58px;
+}
+
+.bcl-logo {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  background: #ffffff;
+  border-radius: 50%;
+}
+
+.football-logo {
+  position: absolute;
+  /* left: 0;
+  z-index: 2; */
+    left: -6px;
+    z-index: -2;
+}
+
+.cricket-logo {
+  position: absolute;
+  right: 0;
+  width: 48px;
+  height: 48px;
+  z-index: 1;
+}
+
+.bcl-brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.bcl-name {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  line-height: 1;
+  color: #123c69;
+}
+
+.bcl-full-name {
+  margin-top: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* DESKTOP NAV */
+
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav-link,
+.nav-dropdown-button {
+  border: none;
+  background: transparent;
+  padding: 10px 12px;
+
+  color: #1f2937;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  transition: 0.2s;
+}
+
+.nav-link:hover,
+.nav-dropdown-button:hover {
+  color: #0b63ce;
+}
+
+/* SPORTS DROPDOWN */
+
+.sports-dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 45px;
+  left: 0;
+
+  min-width: 170px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+
+  padding: 7px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-menu a {
+  padding: 10px 12px;
+
+  border-radius: 7px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  color: #1f2937;
+}
+
+.dropdown-menu a:hover {
+  background: #f3f6fa;
+  color: #0b63ce;
+}
+
+/* REGISTRATION */
+
+.register-button {
+  margin-left: 8px;
+
+  padding: 10px 17px;
+
+  background: #0b63ce;
+  color: white;
+
+  border-radius: 7px;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  transition: 0.2s;
+}
+
+.register-button:hover {
+  background: #084d9f;
+}
+
+/* MOBILE BUTTON */
+
+.mobile-menu-button {
+  display: none;
+
+  border: none;
+  background: transparent;
+
+  cursor: pointer;
+
+  color: #1f2937;
+}
+
+/* MOBILE NAV */
+
+.mobile-nav {
+  display: none;
+}
+
+/* MOBILE */
+
+@media (max-width: 1050px) {
+
+  .desktop-nav {
+    display: none;
+  }
+
+  .mobile-menu-button {
+    display: block;
+  }
+
+  .mobile-nav {
+    display: flex;
+    flex-direction: column;
+
+    border-top: 1px solid #e5e7eb;
+
+    padding: 10px 20px 20px;
+
+    background: #ffffff;
+  }
+
+  .mobile-nav > a,
+  .mobile-sports-button {
+    padding: 13px 5px;
+
+    border: none;
+    background: transparent;
+
+    text-align: left;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    color: #1f2937;
+
+    cursor: pointer;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .mobile-nav > a:hover,
+  .mobile-sports-button:hover {
+    color: #0b63ce;
+  }
+
+  .mobile-sports-menu {
+    display: flex;
+    flex-direction: column;
+
+    margin-left: 15px;
+
+    border-left: 2px solid #e5e7eb;
+  }
+
+  .mobile-sports-menu a {
+    padding: 10px 15px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #374151;
+  }
+
+  .mobile-register-button {
+    margin-top: 8px;
+
+    padding: 12px 15px !important;
+
+    background: #0b63ce !important;
+    color: #ffffff !important;
+
+    border-radius: 7px;
+  }
+}
+
+/* SMALL MOBILE */
+
+@media (max-width: 500px) {
+
+  .navbar-container {
+    height: 70px;
+    padding: 0 15px;
+  }
+
+  .bcl-logos {
+    width: 62px;
+    height: 52px;
+  }
+
+  .bcl-logo {
+    width: 46px;
+    height: 46px;
+  }
+
+  .cricket-logo {
+    width: 43px;
+    height: 43px;
+  }
+
+  .bcl-name {
+    font-size: 21px;
+  }
+
+  .bcl-full-name {
+    font-size: 9px;
+  }
+}
