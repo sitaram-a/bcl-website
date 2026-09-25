@@ -646,7 +646,14 @@ console.log("Cricket Standings:", cricketStandings);
             </p>
 
             <button>
+                <a 
+              href="https://www.instagram.com/bcl.__official?stkn=MWl2MmY3YTExY28zOA%3D%3D" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="media-social-btn"
+            >
               Follow BCL →
+            </a>
             </button>
 
           </div>
@@ -667,7 +674,14 @@ console.log("Cricket Standings:", cricketStandings);
             </p>
 
             <button>
+              <a 
+              href="https://www.youtube.com/@AdityaSports" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="media-social-btn"
+            >
               Watch Videos →
+            </a>
             </button>
 
           </div>
