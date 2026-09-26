@@ -5749,3 +5749,44 @@
     height: 70px;
   }
 }
+
+/* =================================
+   BCL SPONSOR HIERARCHY
+================================= */
+
+.home-sponsor-group {
+  margin-top: 35px;
+}
+
+.home-sponsor-group-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.home-sponsor-group-title span {
+  font-size: 24px;
+}
+
+.home-sponsor-group-title h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.home-sponsor-title-card {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.home-sponsor-logo img {
+  width: 80%;
+  height: 80px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}

@@ -1,42 +1,36 @@
 import mobizoneLogo from "../../assets/logo/mobizone.jpg";
-// import sponsor2Logo from "../../assets/sponsors/sponsor-2.png";
-// import sponsor3Logo from "../../assets/sponsors/sponsor-3.png";
-// import sponsor4Logo from "../../assets/sponsors/sponsor-4.png";
+import pasupatiLogo from "../../assets/logo/pasupati-feeds-logo.png";
+import cbiLogo from "../../assets/logo/CBI-logo.png";
 
 export const sponsors = [
   {
     id: 1,
     name: "Mobizone",
     level: "TITLE SPONSOR",
-    category: "Official Sponsor",
+    category: "TITLE",
+    categoryLabel: "Official Title Sponsor",
     logo: mobizoneLogo,
     website: "#",
     active: true,
   },
   {
     id: 2,
-    name: "XYZ Motors",
-    level: "SILVER SPONSOR",
-    category: "Official Partner",
-    logo: null,
-    website: "https://example.com",
+    name: "Pasupati Feeds",
+    level: "TITLE SPONSOR",
+    category: "TITLE",
+    categoryLabel: "Official Title Sponsor",
+    logo: pasupatiLogo,
+    website: "#",
+    active: true,
   },
-
   {
     id: 3,
-    name: "Baharagora Business",
-    level: "BRONZE SPONSOR",
-    category: "Official Partner",
-    logo: null,
-    website: "https://example.com",
-  },
-
-  {
-    id: 4,
-    name: "Local Partner",
-    level: "PARTNER",
-    category: "Official Partner",
-    logo: null,
-    website: "https://example.com",
+    name: "Central Bank of India",
+    level: "TITLE SPONSOR",
+    category: "TITLE",
+    categoryLabel: "Official Title Sponsor",
+    logo: cbiLogo,
+    website: "#",
+    active: true,
   },
 ];

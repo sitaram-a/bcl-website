@@ -4,8 +4,7 @@ import { useEffect, useState } from "react";
 import footballLogo from "../assets/logo/bcl-football-logo.png";
 import cricketLogo from "../assets/logo/bcl-cricket-logo.png";
 import cricketball from "../assets/icons/cricket-ball.png";
-import mobizoneLogo from "../assets/logo/mobizone.jpg";
-import mobizoneAdvertisement from "../assets/banners/mobizone-advertise.png";
+import { advertisements } from "../data/advertisements/advertisements";
 
 import { footballTeams } from "../data/football/teams";
 import { cricketTeams } from "../data/cricket/teams";
@@ -34,17 +33,40 @@ function Home() {
     sponsor.level === "TITLE SPONSOR"
 );
 
-    const [showMobizoneAd, setShowMobizoneAd] = useState(true);
+const [showAdvertisement, setShowAdvertisement] = useState(true);
+const [currentAdvertisementIndex, setCurrentAdvertisementIndex] = useState(0);
 
-    useEffect(() => {
+useEffect(() => {
   const adInterval = setInterval(() => {
-    setShowMobizoneAd(true);
+
+    setCurrentAdvertisementIndex((currentIndex) => {
+      const activeAdvertisements = advertisements.filter(
+        (advertisement) => advertisement.active
+      );
+
+      if (activeAdvertisements.length === 0) {
+        return 0;
+      }
+
+      return (currentIndex + 1) % activeAdvertisements.length;
+    });
+
+    setShowAdvertisement(true);
+
   }, 60 * 1000);
 
   return () => {
     clearInterval(adInterval);
   };
 }, []);
+
+
+const activeAdvertisements = advertisements.filter(
+  (advertisement) => advertisement.active
+);
+
+const currentAdvertisement =
+  activeAdvertisements[currentAdvertisementIndex];
   /* =====================================================
      LIVE MATCH DATA
   ===================================================== */
@@ -765,7 +787,7 @@ const cricketLiveTeam2 = cricketLiveMatch
 
 {/* ================= BCL ADVERTISEMENT ================= */}
 
-{showMobizoneAd && (
+{showAdvertisement && currentAdvertisement && (
   <div className="home-ad-popup-overlay">
 
     <div className="home-ad-popup">
@@ -773,7 +795,7 @@ const cricketLiveTeam2 = cricketLiveMatch
       <button
         type="button"
         className="home-ad-popup-close"
-        onClick={() => setShowMobizoneAd(false)}
+        onClick={() => setShowAdvertisement(false)}
         aria-label="Close advertisement"
       >
         ×
@@ -784,12 +806,14 @@ const cricketLiveTeam2 = cricketLiveMatch
       </div>
 
       <a
-        href="#"
+        href={currentAdvertisement.link}
         className="home-ad-popup-link"
+        target="_blank"
+        rel="noopener noreferrer"
       >
         <img
-          src={mobizoneAdvertisement}
-          alt="Mobizone Advertisement"
+          src={currentAdvertisement.image}
+          alt={`${currentAdvertisement.name} Advertisement`}
           className="home-ad-popup-image"
         />
       </a>
@@ -1474,66 +1498,225 @@ const cricketLiveTeam2 = cricketLiveMatch
       </p>
     </div>
 
-    <div className="home-sponsors-grid">
+    {/* TITLE SPONSOR */}
+    {sponsors.some(
+      (sponsor) =>
+        sponsor.active &&
+        sponsor.category === "TITLE"
+    ) && (
+      <div className="home-sponsor-group">
 
-      {sponsors
-        .filter((sponsor) => sponsor.active)
-        .map((sponsor) => (
-          <div
-            className="home-sponsor-card"
-            key={sponsor.id}
-          >
+        <div className="home-sponsor-group-title">
+          <span>🏆</span>
+          <h3>Title Sponsor</h3>
+        </div>
 
-            <div className="home-sponsor-logo">
+        <div className="home-sponsors-grid">
 
-              {sponsor.logo ? (
-                <img
-                  src={sponsor.logo}
-                  alt={`${sponsor.name} logo`}
-                />
-              ) : (
-                <span>LOGO</span>
-              )}
+          {sponsors
+            .filter(
+              (sponsor) =>
+                sponsor.active &&
+                sponsor.category === "TITLE"
+            )
+            .map((sponsor) => (
+              <div
+                className="home-sponsor-card home-sponsor-title-card"
+                key={sponsor.id}
+              >
 
-            </div>
+                <div className="home-sponsor-logo">
+                  {sponsor.logo ? (
+                    <img
+                      src={sponsor.logo}
+                      alt={`${sponsor.name} logo`}
+                    />
+                  ) : (
+                    <span>LOGO</span>
+                  )}
+                </div>
 
-            <div className="home-sponsor-info">
+                <div className="home-sponsor-info">
+                  <span>{sponsor.level}</span>
 
-              <span>
-                {sponsor.level}
-              </span>
+                  <h3>{sponsor.name}</h3>
 
-              <h3>
-                {sponsor.name}
-              </h3>
+                  <p>{sponsor.categoryLabel}</p>
+                </div>
 
-              <p>
-                {sponsor.category}
-              </p>
+                {sponsor.website &&
+                  sponsor.website !== "#" && (
+                    <a
+                      href={sponsor.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Visit Website →
+                    </a>
+                  )}
 
-            </div>
+              </div>
+            ))}
 
-            {sponsor.website &&
-              sponsor.website !== "#" && (
-                <a
-                  href={sponsor.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Visit Website →
-                </a>
-              )}
+        </div>
+      </div>
+    )}
 
-          </div>
-        ))}
+    {/* GOLD SPONSORS */}
+    {sponsors.some(
+      (sponsor) =>
+        sponsor.active &&
+        sponsor.category === "GOLD"
+    ) && (
+      <div className="home-sponsor-group">
 
-    </div>
+        <div className="home-sponsor-group-title">
+          <span>🥇</span>
+          <h3>Gold Sponsors</h3>
+        </div>
+
+        <div className="home-sponsors-grid">
+
+          {sponsors
+            .filter(
+              (sponsor) =>
+                sponsor.active &&
+                sponsor.category === "GOLD"
+            )
+            .map((sponsor) => (
+              <div
+                className="home-sponsor-card"
+                key={sponsor.id}
+              >
+
+                <div className="home-sponsor-logo">
+                  {sponsor.logo ? (
+                    <img
+                      src={sponsor.logo}
+                      alt={`${sponsor.name} logo`}
+                    />
+                  ) : (
+                    <span>LOGO</span>
+                  )}
+                </div>
+
+                <div className="home-sponsor-info">
+                  <span>{sponsor.level}</span>
+                  <h3>{sponsor.name}</h3>
+                  <p>{sponsor.categoryLabel}</p>
+                </div>
+
+              </div>
+            ))}
+
+        </div>
+      </div>
+    )}
+
+    {/* SILVER SPONSORS */}
+    {sponsors.some(
+      (sponsor) =>
+        sponsor.active &&
+        sponsor.category === "SILVER"
+    ) && (
+      <div className="home-sponsor-group">
+
+        <div className="home-sponsor-group-title">
+          <span>🥈</span>
+          <h3>Silver Sponsors</h3>
+        </div>
+
+        <div className="home-sponsors-grid">
+
+          {sponsors
+            .filter(
+              (sponsor) =>
+                sponsor.active &&
+                sponsor.category === "SILVER"
+            )
+            .map((sponsor) => (
+              <div
+                className="home-sponsor-card"
+                key={sponsor.id}
+              >
+
+                <div className="home-sponsor-logo">
+                  {sponsor.logo ? (
+                    <img
+                      src={sponsor.logo}
+                      alt={`${sponsor.name} logo`}
+                    />
+                  ) : (
+                    <span>LOGO</span>
+                  )}
+                </div>
+
+                <div className="home-sponsor-info">
+                  <span>{sponsor.level}</span>
+                  <h3>{sponsor.name}</h3>
+                  <p>{sponsor.categoryLabel}</p>
+                </div>
+
+              </div>
+            ))}
+
+        </div>
+      </div>
+    )}
+
+    {/* OFFICIAL PARTNERS */}
+    {sponsors.some(
+      (sponsor) =>
+        sponsor.active &&
+        sponsor.category === "PARTNER"
+    ) && (
+      <div className="home-sponsor-group">
+
+        <div className="home-sponsor-group-title">
+          <span>🤝</span>
+          <h3>Official Partners</h3>
+        </div>
+
+        <div className="home-sponsors-grid">
+
+          {sponsors
+            .filter(
+              (sponsor) =>
+                sponsor.active &&
+                sponsor.category === "PARTNER"
+            )
+            .map((sponsor) => (
+              <div
+                className="home-sponsor-card"
+                key={sponsor.id}
+              >
+
+                <div className="home-sponsor-logo">
+                  {sponsor.logo ? (
+                    <img
+                      src={sponsor.logo}
+                      alt={`${sponsor.name} logo`}
+                    />
+                  ) : (
+                    <span>LOGO</span>
+                  )}
+                </div>
+
+                <div className="home-sponsor-info">
+                  <span>{sponsor.level}</span>
+                  <h3>{sponsor.name}</h3>
+                  <p>{sponsor.categoryLabel}</p>
+                </div>
+
+              </div>
+            ))}
+
+        </div>
+      </div>
+    )}
 
     <div className="home-sponsors-bottom">
-
-      <p>
-        Interested in sponsoring BCL 2026?
-      </p>
+      <p>Interested in sponsoring BCL 2026?</p>
 
       <a
         href="#"
@@ -1541,7 +1724,6 @@ const cricketLiveTeam2 = cricketLiveMatch
       >
         Become a Sponsor →
       </a>
-
     </div>
 
   </div>
