@@ -5790,3 +5790,117 @@
   display: block;
   margin: 0 auto;
 }
+
+/* =================================
+   BCL ADVERTISEMENT CONTROLS
+================================= */
+
+.home-ad-popup-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+
+  margin-top: 14px;
+}
+
+.home-ad-popup-nav {
+  border: none;
+  background: transparent;
+
+  color: #1f2937;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  padding: 6px 8px;
+
+  transition: 0.2s ease;
+}
+
+.home-ad-popup-nav:hover {
+  color: #dc2626;
+}
+
+.home-ad-popup-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+
+.home-ad-popup-dot {
+  width: 10px;
+  height: 10px;
+
+  padding: 0;
+
+  border: none;
+  border-radius: 50%;
+
+  background: #d1d5db;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: all 0.2s ease;
+}
+
+.home-ad-popup-dot span {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  border-radius: 50%;
+}
+
+.home-ad-popup-dot:hover {
+  transform: scale(1.2);
+}
+
+.home-ad-popup-dot.active {
+  width: 12px;
+  height: 12px;
+
+  background: #dc2626;
+}
+
+.home-ad-popup-nav:focus-visible,
+.home-ad-popup-dot:focus-visible,
+.home-ad-popup-close:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+
+  .home-ad-popup-controls {
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .home-ad-popup-nav {
+    font-size: 11px;
+    padding: 5px;
+  }
+
+  .home-ad-popup-dots {
+    gap: 5px;
+  }
+
+  .home-ad-popup-dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .home-ad-popup-dot.active {
+    width: 10px;
+    height: 10px;
+  }
+}

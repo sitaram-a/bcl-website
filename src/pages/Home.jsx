@@ -33,12 +33,16 @@ function Home() {
     sponsor.level === "TITLE SPONSOR"
 );
 
-const [showAdvertisement, setShowAdvertisement] = useState(true);
+// const [showAdvertisement, setShowAdvertisement] = useState(true);
+const [showAdvertisement, setShowAdvertisement] = useState(false);
 const [currentAdvertisementIndex, setCurrentAdvertisementIndex] = useState(0);
 
 useEffect(() => {
-  const adInterval = setInterval(() => {
+  const firstAdTimeout = setTimeout(() => {
+    setShowAdvertisement(true);
+  }, 60 * 1000);
 
+  const adInterval = setInterval(() => {
     setCurrentAdvertisementIndex((currentIndex) => {
       const activeAdvertisements = advertisements.filter(
         (advertisement) => advertisement.active
@@ -52,10 +56,10 @@ useEffect(() => {
     });
 
     setShowAdvertisement(true);
-
   }, 60 * 1000);
 
   return () => {
+    clearTimeout(firstAdTimeout);
     clearInterval(adInterval);
   };
 }, []);
@@ -817,6 +821,69 @@ const cricketLiveTeam2 = cricketLiveMatch
           className="home-ad-popup-image"
         />
       </a>
+
+      {/* Advertisement Controls */}
+      {activeAdvertisements.length > 1 && (
+        <div className="home-ad-popup-controls">
+
+          <button
+            type="button"
+            className="home-ad-popup-nav"
+            onClick={() => {
+              setCurrentAdvertisementIndex((currentIndex) =>
+                currentIndex === 0
+                  ? activeAdvertisements.length - 1
+                  : currentIndex - 1
+              );
+            }}
+            aria-label="Previous advertisement"
+          >
+            ← Previous
+          </button>
+
+          <div className="home-ad-popup-dots">
+
+            {activeAdvertisements.map((advertisement, index) => (
+              <button
+                key={advertisement.id}
+                type="button"
+                className={
+                  index === currentAdvertisementIndex
+                    ? "home-ad-popup-dot active"
+                    : "home-ad-popup-dot"
+                }
+                onClick={() => {
+                  setCurrentAdvertisementIndex(index);
+                }}
+                aria-label={`Show advertisement ${index + 1}`}
+                aria-current={
+                  index === currentAdvertisementIndex
+                    ? "true"
+                    : undefined
+                }
+              >
+                <span></span>
+              </button>
+            ))}
+
+          </div>
+
+          <button
+            type="button"
+            className="home-ad-popup-nav"
+            onClick={() => {
+              setCurrentAdvertisementIndex((currentIndex) =>
+                (currentIndex + 1) %
+                activeAdvertisements.length
+              );
+            }}
+            aria-label="Next advertisement"
+          >
+            Next →
+          </button>
+
+        </div>
+      )}
 
     </div>
 
