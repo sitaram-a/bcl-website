@@ -5174,3 +5174,578 @@
   }
 
 }
+
+/* =====================================================
+   BCL MAIN SPONSOR
+===================================================== */
+
+.home-main-sponsor {
+  padding: 35px 0;
+  background: #f8fafc;
+}
+
+.home-main-sponsor-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  background: linear-gradient(
+    135deg,
+    #061a32,
+    #0b3b70
+  );
+  color: #ffffff;
+  padding: 25px 30px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+}
+
+.home-main-sponsor-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  color: #93c5fd;
+  margin-bottom: 18px;
+}
+
+.home-main-sponsor-content {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.home-main-sponsor-logo {
+  width: 120px;
+  height: 80px;
+  border-radius: 14px;
+  background: #ffffff;
+  color: #061a32;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.home-main-sponsor-logo span {
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.home-main-sponsor-logo strong {
+  font-size: 18px;
+}
+
+.home-main-sponsor-text {
+  flex: 1;
+}
+
+.home-main-sponsor-text > span {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: #93c5fd;
+}
+
+.home-main-sponsor-text h2 {
+  margin: 5px 0;
+  font-size: 26px;
+}
+
+.home-main-sponsor-text p {
+  margin: 0;
+  color: #dbeafe;
+}
+
+.home-main-sponsor-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 20px;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #061a32;
+  text-decoration: none;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: 0.25s ease;
+}
+
+.home-main-sponsor-button:hover {
+  transform: translateY(-2px);
+}
+
+
+/* =====================================================
+   BCL ADVERTISEMENT
+===================================================== */
+
+.home-ad-section {
+  padding: 40px 0;
+  background: #ffffff;
+}
+
+.home-ad-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #f8fafc;
+}
+
+.home-ad-label {
+  padding: 8px 18px;
+  background: #e2e8f0;
+  color: #64748b;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.home-ad-content {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  padding: 25px 30px;
+}
+
+.home-ad-logo {
+  width: 70px;
+  height: 70px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  flex-shrink: 0;
+}
+
+.home-ad-text {
+  flex: 1;
+}
+
+.home-ad-text span {
+  font-size: 11px;
+  color: #64748b;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.home-ad-text h2 {
+  margin: 5px 0;
+  color: #0f172a;
+  font-size: 23px;
+}
+
+.home-ad-text p {
+  margin: 0;
+  color: #64748b;
+}
+
+.home-ad-button {
+  display: inline-flex;
+  padding: 12px 20px;
+  border-radius: 10px;
+  background: #0b3b70;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: 0.25s ease;
+}
+
+.home-ad-button:hover {
+  transform: translateY(-2px);
+}
+
+
+/* =====================================================
+   OFFICIAL SPONSORS
+===================================================== */
+
+.home-sponsors-section {
+  padding: 80px 0;
+  background: #f8fafc;
+}
+
+.home-sponsors-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 35px;
+}
+
+.home-sponsor-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 24px;
+  text-align: center;
+  transition: 0.25s ease;
+}
+
+.home-sponsor-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(15, 23, 42, 0.10);
+}
+
+.home-sponsor-logo {
+  height: 100px;
+  border-radius: 14px;
+  background: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  font-weight: 800;
+  margin-bottom: 18px;
+}
+
+.home-sponsor-info > span {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.3px;
+  color: #2563eb;
+}
+
+.home-sponsor-info h3 {
+  margin: 8px 0 4px;
+  color: #0f172a;
+}
+
+.home-sponsor-info p {
+  margin: 0 0 15px;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.home-sponsor-card > a {
+  color: #0b3b70;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.home-sponsors-bottom {
+  margin-top: 35px;
+  padding: 22px;
+  border-radius: 14px;
+  background: #061a32;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.home-sponsors-bottom p {
+  margin: 0;
+}
+
+.home-sponsors-contact {
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  background: #0b3b70;
+}
+
+
+/* =====================================================
+   SPONSOR RESPONSIVE
+===================================================== */
+
+@media (max-width: 1000px) {
+
+  .home-sponsors-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .home-main-sponsor-content {
+    flex-wrap: wrap;
+  }
+
+}
+
+
+@media (max-width: 700px) {
+
+  .home-main-sponsor-content,
+  .home-ad-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .home-main-sponsor-button,
+  .home-ad-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .home-sponsors-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-sponsors-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+
+}
+
+
+@media (max-width: 420px) {
+
+  .home-main-sponsor-card {
+    padding: 20px;
+  }
+
+  .home-ad-content {
+    padding: 22px 18px;
+  }
+
+  .home-sponsors-section {
+    padding: 55px 0;
+  }
+
+}
+
+/* ================================
+   MOBIZONE SPONSOR & ADVERTISEMENT
+================================ */
+
+.home-main-sponsor-logo img {
+  width: 180px;
+  max-width: 100%;
+  height: 90px;
+  object-fit: contain;
+  display: block;
+}
+
+.home-ad-banner-link {
+  display: block;
+  width: 100%;
+  text-decoration: none;
+}
+
+.home-ad-banner {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+.home-ad-banner-link:hover .home-ad-banner {
+  transform: scale(1.01);
+  transition: transform 0.25s ease;
+}
+
+@media (max-width: 700px) {
+  .home-main-sponsor-logo img {
+    width: 140px;
+    height: 70px;
+  }
+
+  .home-ad-banner {
+    border-radius: 8px;
+  }
+}
+
+.home-sponsor-logo img {
+  width: 80%;
+  height: 80px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+/* ================================
+   MOBIZONE ADVERTISEMENT SIZE
+================================ */
+
+.home-ad-banner-link {
+  display: block;
+  width: 100%;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.home-ad-banner {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+@media (max-width: 900px) {
+  .home-ad-banner-link {
+    max-width: 750px;
+  }
+}
+
+@media (max-width: 700px) {
+  .home-ad-banner-link {
+    max-width: 100%;
+  }
+
+  .home-ad-banner {
+    border-radius: 8px;
+  }
+}
+
+/* =================================
+   MOBIZONE AD POPUP
+================================= */
+
+.home-ad-popup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(0, 0, 0, 0.65);
+}
+
+.home-ad-popup {
+  position: relative;
+
+  width: 100%;
+  max-width: 850px;
+
+  background: #ffffff;
+  border-radius: 14px;
+
+  padding: 14px;
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+
+  animation: mobizoneAdPopupIn 0.3s ease;
+}
+
+.home-ad-popup-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-align: center;
+
+  color: #777;
+
+  margin-bottom: 10px;
+}
+
+.home-ad-popup-link {
+  display: block;
+  width: 100%;
+}
+
+.home-ad-popup-image {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  max-height: 70vh;
+
+  object-fit: contain;
+
+  border-radius: 8px;
+}
+
+.home-ad-popup-close {
+  position: absolute;
+
+  top: -14px;
+  right: -14px;
+
+  width: 38px;
+  height: 38px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: #111;
+  color: #fff;
+
+  font-size: 27px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 10;
+
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.home-ad-popup-close:hover {
+  background: #e11d48;
+  transform: scale(1.08);
+}
+
+@keyframes mobizoneAdPopupIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 700px) {
+  .home-ad-popup-overlay {
+    padding: 14px;
+  }
+
+  .home-ad-popup {
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .home-ad-popup-close {
+    top: -10px;
+    right: -8px;
+
+    width: 34px;
+    height: 34px;
+
+    font-size: 24px;
+  }
+
+  .home-ad-popup-image {
+    max-height: 65vh;
+  }
+}
+
+/* ================================
+   DYNAMIC MAIN SPONSOR LOGO
+================================ */
+
+.home-main-sponsor-logo img {
+  width: 180px;
+  max-width: 100%;
+  height: 90px;
+  object-fit: contain;
+  display: block;
+}
+
+@media (max-width: 700px) {
+  .home-main-sponsor-logo img {
+    width: 140px;
+    height: 70px;
+  }
+}

@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import footballLogo from "../assets/logo/bcl-football-logo.png";
 import cricketLogo from "../assets/logo/bcl-cricket-logo.png";
+import cricketball from "../assets/icons/cricket-ball.png";
+import mobizoneLogo from "../assets/logo/mobizone.jpg";
+import mobizoneAdvertisement from "../assets/banners/mobizone-advertise.png";
 
 import { footballTeams } from "../data/football/teams";
 import { cricketTeams } from "../data/cricket/teams";
@@ -19,10 +22,29 @@ import { cricketStandings } from "../data/cricket/standings";
 import { footballMatches } from "../data/football/footballMatches";
 import { cricketLiveMatches } from "../data/cricket/liveMatches";
 
+import { sponsors } from "../data/sponsors/sponsors";
+
 import "./Home.css";
 
 function Home() {
 
+    const titleSponsor = sponsors.find(
+  (sponsor) =>
+    sponsor.active &&
+    sponsor.level === "TITLE SPONSOR"
+);
+
+    const [showMobizoneAd, setShowMobizoneAd] = useState(true);
+
+    useEffect(() => {
+  const adInterval = setInterval(() => {
+    setShowMobizoneAd(true);
+  }, 60 * 1000);
+
+  return () => {
+    clearInterval(adInterval);
+  };
+}, []);
   /* =====================================================
      LIVE MATCH DATA
   ===================================================== */
@@ -172,7 +194,10 @@ const cricketLiveTeam2 = cricketLiveMatch
 
   <div className="home-hero-flying-balls" aria-hidden="true">
     <span className="home-hero-ball home-hero-ball-football">⚽</span>
-    <span className="home-hero-ball home-hero-ball-cricket">🥎</span>
+    <span className="home-hero-ball home-hero-ball-cricket"><img
+            src={cricketball}
+            alt="ball" style={{width:"30px"}}
+          /></span>
     <span className="home-hero-ball home-hero-ball-football home-hero-ball-football-2">⚽</span>
   </div>
 
@@ -243,6 +268,73 @@ const cricketLiveTeam2 = cricketLiveMatch
   </div>
 
 </section>
+
+{/* ================= BCL MAIN SPONSOR ================= */}
+
+{titleSponsor && (
+  <section className="home-main-sponsor">
+    <div className="home-section-container">
+
+      <div className="home-main-sponsor-card">
+
+        <div className="home-main-sponsor-label">
+          <span>🏆</span>
+          <strong>POWERED BY</strong>
+        </div>
+
+        <div className="home-main-sponsor-content">
+
+          <div className="home-main-sponsor-logo">
+            {titleSponsor.logo ? (
+              <img
+                src={titleSponsor.logo}
+                alt={`${titleSponsor.name} logo`}
+              />
+            ) : (
+              <>
+                <span>YOUR</span>
+                <strong>SPONSOR</strong>
+              </>
+            )}
+          </div>
+
+          <div className="home-main-sponsor-text">
+
+            <span>
+              {titleSponsor.level}
+            </span>
+
+            <h2>
+              {titleSponsor.name}
+            </h2>
+
+            <p>
+              Proudly supporting the Baharagora
+              Champions League 2026.
+            </p>
+
+          </div>
+
+          {titleSponsor.website &&
+            titleSponsor.website !== "#" && (
+              <a
+                href={titleSponsor.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="home-main-sponsor-button"
+              >
+                Visit Sponsor →
+              </a>
+            )}
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+)}
+
 
       {/* ================= TOURNAMENT INFO STRIP ================= */}
 <section className="home-tournament-info">
@@ -669,6 +761,43 @@ const cricketLiveTeam2 = cricketLiveMatch
   </div>
 
 </section>
+
+
+{/* ================= BCL ADVERTISEMENT ================= */}
+
+{showMobizoneAd && (
+  <div className="home-ad-popup-overlay">
+
+    <div className="home-ad-popup">
+
+      <button
+        type="button"
+        className="home-ad-popup-close"
+        onClick={() => setShowMobizoneAd(false)}
+        aria-label="Close advertisement"
+      >
+        ×
+      </button>
+
+      <div className="home-ad-popup-label">
+        ADVERTISEMENT
+      </div>
+
+      <a
+        href="#"
+        className="home-ad-popup-link"
+      >
+        <img
+          src={mobizoneAdvertisement}
+          alt="Mobizone Advertisement"
+          className="home-ad-popup-image"
+        />
+      </a>
+
+    </div>
+
+  </div>
+)}
 
 
       {/* =================================================
@@ -1329,6 +1458,94 @@ const cricketLiveTeam2 = cricketLiveMatch
   </div>
 </section>
 
+{/* ================= BCL OFFICIAL SPONSORS ================= */}
+
+<section className="home-sponsors-section">
+  <div className="home-section-container">
+
+    <div className="home-section-heading">
+      <span>BCL 2026 PARTNERS</span>
+
+      <h2>Our Official Sponsors</h2>
+
+      <p>
+        BCL is proudly supported by businesses and partners
+        helping us grow local sports in Baharagora.
+      </p>
+    </div>
+
+    <div className="home-sponsors-grid">
+
+      {sponsors
+        .filter((sponsor) => sponsor.active)
+        .map((sponsor) => (
+          <div
+            className="home-sponsor-card"
+            key={sponsor.id}
+          >
+
+            <div className="home-sponsor-logo">
+
+              {sponsor.logo ? (
+                <img
+                  src={sponsor.logo}
+                  alt={`${sponsor.name} logo`}
+                />
+              ) : (
+                <span>LOGO</span>
+              )}
+
+            </div>
+
+            <div className="home-sponsor-info">
+
+              <span>
+                {sponsor.level}
+              </span>
+
+              <h3>
+                {sponsor.name}
+              </h3>
+
+              <p>
+                {sponsor.category}
+              </p>
+
+            </div>
+
+            {sponsor.website &&
+              sponsor.website !== "#" && (
+                <a
+                  href={sponsor.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Visit Website →
+                </a>
+              )}
+
+          </div>
+        ))}
+
+    </div>
+
+    <div className="home-sponsors-bottom">
+
+      <p>
+        Interested in sponsoring BCL 2026?
+      </p>
+
+      <a
+        href="#"
+        className="home-sponsors-contact"
+      >
+        Become a Sponsor →
+      </a>
+
+    </div>
+
+  </div>
+</section>
 
       {/* =================================================
     BCL MEDIA
