@@ -3,7 +3,7 @@ export const bclVideos = [
      id: 1,
     title: "BCL Season 5 Cricket",
     thumbnail: "/media/videos/BCL-season-5.png", // optional poster image
-    duration: "5:20", // update to actual duration
+    duration: "0:56", // update to actual duration
     category: "Cricket",
     type: "local",
     src: "/media/videos/BCL-season-5-1.mp4",
