@@ -22,9 +22,18 @@ export const bclVideos = [
     title: "⚡Baharagora FC 🆚 Bineet Warrior",
     thumbnail: "https://img.youtube.com/vi/Mlm3wDcL8h4/hqdefault.jpg",
     duration: "43:44",
-    category: "Football",
+    category: "Highlights",
     type: "youtube",
     youtubeId: "Mlm3wDcL8h4",
+  },
+  {
+    id: 4,
+    title: "FINAL DAY BAHARAGORA CHAMPIONS LEAGUE 2025",
+    thumbnail: "https://img.youtube.com/vi/bSz6gfTXLpo/hqdefault.jpg",
+    duration: "43:44",
+    category: "Highlights",
+    type: "youtube",
+    youtubeId: "bSz6gfTXLpo",
   },
   // add more...
 ];
