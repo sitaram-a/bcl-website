@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import footballLogo from "../assets/logo/bcl-football-logo.png";
 import cricketLogo from "../assets/logo/bcl-cricket-logo.png";
 import cricketball from "../assets/icons/cricket-ball.png";
+import { bclVideos } from "../data/home/videos";
+
 import { advertisements } from "../data/advertisements/advertisements";
 
 import { footballTeams } from "../data/football/teams";
@@ -37,6 +39,7 @@ function Home() {
 // const [showAdvertisement, setShowAdvertisement] = useState(true);
 const [showAdvertisement, setShowAdvertisement] = useState(false);
 const [currentAdvertisementIndex, setCurrentAdvertisementIndex] = useState(0);
+const [activeVideo, setActiveVideo] = useState(null);
 
 useEffect(() => {
   const firstAdTimeout = setTimeout(() => {
@@ -84,8 +87,6 @@ const currentAdvertisement =
     (match) => match.status === "LIVE"
   );
 
-  
-
   /* =====================================================
      TEAM HELPERS
   ===================================================== */
@@ -95,7 +96,8 @@ const currentAdvertisement =
 
   const getCricketTeam = (teamId) =>
     cricketTeams.find((team) => team.id === teamId);
-    const activeAnnouncement = announcements.find((a) => a.active);
+    
+  const activeAnnouncement = announcements.find((a) => a.active);
 
 const footballLiveTeam1 = footballLiveMatch
   ? getFootballTeam(footballLiveMatch.team1Id)
@@ -127,31 +129,7 @@ const cricketLiveTeam2 = cricketLiveMatch
 
 
   /* =====================================================
-     DEBUG LOGS
-  ===================================================== */
-
-  console.log("Football Teams:", footballTeams);
-  console.log("Cricket Teams:", cricketTeams);
-
-  console.log("Football Fixtures:", footballFixtures);
-  console.log("Cricket Fixtures:", cricketFixtures);
-
-  console.log("Football Results:", footballResults);
-  console.log("Cricket Results:", cricketResults);
-
-  console.log("Football Standings:", footballStandings);
-  console.log("Cricket Standings:", cricketStandings);
-
-  console.log("Football Live Match:", footballLiveMatch);
-  console.log("Cricket Live Match:", cricketLiveMatch);
-
-
-  /* =====================================================
      SCROLL-REVEAL ANIMATIONS
-     Adds "reveal" classes to key sections/cards and fades
-     them in with a staggered, modern animation as they
-     enter the viewport. Falls back gracefully if
-     IntersectionObserver isn't available.
   ===================================================== */
 
   useEffect(() => {
@@ -176,7 +154,6 @@ const cricketLiveTeam2 = cricketLiveMatch
 
     if (elements.length === 0) return;
 
-    // Group elements by their parent so siblings stagger together
     const staggerCounters = new Map();
 
     elements.forEach((el) => {
@@ -364,8 +341,9 @@ const cricketLiveTeam2 = cricketLiveMatch
 )}
 
 
-      {/* ================= TOURNAMENT INFO STRIP ================= */}
-<section className="home-tournament-info">
+
+     {/* ================= TOURNAMENT INFO STRIP ================= */}
+<section className="home-tournament-info" style={{display:"none"}}>
   <div className="home-tournament-info-container">
 
     <div className="home-tournament-item">
@@ -470,6 +448,114 @@ const cricketLiveTeam2 = cricketLiveMatch
 
   </div>
 </section>
+
+
+
+
+{/* ================= BCL VIDEOS (Hotstar style) ================= */}
+<section className="home-video-section">
+  <div className="home-section-container">
+
+    <div className="home-video-heading">
+      <div>
+        <span className="home-video-kicker">▶️ WATCH BCL</span>
+        <h2>Latest Videos</h2>
+      </div>
+      <Link to="/media" className="home-video-view-all">
+        View All →
+      </Link>
+    </div>
+
+    <div className="home-video-row">
+      {bclVideos.map((video) => (
+        <div
+          className="home-video-card"
+          key={video.id}
+          onClick={() => setActiveVideo(video)}
+        >
+          <div className="home-video-thumb-wrap">
+            {video.thumbnail ? (
+              <img
+                src={video.thumbnail}
+                alt={video.title}
+                className="home-video-thumb"
+              />
+            ) : (
+              <video
+                className="home-video-thumb"
+                src={video.src}
+                muted
+                preload="metadata"
+              />
+            )}
+
+            <div className="home-video-play-overlay">
+              <span className="home-video-play-icon">▶</span>
+            </div>
+
+            {video.duration && (
+              <span className="home-video-duration">{video.duration}</span>
+            )}
+
+            <span className="home-video-category-badge">
+              {video.category}
+            </span>
+          </div>
+
+          <div className="home-video-info">
+            <h4>{video.title}</h4>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+{/* ================= VIDEO PLAYER MODAL ================= */}
+{activeVideo && (
+  <div
+    className="home-video-modal-overlay"
+    onClick={() => setActiveVideo(null)}
+  >
+    <div
+      className="home-video-modal"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <button
+        className="home-video-modal-close"
+        onClick={() => setActiveVideo(null)}
+        aria-label="Close video"
+      >
+        ×
+      </button>
+
+      <div className="home-video-modal-player">
+        {activeVideo.type === "youtube" ? (
+          <iframe
+            src={`https://www.youtube.com/embed/${activeVideo.youtubeId}?autoplay=1`}
+            title={activeVideo.title}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          />
+        ) : (
+          <video
+            src={activeVideo.src}
+            controls
+            autoPlay
+            playsInline
+          />
+        )}
+      </div>
+
+      <div className="home-video-modal-info">
+        <h3>{activeVideo.title}</h3>
+        <span>{activeVideo.category}</span>
+      </div>
+    </div>
+  </div>
+)}
+
 
 
       {/* ================= SPORTS SECTION ================= */}
@@ -976,7 +1062,7 @@ const cricketLiveTeam2 = cricketLiveMatch
           >
 
             <iframe
-              src="https://www.youtube.com/embed/42xFSI6kRtM?si=go8F8JTWl6l7I4TE"
+              src="https://www.youtube.com/embed/Mlm3wDcL8h4?si=C1BpXLIfQUJzR63-"
               title="BCL Live Stream"
               style={{
                 position: "absolute",
@@ -1586,6 +1672,7 @@ const cricketLiveTeam2 = cricketLiveMatch
 
   </div>
 </section>
+
 
 {/* ================= BCL OFFICIAL SPONSORS ================= */}
 
