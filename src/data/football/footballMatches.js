@@ -84,20 +84,19 @@ export const footballMatches = [
   },
 
   {
-    id: 102,
-    team1Id: 1,
-    team2Id: 3,
-    date: "2026-09-25",
-    time: "16:00",
-    venue: "Baharagora Stadium",
-    status: "LIVE",
-    matchType: "LEAGUE",
-    score1: 1,
-    score2: 0,
-    minute: 67,
-
-    halftimeScore1: 1,
-    halftimeScore2: 0,
+     id: 102,
+  team1Id: 1,
+  team2Id: 3,
+  date: "2026-10-25",
+  time: "16:00",
+  venue: "Baharagora Stadium",
+  status: "UPCOMING",
+  matchType: "LEAGUE",
+  score1: null,
+  score2: null,
+  minute: null,
+  halftimeScore1: null,
+  halftimeScore2: null,
 
     events: [
   {

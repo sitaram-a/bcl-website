@@ -10,7 +10,7 @@ export const cricketLiveMatches = [
 
     venue: "Baharagora Cricket Ground",
 
-    status: "LIVE",
+    status: "UPCOMING",
 
     matchType: "LEAGUE",
 

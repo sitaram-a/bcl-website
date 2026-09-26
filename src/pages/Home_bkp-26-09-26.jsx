@@ -20,7 +20,6 @@ import { cricketStandings } from "../data/cricket/standings";
 
 import { footballMatches } from "../data/football/footballMatches";
 import { cricketLiveMatches } from "../data/cricket/liveMatches";
-import { announcements } from "../data/home/announcements";
 
 import { sponsors } from "../data/sponsors/sponsors";
 
@@ -84,7 +83,6 @@ const currentAdvertisement =
     (match) => match.status === "LIVE"
   );
 
-  
 
   /* =====================================================
      TEAM HELPERS
@@ -95,7 +93,7 @@ const currentAdvertisement =
 
   const getCricketTeam = (teamId) =>
     cricketTeams.find((team) => team.id === teamId);
-    const activeAnnouncement = announcements.find((a) => a.active);
+
 
 const footballLiveTeam1 = footballLiveMatch
   ? getFootballTeam(footballLiveMatch.team1Id)
@@ -891,42 +889,6 @@ const cricketLiveTeam2 = cricketLiveMatch
 
   </div>
 )}
-
-{/* ================= CRICKET AUCTION HIGHLIGHT ================= */}
-      {activeAnnouncement && (
-        <section className="live-section">
-          <div className="section-heading light-heading">
-            <span>UPCOMING EVENT</span>
-            <h2>{activeAnnouncement.title}</h2>
-          </div>
-
-          <div className="live-match-card" style={{ padding: "30px", textAlign: "center", background: "linear-gradient(135deg, #111 0%, #1f1f1f 100%)", color: "#fff", border: "1px solid rgba(255,215,0,0.3)" }}>
-            <div className="live-match-header" style={{ justifyContent: "center", marginBottom: "20px" }}>
-              <span className="live-badge" style={{ background: "#f59e0b", color: "#000", fontWeight: "bold" }}>
-                🔔 {activeAnnouncement.subtitle}
-              </span>
-            </div>
-
-            <h3 style={{ fontSize: "1.8rem", marginBottom: "10px", color: "#facc15" }}>
-              🏏 BCL Cricket Auction & Teams Reveal
-            </h3>
-            <p style={{ fontSize: "1.05rem", color: "#d1d5db", maxWidth: "600px", margin: "0 auto 20px auto" }}>
-              {activeAnnouncement.description}
-            </p>
-
-            <div style={{ display: "flex", justifyContent: "center", gap: "30px", flexWrap: "wrap", marginBottom: "25px", fontSize: "0.95rem" }}>
-              <div>📅 <strong>Date:</strong> 27 September 2026</div>
-              <div>📍 <strong>Venue:</strong> Bidyanath Palace</div>
-            </div>
-
-            <div style={{ marginTop: "15px" }}>
-              <Link to="/cricket" className="sport-button" style={{ background: "#f59e0b", color: "#000", padding: "10px 25px", borderRadius: "6px", fontWeight: "600", textDecoration: "none" }}>
-                View Cricket Teams →
-              </Link>
-            </div>
-          </div>
-        </section>
-      )}
 
 
       {/* =================================================
