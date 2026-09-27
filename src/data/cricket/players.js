@@ -35,20 +35,20 @@ export const cricketPlayers = [
 
   // --- TEAM 3: DIGBARDA PITCH PANTHERS ---[cite: 23]
   { id: 31, name: "TINKU DAS", teamId: 3, role: "Icon", jerseyNumber: 1 },
-  { id: 32, name: "SOUGATA SATPATHY", teamId: 3, role: "Player", jerseyNumber: 2 },
-  { id: 33, name: "RAHUL MUNDA", teamId: 3, role: "Player", jerseyNumber: 3 },
+  { id: 32, name: "SOUGATA SATPATHY", teamId: 3, role: "BAT", jerseyNumber: 2 },
+  { id: 33, name: "RAHUL MUNDA", teamId: 3, role: "BAT", jerseyNumber: 3 },
   { id: 34, name: "MIHIR", teamId: 3, role: "Player", jerseyNumber: 4 },
   { id: 35, name: "RAJ SOREN", teamId: 3, role: "Player", jerseyNumber: 5 },
   { id: 36, name: "SUBHO", teamId: 3, role: "Player", jerseyNumber: 6 },
-  { id: 37, name: "SUBRATARAJ", teamId: 3, role: "Player", jerseyNumber: 7 },
+  { id: 37, name: "SUBRATORAJ", teamId: 3, role: "Player", jerseyNumber: 7 },
   { id: 38, name: "ABHIJEET JENA", teamId: 3, role: "Player", jerseyNumber: 8 },
   { id: 39, name: "ANJAN PAN", teamId: 3, role: "Player", jerseyNumber: 9 },
   { id: 40, name: "MUNNA DANDAPAT", teamId: 3, role: "Player", jerseyNumber: 10 },
   { id: 41, name: "PRASENJIT BERA", teamId: 3, role: "Player", jerseyNumber: 11 },
   { id: 42, name: "BAPUN MONDAL", teamId: 3, role: "Player", jerseyNumber: 12 },
   { id: 43, name: "MANAS BARIK", teamId: 3, role: "Player", jerseyNumber: 13 },
-  { id: 44, name: "RANJAN MAHAKUD", teamId: 3, role: "Player", jerseyNumber: 14 },
-  { id: 45, name: "BIBLABO HEMBRAM", teamId: 3, role: "Player", jerseyNumber: 15 },
+  { id: 44, name: "RANJAN MAHAKUR", teamId: 3, role: "Player", jerseyNumber: 14 },
+  { id: 45, name: "BIPLAB HEMBRAM", teamId: 3, role: "Player", jerseyNumber: 15 },
 
   // --- TEAM 4: TEAM GAJRAJ ---[cite: 24]
   { id: 46, name: "PARMIT SINGH", teamId: 4, role: "Icon", jerseyNumber: 1 },
@@ -70,7 +70,7 @@ export const cricketPlayers = [
   // --- TEAM 5: KESHARDA SUPER KINGS ---[cite: 25]
   { id: 61, name: "AJIT MARDI", teamId: 5, role: "Icon", jerseyNumber: 1 },
   { id: 62, name: "JISHAN", teamId: 5, role: "Player", jerseyNumber: 2 },
-  { id: 63, name: "SISIR MUNDA", teamId: 5, role: "Player", jerseyNumber: 3 },
+  { id: 63, name: "SISHIR MUNDA", teamId: 5, role: "Player", jerseyNumber: 3 },
   { id: 64, name: "SHIVAM KUMAR", teamId: 5, role: "Player", jerseyNumber: 4 },
   { id: 65, name: "DIPU BAGTI", teamId: 5, role: "Player", jerseyNumber: 5 },
   { id: 66, name: "KESHAV LAMA", teamId: 5, role: "Player", jerseyNumber: 6 },
@@ -80,8 +80,8 @@ export const cricketPlayers = [
   { id: 70, name: "NANDA GOPAL DAS", teamId: 5, role: "Player", jerseyNumber: 10 },
   { id: 71, name: "DONA MAHALI", teamId: 5, role: "Player", jerseyNumber: 11 },
   { id: 72, name: "PAPPU KR. SINGH", teamId: 5, role: "Player", jerseyNumber: 12 },
-  { id: 73, name: "SURJIT MUNDA", teamId: 5, role: "Player", jerseyNumber: 13 },
-  { id: 74, name: "ALAK RAJ GIRI", teamId: 5, role: "Player", jerseyNumber: 14 },
+  { id: 73, name: "SURJEET MUNDA", teamId: 5, role: "Player", jerseyNumber: 13 },
+  { id: 74, name: "ALOK RAJ GIRI", teamId: 5, role: "Player", jerseyNumber: 14 },
   { id: 75, name: "SUMAN MAHATO", teamId: 5, role: "Player", jerseyNumber: 15 },
 
   // --- TEAM 6: KHANDAMOUDA WARRIORS ---[cite: 26]
