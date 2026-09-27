@@ -29,8 +29,8 @@ export const cricketPlayers = [
   { id: 25, name: "SHANTANU ROUT", teamId: 2, role: "Player", jerseyNumber: 11 },
   { id: 26, name: "KOUSHIK PATRA", teamId: 2, role: "Player", jerseyNumber: 12 },
   { id: 27, name: "HARADHAN MALLICK", teamId: 2, role: "Player", jerseyNumber: 13 },
-  { id: 28, name: "RAKTIM MAUNGA", teamId: 2, role: "Player", jerseyNumber: 14 },
-  { id: 29, name: "BUDhu SOREN", teamId: 2, role: "Player", jerseyNumber: 15 },
+  { id: 28, name: "RAKTIM MANNA", teamId: 2, role: "Player", jerseyNumber: 14 },
+  { id: 29, name: "BUDHU SOREN", teamId: 2, role: "Player", jerseyNumber: 15 },
   { id: 30, name: "ABHIJEET DUTTA", teamId: 2, role: "Player", jerseyNumber: 16 },
 
   // --- TEAM 3: DIGBARDA PITCH PANTHERS ---[cite: 23]
@@ -122,7 +122,7 @@ export const cricketPlayers = [
   { id: 106, name: "BISHWARUP HOTA", teamId: 8, role: "Icon", jerseyNumber: 1 },
   { id: 107, name: "DEEPAK KR. SINGH", teamId: 8, role: "Player", jerseyNumber: 2 },
   { id: 108, name: "KAPIL MISHRA", teamId: 8, role: "Player", jerseyNumber: 3 },
-  { id: 109, name: "HIRU DHAWRIA", teamId: 8, role: "Player", jerseyNumber: 4 },
+  { id: 109, name: "HIRU DHAURIA", teamId: 8, role: "Player", jerseyNumber: 4 },
   { id: 110, name: "NABIN BERA", teamId: 8, role: "Player", jerseyNumber: 5 },
   { id: 111, name: "JITESH KR. SINGH", teamId: 8, role: "Player", jerseyNumber: 6 },
   { id: 112, name: "HITESH KR. BERA", teamId: 8, role: "Player", jerseyNumber: 7 },
