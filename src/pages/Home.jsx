@@ -1286,7 +1286,7 @@ const cricketLiveTeam2 = cricketLiveMatch
         <h2>Upcoming Matches</h2>
 
         <p>
-          Don't miss the next BCL Football and Cricket matches.
+          Don't miss the upcoming BCL Cricket 2026 matches.
         </p>
       </div>
 
@@ -1294,73 +1294,6 @@ const cricketLiveTeam2 = cricketLiveMatch
 
 
     <div className="home-upcoming-list">
-
-      {/* ================= FOOTBALL FIXTURES ================= */}
-
-      {upcomingFootballMatches.slice(0, 3).map((match) => {
-
-        const team1 = getFootballTeam(match.team1Id);
-        const team2 = getFootballTeam(match.team2Id);
-
-        return (
-          <div
-            className="home-upcoming-card"
-            key={`football-${match.id}`}
-          >
-
-            <div className="home-upcoming-date">
-
-              <strong>
-                {formatMatchDate(match.date)}
-              </strong>
-
-              <span>
-                {formatMatchTime(match.time)}
-              </span>
-
-            </div>
-
-
-            <div className="home-upcoming-sport football">
-
-              ⚽ FOOTBALL
-
-            </div>
-
-
-            <div className="home-upcoming-teams">
-
-              <strong>
-                {team1?.name || "Team A"}
-              </strong>
-
-              <span>VS</span>
-
-              <strong>
-                {team2?.name || "Team B"}
-              </strong>
-
-            </div>
-
-
-            <div className="home-upcoming-venue">
-
-              🏟 {match.venue}
-
-            </div>
-
-
-            <Link
-              to="/fixtures"
-              className="home-upcoming-link"
-            >
-              View Fixture →
-            </Link>
-
-          </div>
-        );
-      })}
-
 
       {/* ================= CRICKET FIXTURES ================= */}
 
@@ -1429,12 +1362,27 @@ const cricketLiveTeam2 = cricketLiveMatch
       })}
 
 
-      {upcomingFootballMatches.length === 0 &&
-        cricketFixtures.length === 0 && (
-          <div className="empty-home-message">
-            No upcoming matches available.
+      {/* ================= EMPTY STATE ================= */}
+
+      {cricketFixtures.length === 0 && (
+        <div className="empty-home-message">
+
+          <div style={{ fontSize: "36px", marginBottom: "10px" }}>
+            🏏
           </div>
-        )}
+
+          <h3>BCL Cricket 2026</h3>
+
+          <p>
+            Tournament starts on 25 October 2026.
+          </p>
+
+          <span>
+            Fixtures will be announced soon.
+          </span>
+
+        </div>
+      )}
 
     </div>
 
@@ -1660,7 +1608,7 @@ const cricketLiveTeam2 = cricketLiveMatch
 
 
       {/* ================= STANDINGS ================= */}
-<section className="home-standings-section">
+{/*<section className="home-standings-section">
   <div className="home-section-container">
 
     <div className="home-section-heading">
@@ -1674,7 +1622,7 @@ const cricketLiveTeam2 = cricketLiveMatch
     <div className="home-standings-grid">
 
       {/* ================= FOOTBALL STANDINGS ================= */}
-      <div className="home-standing-card home-standing-football">
+     {/* <div className="home-standing-card home-standing-football">
 
         <div className="home-standing-header">
           <div>
@@ -1759,7 +1707,7 @@ const cricketLiveTeam2 = cricketLiveMatch
 
 
       {/* ================= CRICKET STANDINGS ================= */}
-      <div className="home-standing-card home-standing-cricket">
+      {/*<div className="home-standing-card home-standing-cricket">
 
         <div className="home-standing-header">
           <div>
@@ -1845,7 +1793,7 @@ const cricketLiveTeam2 = cricketLiveMatch
     </div>
 
   </div>
-</section>
+</section> */}
 
 
 {/* ================= BCL OFFICIAL SPONSORS ================= */}
