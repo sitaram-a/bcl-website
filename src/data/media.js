@@ -40,7 +40,7 @@ export const photos = [
   { id: 27, title: "Glimpses Of the Day", category: "Football", date: "Season 3", size: "big", tone: 5, src: photo("Glimpses_Of_Day_1_Football_player.jpg") },
   { id: 28, title: "Glimpses Of the Day", category: "Football", date: "Season 3", size: "", tone: 5, src: photo("Glimpses_Of_Day_1_Football_player_1.jpg") },
   { id: 29, title: "Glimpses Of the Day", category: "Football", date: "Season 3", size: "", tone: 5, src: photo("Glimpses_Of_Day_hand_shake_guest.jpg") },
-  { id: 30, title: "WELCOME OUR ALL OWNER AND ICONS", category: "Cricket", date: "Season 3", size: "big", tone: 5, src: photo("WELCOME_OUR_ALL_OWNER_AND_ICONS.jpg") },
+  { id: 30, title: "WELCOME OUR ALL OWNER AND ICONS", category: "Football", date: "Season 3", size: "big", tone: 5, src: photo("WELCOME_OUR_ALL_OWNER_AND_ICONS.jpg") },
   { id: 31, title: "Football season2 Day 2", category: "Football", date: "Season 3", size: "", tone: 5, src: photo("football_season2_DaY_1_And_Day_2.jpg") },
   { id: 32, title: "Football season2 Day 1", category: "Football", date: "Season 3", size: "", tone: 5, src: photo("football_season-2_DaY_1_And_Day_2.jpg") },
   { id: 33, title: "Bcl cricket team names", category: "Cricket", date: "Season 3", size: "", tone: 5, src: photo("bcl_cricket_team_names.jpg") },
@@ -53,7 +53,7 @@ export const photos = [
   { id: 40, title: "Baharagora Kings team members", category: "Cricket", date: "Season 3", size: "", tone: 5, src: photo("baharagora_kings_team_members.jpg") },
   { id: 41, title: "Kesarda Super Kings team_members", category: "Cricket", date: "Season 3", size: "", tone: 5, src: photo("kesarda_team_members.jpg") },
   { id: 42, title: "Khandamouda Worriors team_members", category: "Cricket", date: "Season 3", size: "", tone: 5, src: photo("khandamouda_team_members.jpg") },
-  { id: 43, title: "BCL Football Match Rafree", category: "Cricket", date: "Season 3", size: "wide", tone: 5, src: photo("bcl_football_match_rafree.jpg") },
+  { id: 43, title: "BCL Football Match Rafree", category: "Football", date: "Season 3", size: "wide", tone: 5, src: photo("bcl_football_match_rafree.jpg") },
 ];
 
 // `thumb` is optional: a poster image for the video card. If omitted, the first frame of the video is used.
