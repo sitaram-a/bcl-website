@@ -1444,7 +1444,7 @@ const cricketLiveTeam2 = cricketLiveMatch
 
 
       {/* ================= RESULTS ================= */}
-<section className="home-results-section">
+{/*<section className="home-results-section">
 
   <div className="home-section-container">
 
@@ -1465,7 +1465,7 @@ const cricketLiveTeam2 = cricketLiveMatch
 
       {/* ================= FOOTBALL RESULT ================= */}
 
-      {footballResults.slice(0, 1).map((result) => {
+       {/* {footballResults.slice(0, 1).map((result) => {
 
         const team1 = getFootballTeam(result.team1Id);
         const team2 = getFootballTeam(result.team2Id);
@@ -1556,7 +1556,7 @@ const cricketLiveTeam2 = cricketLiveMatch
 
       {/* ================= CRICKET RESULT ================= */}
 
-      {cricketResults.slice(0, 1).map((result) => {
+      {/*{cricketResults.slice(0, 1).map((result) => {
 
         const team1 = getCricketTeam(result.team1Id);
         const team2 = getCricketTeam(result.team2Id);
@@ -1656,7 +1656,7 @@ const cricketLiveTeam2 = cricketLiveMatch
 
   </div>
 
-</section>
+</section>*/}
 
 
       {/* ================= STANDINGS ================= */}
@@ -2619,6 +2619,8 @@ const cricketLiveTeam2 = cricketLiveMatch
     BCL FOOTER
 ================================================= */}
 
+
+
 <footer className="bcl-footer">
 
   <div className="footer-container">
@@ -2753,10 +2755,35 @@ const cricketLiveTeam2 = cricketLiveMatch
       </div>
 
     </div>
-
   </div>
 
+ <div className="footer-development">
+  <div className="footer-development-icon">💻</div>
 
+  <div>
+    <span className="footer-development-label">
+      WEBSITE DEVELOPMENT
+    </span>
+
+    <h3>Need a Website for Your Business or Event?</h3>
+
+    <p>
+      Have a website development requirement? Get in touch for
+      custom websites for businesses, tournaments, events and
+      organizations.
+    </p>
+
+    <div className="footer-development-contact">
+      <a href="mailto:sitaram.hembrom123@gmail.com">
+        ✉️ sitaram.hembrom123@gmail.com
+      </a>
+
+      <a href="tel:+917004941312">
+        📞 +91 70049 41312
+      </a>
+    </div>
+  </div>
+</div>
   {/* ================= FOOTER BOTTOM ================= */}
 
   <div className="footer-bottom">
