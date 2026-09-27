@@ -336,3 +336,81 @@
   .reg-stepper li { font-size: 0; gap: 0; justify-content: center; }
   .reg-stepper li span { font-size: 13px; }
 }
+
+/* ================================
+   REGISTRATION CLOSED
+================================ */
+
+.reg-closed > svg {
+  color: #1f9d63;
+}
+
+.reg-closed h2 {
+  font-size: 32px;
+  margin: 16px 0 10px;
+  color: #0c1c36;
+}
+
+.reg-closed-info {
+  margin-top: 28px;
+  min-width: 280px;
+}
+
+.reg-closed-info strong {
+  font-size: 20px;
+}
+
+.reg-closed-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.reg-closed-details > div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 14px;
+  background: #f0f6ff;
+  text-align: left;
+}
+
+.reg-closed-details svg {
+  flex-shrink: 0;
+  color: #123e73;
+}
+
+.reg-closed-details span {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.reg-closed-details small {
+  color: #64748b;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.reg-closed-details strong {
+  color: #0c1c36;
+  font-size: 14px;
+}
+
+@media (max-width: 600px) {
+  .reg-closed-details {
+    grid-template-columns: 1fr;
+  }
+
+  .reg-closed h2 {
+    font-size: 26px;
+  }
+
+  .reg-closed-info {
+    min-width: auto;
+    width: 100%;
+  }
+}

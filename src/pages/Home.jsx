@@ -856,7 +856,7 @@ const cricketLiveTeam2 = cricketLiveMatch
 </section>
 
 
-      {/* ================= LIVE MATCHES ================= */}
+    {/*  ================= LIVE MATCHES =================
 <section className="home-live-highlight">
 
   <div className="home-section-container">
@@ -888,7 +888,7 @@ const cricketLiveTeam2 = cricketLiveMatch
     <div className="home-live-highlight-grid">
 
       {/* ================= FOOTBALL LIVE ================= */}
-      {footballLiveMatch && (
+      {/*{footballLiveMatch && (
         <div className="home-live-match-card home-live-football">
 
           <div className="home-live-card-header">
@@ -962,7 +962,7 @@ const cricketLiveTeam2 = cricketLiveMatch
 
 
       {/* ================= CRICKET LIVE ================= */}
-      {cricketLiveMatch && (
+       {/*{cricketLiveMatch && (
         <div className="home-live-match-card home-live-cricket">
 
           <div className="home-live-card-header">
@@ -1048,7 +1048,7 @@ const cricketLiveTeam2 = cricketLiveMatch
 
   </div>
 
-</section>
+</section> */}
 
 
 {/* ================= BCL ADVERTISEMENT ================= */}

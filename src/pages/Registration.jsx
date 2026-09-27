@@ -265,6 +265,7 @@ function Field({ label, name, type = "text", placeholder, form, errors, set, ...
 }
 
 function Registration() {
+    const REGISTRATION_CLOSED = true;
   const [step, setStep] = useState(0);
   const [form, setForm] = useState(initial);
   const [errors, setErrors] = useState({});
@@ -394,304 +395,122 @@ function Registration() {
   };
 
   return (
-    <div className="reg-page">
-      {/* HERO */}
-      <section className="reg-hero">
-        <div className="reg-hero-glow" />
-        <div className="reg-hero-inner">
-          <span className="reg-kicker">
-            <Trophy size={14} /> SEASON REGISTRATIONS OPEN
-          </span>
-          <h1>
-            Join the <span>Champions</span>
-          </h1>
+  <div className="reg-page">
+    {/* REGISTRATION CLOSED HERO */}
+    <section className="reg-hero">
+      <div className="reg-hero-glow" />
+
+      <div className="reg-hero-inner">
+        <span className="reg-kicker">
+          <Trophy size={14} /> BCL 2026
+        </span>
+
+        <h1>
+          Registration <span>Closed</span>
+        </h1>
+
+        <p>
+          Player and team registrations for Baharagora Champions League
+          Season 5 are now closed.
+        </p>
+
+        <div className="reg-facts">
+          <div>
+            <CalendarDays size={18} />
+            Registration Closed
+          </div>
+
+          <div>
+            <MapPin size={18} />
+            Baharagora
+          </div>
+
+          <div>
+            <Trophy size={18} />
+            BCL Cricket 2026
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* CLOSED MESSAGE */}
+    <section className="reg-wrap">
+      <div className="reg-card">
+        <div className="reg-success reg-closed">
+          <CheckCircle2 size={72} />
+
+          <h2>Registration Is Closed</h2>
+
           <p>
-            Register as a player or bring your whole team to compete in
-            Baharagora's biggest football and cricket league.
+            Thank you for your interest in the Baharagora Champions League.
+            Registration for BCL Cricket 2026 has now ended.
           </p>
-          <div className="reg-facts">
-            <div><CalendarDays size={18} /> Season starts soon</div>
-            <div><MapPin size={18} /> Baharagora</div>
-            <div><IndianRupee size={18} /> Fees announced on confirmation</div>
+
+          <div className="reg-ref reg-closed-info">
+            <span>Tournament</span>
+            <strong>BCL Cricket 2026</strong>
           </div>
-        </div>
-      </section>
 
-      <section className="reg-wrap">
-        <div className="reg-card">
-          {refId ? (
-            <div className="reg-success">
-              <CheckCircle2 size={64} />
-              <h2>Registration Submitted!</h2>
-              <p>
-                Thanks, {isPlayer ? form.name : form.teamName}. Our team will
-                contact you on {form.phone} shortly.
-              </p>
-              <div className="reg-ref">
-                <span>Your reference ID</span>
-                <strong>{refId}</strong>
-              </div>
-
-              <div className="reg-poster-wrap">
-                {posterLoading ? (
-                  <div className="reg-poster-loading">
-                    <Loader2 className="spin" size={28} />
-                    <span>Generating your registration poster…</span>
-                  </div>
-                ) : poster ? (
-                  <>
-                    <img className="reg-poster" src={poster} alt="Your registration poster" />
-                    <div className="reg-actions center">
-                      <a
-                        href={poster}
-                        download={`registered-players/bcl-registration-${refId}.png`}
-                        className="reg-btn primary"
-                      >
-                        <Download size={16} /> Download Poster
-                      </a>
-                      {typeof navigator !== "undefined" && navigator.share && (
-                        <button className="reg-btn ghost" onClick={sharePoster}>
-                          <Share2 size={16} /> Share
-                        </button>
-                      )}
-                    </div>
-
-                    <div className="reg-whatsapp-box">
-                      <p>
-                        Download the poster above, then send it on WhatsApp
-                        to confirm your registration:
-                      </p>
-                      <a
-                        className="reg-btn whatsapp"
-                        href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-                          buildWhatsAppMessage({ form, refId, isPlayer })
-                        )}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <MessageCircle size={16} /> Send on WhatsApp ({CONTACT_PHONE})
-                      </a>
-                      <small>
-                        This opens WhatsApp with your details pre-filled —
-                        attach the downloaded poster before sending.
-                      </small>
-                    </div>
-                  </>
-                ) : null}
-              </div>
-
-              <div className="reg-actions center">
-                <button className="reg-btn ghost" onClick={reset}>
-                  Register Another
-                </button>
-                <Link to="/" className="reg-btn primary">
-                  Back to Home
-                </Link>
-              </div>
+          <div className="reg-closed-details">
+            <div>
+              <CalendarDays size={20} />
+              <span>
+                <small>Tournament Starts</small>
+                <strong>25 October 2026</strong>
+              </span>
             </div>
-          ) : (
-            <>
-              {/* STEPPER */}
-              <ol className="reg-stepper">
-                {STEPS.map((s, i) => (
-                  <li
-                    key={s}
-                    className={i === step ? "current" : i < step ? "done" : ""}
-                  >
-                    <span>{i < step ? "✓" : i + 1}</span>
-                    {s}
-                  </li>
-                ))}
-              </ol>
 
-              {/* STEP 0 */}
-              {step === 0 && (
-                <div className="reg-step">
-                  <h2>What would you like to register for?</h2>
-
-                  <h3 className="reg-label">Sport</h3>
-                  <div className="reg-choices">
-                    {[
-                      ["football", "⚽", "Football"],
-                      ["cricket", "🏏", "Cricket"],
-                    ].map(([v, icon, label]) => (
-                      <button
-                        key={v}
-                        className={`reg-choice ${form.sport === v ? "active" : ""}`}
-                        onClick={() => set("sport", v)}
-                      >
-                        <span className="emoji">{icon}</span>
-                        <strong>{label}</strong>
-                      </button>
-                    ))}
-                  </div>
-
-                  <h3 className="reg-label">Register as</h3>
-                  <div className="reg-choices">
-                    <button
-                      className={`reg-choice ${isPlayer ? "active" : ""}`}
-                      onClick={() => set("type", "player")}
-                    >
-                      <User size={30} />
-                      <strong>Individual Player</strong>
-                      <small>Get picked by a team</small>
-                    </button>
-                    <button
-                      className={`reg-choice ${!isPlayer ? "active" : ""}`}
-                      onClick={() => set("type", "team")}
-                    >
-                      <Users size={30} />
-                      <strong>Full Team</strong>
-                      <small>Enter your own squad</small>
-                    </button>
-                  </div>
-                </div>
-              )}
-
-              {/* STEP 1 */}
-              {step === 1 && (
-                <div className="reg-step">
-                  <h2>{isPlayer ? "Player details" : "Team details"}</h2>
-                  <div className="reg-grid">
-                    {isPlayer ? (
-                      <>
-                        <Field form={form} errors={errors} set={set} label="Full name" name="name" placeholder="e.g. Rahul Kumar" />
-                        <Field form={form} errors={errors} set={set} label="Age" name="age" type="number" placeholder="18" />
-                        <label className={`reg-field ${errors.position ? "has-error" : ""}`}>
-                          <span>Preferred position</span>
-                          <select
-                            value={form.position}
-                            onChange={(e) => set("position", e.target.value)}
-                          >
-                            <option value="">Select…</option>
-                            {positions[form.sport].map((p) => (
-                              <option key={p}>{p}</option>
-                            ))}
-                          </select>
-                          {errors.position && <small>{errors.position}</small>}
-                        </label>
-                        <label className={`reg-field ${errors.photo ? "has-error" : ""}`}>
-                          <span>Your photo (optional)</span>
-                          <button
-                            type="button"
-                            className="reg-photo-btn"
-                            onClick={() => fileInputRef.current?.click()}
-                          >
-                            {form.photoDataUrl ? (
-                              <img src={form.photoDataUrl} alt="Preview" />
-                            ) : (
-                              <Camera size={20} />
-                            )}
-                            {form.photoDataUrl ? "Change photo" : "Upload photo"}
-                          </button>
-                          <input
-                            ref={fileInputRef}
-                            type="file"
-                            accept="image/*"
-                            hidden
-                            onChange={onPhotoChange}
-                          />
-                          {errors.photo && <small>{errors.photo}</small>}
-                          <small className="reg-hint">
-                            Used only for your registration poster below.
-                          </small>
-                        </label>
-                      </>
-                    ) : (
-                      <>
-                        <Field form={form} errors={errors} set={set} label="Team name" name="teamName" placeholder="e.g. Baharagora Strikers" />
-                        <Field form={form} errors={errors} set={set} label="Captain name" name="captain" placeholder="Captain's full name" />
-                        <Field form={form} errors={errors} set={set} label="Squad size" name="players" type="number" placeholder="11" />
-                      </>
-                    )}
-                    <Field form={form} errors={errors} set={set} label="Mobile number" name="phone" type="tel" placeholder="10-digit number" maxLength={10} />
-                    <Field form={form} errors={errors} set={set} label="Email" name="email" type="email" placeholder="you@example.com" />
-                    <div className="reg-full">
-                      <Field form={form} errors={errors} set={set} label="Address" name="address" placeholder="Village / Town, Baharagora" />
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* STEP 2 */}
-              {step === 2 && (
-                <div className="reg-step">
-                  <h2>Review & confirm</h2>
-                  <dl className="reg-review">
-                    <div><dt>Sport</dt><dd>{form.sport === "football" ? "⚽ Football" : "🏏 Cricket"}</dd></div>
-                    <div><dt>Type</dt><dd>{isPlayer ? "Individual Player" : "Full Team"}</dd></div>
-                    {isPlayer ? (
-                      <>
-                        <div><dt>Name</dt><dd>{form.name}</dd></div>
-                        <div><dt>Age</dt><dd>{form.age}</dd></div>
-                        <div><dt>Position</dt><dd>{form.position}</dd></div>
-                      </>
-                    ) : (
-                      <>
-                        <div><dt>Team</dt><dd>{form.teamName}</dd></div>
-                        <div><dt>Captain</dt><dd>{form.captain}</dd></div>
-                        <div><dt>Squad size</dt><dd>{form.players}</dd></div>
-                      </>
-                    )}
-                    <div><dt>Mobile</dt><dd>{form.phone}</dd></div>
-                    <div><dt>Email</dt><dd>{form.email}</dd></div>
-                    <div><dt>Address</dt><dd>{form.address}</dd></div>
-                  </dl>
-
-                  <label className="reg-agree">
-                    <input
-                      type="checkbox"
-                      checked={form.agree}
-                      onChange={(e) => set("agree", e.target.checked)}
-                    />
-                    <span>
-                      <ShieldCheck size={16} /> I confirm the details are correct and agree
-                      to follow the BCL rules and code of conduct.
-                    </span>
-                  </label>
-                  {errors.agree && <small className="reg-error">{errors.agree}</small>}
-                </div>
-              )}
-
-              {/* ACTIONS */}
-              <div className="reg-actions">
-                {step > 0 ? (
-                  <button className="reg-btn ghost" onClick={() => setStep(step - 1)}>
-                    <ArrowLeft size={16} /> Back
-                  </button>
-                ) : (
-                  <span />
-                )}
-                {step < 2 ? (
-                  <button className="reg-btn primary" onClick={goNext}>
-                    Continue <ArrowRight size={16} />
-                  </button>
-                ) : (
-                  <button className="reg-btn primary" onClick={submit}>
-                    Submit Registration <CheckCircle2 size={16} />
-                  </button>
-                )}
-              </div>
-            </>
-          )}
-        </div>
-
-        {/* SIDE INFO */}
-        <aside className="reg-side">
-          <h3>Why join BCL?</h3>
-          <ul>
-            <li><Trophy size={18} /> Compete for the championship trophy</li>
-            <li><Users size={18} /> Play with the best local talent</li>
-            <li><ShieldCheck size={18} /> Organised, fair & well-officiated matches</li>
-          </ul>
-          <div className="reg-side-note">
-            <strong>Need help?</strong>
-            <span>Reach out to the BCL organising committee for any questions about eligibility or fees.</span>
+            <div>
+              <MapPin size={20} />
+              <span>
+                <small>Location</small>
+                <strong>Baharagora</strong>
+              </span>
+            </div>
           </div>
-        </aside>
-      </section>
-    </div>
-  );
+
+          <div className="reg-actions center">
+            <Link to="/" className="reg-btn primary">
+              <ArrowLeft size={16} />
+              Back to Home
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* SIDE INFO */}
+      <aside className="reg-side">
+        <h3>BCL Cricket 2026</h3>
+
+        <ul>
+          <li>
+            <Trophy size={18} />
+            Get ready for the championship
+          </li>
+
+          <li>
+            <CalendarDays size={18} />
+            Tournament starts on 25 October 2026
+          </li>
+
+          <li>
+            <MapPin size={18} />
+            Venue: Baharagora
+          </li>
+        </ul>
+
+        <div className="reg-side-note">
+          <strong>Registration Closed</strong>
+
+          <span>
+            Player and team registration is no longer accepting new
+            submissions for this season.
+          </span>
+        </div>
+      </aside>
+    </section>
+  </div>
+);
 }
 
 export default Registration;
