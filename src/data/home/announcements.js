@@ -3,7 +3,7 @@ export const announcements = [
     id: 1,
     type: "AUCTION",
     title: "BCL Cricket Auction 2026",
-    subtitle: "Auction Tomorrow",
+    subtitle: "Auction Today 5:00 PM",
     date: "2026-09-27",
     venue: "Bidyanath Palace",
     description:
