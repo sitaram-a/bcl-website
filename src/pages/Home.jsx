@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import footballLogo from "../assets/logo/bcl-football-logo.png";
 import cricketLogo from "../assets/logo/bcl-cricket-logo.png";
 import cricketball from "../assets/icons/cricket-ball.png";
+
+import { homePosters } from "../data/home/posters";
 import { bclVideos } from "../data/home/videos";
 
 import { advertisements } from "../data/advertisements/advertisements";
@@ -40,6 +42,34 @@ function Home() {
 const [showAdvertisement, setShowAdvertisement] = useState(false);
 const [currentAdvertisementIndex, setCurrentAdvertisementIndex] = useState(0);
 const [activeVideo, setActiveVideo] = useState(null);
+const [activePoster, setActivePoster] = useState(null);
+const [activePosterIndex, setActivePosterIndex] = useState(0);
+
+const nextPoster = () => {
+  setActivePosterIndex((currentIndex) =>
+    (currentIndex + 1) % homePosters.length
+  );
+};
+
+const previousPoster = () => {
+  setActivePosterIndex((currentIndex) =>
+    currentIndex === 0
+      ? homePosters.length - 1
+      : currentIndex - 1
+  );
+};
+
+useEffect(() => {
+  if (homePosters.length <= 1) return;
+
+  const posterInterval = setInterval(() => {
+    setActivePosterIndex((currentIndex) =>
+      (currentIndex + 1) % homePosters.length
+    );
+  }, 5000);
+
+  return () => clearInterval(posterInterval);
+}, []);
 
 useEffect(() => {
   const firstAdTimeout = setTimeout(() => {
@@ -268,6 +298,150 @@ const cricketLiveTeam2 = cricketLiveMatch
         <span>League Table</span>
       </div>
 
+    </div>
+
+  </div>
+
+</section>
+
+{/* ================= BCL SEASON 5 TEAM POSTERS ================= */}
+<section className="home-poster-showcase">
+
+  <div className="home-section-container">
+
+    <div className="home-section-heading">
+      <span>BCL SEASON 5</span>
+
+      <h2>Teams & Franchise Posters</h2>
+
+      <p>
+        Explore the official BCL 2026 franchises, team posters
+        and the grand auction details.
+      </p>
+    </div>
+
+
+    <div className="home-poster-carousel">
+
+      <button
+        type="button"
+        className="home-poster-arrow home-poster-arrow-left"
+        onClick={previousPoster}
+        aria-label="Previous poster"
+      >
+        ‹
+      </button>
+
+
+      <div className="home-poster-track">
+
+        {homePosters.map((poster, index) => {
+
+          const position =
+            index === activePosterIndex
+              ? "active"
+              : index ===
+                  (activePosterIndex - 1 + homePosters.length) %
+                    homePosters.length
+                ? "previous"
+                : index ===
+                    (activePosterIndex + 1) %
+                      homePosters.length
+                  ? "next"
+                  : "hidden";
+
+          return (
+            <div
+              key={poster.id}
+              className={`home-poster-slide ${position}`}
+              onClick={() => {
+                if (position === "active") {
+                  setActivePoster(poster);
+                } else if (position === "previous") {
+                  previousPoster();
+                } else if (position === "next") {
+                  nextPoster();
+                }
+              }}
+            >
+
+              <div className="home-poster-card">
+
+                <img
+                  src={poster.src}
+                  alt={poster.title}
+                  loading="lazy"
+                />
+
+                <div className="home-poster-overlay">
+
+                  <span className="home-poster-category">
+                    {poster.category}
+                  </span>
+
+                  <h3>
+                    {poster.title}
+                  </h3>
+
+                  <span className="home-poster-view">
+                    View Poster →
+                  </span>
+
+                </div>
+
+              </div>
+
+            </div>
+          );
+        })}
+
+      </div>
+
+
+      <button
+        type="button"
+        className="home-poster-arrow home-poster-arrow-right"
+        onClick={nextPoster}
+        aria-label="Next poster"
+      >
+        ›
+      </button>
+
+    </div>
+
+
+    {/* Carousel dots */}
+
+    <div className="home-poster-dots">
+
+      {homePosters.map((poster, index) => (
+        <button
+          key={poster.id}
+          type="button"
+          className={
+            index === activePosterIndex
+              ? "home-poster-dot active"
+              : "home-poster-dot"
+          }
+          onClick={() => setActivePosterIndex(index)}
+          aria-label={`Show ${poster.title}`}
+          aria-current={
+            index === activePosterIndex
+              ? "true"
+              : undefined
+          }
+        />
+      ))}
+
+    </div>
+
+
+    <div className="home-poster-counter">
+      <strong>
+        {activePosterIndex + 1}
+      </strong>
+      <span>/</span>
+      <span>{homePosters.length}</span>
     </div>
 
   </div>

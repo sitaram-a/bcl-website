@@ -6113,3 +6113,254 @@
   background: #000;
   object-fit: contain;
 }
+
+/* =====================================================
+   BCL MODERN POSTER CAROUSEL
+===================================================== */
+
+.home-poster-carousel {
+  position: relative;
+  width: 100%;
+  margin-top: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 520px;
+  overflow: hidden;
+}
+
+.home-poster-track {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+}
+
+.home-poster-slide {
+  position: absolute;
+  width: 330px;
+  height: 460px;
+  transition:
+    transform 0.55s ease,
+    opacity 0.55s ease,
+    filter 0.55s ease;
+  cursor: pointer;
+}
+
+.home-poster-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #111;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+.home-poster-card img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.home-poster-slide.active {
+  z-index: 5;
+  transform: translateX(0) scale(1);
+  opacity: 1;
+  filter: none;
+}
+
+.home-poster-slide.previous {
+  z-index: 3;
+  transform: translateX(-350px) scale(0.82);
+  opacity: 0.55;
+  filter: brightness(0.65);
+}
+
+.home-poster-slide.next {
+  z-index: 3;
+  transform: translateX(350px) scale(0.82);
+  opacity: 0.55;
+  filter: brightness(0.65);
+}
+
+.home-poster-slide.hidden {
+  z-index: 1;
+  transform: translateX(0) scale(0.7);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.home-poster-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 55px 22px 22px;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.92),
+    rgba(0, 0, 0, 0)
+  );
+  color: #fff;
+}
+
+.home-poster-category {
+  display: inline-block;
+  padding: 5px 10px;
+  margin-bottom: 8px;
+  border-radius: 999px;
+  background: rgba(245, 158, 11, 0.95);
+  color: #111;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.home-poster-overlay h3 {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.home-poster-view {
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+.home-poster-arrow {
+  position: absolute;
+  z-index: 10;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52px;
+  height: 52px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  background: rgba(10, 10, 10, 0.8);
+  color: #fff;
+  font-size: 2.2rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+}
+
+.home-poster-arrow:hover {
+  transform: translateY(-50%) scale(1.08);
+  background: #f59e0b;
+  color: #111;
+}
+
+.home-poster-arrow-left {
+  left: 20px;
+}
+
+.home-poster-arrow-right {
+  right: 20px;
+}
+
+.home-poster-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  margin-top: 15px;
+}
+
+.home-poster-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.home-poster-dot.active {
+  width: 24px;
+  border-radius: 10px;
+  background: #f59e0b;
+}
+
+.home-poster-counter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin-top: 12px;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.85rem;
+}
+
+.home-poster-counter strong {
+  color: #f59e0b;
+}
+
+
+/* =====================================================
+   MOBILE POSTER CAROUSEL
+===================================================== */
+
+@media (max-width: 768px) {
+
+  .home-poster-carousel {
+    min-height: 450px;
+  }
+
+  .home-poster-track {
+    height: 430px;
+  }
+
+  .home-poster-slide {
+    width: 270px;
+    height: 400px;
+  }
+
+  .home-poster-slide.previous {
+    transform: translateX(-210px) scale(0.72);
+    opacity: 0.25;
+  }
+
+  .home-poster-slide.next {
+    transform: translateX(210px) scale(0.72);
+    opacity: 0.25;
+  }
+
+  .home-poster-arrow {
+    width: 42px;
+    height: 42px;
+    font-size: 1.8rem;
+  }
+
+  .home-poster-arrow-left {
+    left: 5px;
+  }
+
+  .home-poster-arrow-right {
+    right: 5px;
+  }
+
+  .home-poster-overlay {
+    padding: 45px 16px 16px;
+  }
+
+  .home-poster-overlay h3 {
+    font-size: 1rem;
+  }
+
+  .home-poster-category {
+    font-size: 0.65rem;
+  }
+
+}
