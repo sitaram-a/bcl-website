@@ -74,7 +74,7 @@ useEffect(() => {
 useEffect(() => {
   const firstAdTimeout = setTimeout(() => {
     setShowAdvertisement(true);
-  }, 60 * 1000);
+  }, 30 * 1000);
 
   const adInterval = setInterval(() => {
     setCurrentAdvertisementIndex((currentIndex) => {
@@ -90,7 +90,7 @@ useEffect(() => {
     });
 
     setShowAdvertisement(true);
-  }, 60 * 1000);
+  }, 300 * 1000);
 
   return () => {
     clearTimeout(firstAdTimeout);
