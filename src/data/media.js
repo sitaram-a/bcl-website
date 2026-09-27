@@ -59,8 +59,8 @@ export const photos = [
 // `thumb` is optional: a poster image for the video card. If omitted, the first frame of the video is used.
 export const videos = [
   { id: 1, title: "Baharagora Champions League  – Season 5", category: "Cricket", duration: "", views: "", tone: 4, src: video("BCL-season-5-1.mp4"), thumb: video("BCL-season-5.png") },
-  { id: 2, title: "Anchor Pallab 2.0", category: "Champions", duration: "", views: "", tone: 4, src: video("KPL BATTING ❤️.mp4"), thumb: video("nikhil-on-fire.png") },
-  { id: 3, title: "The Dancing Umpire in BCL 3", category: "Cricket", duration: "", views: "", tone: 2, src: video("anchor_pallab_2.mp4"), thumb: video("anchor_pallab.png") },
+  { id: 2, title: "The Dancing Umpire in BCL 3", category: "Cricket", duration: "", views: "", tone: 4, src: video("KPL BATTING ❤️.mp4"), thumb: video("nikhil-on-fire.png") },
+  { id: 3, title: "Anchor Pallab 2.0", category: "Cricket", duration: "", views: "", tone: 2, src: video("anchor_pallab_2.mp4"), thumb: video("anchor_pallab.png") },
   { id: 4, title: "Baharagora Biggest Tennis Cricket League", category: "Fans", duration: "", views: "", tone: 3, src: video("SEASON 3 🔥.mp4"), thumb: video("tennis.png") },
   { id: 5, title: "THE CHAMPIONS OF BCL SEASON 3", category: "Champions", duration: "", views: "", tone: 0, src: video("THE CHAMPIONS OF BCL SEASON 3 🔥 TEAM - KHANDAMOUDA WARRIORS 🔥 OWNER - SHASANK SHEKHAR PAUL CAP 2.mp4"), thumb: video("THE_CHAMPIONS.jpg") },
   { id: 6, title: "Champions Celebration", category: "Champions", duration: "", views: "", tone: 7, src: video("THE CHAMPIONS OF BCL SEASON 3 🔥 TEAM - KHANDAMOUDA WARRIORS 🔥 OWNER - SHASANK SHEKHAR PAUL CAP.mp4"), thumb: video("champions2.png") },
