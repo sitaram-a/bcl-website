@@ -59,11 +59,11 @@ export const photos = [
 // `thumb` is optional: a poster image for the video card. If omitted, the first frame of the video is used.
 export const videos = [
   { id: 1, title: "Baharagora Champions League  – Season 5", category: "Cricket", duration: "", views: "", tone: 4, src: video("BCL-season-5-1.mp4"), thumb: video("BCL-season-5.png") },
-  { id: 2, title: "Nikhil On Fire", category: "Champions", duration: "", views: "", tone: 4, src: video("KPL BATTING ❤️.mp4"), thumb: video("nikhil-on-fire.png") },
+  { id: 2, title: "Anchor Pallab 2.0", category: "Champions", duration: "", views: "", tone: 4, src: video("KPL BATTING ❤️.mp4"), thumb: video("nikhil-on-fire.png") },
   { id: 3, title: "The Dancing Umpire in BCL 3", category: "Cricket", duration: "", views: "", tone: 2, src: video("anchor_pallab_2.mp4"), thumb: video("anchor_pallab.png") },
-  { id: 4, title: "The Dancing Umpire in BCL 3", category: "Fans", duration: "", views: "", tone: 3, src: video("SEASON 3 🔥.mp4"), thumb: video("tennis.png") },
+  { id: 4, title: "Baharagora Biggest Tennis Cricket League", category: "Fans", duration: "", views: "", tone: 3, src: video("SEASON 3 🔥.mp4"), thumb: video("tennis.png") },
   { id: 5, title: "THE CHAMPIONS OF BCL SEASON 3", category: "Champions", duration: "", views: "", tone: 0, src: video("THE CHAMPIONS OF BCL SEASON 3 🔥 TEAM - KHANDAMOUDA WARRIORS 🔥 OWNER - SHASANK SHEKHAR PAUL CAP 2.mp4"), thumb: video("THE_CHAMPIONS.jpg") },
-  { id: 6, title: "Anchor Pallab 2.0", category: "Events", duration: "", views: "", tone: 7, src: video("THE CHAMPIONS OF BCL SEASON 3 🔥 TEAM - KHANDAMOUDA WARRIORS 🔥 OWNER - SHASANK SHEKHAR PAUL CAP.mp4"), thumb: video("champions2.png") },
+  { id: 6, title: "Champions Celebration", category: "Champions", duration: "", views: "", tone: 7, src: video("THE CHAMPIONS OF BCL SEASON 3 🔥 TEAM - KHANDAMOUDA WARRIORS 🔥 OWNER - SHASANK SHEKHAR PAUL CAP.mp4"), thumb: video("champions2.png") },
   { id: 7, title: "Update for Advertisement", category: "Events", duration: "", views: "", tone: 6, src: video("Update For Advertisement 👍.mp4"), thumb: video("piklu.png") },
   { id: 8, title: "THE DANCING UMPIRE IN BCL 3 .🥳", category: "Cricket", duration: "", views: "", tone: 6, src: video("THE DANCING UMPIRE IN BCL 3 .🥳.mp4"), thumb: video("advetise.png") },
   { id: 9, title: "Arun Patra Batting", category: "Cricket", duration: "", views: "", tone: 4, src: video("Arunpatra_batting.mp4"), thumb: video("Arunpatra_batting.png") },
@@ -72,9 +72,9 @@ export const videos = [
   { id: 12, title: "81 runs 23 Balls Anu", category: "Cricket", duration: "", views: "", tone: 4, src: video("ANU_81_runs_23_balls.mp4"), thumb: video("ANU_81_runs_23_balls.png") },
   { id: 13, title: "DEV MAHATO BCL", category: "Cricket", duration: "", views: "", tone: 4, src: video("DEV_MAHATO_BCL.mp4"), thumb: video("DEV_MAHATO_BCL.png") },
   { id: 14, title: "BCL Football Final Moment", category: "Football", duration: "", views: "", tone: 4, src: video("BCL_football_Final_Moment.mp4"), thumb: video("football_match.png") },
-  { id: 15, title: "BCL_football_promotion", category: "Football", duration: "", views: "", tone: 4, src: video("BCL_football_promotion.mp4"), thumb: video("advetise2.png") },
-  { id: 16, title: "BCL_football_promotion", category: "Football", duration: "", views: "", tone: 4, src: video("BCL_football_promotion_2.mp4"), thumb: video("piklu2.png") },
-  { id: 17, title: "BCL_football_promotion", category: "Football", duration: "", views: "", tone: 4, src: video("BCL_season4_UPDATE.mp4"), thumb: video("piklu3.png") },
+  { id: 15, title: "BCL football promotion", category: "Football", duration: "", views: "", tone: 4, src: video("BCL_football_promotion.mp4"), thumb: video("advetise2.png") },
+  { id: 16, title: "BCL football promotion", category: "Football", duration: "", views: "", tone: 4, src: video("BCL_football_promotion_2.mp4"), thumb: video("piklu2.png") },
+  { id: 17, title: "BCL football promotion", category: "Football", duration: "", views: "", tone: 4, src: video("BCL_season4_UPDATE.mp4"), thumb: video("piklu3.png") },
   { id: 18, title: "Brilliant Catch of the Tournament season3 Shivham_kumar", category: "Cricket", duration: "", views: "", tone: 4, src: video("Brilliant_Catch_of_the_Tournament_season3_Shivham_kumar.mp4"), thumb: video("Brilliant_Catch_of_the_Tournament_season3_Shivham_kumar.png") },
   { id: 19, title: "BUNTY DAS Kerukocha Titans", category: "Cricket", duration: "", views: "", tone: 4, src: video("BUNTY_DAS_Kerukocha_Titans.mp4"), thumb: video("BUNTY_DAS_Kerukocha_Titans.png") },
 ];
