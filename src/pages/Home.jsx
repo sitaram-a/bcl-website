@@ -1214,7 +1214,8 @@ const cricketLiveTeam2 = cricketLiveMatch
 
               <span className="live-dot"></span>
 
-              LIVE STREAM
+              {/* LIVE STREAM */}
+              Highlights
 
             </span>
 
