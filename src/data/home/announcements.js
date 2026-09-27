@@ -3,11 +3,11 @@ export const announcements = [
     id: 1,
     type: "AUCTION",
     title: "BCL Cricket Auction 2026",
-    subtitle: "Auction Starting Soon",
+    subtitle: "🔴 AUCTION LIVE NOW",
     date: "2026-09-27",
     venue: "Bidyanath Palace",
     description:
-      "The BCL Cricket Auction 2026 will begin shortly. The auction has been delayed due to technical circumstances.",
+      "The BCL Cricket Auction 2026 is live now at Bidyanath Palace. Follow the auction for team selections and player updates.",
     active: true,
   },
   {
