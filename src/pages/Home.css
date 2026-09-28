@@ -6453,3 +6453,47 @@
     gap: 10px;
   }
 }
+
+/* =========================================
+   POSTER DOWNLOAD
+========================================= */
+
+.home-poster-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.home-poster-download {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 12px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.home-poster-download:hover {
+  background: #fff;
+  color: #061a32;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 600px) {
+  .home-poster-actions {
+    gap: 8px;
+  }
+
+  .home-poster-download {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+}

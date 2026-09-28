@@ -386,6 +386,14 @@ const cricketLiveTeam2 = cricketLiveMatch
                   <span className="home-poster-view">
                     View Poster →
                   </span>
+                    <a
+                    href={poster.src}
+                    download
+                    className="home-poster-download"
+                    onClick={(event) => event.stopPropagation()}
+                    >
+                    ⬇ Download
+                    </a>
 
                 </div>
 
