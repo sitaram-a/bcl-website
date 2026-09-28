@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import footballLogo from "../assets/logo/bcl-football-logo.png";
 import cricketLogo from "../assets/logo/bcl-cricket-logo.png";
 import cricketball from "../assets/icons/cricket-ball.png";
-
+import { Download } from "lucide-react";
 import { homePosters } from "../data/home/posters";
 import { bclVideos } from "../data/home/videos";
 
@@ -391,8 +391,10 @@ const cricketLiveTeam2 = cricketLiveMatch
                     download
                     className="home-poster-download"
                     onClick={(event) => event.stopPropagation()}
+                    aria-label={`Download ${poster.title}`}
+                    title="Download Poster"
                     >
-                    ⬇ Download
+                    <Download size={18} strokeWidth={2.2} />
                     </a>
 
                 </div>
