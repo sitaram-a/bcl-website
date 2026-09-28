@@ -91,19 +91,19 @@ function Navbar() {
 
           </div>
 
-          <Link to="/fixtures" className="nav-link">
+          <Link to="cricket/fixtures" className="nav-link">
             Fixtures
           </Link>
 
-          <Link to="/results" className="nav-link">
+          <Link to="cricket/results" className="nav-link">
             Results
           </Link>
 
-          <Link to="/teams" className="nav-link">
+          <Link to="cricket/teams" className="nav-link">
             Teams
           </Link>
 
-          <Link to="/players" className="nav-link">
+          <Link to="cricket/players" className="nav-link">
             Players
           </Link>
 
