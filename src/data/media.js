@@ -11,6 +11,22 @@ const video = (n) => `/media/videos/${n}`;
 export const mediaCategories = ["All", "Football", "Cricket", "Champions", "Fans", "Events"];
 
 export const photos = [
+  { id: 44, title: "Baharagora Kings", category: "Cricket", date: "Season 5", size: "tall", tone: 5, src: "/media/photos/posters/baharagora-kings.jpeg" },
+  { id: 45, title: "Baharagora Royals", category: "Cricket", date: "Season 5", size: "tall", tone: 5, src: "/media/photos/posters/baharagora-royals.jpeg" },
+  { id: 46, title: "Digbarda Pitch Panthers", category: "Cricket", date: "Season 5", size: "tall", tone: 5, src: "/media/photos/posters/digbarda-pitch-panthers.jpeg"},
+  { id: 47, title: "Kesharda Super Kings", category: "Cricket", date: "Season 5", size: "tall", tone: 5, src: "/media/photos/posters/kesharda-super-kings.jpeg" },
+  { id: 48, title: "Khandamouda Warriors", category: "Cricket", date: "Season 5", size: "tall", tone: 5, src: "/media/photos/posters/khandamouda-warriors.jpeg" },
+  { id: 49, title: "Sakra Royals", category: "Cricket", date: "Season 5", size: "tall", tone: 5, src: "/media/photos/posters/sakra-royals.jpeg" },
+  { id: 50, title: "Gajraj Chakulia", category: "Cricket", date: "Season 5", size: "tall", tone: 5, src: "/media/photos/posters/team-gajraj.jpeg" },
+  { id: 51, title: "RR Thunder Star", category: "Cricket", date: "Season 5", size: "tall", tone: 5, src: "/media/photos/posters/rr-thunder-star.jpeg" },
+  { id: 52, title: "Baharagora Kings Player Auction List", category: "Cricket", date: "Season 5", size: "tall", tone: 5, src: "/media/photos/player-auction-list/Baharagora-Kings.jpeg" },
+  { id: 53, title: "Baharagora Royals Player Auction List", category: "Cricket", date: "Season 5", size: "tall", tone: 5, src: "/media/photos/player-auction-list/Baharagora-Royals.jpeg" },
+  { id: 54, title: "Digbarda Pitch Panthers Player Auction List", category: "Cricket", date: "Season 5", size: "tall", tone: 5, src: "/media/photos/player-auction-list/Digbarda-Pitch-Panthers.jpeg" },
+  { id: 55, title: "Kesharda Super Kings Player Auction List", category: "Cricket", date: "Season 5", size: "tall", tone: 5, src: "/media/photos/player-auction-list/Kesharda-Super-Kings.jpeg" },
+  { id: 56, title: "Khandamouda Warriors Player Auction List", category: "Cricket", date: "Season 5", size: "tall", tone: 5, src: "/media/photos/player-auction-list/Khandamouda-Warriors.jpeg" },
+  { id: 57, title: "Sakra Royals Player Auction List", category: "Cricket", date: "Season 5", size: "tall", tone: 5, src: "/media/photos/player-auction-list/Sakra-Royals.jpeg" },
+  { id: 58, title: "Gajraj Chakulia Player Auction List", category: "Cricket", date: "Season 5", size: "tall", tone: 5, src: "/media/photos/player-auction-list/Gajraj-Chakulia.jpeg" },
+  { id: 59, title: "RR Thunder Star Player Auction List", category: "Cricket", date: "Season 5", size: "tall", tone: 5, src: "/media/photos/player-auction-list/RR-Thunder-Star.jpeg" },
   { id: 1, title: "BCL Football Trophy", category: "Champions", date: "Season 3", size: "tall", tone: 6, src: photo("BCL FOOTBALL TROPHY 🏆.jpg") },
   { id: 2, title: "Season 3 Champions", category: "Champions", date: "Season 3", size: "big", tone: 4, src: photo("THE CHAMPIONS OF BCL SEASON 3 🔥 TEAM - KHANDAMOUDA WARRIORS 🔥 OWNER - SHASANK SHEKHAR PAUL CAP 2.jpg") },
   { id: 3, title: "Season 3 Champions", category: "Champions", date: "Season 3", size: "", tone: 4, src: photo("THE CHAMPIONS OF BCL SEASON 3 🔥 TEAM - KHANDAMOUDA WARRIORS 🔥 OWNER - SHASANK SHEKHAR PAUL CAP.jpg") },
@@ -54,6 +70,7 @@ export const photos = [
   { id: 41, title: "Kesarda Super Kings team_members", category: "Cricket", date: "Season 3", size: "", tone: 5, src: photo("kesarda_team_members.jpg") },
   { id: 42, title: "Khandamouda Worriors team_members", category: "Cricket", date: "Season 3", size: "", tone: 5, src: photo("khandamouda_team_members.jpg") },
   { id: 43, title: "BCL Football Match Rafree", category: "Football", date: "Season 3", size: "wide", tone: 5, src: photo("bcl_football_match_rafree.jpg") },
+
 ];
 
 // `thumb` is optional: a poster image for the video card. If omitted, the first frame of the video is used.
