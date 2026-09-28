@@ -9,7 +9,7 @@ export const homePosters = [
   { id: 8, title: "Team Gajraj", src: "/media/photos/posters/team-gajraj.jpeg", category: "Teams" },
   { id: 9, title: "RR Thunder Star", src: "/media/photos/posters/rr-thunder-star.jpeg", category: "Teams" },
   { id: 10, title: "Baharagora Kings", src: "/media/photos/player-auction-list/Baharagora-Kings.jpeg", category: "Teams" },
- { id: 11, title: "Baharagora Royals", src: "/media/photos/player-auction-list/baharagora-Royals.jpeg", category: "Teams" },
+ { id: 11, title: "Baharagora Royals", src: "/media/photos/player-auction-list/Baharagora-Royals.jpeg", category: "Teams" },
 { id: 12, title: "Digbarda Pitch Panthers", src: "/media/photos/player-auction-list/Digbarda-Pitch-Panthers.jpeg", category: "Teams" },
 { id: 13, title: "Kesharda Super Kings", src: "/media/photos/player-auction-list/Kesharda-Super-Kings.jpeg", category: "Teams" },
 { id: 14, title: "Khandamouda Warriors", src: "/media/photos/player-auction-list/Khandamouda-Warriors.jpeg", category: "Teams" },
