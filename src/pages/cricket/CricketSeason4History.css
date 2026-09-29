@@ -1,0 +1,538 @@
+/* =====================================================
+   BCL SEASON 4 HISTORY
+===================================================== */
+
+.season4-history-page {
+  min-height: 100vh;
+  background: #f5f7fb;
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.season4-history-hero {
+  background:
+    linear-gradient(
+      135deg,
+      #061a32 0%,
+      #0b3b70 55%,
+      #0f5ca8 100%
+    );
+
+  color: #ffffff;
+  padding: 90px 20px 80px;
+}
+
+.season4-history-hero-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.season4-history-kicker {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #93c5fd;
+  margin-bottom: 15px;
+}
+
+.season4-history-hero h1 {
+  margin: 0 0 15px;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1;
+}
+
+.season4-history-hero p {
+  max-width: 650px;
+  margin: 0 0 25px;
+  color: #dbeafe;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.season4-history-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.season4-history-meta span {
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  font-size: 0.9rem;
+}
+
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.season4-history-content {
+  padding: 60px 20px;
+}
+
+.season4-history-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+
+/* =====================================================
+   HEADING
+===================================================== */
+
+.season4-history-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.season4-history-heading > div:first-child > span {
+  display: block;
+  margin-bottom: 8px;
+  color: #2563eb;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+}
+
+.season4-history-heading h2 {
+  margin: 0 0 10px;
+  color: #0f172a;
+  font-size: 2rem;
+}
+
+.season4-history-heading p {
+  margin: 0;
+  max-width: 650px;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+.season4-match-count {
+  min-width: 130px;
+  padding: 18px 20px;
+  text-align: center;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+}
+
+.season4-match-count strong {
+  display: block;
+  color: #0f3d73;
+  font-size: 1.8rem;
+}
+
+.season4-match-count span {
+  color: #64748b;
+  font-size: 0.82rem;
+}
+
+
+/* =====================================================
+   FILTERS
+===================================================== */
+
+.season4-filters {
+  display: grid;
+  grid-template-columns:
+    repeat(3, minmax(180px, 1fr))
+    auto;
+
+  gap: 15px;
+  padding: 20px;
+  margin-bottom: 30px;
+
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+
+  box-shadow:
+    0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+.season4-filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.season4-filter-group label {
+  color: #334155;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.season4-filter-group select {
+  width: 100%;
+  min-height: 45px;
+  padding: 0 12px;
+
+  border: 1px solid #cbd5e1;
+  border-radius: 9px;
+
+  background: #ffffff;
+  color: #0f172a;
+
+  font-size: 0.9rem;
+  cursor: pointer;
+
+  outline: none;
+}
+
+.season4-filter-group select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.season4-reset-button {
+  align-self: end;
+  min-height: 45px;
+
+  padding: 0 18px;
+
+  border: none;
+  border-radius: 9px;
+
+  background: #0f172a;
+  color: #ffffff;
+
+  font-weight: 700;
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.season4-reset-button:hover {
+  background: #1e293b;
+  transform: translateY(-1px);
+}
+
+
+/* =====================================================
+   MATCH LIST
+===================================================== */
+
+.season4-match-list {
+  display: grid;
+  gap: 18px;
+}
+
+
+/* =====================================================
+   MATCH CARD
+===================================================== */
+
+.season4-match-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  overflow: hidden;
+
+  box-shadow:
+    0 8px 25px rgba(15, 23, 42, 0.05);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.season4-match-card:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 14px 35px rgba(15, 23, 42, 0.09);
+}
+
+
+/* =====================================================
+   MATCH HEADER
+===================================================== */
+
+.season4-match-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 14px 20px;
+
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.season4-match-header > div {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.season4-match-stage {
+  padding: 5px 9px;
+  border-radius: 6px;
+
+  background: #dbeafe;
+  color: #1d4ed8;
+
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.season4-match-date {
+  color: #64748b;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.season4-match-overs {
+  color: #475569;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+
+/* =====================================================
+   TEAMS
+===================================================== */
+
+.season4-match-teams {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+
+  gap: 20px;
+  padding: 25px 20px 15px;
+}
+
+.season4-team {
+  color: #0f172a;
+  font-size: 1.05rem;
+}
+
+.season4-team:last-child {
+  text-align: right;
+}
+
+.season4-vs {
+  color: #94a3b8;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+
+/* =====================================================
+   RESULT
+===================================================== */
+
+.season4-match-result {
+  padding: 0 20px 20px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.season4-result-label {
+  color: #94a3b8;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.season4-match-result strong {
+  color: #15803d;
+  font-size: 0.92rem;
+}
+
+.season4-result-unavailable {
+  color: #94a3b8;
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.season4-match-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+
+  padding: 14px 20px;
+
+  border-top: 1px solid #e2e8f0;
+
+  color: #64748b;
+  font-size: 0.8rem;
+}
+
+.season4-scorecard-button {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 8px 13px;
+
+  border-radius: 8px;
+
+  background: #0f3d73;
+  color: #ffffff;
+
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 700;
+
+  transition: 0.2s ease;
+}
+
+.season4-scorecard-button:hover {
+  background: #0b5cab;
+  transform: translateY(-1px);
+}
+
+
+/* =====================================================
+   EMPTY
+===================================================== */
+
+.season4-empty {
+  padding: 70px 20px;
+  text-align: center;
+
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+}
+
+.season4-empty > div {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.season4-empty h3 {
+  margin: 0 0 8px;
+  color: #0f172a;
+}
+
+.season4-empty p {
+  margin: 0 0 20px;
+  color: #64748b;
+}
+
+.season4-empty button {
+  padding: 10px 18px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #0f3d73;
+  color: #ffffff;
+
+  font-weight: 700;
+  cursor: pointer;
+}
+
+
+/* =====================================================
+   BACK
+===================================================== */
+
+.season4-history-back {
+  margin-top: 35px;
+  text-align: center;
+}
+
+.season4-history-back a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.season4-history-back a:hover {
+  text-decoration: underline;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 900px) {
+
+  .season4-filters {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .season4-reset-button {
+    width: 100%;
+  }
+
+  .season4-history-heading {
+    align-items: flex-start;
+  }
+
+}
+
+
+@media (max-width: 650px) {
+
+  .season4-history-hero {
+    padding: 65px 18px;
+  }
+
+  .season4-history-content {
+    padding: 40px 15px;
+  }
+
+  .season4-history-heading {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .season4-match-count {
+    width: fit-content;
+  }
+
+  .season4-filters {
+    grid-template-columns: 1fr;
+  }
+
+  .season4-match-teams {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .season4-team:last-child {
+    text-align: center;
+  }
+
+  .season4-vs {
+    order: 2;
+  }
+
+  .season4-match-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .season4-scorecard-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+}

@@ -76,6 +76,14 @@ function CricketNavbar() {
             Standings
           </NavLink>
 
+          <NavLink to="/cricket/history" className={({ isActive }) =>
+              isActive
+                ? "cricket-nav-link active"
+                : "cricket-nav-link"
+            }>
+           Season 4 History
+          </NavLink>
+
           <NavLink
             to="/cricket/teams"
             className={({ isActive }) =>

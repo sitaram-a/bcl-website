@@ -19,6 +19,8 @@ import CricketTeamDetails from "../pages/cricket/CricketTeamDetails";
 import CricketPlayers from "../pages/cricket/CricketPlayers";
 import CricketLiveScore from "../pages/cricket/CricketLiveScore";
 import CricketMatchDetails from "../pages/cricket/CricketMatchDetails";
+import CricketSeason4History from "../pages/cricket/CricketSeason4History";
+import CricketSeason4Match from "../pages/cricket/CricketSeason4Match";
 
 import Media from "../pages/Media";
 import Registration from "../pages/Registration";
@@ -58,7 +60,9 @@ function AppRoutes() {
       <Route  path="/cricket/players"  element={<CricketPlayers />} />
       <Route  path="/cricket/live-score"  element={<CricketLiveScore />} />
       <Route  path="/cricket/matches/:matchId"  element={<CricketMatchDetails />} />
-
+      <Route  path="/cricket/history"  element={<CricketSeason4History />}/>
+      <Route  path="/cricket/history/:matchId"  element={<CricketSeason4Match />}/>
+      
       <Route path="/results" element={<Results />} />
 
       <Route
