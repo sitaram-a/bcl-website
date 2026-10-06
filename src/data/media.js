@@ -27,6 +27,7 @@ export const photos = [
   { id: 57, title: "Sakra Royals Player Auction List", category: "Cricket", date: "Season 5", size: "tall", tone: 5, src: "/media/photos/player-auction-list/Sakra-Royals.jpeg" },
   { id: 58, title: "Gajraj Chakulia Player Auction List", category: "Cricket", date: "Season 5", size: "tall", tone: 5, src: "/media/photos/player-auction-list/Gajraj-Chakulia.jpeg" },
   { id: 59, title: "RR Thunder Star Player Auction List", category: "Cricket", date: "Season 5", size: "tall", tone: 5, src: "/media/photos/player-auction-list/RR-Thunder-Star.jpeg" },
+  { id: 60, title: "REMEMBER_THE_ DATE", category: "Cricket", date: "Season 5", size: "tall", tone: 5, src: photo("REMEMBER_THE_ DATE.jpg") },
   { id: 1, title: "BCL Football Trophy", category: "Champions", date: "Season 3", size: "tall", tone: 6, src: photo("BCL FOOTBALL TROPHY 🏆.jpg") },
   { id: 2, title: "Season 3 Champions", category: "Champions", date: "Season 3", size: "big", tone: 4, src: photo("THE CHAMPIONS OF BCL SEASON 3 🔥 TEAM - KHANDAMOUDA WARRIORS 🔥 OWNER - SHASANK SHEKHAR PAUL CAP 2.jpg") },
   { id: 3, title: "Season 3 Champions", category: "Champions", date: "Season 3", size: "", tone: 4, src: photo("THE CHAMPIONS OF BCL SEASON 3 🔥 TEAM - KHANDAMOUDA WARRIORS 🔥 OWNER - SHASANK SHEKHAR PAUL CAP.jpg") },
@@ -94,6 +95,7 @@ export const videos = [
   { id: 17, title: "BCL football promotion", category: "Football", duration: "", views: "", tone: 4, src: video("BCL_season4_UPDATE.mp4"), thumb: video("piklu3.png") },
   { id: 18, title: "Brilliant Catch of the Tournament season3 Shivham_kumar", category: "Cricket", duration: "", views: "", tone: 4, src: video("Brilliant_Catch_of_the_Tournament_season3_Shivham_kumar.mp4"), thumb: video("Brilliant_Catch_of_the_Tournament_season3_Shivham_kumar.png") },
   { id: 19, title: "BUNTY DAS Kerukocha Titans", category: "Cricket", duration: "", views: "", tone: 4, src: video("BUNTY_DAS_Kerukocha_Titans.mp4"), thumb: video("BUNTY_DAS_Kerukocha_Titans.png") },
+  { id: 20, title: "THE AURA OF 4 YEARS 🔥CONTINUES 🏆❤️ THANK YOU HERO an_kit__kr__mr._.27", category: "Cricket", duration: "", views: "", tone: 4, src: video("THE AURA OF 4 YEARS 🔥CONTINUES 🏆❤️ THANK YOU HERO an_kit__kr__mr._.27.mp4"), thumb: video("THE AURA OF 4 YEARS.png") },
 ];
 
 export const mediaStats = [

@@ -16,4 +16,5 @@ export const homePosters = [
 { id: 15, title: "Sakra Royals", src: "/media/photos/player-auction-list/Sakra-Royals.jpeg", category: "Teams" },
 { id: 16, title: "Team Gajraj", src: "/media/photos/player-auction-list/Gajraj-Chakulia.jpeg", category: "Teams" },
 { id: 17, title: "RR Thunder Star", src: "/media/photos/player-auction-list/RR-Thunder-Star.jpeg", category: "Teams" },
+{ id: 18, title: "REMEMBER THE DATE", src: "/media/photos/posters/REMEMBER_THE_ DATE.jpg", category: "Teams" },
 ];
