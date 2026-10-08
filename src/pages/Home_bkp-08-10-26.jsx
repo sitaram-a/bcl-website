@@ -26,7 +26,6 @@ import { footballMatches } from "../data/football/footballMatches";
 import { cricketLiveMatches } from "../data/cricket/liveMatches";
 import { announcements } from "../data/home/announcements";
 
-
 import { sponsors } from "../data/sponsors/sponsors";
 
 import "./Home.css";
@@ -45,7 +44,6 @@ const [currentAdvertisementIndex, setCurrentAdvertisementIndex] = useState(0);
 const [activeVideo, setActiveVideo] = useState(null);
 const [activePoster, setActivePoster] = useState(null);
 const [activePosterIndex, setActivePosterIndex] = useState(0);
-const [activeHeroSlide, setActiveHeroSlide] = useState(0);
 
 const nextPoster = () => {
   setActivePosterIndex((currentIndex) =>
@@ -71,17 +69,6 @@ useEffect(() => {
   }, 5000);
 
   return () => clearInterval(posterInterval);
-}, []);
-
-
-useEffect(() => {
-  const heroInterval = setInterval(() => {
-    setActiveHeroSlide((currentSlide) =>
-      (currentSlide + 1) % 3
-    );
-  }, 12000);
-
-  return () => clearInterval(heroInterval);
 }, []);
 
 useEffect(() => {
@@ -236,271 +223,82 @@ const cricketLiveTeam2 = cricketLiveMatch
     <div className="home-page">
 
      {/* ================= HERO SECTION ================= */}
-{/* ================= BCL SEASON 5 HERO CAROUSEL ================= */}
 <section className="home-hero">
 
-  {/* ================= HERO SLIDE 1 — VIDEO ================= */}
-  <div
-    className={
-      activeHeroSlide === 0
-        ? "home-hero-slide active"
-        : "home-hero-slide"
-    }
-  >
+  <div className="home-hero-overlay"></div>
 
-    <video
-      className="home-hero-video"
-      src="/media/videos/bcl-season-5-promo.mp4"
-      autoPlay
-      muted
-      loop
-      playsInline
-      preload="auto"
-    />
+  <div className="home-hero-flying-balls" aria-hidden="true">
+    <span className="home-hero-ball home-hero-ball-football">⚽</span>
+    <span className="home-hero-ball home-hero-ball-cricket"><img
+            src={cricketball}
+            alt="ball" style={{width:"30px"}}
+          /></span>
+    <span className="home-hero-ball home-hero-ball-football home-hero-ball-football-2">⚽</span>
+  </div>
 
-    <div className="home-hero-overlay"></div>
+  <div className="home-hero-content">
 
-    <div className="home-hero-content">
+    <div className="home-hero-kicker">
+      BAHARAGORA CHAMPIONS LEAGUE
+    </div>
 
-      <div className="home-hero-kicker">
-        BAHARAGORA CHAMPIONS LEAGUE
-      </div>
+    <h1>
+      BCL <span>2026</span>
+    </h1>
 
-      <h1>
-        SEASON <span>5</span>
-      </h1>
+    <div className="home-hero-sports">
+      ⚽ FOOTBALL
+      <span>•</span>
+      🏏 CRICKET
+    </div>
 
-      <div className="home-hero-sports">
-        🏏 CRICKET
-      </div>
+    <p className="home-hero-description">
+      Experience the excitement of Baharagora's biggest local
+      sporting tournament with live scores, fixtures, results
+      and championship standings.
+    </p>
 
-      <p className="home-hero-description">
-        The battle for the BCL Season 5 championship begins
-        on 25 October at Baharagora Stadium.
-      </p>
+    <div className="home-hero-actions">
 
-      <div className="home-hero-actions">
+      <Link
+        to="/football"
+        className="home-hero-btn home-hero-btn-football"
+      >
+        ⚽ Football
+      </Link>
 
-        <Link
-          to="/cricket"
-          className="home-hero-btn home-hero-btn-cricket"
-        >
-          🏏 Explore Cricket
-        </Link>
-
-      </div>
-
-      <div className="home-hero-features">
-
-        <div className="home-hero-feature">
-          <strong>🏏 SEASON 5</strong>
-          <span>BCL Cricket</span>
-        </div>
-
-        <div className="home-hero-feature">
-          <strong>📅 25 OCTOBER</strong>
-          <span>Tournament Starts</span>
-        </div>
-
-        <div className="home-hero-feature">
-          <strong>📍 BAHARAGORA</strong>
-          <span>Stadium</span>
-        </div>
-
-      </div>
+      <Link
+        to="/cricket"
+        className="home-hero-btn home-hero-btn-cricket"
+      >
+        🏏 Cricket
+      </Link>
 
     </div>
 
-  </div>
+    <div className="home-hero-features">
 
-
-  {/* ================= HERO SLIDE 2 — SEASON 5 ================= */}
-  <div
-    className={
-      activeHeroSlide === 1
-        ? "home-hero-slide active"
-        : "home-hero-slide"
-    }
-  >
-
-    <img
-      src="/media/photos/posters/season5_start_from.png"
-      alt="Baharagora Champions League Season 5"
-      className="home-hero-image"
-    />
-
-    <div className="home-hero-overlay"></div>
-
-    <div className="home-hero-content">
-
-      <div className="home-hero-kicker">
-        BAHARAGORA CHAMPIONS LEAGUE
+      <div className="home-hero-feature">
+        <strong>🔴 LIVE</strong>
+        <span>Match Scores</span>
       </div>
 
-      <h1>
-        BCL <span>SEASON 5</span>
-      </h1>
-
-      <div className="home-hero-sports">
-        🏏 CRICKET
+      <div className="home-hero-feature">
+        <strong>📅 FIXTURES</strong>
+        <span>Match Schedule</span>
       </div>
 
-      <p className="home-hero-description">
-        Eight teams. Four match days. One championship.
-        Get ready for the biggest cricket battle in Baharagora.
-      </p>
-
-      <div className="home-hero-schedule">
-
-        <div className="home-hero-schedule-card">
-          <strong>GROUP A</strong>
-          <span>25 & 27 OCTOBER</span>
-        </div>
-
-        <div className="home-hero-schedule-card">
-          <strong>GROUP B</strong>
-          <span>26 & 28 OCTOBER</span>
-        </div>
-
+      <div className="home-hero-feature">
+        <strong>🏆 RESULTS</strong>
+        <span>Match Results</span>
       </div>
 
-      <div className="home-hero-actions">
-
-        <Link
-          to="/cricket"
-          className="home-hero-btn home-hero-btn-cricket"
-        >
-          🏏 View Cricket
-        </Link>
-
+      <div className="home-hero-feature">
+        <strong>📊 STANDINGS</strong>
+        <span>League Table</span>
       </div>
 
     </div>
-
-  </div>
-
-
-  {/* ================= HERO SLIDE 3 — AUCTION COMPLETED ================= */}
-  <div
-    className={
-      activeHeroSlide === 2
-        ? "home-hero-slide active"
-        : "home-hero-slide"
-    }
-  >
-
-    <img
-      src="/media/photos/posters/bcl_poster.png"
-      alt="BCL Cricket Auction 2026"
-      className="home-hero-image"
-    />
-
-    <div className="home-hero-overlay"></div>
-
-    <div className="home-hero-content">
-
-      <div className="home-hero-kicker">
-        BCL CRICKET 2026
-      </div>
-
-      <h1>
-        AUCTION <span>COMPLETED</span>
-      </h1>
-
-      <div className="home-hero-sports">
-        🏆 TEAMS REVEALED
-      </div>
-
-      <p className="home-hero-description">
-        The BCL Season 5 auction has been successfully completed.
-        Teams and player selections are now complete.
-      </p>
-
-      <div className="home-hero-schedule">
-
-        <div className="home-hero-schedule-card">
-          <strong>📅 DATE</strong>
-          <span>27 SEPTEMBER 2026</span>
-        </div>
-
-        <div className="home-hero-schedule-card">
-          <strong>📍 VENUE</strong>
-          <span>BIDYANATH PALACE</span>
-        </div>
-
-      </div>
-
-      <div className="home-hero-actions">
-
-        <Link
-          to="/cricket"
-          className="home-hero-btn home-hero-btn-cricket"
-        >
-          🏏 View Cricket Teams
-        </Link>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  {/* ================= HERO NAVIGATION ================= */}
-
-  <button
-    type="button"
-    className="home-hero-arrow home-hero-arrow-left"
-    onClick={() =>
-      setActiveHeroSlide((currentSlide) =>
-        currentSlide === 0
-          ? 2
-          : currentSlide - 1
-      )
-    }
-    aria-label="Previous hero slide"
-  >
-    ‹
-  </button>
-
-
-  <button
-    type="button"
-    className="home-hero-arrow home-hero-arrow-right"
-    onClick={() =>
-      setActiveHeroSlide(
-        (currentSlide) =>
-          (currentSlide + 1) % 3
-      )
-    }
-    aria-label="Next hero slide"
-  >
-    ›
-  </button>
-
-
-  {/* ================= HERO DOTS ================= */}
-
-  <div className="home-hero-indicators">
-
-    {[0, 1, 2].map((index) => (
-      <button
-        key={index}
-        type="button"
-        className={
-          activeHeroSlide === index
-            ? "home-hero-indicator active"
-            : "home-hero-indicator"
-        }
-        onClick={() => setActiveHeroSlide(index)}
-        aria-label={`Show hero slide ${index + 1}`}
-        aria-current={
-          activeHeroSlide === index
-            ? "true"
-            : undefined
-        }
-      />
-    ))}
 
   </div>
 
