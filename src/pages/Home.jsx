@@ -139,6 +139,45 @@ const currentAdvertisement =
 
   const getCricketTeam = (teamId) =>
     cricketTeams.find((team) => team.id === teamId);
+
+
+const getCricketFixtureTeam = (teamName) => {
+  const normalizedName = teamName?.trim().toUpperCase();
+
+  const aliases = {
+    "BAHARAGORA KINGS": ["BAHARAGORA KINGS", "BAHARAGORA"],
+    "BAHARAGORA ROYALS": ["BAHARAGORA ROYALS", "ROYALS"],
+    "DIGBARDA PITCH PANTHERS": [
+      "DIGBARDA PITCH PANTHERS",
+      "PANTHERS",
+    ],
+    "TEAM GAJRAJ": ["TEAM GAJRAJ", "GAJRAJ", "GAJRAJ CKU"],
+    "KESHARDA SUPER KINGS": [
+      "KESHARDA SUPER KINGS",
+      "KESHARDA SUPER KING",
+      "KESHARDA",
+    ],
+    "KHANDAMOUDA WARRIORS": [
+      "KHANDAMOUDA WARRIORS",
+      "KHANDAMOUDA WARRIOR",
+      "KHANDAMOUDA",
+    ],
+    "SAKARA ROYALS": ["SAKARA ROYALS", "SAKRA ROYALS", "SAKARA"],
+    "RR THUNDER STAR": ["RR THUNDER STAR", "RR THUNDER", "R.R THUNDER"],
+  };
+
+  return cricketTeams.find((team) => {
+    const canonicalName = team.name?.trim().toUpperCase();
+    const shortName = team.shortName?.trim().toUpperCase();
+
+    return (
+      canonicalName === normalizedName ||
+      shortName === normalizedName ||
+      (aliases[canonicalName] || []).includes(normalizedName)
+    );
+  });
+};
+
     
   const activeAnnouncement = announcements.find((a) => a.active);
 
@@ -231,6 +270,33 @@ const cricketLiveTeam2 = cricketLiveMatch
     return () => observer.disconnect();
   }, []);
 
+
+  
+  const tournamentDate = new Date("2026-10-25T00:00:00+05:30").getTime();
+
+  const [timeLeft, setTimeLeft] = useState(() => {
+    const difference = tournamentDate - Date.now();
+    return Math.max(0, difference);
+  });
+
+  useEffect(() => {
+    const updateCountdown = () => {
+      setTimeLeft(Math.max(0, tournamentDate - Date.now()));
+    };
+
+    updateCountdown();
+
+    const timer = setInterval(updateCountdown, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+  const hours = Math.floor(
+    (timeLeft / (1000 * 60 * 60)) % 24
+  );
+  const minutes = Math.floor((timeLeft / (1000 * 60)) % 60);
+  const seconds = Math.floor((timeLeft / 1000) % 60);
 
   return (
     <div className="home-page">
@@ -1485,6 +1551,144 @@ const cricketLiveTeam2 = cricketLiveMatch
       </section>
 
 
+      
+{/* ================= BCL COUNTDOWN TIMER ================= */}
+<section className="home-countdown-section">
+  <div className="home-countdown-content">
+    <span className="home-countdown-eyebrow">
+      THE COUNTDOWN IS ON
+    </span>
+
+    <h2>BCL Cricket 2026</h2>
+
+    <p className="home-countdown-description">
+      The battle for BCL glory begins on 25 October!
+    </p>
+
+    {timeLeft > 0 ? (
+      <div className="home-countdown-timer">
+        <div className="home-countdown-unit">
+          <strong>{days.toString().padStart(2, "0")}</strong>
+          <span>Days</span>
+        </div>
+
+        <div className="home-countdown-unit">
+          <strong>{hours.toString().padStart(2, "0")}</strong>
+          <span>Hours</span>
+        </div>
+
+        <div className="home-countdown-unit">
+          <strong>{minutes.toString().padStart(2, "0")}</strong>
+          <span>Minutes</span>
+        </div>
+
+        <div className="home-countdown-unit">
+          <strong>{seconds.toString().padStart(2, "0")}</strong>
+          <span>Seconds</span>
+        </div>
+      </div>
+    ) : (
+      <p className="home-countdown-started">
+        The tournament has started!
+      </p>
+    )}
+
+    <p className="home-countdown-venue">
+      <span>📍</span> Baharagora Stadium
+    </p>
+  </div>
+</section>
+
+
+{/* ================= BCL CRICKET TEAMS ================= */}
+<section className="home-cricket-teams-section">
+  <div className="home-section-container">
+    <div className="home-section-heading home-cricket-teams-heading">
+      <div>
+        <span>MEET THE TEAMS</span>
+        <h2>BCL Cricket 2026 Teams</h2>
+        <p>
+          Eight teams. One trophy. The battle for BCL glory begins here.
+        </p>
+      </div>
+    </div>
+
+    <div className="home-cricket-teams-grid">
+      {cricketTeams.map((team) => (
+        <article className="home-cricket-team-card" key={team.id}>
+          <div className="home-cricket-team-logo-wrap">
+            <img
+              src={team.logo}
+              alt={`${team.name} logo`}
+              className="home-cricket-team-logo"
+              loading="lazy"
+            />
+          </div>
+
+          <h3>{team.name}</h3>
+
+          {team.city && (
+            <p className="home-cricket-team-city">
+              {team.city}
+            </p>
+          )}
+
+          <Link
+            to="/cricket/fixtures"
+            className="home-cricket-team-link"
+          >
+            View Fixtures <span>→</span>
+          </Link>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+
+{/* ================= BCL CRICKET 2026 BANNER ================= */}
+<section className="home-tournament-banner">
+  <div className="home-tournament-banner-content">
+    <span className="home-tournament-eyebrow">
+      🏏 THE BIGGEST CRICKET CELEBRATION
+    </span>
+
+    <h2>
+      BAHARAGORA <span>CHAMPIONS LEAGUE</span>
+    </h2>
+
+    <p className="home-tournament-edition">
+      BCL CRICKET 2026
+    </p>
+
+    <div className="home-tournament-details">
+      <div>
+        <span className="home-tournament-detail-icon">📅</span>
+        <div>
+          <strong>25–30 October 2026</strong>
+          <small>Tournament Dates</small>
+        </div>
+      </div>
+
+      <div>
+        <span className="home-tournament-detail-icon">🏟️</span>
+        <div>
+          <strong>Baharagora Stadium</strong>
+          <small>Match Venue</small>
+        </div>
+      </div>
+    </div>
+
+    <a href="/cricket/fixtures" className="home-tournament-cta">
+      EXPLORE FIXTURES <span>→</span>
+    </a>
+  </div>
+
+  <div className="home-tournament-decoration" aria-hidden="true">
+    <span> BCL </span>
+    <span>2026</span>
+  </div>
+</section>
      
 {/* ================= UPCOMING MATCHES ================= */}
 <section className="home-upcoming-section">
@@ -1516,11 +1720,43 @@ const cricketLiveTeam2 = cricketLiveMatch
               🏏 CRICKET
             </div>
 
-            <div className="home-upcoming-teams">
-              <strong>{match.team1}</strong>
-              <span>VS</span>
-              <strong>{match.team2}</strong>
-            </div>
+
+
+            
+<div className="home-upcoming-teams">
+  {(() => {
+    const team1 = getCricketFixtureTeam(match.team1);
+    const team2 = getCricketFixtureTeam(match.team2);
+
+    return (
+      <>
+        <div className="home-upcoming-team">
+          {team1?.logo && (
+            <img
+              src={team1.logo}
+              alt={`${team1.name} logo`}
+              className="home-upcoming-team-logo"
+            />
+          )}
+          <strong>{match.team1}</strong>
+        </div>
+
+        <span className="home-upcoming-vs">VS</span>
+
+        <div className="home-upcoming-team">
+          {team2?.logo && (
+            <img
+              src={team2.logo}
+              alt={`${team2.name} logo`}
+              className="home-upcoming-team-logo"
+            />
+          )}
+          <strong>{match.team2}</strong>
+        </div>
+      </>
+    );
+  })()}
+</div>
 
             <div className="home-upcoming-venue">
               🏟 {match.venue}
@@ -1769,7 +2005,7 @@ const cricketLiveTeam2 = cricketLiveMatch
 
 
       {/* ================= STANDINGS ================= */}
-{/*<section className="home-standings-section">
+<section className="home-standings-section">
   <div className="home-section-container">
 
     <div className="home-section-heading">
@@ -1868,7 +2104,7 @@ const cricketLiveTeam2 = cricketLiveMatch
 
 
       {/* ================= CRICKET STANDINGS ================= */}
-      {/*<div className="home-standing-card home-standing-cricket">
+      <div className="home-standing-card home-standing-cricket">
 
         <div className="home-standing-header">
           <div>
@@ -1899,7 +2135,7 @@ const cricketLiveTeam2 = cricketLiveMatch
             </thead>
 
             <tbody>
-              {cricketStandings.slice(0, 4).map((standing) => {
+              {cricketStandings.map((standing) => {
                 const team = getCricketTeam(standing.teamId);
 
                 return (
@@ -1913,13 +2149,21 @@ const cricketLiveTeam2 = cricketLiveMatch
                       </span>
                     </td>
 
-                    <td>
-                      <div className="home-standing-team">
-                        <strong>
-                          {team?.name || "Team"}
-                        </strong>
-                      </div>
-                    </td>
+                    
+<td>
+  <div className="home-standing-team">
+    {team?.logo && (
+      <img
+  src={team.logo}
+  alt={`${team.name} logo`}
+  className="home-standing-team-logo"
+  loading="lazy"
+/>
+    )}
+
+    <strong>{team?.name || "Team"}</strong>
+  </div>
+</td>
 
                     <td>{standing.played}</td>
                     <td>{standing.won}</td>
@@ -1954,7 +2198,7 @@ const cricketLiveTeam2 = cricketLiveMatch
     </div>
 
   </div>
-</section> */}
+</section>
 
 
 {/* ================= BCL OFFICIAL SPONSORS ================= */}

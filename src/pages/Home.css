@@ -3236,7 +3236,7 @@
 }
 
 .home-standings-grid {
-  display: grid;
+  /* display: grid; */
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 24px;
   max-width: 1150px;
@@ -7082,3 +7082,943 @@
   }
 
 }
+
+
+.home-upcoming-teams {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.home-upcoming-team {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 0;
+  text-align: center;
+}
+
+.home-upcoming-team-logo {
+  display: block;
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+}
+
+.home-upcoming-team strong {
+  font-size: 14px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.home-upcoming-vs {
+  flex-shrink: 0;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+@media (max-width: 480px) {
+  .home-upcoming-teams {
+    gap: 8px;
+  }
+
+  .home-upcoming-team-logo {
+    width: 44px;
+    height: 44px;
+  }
+
+  .home-upcoming-team strong {
+    font-size: 12px;
+  }
+}
+
+
+/* ================= PROFESSIONAL UPCOMING MATCHES ================= */
+
+.home-upcoming-section {
+  padding: 72px 20px;
+  background:
+    radial-gradient(ellipse at top, rgba(28, 75, 130, 0.18), transparent 60%),
+    #07111f;
+}
+
+.home-upcoming-heading {
+  margin-bottom: 30px;
+}
+
+.home-upcoming-heading h2 {
+  color: #ffffff;
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 800;
+  letter-spacing: -0.8px;
+}
+
+.home-upcoming-heading p {
+  color: #aab8ca;
+  margin-top: 8px;
+}
+
+.home-upcoming-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.home-upcoming-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+  padding: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 18px;
+  background: linear-gradient(145deg, #14243a, #0b1728 75%);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+  transition: transform 0.25s ease, border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.home-upcoming-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 24px;
+  right: 24px;
+  height: 3px;
+  border-radius: 0 0 5px 5px;
+  background: linear-gradient(90deg, #c89b2c, #ffe7a0, #c89b2c);
+}
+
+.home-upcoming-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 215, 100, 0.7);
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.32);
+}
+
+.home-upcoming-date {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  color: #e7edf6;
+  font-size: 13px;
+}
+
+.home-upcoming-date strong {
+  color: #f5d77b;
+  font-size: 14px;
+}
+
+.home-upcoming-date span {
+  color: #c3cede;
+  white-space: nowrap;
+}
+
+.home-upcoming-sport.cricket {
+  align-self: flex-start;
+  padding: 7px 11px;
+  border: 1px solid rgba(245, 215, 123, 0.25);
+  border-radius: 30px;
+  background: rgba(245, 215, 123, 0.09);
+  color: #f5d77b;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.home-upcoming-teams {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 130px;
+}
+
+.home-upcoming-team {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-width: 0;
+  text-align: center;
+}
+
+.home-upcoming-team-logo {
+  display: block;
+  width: 72px;
+  height: 72px;
+  padding: 5px;
+  object-fit: contain;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.home-upcoming-team strong {
+  color: #ffffff;
+  font-size: 13px;
+  line-height: 1.5;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.home-upcoming-vs {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(245, 215, 123, 0.3);
+  border-radius: 50%;
+  background: rgba(245, 215, 123, 0.08);
+  color: #f5d77b;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.home-upcoming-venue {
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.09);
+  color: #b9c6d7;
+  font-size: 12px;
+  text-align: center;
+}
+
+.home-upcoming-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  margin-top: auto;
+  padding: 12px 14px;
+  border: 1px solid rgba(245, 215, 123, 0.35);
+  border-radius: 10px;
+  background: linear-gradient(135deg, #e5c15c, #c99a2e);
+  color: #101827;
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.home-upcoming-link:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 900px) {
+  .home-upcoming-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .home-upcoming-section {
+    padding: 48px 14px;
+  }
+
+  .home-upcoming-list {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .home-upcoming-card {
+    padding: 22px 18px;
+  }
+
+  .home-upcoming-team-logo {
+    width: 64px;
+    height: 64px;
+  }
+}
+
+
+/* ================= HOME CRICKET TEAMS ================= */
+
+.home-cricket-teams-section {
+  padding: 64px 20px;
+  background: #f5f7fb;
+}
+
+.home-cricket-teams-heading {
+  margin-bottom: 32px;
+}
+
+.home-cricket-teams-heading h2 {
+  color: #10213a;
+  font-size: clamp(27px, 4vw, 38px);
+  font-weight: 800;
+}
+
+.home-cricket-teams-heading p {
+  margin-top: 8px;
+  color: #66758a;
+  line-height: 1.6;
+}
+
+.home-cricket-teams-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.home-cricket-team-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  padding: 26px 18px 20px;
+  border: 1px solid #e1e7f0;
+  border-radius: 16px;
+  background: #ffffff;
+  text-align: center;
+  box-shadow: 0 5px 18px rgba(16, 33, 58, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.home-cricket-team-card:hover {
+  transform: translateY(-4px);
+  border-color: #d4b45e;
+  box-shadow: 0 12px 28px rgba(16, 33, 58, 0.11);
+}
+
+.home-cricket-team-logo-wrap {
+  display: grid;
+  place-items: center;
+  width: 112px;
+  height: 112px;
+  margin-bottom: 18px;
+  padding: 10px;
+  border-radius: 50%;
+  background: #f2f5fa;
+  border: 1px solid #e7ebf2;
+}
+
+.home-cricket-team-logo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.home-cricket-team-card h3 {
+  margin: 0;
+  color: #14243b;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.home-cricket-team-city {
+  margin: 7px 0 15px;
+  color: #758298;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.home-cricket-team-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin-top: auto;
+  padding: 10px 13px;
+  border: 1px solid #e3d3a2;
+  border-radius: 8px;
+  color: #725514;
+  background: #fffaf0;
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.home-cricket-team-link:hover {
+  color: #ffffff;
+  background: #14243b;
+  border-color: #14243b;
+}
+
+@media (max-width: 900px) {
+  .home-cricket-teams-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-cricket-teams-section {
+    padding: 44px 14px;
+  }
+
+  .home-cricket-teams-grid {
+    gap: 12px;
+  }
+
+  .home-cricket-team-card {
+    padding: 20px 10px 16px;
+    border-radius: 12px;
+  }
+
+  .home-cricket-team-logo-wrap {
+    width: 82px;
+    height: 82px;
+    margin-bottom: 13px;
+  }
+
+  .home-cricket-team-card h3 {
+    font-size: 12px;
+  }
+
+  .home-cricket-team-link {
+    padding: 9px 8px;
+    font-size: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-cricket-team-card,
+  .home-cricket-team-link {
+    transition: none;
+  }
+}
+
+
+/* ================= BCL CRICKET 2026 BANNER ================= */
+
+.home-tournament-banner {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 330px;
+  margin: 36px auto 0;
+  margin-bottom: 20px;
+  padding: 48px clamp(22px, 5vw, 64px);
+  max-width: 1400px;
+  overflow: hidden;
+  border: 1px solid rgba(245, 215, 123, 0.3);
+  border-radius: 22px;
+  background:
+    radial-gradient(ellipse at 85% 20%, rgba(35, 91, 145, 0.45), transparent 48%),
+    linear-gradient(120deg, #07111f 0%, #102945 60%, #142f4b 100%);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
+}
+
+.home-tournament-banner::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 280px;
+  height: 280px;
+  top: -150px;
+  right: 15%;
+  border: 1px solid rgba(245, 215, 123, 0.2);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 30px rgba(245, 215, 123, 0.025),
+    0 0 0 60px rgba(245, 215, 123, 0.025);
+}
+
+.home-tournament-banner-content {
+  position: relative;
+  z-index: 1;
+  max-width: 740px;
+}
+
+.home-tournament-eyebrow {
+  display: inline-block;
+  margin-bottom: 18px;
+  color: #f5d77b;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.home-tournament-banner h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(27px, 4.2vw, 48px);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -1px;
+}
+
+.home-tournament-banner h2 span {
+  display: block;
+  color: #f5d77b;
+}
+
+.home-tournament-edition {
+  margin: 12px 0 24px;
+  color: #c4d2e3;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 4px;
+}
+
+.home-tournament-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 26px;
+  margin-bottom: 26px;
+}
+
+.home-tournament-details > div {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.home-tournament-detail-icon {
+  font-size: 24px;
+}
+
+.home-tournament-details strong,
+.home-tournament-details small {
+  display: block;
+}
+
+.home-tournament-details strong {
+  color: #ffffff;
+  font-size: 13px;
+}
+
+.home-tournament-details small {
+  margin-top: 4px;
+  color: #aebed1;
+  font-size: 11px;
+}
+
+.home-tournament-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 19px;
+  border-radius: 9px;
+  background: linear-gradient(135deg, #f5df91, #c99a2e);
+  color: #101827;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.home-tournament-cta:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+}
+
+.home-tournament-cta span {
+  font-size: 18px;
+}
+
+.home-tournament-decoration {
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  right: 7%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translateY(-50%) rotate(-8deg);
+  color: rgba(245, 215, 123, 0.08);
+  font-weight: 1000;
+  line-height: 0.9;
+  pointer-events: none;
+}
+
+.home-tournament-decoration span:first-child {
+  font-size: clamp(90px, 15vw, 190px);
+}
+
+.home-tournament-decoration span:last-child {
+  font-size: clamp(40px, 7vw, 86px);
+  letter-spacing: 12px;
+}
+
+@media (max-width: 700px) {
+  .home-tournament-banner {
+    min-height: auto;
+    margin: 24px 14px 0;
+    padding: 34px 22px;
+    border-radius: 16px;
+  }
+
+  .home-tournament-eyebrow {
+    font-size: 9px;
+    letter-spacing: 1.2px;
+  }
+
+  .home-tournament-banner h2 {
+    font-size: clamp(26px, 7vw, 38px);
+  }
+
+  .home-tournament-edition {
+    font-size: 13px;
+    letter-spacing: 3px;
+  }
+
+  .home-tournament-details {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .home-tournament-decoration {
+    top: auto;
+    right: -10px;
+    bottom: 15px;
+    transform: rotate(-8deg);
+  }
+
+  .home-tournament-decoration span:first-child {
+    font-size: 90px;
+  }
+
+  .home-tournament-decoration span:last-child {
+    font-size: 40px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-tournament-cta {
+    transition: none;
+  }
+}
+
+
+/* ================= BCL COUNTDOWN TIMER ================= */
+.home-countdown-section {
+  position: relative;
+  overflow: hidden;
+  margin: 32px auto;
+  padding: 48px 24px;
+  width: calc(100% - 40px);
+  max-width: 1200px;
+  border-radius: 22px;
+  color: #fff;
+  text-align: center;
+  background: linear-gradient(135deg, #101b35 0%, #173e68 55%, #087f8c 100%);
+  box-shadow: 0 14px 35px rgba(12, 35, 68, 0.22);
+}
+
+.home-countdown-content {
+  position: relative;
+  z-index: 1;
+}
+
+.home-countdown-eyebrow {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #facc15;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+
+.home-countdown-content h2 {
+  margin: 0 0 12px;
+  color: #fff;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 900;
+}
+
+.home-countdown-description {
+  margin: 0 0 28px;
+  color: #e2e8f0;
+  font-size: 1rem;
+}
+
+.home-countdown-timer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 0 auto 26px;
+}
+
+.home-countdown-unit {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 112px;
+  min-height: 105px;
+  padding: 14px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+}
+
+.home-countdown-unit strong {
+  color: #fff;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  line-height: 1.2;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+}
+
+.home-countdown-unit span {
+  margin-top: 8px;
+  color: #cbd5e1;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.home-countdown-started {
+  margin: 24px 0;
+  color: #facc15;
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+.home-countdown-venue {
+  margin: 0;
+  color: #e2e8f0;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+@media (max-width: 520px) {
+  .home-countdown-section {
+    width: calc(100% - 24px);
+    margin: 22px auto;
+    padding: 34px 14px;
+    border-radius: 16px;
+  }
+
+  .home-countdown-timer {
+    gap: 8px;
+  }
+
+  .home-countdown-unit {
+    width: calc(50% - 8px);
+    min-height: 88px;
+    box-sizing: border-box;
+  }
+
+  .home-countdown-description {
+    font-size: 0.9rem;
+  }
+
+  .home-countdown-eyebrow {
+    letter-spacing: 2px;
+  }
+}
+
+
+/* ================= BCL CARD ANIMATIONS ================= */
+
+/* Upcoming match cards */
+.home-upcoming-card {
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    border-color 220ms ease;
+}
+
+.home-upcoming-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 26px rgba(15, 35, 65, 0.12);
+}
+
+/* Team cards */
+.home-cricket-team-card {
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    border-color 220ms ease;
+}
+
+.home-cricket-team-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 26px rgba(15, 35, 65, 0.12);
+}
+
+/* Gentle logo animation */
+.home-cricket-team-logo,
+.home-upcoming-team-logo {
+  transition: transform 220ms ease;
+}
+
+.home-cricket-team-card:hover .home-cricket-team-logo,
+.home-upcoming-card:hover .home-upcoming-team-logo {
+  transform: scale(1.06);
+}
+
+/* Keyboard accessibility */
+.home-upcoming-card:focus-within,
+.home-cricket-team-card:focus-within {
+  outline: 2px solid #0f766e;
+  outline-offset: 3px;
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .home-upcoming-card,
+  .home-cricket-team-card,
+  .home-cricket-team-logo,
+  .home-upcoming-team-logo {
+    transition: none;
+  }
+
+  .home-upcoming-card:hover,
+  .home-cricket-team-card:hover {
+    transform: none;
+  }
+
+  .home-cricket-team-card:hover .home-cricket-team-logo,
+  .home-upcoming-card:hover .home-upcoming-team-logo {
+    transform: none;
+  }
+}
+
+
+/* ================= BCL CARD ENTRANCE ANIMATION ================= */
+
+@keyframes bcl-card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.home-upcoming-card {
+  animation: bcl-card-enter 450ms ease backwards;
+}
+
+.home-cricket-team-card {
+  animation: bcl-card-enter 450ms ease backwards;
+}
+/* Small stagger between cards */
+.home-upcoming-card:nth-child(2),
+.home-cricket-team-card:nth-child(2) {
+  animation-delay: 60ms;
+}
+
+.home-upcoming-card:nth-child(3),
+.home-cricket-team-card:nth-child(3) {
+  animation-delay: 120ms;
+}
+
+.home-upcoming-card:nth-child(4),
+.home-cricket-team-card:nth-child(4) {
+  animation-delay: 180ms;
+}
+
+/* Accessibility: disable entrance animations when requested */
+@media (prefers-reduced-motion: reduce) {
+  .home-upcoming-card,
+  .home-cricket-team-card {
+    animation: none;
+  }
+}
+
+
+/* BCL Home - Points Table Team Logos */
+
+.home-standing-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+.home-standing-table th,
+.home-standing-table td {
+  padding: 12px 10px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.home-standing-table th:nth-child(2),
+.home-standing-table td:nth-child(2) {
+  text-align: left;
+}
+
+.home-standing-team {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.home-standing-team-logo {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+.home-standing-team strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+/* Keep the points column clear */
+.home-standing-points {
+  font-weight: 800;
+  text-align: center;
+}
+
+/* Responsive layout for mobile screens */
+.home-standing-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.home-standing-table {
+  min-width: 420px;
+}
+
+@media (max-width: 480px) {
+  .home-standing-table th,
+  .home-standing-table td {
+    padding: 10px 7px;
+    font-size: 12px;
+  }
+
+  .home-standing-team {
+    gap: 7px;
+  }
+
+  .home-standing-team-logo {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+  }
+
+  .home-standing-team strong {
+    font-size: 11px;
+  }
+}
+
