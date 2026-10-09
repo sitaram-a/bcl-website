@@ -1485,82 +1485,46 @@ const cricketLiveTeam2 = cricketLiveMatch
       </section>
 
 
-      {/* ================= UPCOMING MATCHES ================= */}
+     
+{/* ================= UPCOMING MATCHES ================= */}
 <section className="home-upcoming-section">
-
   <div className="home-section-container">
-
     <div className="home-section-heading home-upcoming-heading">
-
       <div>
         <span>COMING UP</span>
-
         <h2>Upcoming Matches</h2>
-
         <p>
           Don't miss the upcoming BCL Cricket 2026 matches.
         </p>
       </div>
-
     </div>
 
-
     <div className="home-upcoming-list">
-
       {/* ================= CRICKET FIXTURES ================= */}
-
-      {cricketFixtures.slice(0, 3).map((match) => {
-
-        const team1 = getCricketTeam(match.team1Id);
-        const team2 = getCricketTeam(match.team2Id);
-
-        return (
+      {cricketFixtures.length > 0 ? (
+        cricketFixtures.slice(0, 3).map((match) => (
           <div
             className="home-upcoming-card"
             key={`cricket-${match.id}`}
           >
-
             <div className="home-upcoming-date">
-
-              <strong>
-                {formatMatchDate(match.date)}
-              </strong>
-
-              <span>
-                {formatMatchTime(match.time)}
-              </span>
-
+              <strong>{formatMatchDate(match.date)}</strong>
+              <span>{formatMatchTime(match.time)}</span>
             </div>
-
 
             <div className="home-upcoming-sport cricket">
-
               🏏 CRICKET
-
             </div>
-
 
             <div className="home-upcoming-teams">
-
-              <strong>
-                {team1?.name || "Team A"}
-              </strong>
-
+              <strong>{match.team1}</strong>
               <span>VS</span>
-
-              <strong>
-                {team2?.name || "Team B"}
-              </strong>
-
+              <strong>{match.team2}</strong>
             </div>
-
 
             <div className="home-upcoming-venue">
-
               🏟 {match.venue}
-
             </div>
-
 
             <Link
               to="/cricket/fixtures"
@@ -1568,38 +1532,23 @@ const cricketLiveTeam2 = cricketLiveMatch
             >
               View Fixture →
             </Link>
-
           </div>
-        );
-      })}
-
-
-      {/* ================= EMPTY STATE ================= */}
-
-      {cricketFixtures.length === 0 && (
+        ))
+      ) : (
         <div className="empty-home-message">
-
           <div style={{ fontSize: "36px", marginBottom: "10px" }}>
             🏏
           </div>
 
           <h3>BCL Cricket 2026</h3>
 
-          <p>
-            Tournament starts on 25 October 2026.
-          </p>
+          <p>Tournament starts on 25 October 2026.</p>
 
-          <span>
-            Fixtures will be announced soon.
-          </span>
-
+          <span>Fixtures will be announced soon.</span>
         </div>
       )}
-
     </div>
-
   </div>
-
 </section>
 
 
