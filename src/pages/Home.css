@@ -8022,3 +8022,23 @@
   }
 }
 
+
+/* ================= VISITOR COUNTER ================= */
+
+.home-visitor-counter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 20px;
+  color: #d1d5db;
+  background: #0b0b0b;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.home-visitor-counter svg {
+  flex-shrink: 0;
+  color: #22c55e;
+}

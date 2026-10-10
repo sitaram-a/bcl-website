@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import footballLogo from "../assets/logo/bcl-football-logo.png";
 import cricketLogo from "../assets/logo/bcl-cricket-logo.png";
 import cricketball from "../assets/icons/cricket-ball.png";
-import { Download } from "lucide-react";
+import { Download, Eye } from "lucide-react";
+import { registerVisitorAndGetCount } from "../lib/visitorCounter";
 import { homePosters } from "../data/home/posters";
 import { bclVideos } from "../data/home/videos";
 
@@ -297,6 +298,28 @@ const cricketLiveTeam2 = cricketLiveMatch
   );
   const minutes = Math.floor((timeLeft / (1000 * 60)) % 60);
   const seconds = Math.floor((timeLeft / 1000) % 60);
+
+
+const [visitorCount, setVisitorCount] = useState(null);
+
+useEffect(() => {
+  let active = true;
+
+  registerVisitorAndGetCount()
+    .then((count) => {
+      if (active) {
+        setVisitorCount(count);
+      }
+    })
+    .catch((error) => {
+      console.error("Failed to load BCL visitor count:", error);
+    });
+
+  return () => {
+    active = false;
+  };
+}, []);
+
 
   return (
     <div className="home-page">
@@ -3137,6 +3160,18 @@ const cricketLiveTeam2 = cricketLiveMatch
     </div>
   </div>
 </div>
+
+
+  <div className="home-visitor-counter" aria-label="Website visitor count">
+    <Eye size={18} aria-hidden="true" />
+    <span>
+      Visitors:{" "}
+      {visitorCount === null
+        ? "Loading..."
+        : visitorCount.toLocaleString("en-IN")}
+    </span>
+  </div>
+
   {/* ================= FOOTER BOTTOM ================= */}
 
   <div className="footer-bottom">
@@ -3296,7 +3331,7 @@ function ResultCard({
       <div className="result-status">
         Final
       </div>
-
+      
     </div>
 
   );
@@ -3337,6 +3372,5 @@ function formatMatchTime(time) {
     hour12: true,
   });
 }
-
 
 export default Home;
