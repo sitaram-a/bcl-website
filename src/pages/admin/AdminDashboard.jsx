@@ -10,6 +10,7 @@ import {
   ClipboardList,
   ArrowUpRight,
   ShieldCheck,
+  LogOut,
 } from "lucide-react";
 import "./AdminDashboard.css";
 
