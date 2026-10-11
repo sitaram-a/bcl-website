@@ -25,7 +25,9 @@ import CricketSeason4Match from "../pages/cricket/CricketSeason4Match";
 import Media from "../pages/Media";
 import Registration from "../pages/Registration";
 
-
+import AdminDashboard from "../pages/admin/AdminDashboard";
+import AdminLogin from "../pages/admin/AdminLogin";
+import AdminRoute from "../pages/admin/AdminRoute";
 
 function Fixtures() {
   return <h1>Fixtures</h1>;
@@ -45,7 +47,12 @@ function AppRoutes() {
     <Routes>
 
       <Route path="/" element={<Home />} />
+      <Route element={<AdminRoute />}>
+      <Route path="/admin" element={<AdminDashboard />} />
+     </Route>
+      <Route path="/admin/login" element={<AdminLogin />} />
 
+      
       <Route path="/football" element={<FootballHome />} />
       <Route path="/fixtures" element={<FootballFixtures />} />
       <Route path="/results" element={<FootballResults />} />
