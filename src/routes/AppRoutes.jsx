@@ -1,3 +1,4 @@
+
 import { Routes, Route } from "react-router-dom";
 
 import Home from "../pages/Home";
@@ -10,6 +11,7 @@ import FootballTeamDetails from "../pages/football/FootballTeamDetails";
 import FootballPlayers from "../pages/football/FootballPlayers";
 import FootballLiveScore from "../pages/football/FootballLiveScore";
 import FootballMatchDetails from "../pages/football/FootballMatchDetails";
+
 import CricketHome from "../pages/cricket/CricketHome";
 import CricketFixtures from "../pages/cricket/CricketFixtures";
 import CricketResults from "../pages/cricket/CricketResults";
@@ -28,72 +30,61 @@ import Registration from "../pages/Registration";
 import AdminDashboard from "../pages/admin/AdminDashboard";
 import AdminLogin from "../pages/admin/AdminLogin";
 import AdminRoute from "../pages/admin/AdminRoute";
-
-function Fixtures() {
-  return <h1>Fixtures</h1>;
-}
+import AdminCricketFixtures from "../pages/admin/AdminCricketFixtures";
 
 function Results() {
   return <h1>Results</h1>;
 }
 
-function Teams() {
-  return <h1>Teams</h1>;
-}
-
-
 function AppRoutes() {
   return (
     <Routes>
-
       <Route path="/" element={<Home />} />
+
+      {/* Protected admin routes */}
       <Route element={<AdminRoute />}>
-      <Route path="/admin" element={<AdminDashboard />} />
-     </Route>
+        <Route path="/admin" element={<AdminDashboard />} />
+        <Route
+          path="/admin/cricket-fixtures"
+          element={<AdminCricketFixtures />}
+        />
+      </Route>
+
       <Route path="/admin/login" element={<AdminLogin />} />
 
-      
+      {/* Football */}
       <Route path="/football" element={<FootballHome />} />
       <Route path="/fixtures" element={<FootballFixtures />} />
       <Route path="/results" element={<FootballResults />} />
       <Route path="/football/standings" element={<FootballStandings />} />
+      <Route path="/football/teams/:teamId" element={<FootballTeamDetails />} />
+      <Route path="/teams" element={<FootballTeams />} />
+      <Route path="/players" element={<FootballPlayers />} />
+      <Route path="/football/live-score" element={<FootballLiveScore />} />
+      <Route
+        path="/football/match/:matchId"
+        element={<FootballMatchDetails />}
+      />
 
+      {/* Cricket */}
       <Route path="/cricket" element={<CricketHome />} />
       <Route path="/cricket/fixtures" element={<CricketFixtures />} />
       <Route path="/cricket/results" element={<CricketResults />} />
       <Route path="/cricket/standings" element={<CricketStandings />} />
       <Route path="/cricket/teams" element={<CricketTeams />} />
-      <Route  path="/cricket/teams/:teamId"  element={<CricketTeamDetails />} />
-      <Route  path="/cricket/players"  element={<CricketPlayers />} />
-      <Route  path="/cricket/live-score"  element={<CricketLiveScore />} />
-      <Route  path="/cricket/matches/:matchId"  element={<CricketMatchDetails />} />
-      <Route  path="/cricket/history"  element={<CricketSeason4History />}/>
-      <Route  path="/cricket/history/:matchId"  element={<CricketSeason4Match />}/>
-      
-      <Route path="/results" element={<Results />} />
-
+      <Route path="/cricket/teams/:teamId" element={<CricketTeamDetails />} />
+      <Route path="/cricket/players" element={<CricketPlayers />} />
+      <Route path="/cricket/live-score" element={<CricketLiveScore />} />
+      <Route path="/cricket/matches/:matchId" element={<CricketMatchDetails />} />
+      <Route path="/cricket/history" element={<CricketSeason4History />} />
       <Route
-  path="/football/teams/:teamId"
-  element={<FootballTeamDetails />}
-/>
-      <Route path="/teams" element={<FootballTeams />} />
+        path="/cricket/history/:matchId"
+        element={<CricketSeason4Match />}
+      />
 
-      
-      <Route path="/players" element={<FootballPlayers />} />
-
-      <Route
-  path="/football/live-score"
-  element={<FootballLiveScore />}
-/>
-
-<Route
-  path="/football/match/:matchId"
-  element={<FootballMatchDetails />}
-/>
+      {/* Other pages */}
       <Route path="/media" element={<Media />} />
-
       <Route path="/registration" element={<Registration />} />
-
     </Routes>
   );
 }

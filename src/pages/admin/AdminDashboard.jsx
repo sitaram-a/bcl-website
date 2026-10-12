@@ -7,6 +7,7 @@ import {
   Users,
   Trophy,
   CalendarDays,
+  CalendarClock,
   ClipboardList,
   ArrowUpRight,
   ShieldCheck,
@@ -35,7 +36,14 @@ const adminSections = [
     icon: CalendarDays,
     path: "/cricket",
     label: "View Cricket",
-  },
+  },{
+  title: "Cricket Fixture Management",
+  description:
+    "Add fixtures, edit match schedules, reschedule games, and manage match status.",
+  icon: CalendarClock,
+  path: "/admin/cricket-fixtures",
+  label: "Manage Fixtures",
+},
   {
     title: "Registrations",
     description: "Open the existing registration page.",
