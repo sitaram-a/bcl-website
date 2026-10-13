@@ -31,6 +31,7 @@ import AdminDashboard from "../pages/admin/AdminDashboard";
 import AdminLogin from "../pages/admin/AdminLogin";
 import AdminRoute from "../pages/admin/AdminRoute";
 import AdminCricketFixtures from "../pages/admin/AdminCricketFixtures";
+import AdminLiveScores from "../pages/admin/AdminLiveScores";
 
 function Results() {
   return <h1>Results</h1>;
@@ -41,16 +42,22 @@ function AppRoutes() {
     <Routes>
       <Route path="/" element={<Home />} />
 
-      {/* Protected admin routes */}
-      <Route element={<AdminRoute />}>
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route
-          path="/admin/cricket-fixtures"
-          element={<AdminCricketFixtures />}
-        />
-      </Route>
+   
+{/* Protected admin routes */}
+<Route element={<AdminRoute />}>
+  <Route path="/admin" element={<AdminDashboard />} />
+  <Route
+    path="/admin/cricket-fixtures"
+    element={<AdminCricketFixtures />}
+  />
+  <Route
+    path="/admin/live-scores"
+    element={<AdminLiveScores />}
+  />
+</Route>
 
-      <Route path="/admin/login" element={<AdminLogin />} />
+<Route path="/admin/login" element={<AdminLogin />} />
+
 
       {/* Football */}
       <Route path="/football" element={<FootballHome />} />

@@ -89,7 +89,7 @@ function CricketHome() {
           <div className="cricket-stat-icon">📅</div>
           <div>
             <strong>{upcomingMatches.length}</strong>
-            <span>Upcoming</span>
+            <span>Upcoming  matches</span>
           </div>
         </div>
 

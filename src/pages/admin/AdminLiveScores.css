@@ -1,0 +1,349 @@
+
+/* =========================================
+   ADMIN LIVE SCORES PANEL STYLES
+   ========================================= */
+
+.admin-score-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  color: #f8fafc;
+}
+
+/* Cards */
+
+.admin-score-form .admin-card {
+  background: #141b2d;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 1.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  min-width: 0;
+}
+
+.admin-score-form .admin-card h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #f8fafc;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 1.4rem;
+}
+
+.admin-score-form h3 {
+  color: #f8fafc;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 1rem;
+}
+
+.admin-score-form h4 {
+  color: #e2e8f0;
+}
+
+/* Form layout */
+
+.admin-score-form .admin-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.1rem;
+  align-items: start;
+}
+
+.admin-score-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+  color: #cbd5e1;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.admin-score-form input[type="text"],
+.admin-score-form input[type="number"],
+.admin-score-form select {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  color: #f8fafc;
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 0.75rem 0.85rem;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.admin-score-form select {
+  cursor: pointer;
+}
+
+.admin-score-form input::placeholder {
+  color: #64748b;
+}
+
+.admin-score-form input:focus,
+.admin-score-form select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  background: #1e293b;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.admin-score-form input:disabled,
+.admin-score-form select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Team score cards */
+
+.admin-score-team {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+  padding: 1.25rem;
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 12px;
+}
+
+.admin-score-team h3 {
+  padding-bottom: 0.8rem;
+  margin-bottom: 0;
+  border-bottom: 1px solid #334155;
+}
+
+/* Checkbox */
+
+.admin-score-form .admin-checkbox-label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.65rem;
+  min-height: 42px;
+  cursor: pointer;
+}
+
+.admin-score-form input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  accent-color: #3b82f6;
+  cursor: pointer;
+}
+
+/* Buttons */
+
+.admin-action-button,
+.admin-save-button,
+.admin-danger-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.admin-action-button {
+  margin-top: 1.1rem;
+  background: #1d4ed8;
+  color: #ffffff;
+}
+
+.admin-action-button:hover {
+  background: #2563eb;
+}
+
+.admin-save-button {
+  min-height: 48px;
+  padding: 0.85rem 1.5rem;
+  background: #16a34a;
+  color: #ffffff;
+}
+
+.admin-save-button:hover:not(:disabled) {
+  background: #15803d;
+}
+
+.admin-save-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.admin-danger-button {
+  margin-top: 0.75rem;
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+}
+
+.admin-danger-button:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: #ef4444;
+}
+
+.admin-score-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Batting, bowling and commentary lists */
+
+.admin-score-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.admin-score-list-item {
+  min-width: 0;
+  padding: 1.1rem;
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 10px;
+}
+
+.admin-score-list-item p {
+  margin: 0.65rem 0 0;
+  color: #cbd5e1;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.admin-score-list-item strong {
+  color: #f8fafc;
+}
+
+.admin-score-list-item .admin-form-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* Secondary text */
+
+.admin-score-form .admin-subtitle {
+  margin: 1rem 0 0;
+  color: #94a3b8;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+/* Success and error messages */
+
+.admin-success-message,
+.admin-error-message {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: 1rem 1.15rem;
+  margin-bottom: 1.25rem;
+  border-radius: 10px;
+  font-size: 0.925rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.admin-success-message {
+  color: #86efac;
+  background: rgba(22, 163, 74, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.admin-error-message {
+  color: #fca5a5;
+  background: rgba(220, 38, 38, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* Keyboard accessibility */
+
+.admin-action-button:focus-visible,
+.admin-save-button:focus-visible,
+.admin-danger-button:focus-visible {
+  outline: 2px solid #60a5fa;
+  outline-offset: 3px;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN
+   ========================================= */
+
+@media (max-width: 768px) {
+  .admin-score-form {
+    gap: 1rem;
+  }
+
+  .admin-score-form .admin-card {
+    padding: 1.15rem;
+    border-radius: 11px;
+  }
+
+  .admin-score-form .admin-card h2 {
+    font-size: 1.1rem;
+    margin-bottom: 1.1rem;
+  }
+
+  .admin-score-form .admin-form-grid,
+  .admin-score-list-item .admin-form-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .admin-score-team {
+    padding: 1rem;
+  }
+
+  .admin-score-actions {
+    justify-content: stretch;
+  }
+
+  .admin-save-button {
+    width: 100%;
+  }
+
+  .admin-action-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-score-form .admin-card {
+    padding: 0.9rem;
+  }
+
+  .admin-score-form input[type="text"],
+  .admin-score-form input[type="number"],
+  .admin-score-form select {
+    font-size: 16px;
+    padding: 0.7rem;
+  }
+
+  .admin-score-list-item {
+    padding: 0.85rem;
+  }
+
+  .admin-danger-button {
+    width: 100%;
+  }
+}

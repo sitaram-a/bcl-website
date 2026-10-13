@@ -158,19 +158,19 @@ function Navbar() {
             </div>
           )}
 
-          <Link to="/fixtures" onClick={closeMobileMenu}>
+          <Link to="cricket/fixtures" onClick={closeMobileMenu}>
             Fixtures
           </Link>
 
-          <Link to="/results" onClick={closeMobileMenu}>
+          <Link to="cricket/results" onClick={closeMobileMenu}>
             Results
           </Link>
 
-          <Link to="/teams" onClick={closeMobileMenu}>
+          <Link to="cricket/teams" onClick={closeMobileMenu}>
             Teams
           </Link>
 
-          <Link to="/players" onClick={closeMobileMenu}>
+          <Link to="cricket/players" onClick={closeMobileMenu}>
             Players
           </Link>
 

@@ -12,6 +12,7 @@ import {
   ArrowUpRight,
   ShieldCheck,
   LogOut,
+  Radio,
 } from "lucide-react";
 import "./AdminDashboard.css";
 
@@ -43,6 +44,13 @@ const adminSections = [
   icon: CalendarClock,
   path: "/admin/cricket-fixtures",
   label: "Manage Fixtures",
+},
+{
+  title: "Live Match Control",
+  description: "Update live scores, runs, wickets, overs, and match status in real time.",
+  icon: Radio,
+  path: "/admin/live-scores",
+  label: "Manage Live Scores",
 },
   {
     title: "Registrations",
