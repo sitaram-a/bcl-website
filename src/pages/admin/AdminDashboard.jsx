@@ -59,6 +59,22 @@ const adminSections = [
     path: "/registration",
     label: "View Registration",
   },
+  {
+  title: "Cricket Team Management",
+  description: "Manage cricket teams, logos, captains, and active status.",
+  icon: Users,
+  path: "/admin/cricket-teams",
+  label: "Manage Cricket Teams",
+},
+
+{
+  title: "Cricket Player Management",
+  description: "Manage player profiles, team assignments, jersey numbers, and roles.",
+  icon: Users,
+  path: "/admin/cricket-players",
+  label: "Manage Cricket Players",
+},
+
 ];
 
 
@@ -99,6 +115,11 @@ const handleSignOut = async () => {
             Registrations
           </Link>
 
+          <Link to="/admin/cricket-teams" className="admin-nav-link">
+          <Users size={19} />
+          Cricket Teams
+          </Link>
+
           <Link to="/football" className="admin-nav-link">
             <Trophy size={19} />
             Football
@@ -107,6 +128,11 @@ const handleSignOut = async () => {
           <Link to="/cricket" className="admin-nav-link">
             <CalendarDays size={19} />
             Cricket
+          </Link>
+
+          <Link to="/admin/cricket-players" className="admin-nav-link">
+          <Users size={19} />
+          Cricket Players
           </Link>
 
           <Link to="/" className="admin-nav-link">

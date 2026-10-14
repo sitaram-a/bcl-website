@@ -1,0 +1,539 @@
+
+.admin-cricket-teams-page {
+  --act-ink: #f8fafc;
+  --act-muted: #94a3b8;
+  --act-border: #334155;
+  --act-surface: #141b2d;
+  --act-input: #0f172a;
+  --act-green: #34d399;
+
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 28px;
+  color: var(--act-ink);
+}
+
+.admin-cricket-teams-page * {
+  box-sizing: border-box;
+}
+
+.admin-cricket-teams-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 18px;
+  align-items: start;
+  margin-bottom: 24px;
+}
+
+.admin-cricket-teams-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--act-muted);
+  text-decoration: none;
+  font-weight: 600;
+  grid-column: 1 / -1;
+  width: fit-content;
+}
+
+.admin-cricket-teams-back:hover {
+  color: var(--act-ink);
+}
+
+.admin-cricket-teams-heading > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--act-green);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.admin-cricket-teams-heading h1 {
+  margin: 10px 0 6px;
+  color: #f8fafc;
+  font-size: clamp(25px, 3vw, 36px);
+  line-height: 1.2;
+}
+
+.admin-cricket-teams-heading p,
+.act-form-heading p,
+.act-list-heading p {
+  margin: 0;
+  color: var(--act-muted);
+  line-height: 1.5;
+}
+
+.admin-cricket-teams-actions,
+.act-form-actions,
+.act-row-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Buttons */
+.act-primary,
+.act-secondary,
+.act-edit-button,
+.act-toggle-button,
+.act-icon-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  padding: 10px 14px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.act-primary {
+  background: #1d4ed8;
+  color: #fff;
+}
+
+.act-primary:hover {
+  background: #2563eb;
+}
+
+.act-secondary {
+  background: #1e293b;
+  color: #e2e8f0;
+  border-color: var(--act-border);
+}
+
+.act-secondary:hover {
+  background: #334155;
+}
+
+.act-primary:disabled,
+.act-secondary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Summary */
+.admin-cricket-teams-summary {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+  padding: 18px;
+  background: var(--act-surface);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.admin-cricket-teams-summary > svg {
+  color: var(--act-green);
+}
+
+.admin-cricket-teams-summary > div:nth-child(2) {
+  display: grid;
+  gap: 4px;
+}
+
+.admin-cricket-teams-summary strong {
+  color: #f8fafc;
+  font-size: 18px;
+}
+
+.admin-cricket-teams-summary span {
+  color: var(--act-muted);
+  font-size: 13px;
+}
+
+.act-summary-counts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-left: auto;
+}
+
+.act-summary-counts span {
+  padding: 6px 10px;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(52, 211, 153, 0.2);
+  border-radius: 20px;
+  color: #6ee7b7;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* Success and error messages */
+.act-notice,
+.act-error {
+  margin: 0 0 18px;
+  padding: 13px 15px;
+  border: 1px solid;
+  border-radius: 9px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.act-notice {
+  color: #86efac;
+  background: rgba(22, 163, 74, 0.12);
+  border-color: rgba(22, 163, 74, 0.3);
+}
+
+.act-error {
+  color: #fca5a5;
+  background: rgba(220, 38, 38, 0.12);
+  border-color: rgba(220, 38, 38, 0.3);
+}
+
+/* Panels */
+.act-form-panel,
+.act-list-panel {
+  margin-top: 20px;
+  padding: 22px;
+  background: var(--act-surface);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.act-form-heading,
+.act-list-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.act-form-heading h2,
+.act-list-heading h2 {
+  margin: 0 0 5px;
+  color: #f8fafc;
+  font-size: 20px;
+}
+
+.act-icon-button {
+  width: 42px;
+  padding: 0;
+  background: #1e293b;
+  color: #e2e8f0;
+  border-color: var(--act-border);
+}
+
+.act-icon-button:hover {
+  background: #334155;
+}
+
+/* Form */
+.act-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.act-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  color: #cbd5e1;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.act-form input:not([type="checkbox"]) {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--act-border);
+  border-radius: 8px;
+  color: #f8fafc;
+  background: var(--act-input);
+  font: inherit;
+  font-weight: 400;
+}
+
+.act-form input::placeholder,
+.act-search input::placeholder {
+  color: #64748b;
+}
+
+.act-form input:focus,
+.act-search input:focus {
+  outline: 2px solid rgba(59, 130, 246, 0.35);
+  outline-offset: 1px;
+  border-color: #3b82f6;
+}
+
+.act-form small {
+  color: var(--act-muted);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.act-full-width {
+  grid-column: 1 / -1;
+}
+
+.act-form .act-checkbox-label {
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.act-checkbox-label input {
+  width: 18px;
+  height: 18px;
+  accent-color: #3b82f6;
+}
+
+.act-form-actions {
+  padding-top: 4px;
+}
+
+/* Search */
+.act-list-heading {
+  align-items: end;
+}
+
+.act-search {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: min(100%, 300px);
+  min-height: 42px;
+  padding: 0 12px;
+  border: 1px solid var(--act-border);
+  border-radius: 9px;
+  background: var(--act-input);
+  color: var(--act-muted);
+}
+
+.act-search input {
+  width: 100%;
+  min-width: 0;
+  min-height: 40px;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: #f8fafc;
+  font: inherit;
+}
+
+/* Teams table */
+.act-empty {
+  padding: 32px 12px;
+  color: var(--act-muted);
+  text-align: center;
+}
+
+.act-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+}
+
+.act-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.act-table th,
+.act-table td {
+  padding: 14px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  vertical-align: middle;
+}
+
+.act-table th {
+  color: var(--act-muted);
+  background: #0f172a;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.act-table td {
+  color: #e2e8f0;
+  font-size: 13px;
+}
+
+.act-table tbody tr {
+  background: #141b2d;
+  transition: background 0.15s ease;
+}
+
+.act-table tbody tr:hover {
+  background: #1b263b;
+}
+
+.act-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.act-team-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 220px;
+}
+
+.act-team-cell img,
+.act-logo-fallback {
+  width: 46px;
+  height: 46px;
+  flex: 0 0 46px;
+  border-radius: 50%;
+  object-fit: contain;
+  border: 1px solid var(--act-border);
+  background: #0f172a;
+}
+
+.act-logo-fallback {
+  display: grid;
+  place-items: center;
+  color: #6ee7b7;
+  background: rgba(16, 185, 129, 0.12);
+  font-weight: 800;
+}
+
+.act-team-cell > div:last-child {
+  display: grid;
+  gap: 5px;
+}
+
+.act-team-cell strong {
+  color: #f8fafc;
+  line-height: 1.4;
+}
+
+.act-team-cell span {
+  color: var(--act-muted);
+  font-size: 12px;
+}
+
+/* Status */
+.act-status {
+  display: inline-flex;
+  padding: 5px 9px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.act-status.is-active {
+  color: #86efac;
+  background: rgba(22, 163, 74, 0.14);
+  border: 1px solid rgba(22, 163, 74, 0.22);
+}
+
+.act-status.is-inactive {
+  color: #fca5a5;
+  background: rgba(220, 38, 38, 0.12);
+  border: 1px solid rgba(220, 38, 38, 0.22);
+}
+
+/* Table actions */
+.act-edit-button {
+  min-height: 34px;
+  padding: 7px 10px;
+  color: #93c5fd;
+  background: rgba(59, 130, 246, 0.12);
+  border-color: rgba(96, 165, 250, 0.25);
+  font-size: 12px;
+}
+
+.act-toggle-button {
+  min-height: 34px;
+  padding: 7px 10px;
+  color: #e2e8f0;
+  background: #1e293b;
+  border-color: var(--act-border);
+  font-size: 12px;
+}
+
+.act-toggle-button:hover,
+.act-edit-button:hover {
+  filter: brightness(1.15);
+}
+
+/* Keyboard focus */
+.admin-cricket-teams-page button:focus-visible,
+.admin-cricket-teams-page a:focus-visible {
+  outline: 2px solid #60a5fa;
+  outline-offset: 3px;
+}
+
+/* Responsive */
+@media (max-width: 760px) {
+  .admin-cricket-teams-page {
+    padding: 16px;
+  }
+
+  .admin-cricket-teams-header {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-cricket-teams-actions {
+    width: 100%;
+  }
+
+  .admin-cricket-teams-actions button {
+    flex: 1;
+  }
+
+  .act-form {
+    grid-template-columns: 1fr;
+  }
+
+  .act-full-width {
+    grid-column: auto;
+  }
+
+  .act-form-panel,
+  .act-list-panel {
+    padding: 16px;
+  }
+
+  .act-list-heading {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .act-search {
+    width: 100%;
+  }
+
+  .act-summary-counts {
+    margin-left: 0;
+  }
+
+  .admin-cricket-teams-summary {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 420px) {
+  .admin-cricket-teams-summary {
+    align-items: flex-start;
+  }
+
+  .act-summary-counts {
+    width: 100%;
+  }
+
+  .act-form-actions > button {
+    flex: 1;
+  }
+}

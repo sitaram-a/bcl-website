@@ -5,6 +5,14 @@ import { supabase } from "../../lib/supabase";
 import { cricketTeams } from "../../data/cricket/teams";
 import "./CricketLiveScore.css";
 
+function getTeamName(teamId) {
+  const team = cricketTeams.find(
+    (item) => Number(item.id) === Number(teamId)
+  );
+
+  return team?.name || team?.shortName || "";
+}
+
 function CricketLiveScore() {
   const [liveMatch, setLiveMatch] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -16,26 +24,27 @@ function CricketLiveScore() {
     async function fetchLiveMatch() {
       try {
         setLoading(true);
-        const { data, error } = await supabase
-          .from("cricket_live_scores")
-          .select(`
-            *,
-            match:match_id (
-              id,
-              stage,
-              group_name,
-              team1_id,
-              team2_id,
-              team1_placeholder,
-              team2_placeholder,
-              match_date,
-              match_time,
-              venue
-            )
-          `)
-          .eq("status", "LIVE")
-          .limit(1)
-          .maybeSingle();
+      const { data, error } = await supabase
+      .from("cricket_live_scores")
+      .select(`
+      *,
+      match:match_id (
+      id,
+      stage,
+      group_name,
+      team1_id,
+      team2_id,
+      team1_placeholder,
+      team2_placeholder,
+      match_date,
+      match_time,
+      venue
+      )
+      `)
+      .eq("status", "LIVE")
+      .order("updated_at", { ascending: false })
+      .limit(1)
+      .maybeSingle();
 
         if (!active) return;
 
@@ -55,8 +64,14 @@ function CricketLiveScore() {
             venue: data.match.venue || "Baharagora Stadium, Ghatsila",
             team1Id: Number(data.match.team1_id),
             team2Id: Number(data.match.team2_id),
-            team1Name: data.match.team1_placeholder,
-            team2Name: data.match.team2_placeholder,
+            team1Name:
+            getTeamName(data.match.team1_id) ||
+            data.match.team1_placeholder ||
+            "Team 1",
+            team2Name:
+            getTeamName(data.match.team2_id) ||
+            data.match.team2_placeholder ||
+            "Team 2",
             currentInnings: data.current_innings || 1,
             target: data.target || 0,
             innings: [

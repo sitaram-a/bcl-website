@@ -470,41 +470,31 @@ function AdminLiveScores() {
         updated_at: new Date().toISOString(),
       };
 
-      const { data: existing, error: lookupError } = await supabase
-        .from("cricket_live_scores")
-        .select("id")
-        .eq("match_id", Number(selectedMatchId))
-        .maybeSingle();
 
-      if (lookupError) throw lookupError;
+        console.log("Saving live score payload:", payload);
 
-      let saveError;
+        const { data: saveResult, error: saveError } = await supabase.rpc(
+        "save_cricket_live_score",
+        {
+            p_match_id: Number(selectedMatchId),
+            p_payload: payload,
+        }
+        );
 
+        console.log("Supabase RPC save result:", saveResult);
 
-console.log("Saving live score payload:", payload);
+        if (saveError) {
+        console.error("Supabase RPC save error:", saveError);
+        throw saveError;
+        }
 
-let saveResult;
+        if (!saveResult?.success) {
+        throw new Error("The live score could not be saved.");
+        }
 
-if (existing) {
-  saveResult = await supabase
-    .from("cricket_live_scores")
-    .update(payload)
-    .eq("id", existing.id)
-    .select();
-} else {
-  saveResult = await supabase
-    .from("cricket_live_scores")
-    .insert(payload)
-    .select();
-}
-
-console.log("Supabase save result:", saveResult);
-
-if (saveResult.error) {
-  throw saveResult.error;
-}
-
-setSuccessMessage("Live score saved successfully.");
+        setSuccessMessage(
+        `Live score saved successfully. Fixture status: ${saveResult.status}.`
+        );
 
     } catch (error) {
       console.error("Error saving cricket live score:", error);

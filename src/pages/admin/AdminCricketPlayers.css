@@ -1,0 +1,544 @@
+main{
+  background-color: #0b1020;
+}
+.admin-cricket-players-page {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 28px;
+  color: #f8fafc;
+  background-color: #0b1020;
+}
+
+/* Header */
+.acp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.acp-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #94a3b8;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.acp-back:hover {
+  color: #f8fafc;
+}
+
+.acp-title {
+  flex: 1;
+  min-width: 230px;
+}
+
+.acp-title > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #34d399;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.acp-title h1 {
+  margin: 8px 0;
+  color: #f8fafc;
+  font-size: clamp(24px, 3vw, 34px);
+}
+
+.acp-title p,
+.acp-panel-heading p,
+.acp-list-heading p {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.acp-header-actions,
+.acp-form-actions,
+.acp-row-actions,
+.acp-counts,
+.acp-filters {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Buttons */
+.acp-primary,
+.acp-secondary,
+.acp-edit,
+.acp-toggle,
+.acp-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 40px;
+  padding: 9px 13px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.acp-primary {
+  color: #fff;
+  background: #1d4ed8;
+}
+
+.acp-primary:hover {
+  background: #2563eb;
+}
+
+.acp-secondary,
+.acp-edit,
+.acp-toggle,
+.acp-close {
+  color: #e2e8f0;
+  background: #1e293b;
+  border-color: #334155;
+}
+
+.acp-secondary:hover,
+.acp-edit:hover,
+.acp-toggle:hover,
+.acp-close:hover {
+  background: #334155;
+  border-color: #475569;
+}
+
+.acp-primary:disabled,
+.acp-secondary:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Summary */
+.acp-summary {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px;
+  margin-bottom: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  background: #141b2d;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.acp-summary > div:nth-child(2) {
+  display: grid;
+  gap: 4px;
+}
+
+.acp-summary strong {
+  color: #f8fafc;
+  font-size: 20px;
+}
+
+.acp-summary span {
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+.acp-counts {
+  margin-left: auto;
+}
+
+.acp-counts span {
+  padding: 7px 10px;
+  border: 1px solid rgba(52, 211, 153, 0.2);
+  border-radius: 999px;
+  background: rgba(16, 185, 129, 0.12);
+  color: #6ee7b7;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* Notices */
+.acp-notice,
+.acp-error {
+  padding: 12px 15px;
+  border-radius: 9px;
+  margin: 14px 0;
+  overflow-wrap: anywhere;
+}
+
+.acp-notice {
+  color: #86efac;
+  background: rgba(22, 163, 74, 0.12);
+  border: 1px solid rgba(22, 163, 74, 0.25);
+}
+
+.acp-error {
+  color: #fca5a5;
+  background: rgba(220, 38, 38, 0.12);
+  border: 1px solid rgba(220, 38, 38, 0.25);
+}
+
+/* Panels */
+.acp-panel {
+  margin: 20px 0;
+  padding: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  background: #141b2d;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.acp-panel-heading,
+.acp-list-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.acp-panel h2,
+.acp-list-heading h2 {
+  margin: 0 0 6px;
+  color: #f8fafc;
+  font-size: 20px;
+}
+
+/* Form */
+.acp-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 17px;
+}
+
+.acp-form > label {
+  display: grid;
+  align-content: start;
+  gap: 7px;
+  color: #cbd5e1;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.acp-form input:not([type="checkbox"]),
+.acp-form select,
+.acp-search input,
+.acp-filters > select {
+  width: 100%;
+  min-width: 0;
+  min-height: 43px;
+  padding: 10px 12px;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  background: #0f172a;
+  color: #f8fafc;
+  font: inherit;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.acp-form input::placeholder,
+.acp-search input::placeholder {
+  color: #64748b;
+}
+
+.acp-form select option,
+.acp-filters > select option {
+  background: #0f172a;
+  color: #f8fafc;
+}
+
+.acp-form input:focus,
+.acp-form select:focus,
+.acp-search input:focus,
+.acp-filters > select:focus {
+  outline: 2px solid rgba(59, 130, 246, 0.35);
+  border-color: #3b82f6;
+}
+
+.acp-full {
+  grid-column: 1 / -1;
+}
+
+.acp-checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.acp-checks label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #cbd5e1;
+  font-size: 14px;
+}
+
+.acp-checks input {
+  width: 17px;
+  height: 17px;
+  accent-color: #3b82f6;
+}
+
+.acp-form-actions {
+  margin-top: 4px;
+}
+
+/* Search and filters */
+.acp-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: min(100%, 280px);
+  padding-left: 10px;
+  border: 1px solid #334155;
+  border-radius: 9px;
+  background: #0f172a;
+  color: #94a3b8;
+}
+
+.acp-search input {
+  border: 0;
+  background: transparent;
+}
+
+.acp-search input:focus {
+  outline: none;
+}
+
+/* Players table */
+.acp-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+}
+
+.acp-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 13px;
+}
+
+.acp-table th {
+  padding: 13px 12px;
+  color: #94a3b8;
+  background: #0f172a;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.acp-table td {
+  padding: 14px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: #e2e8f0;
+  vertical-align: middle;
+}
+
+.acp-table tbody tr {
+  background: #141b2d;
+  transition: background 0.15s ease;
+}
+
+.acp-table tbody tr:hover {
+  background: #1b263b;
+}
+
+.acp-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.acp-player-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 190px;
+}
+
+.acp-player-cell img,
+.acp-avatar {
+  width: 39px;
+  height: 39px;
+  flex: 0 0 39px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #1e293b;
+  border: 1px solid #334155;
+}
+
+.acp-avatar {
+  display: grid;
+  place-items: center;
+  color: #93c5fd;
+  font-weight: 800;
+}
+
+.acp-player-cell > div {
+  display: grid;
+  gap: 4px;
+}
+
+.acp-player-cell strong {
+  color: #f8fafc;
+  overflow-wrap: anywhere;
+}
+
+.acp-player-cell small {
+  color: #94a3b8;
+}
+
+/* Role and status badges */
+.acp-role-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 9px;
+  border: 1px solid rgba(96, 165, 250, 0.2);
+  border-radius: 999px;
+  background: rgba(59, 130, 246, 0.12);
+  color: #93c5fd;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.acp-status {
+  display: inline-block;
+  padding: 5px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.acp-status.active {
+  color: #86efac;
+  background: rgba(22, 163, 74, 0.14);
+  border: 1px solid rgba(22, 163, 74, 0.22);
+}
+
+.acp-status.inactive {
+  color: #fca5a5;
+  background: rgba(220, 38, 38, 0.12);
+  border: 1px solid rgba(220, 38, 38, 0.22);
+}
+
+/* Row actions */
+.acp-row-actions {
+  flex-wrap: nowrap;
+}
+
+.acp-edit,
+.acp-toggle {
+  min-height: 34px;
+  padding: 7px 9px;
+  white-space: nowrap;
+}
+
+.acp-empty {
+  padding: 28px 10px !important;
+  text-align: center;
+  color: #94a3b8 !important;
+}
+
+.acp-loading {
+  padding: 30px;
+  color: #94a3b8;
+  text-align: center;
+}
+
+/* Keyboard focus */
+.acp-primary:focus-visible,
+.acp-secondary:focus-visible,
+.acp-edit:focus-visible,
+.acp-toggle:focus-visible,
+.acp-close:focus-visible,
+.acp-back:focus-visible {
+  outline: 2px solid #60a5fa;
+  outline-offset: 3px;
+}
+
+/* Responsive */
+@media (max-width: 760px) {
+  .admin-cricket-players-page {
+    padding: 16px;
+  }
+
+  .acp-header {
+    align-items: flex-start;
+  }
+
+  .acp-title {
+    order: 2;
+    flex-basis: 100%;
+  }
+
+  .acp-header-actions {
+    order: 3;
+  }
+
+  .acp-form {
+    grid-template-columns: 1fr;
+  }
+
+  .acp-full {
+    grid-column: auto;
+  }
+
+  .acp-panel {
+    padding: 15px;
+  }
+
+  .acp-list-heading {
+    align-items: stretch;
+  }
+
+  .acp-filters,
+  .acp-search {
+    width: 100%;
+  }
+
+  .acp-counts {
+    margin-left: 0;
+  }
+
+  .acp-row-actions {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-cricket-players-page {
+    padding: 12px;
+  }
+
+  .acp-summary {
+    align-items: flex-start;
+    flex-wrap: wrap;
+    padding: 15px;
+  }
+
+  .acp-counts {
+    width: 100%;
+  }
+
+  .acp-panel {
+    padding: 12px;
+  }
+
+  .acp-table th,
+  .acp-table td {
+    padding: 10px 9px;
+  }
+}

@@ -103,7 +103,7 @@ function CricketSeason4History() {
   };
 
   return (
-    <div className="season4-history-page">
+    <div className="season4-history-page" style={{background:"#fff"}}>
 
       <CricketNavbar />
 

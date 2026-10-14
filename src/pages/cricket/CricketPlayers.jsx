@@ -1,172 +1,196 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import CricketNavbar from "../../components/cricket/CricketNavbar";
-import { cricketPlayers } from "../../data/cricket/players";
-import { cricketTeams } from "../../data/cricket/teams";
+import {
+  getCricketPlayers,
+  getCricketTeams,
+} from "../../services/cricketService";
 import "./CricketPlayers.css";
 
 function CricketPlayers() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedTeam, setSelectedTeam] = useState("ALL");
+  const [players, setPlayers] = useState([]);
+  const [teams, setTeams] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  const getTeam = (teamId) => {
-    return cricketTeams.find((team) => team.id === teamId);
-  };
+  useEffect(() => {
+    let mounted = true;
+
+    async function loadData() {
+      try {
+        setLoading(true);
+        setError("");
+
+        const [playersData, teamsData] = await Promise.all([
+          getCricketPlayers(),
+          getCricketTeams(),
+        ]);
+
+        if (!mounted) return;
+
+        setPlayers(
+          playersData.filter((player) => player.is_active !== false)
+        );
+        setTeams(
+          teamsData.filter((team) => team.is_active !== false)
+        );
+      } catch (err) {
+        if (mounted) {
+          setError(err.message || "Unable to load cricket players.");
+        }
+      } finally {
+        if (mounted) setLoading(false);
+      }
+    }
+
+    loadData();
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  const teamMap = useMemo(
+    () => new Map(teams.map((team) => [Number(team.id), team])),
+    [teams]
+  );
 
   const filteredPlayers = useMemo(() => {
-    return cricketPlayers.filter((player) => {
-      const matchesSearch = player.name
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase());
+    const query = searchTerm.trim().toLowerCase();
+
+    return players.filter((player) => {
+      const name = player.player_name || "";
+      const matchesSearch = name.toLowerCase().includes(query);
 
       const matchesTeam =
         selectedTeam === "ALL" ||
-        player.teamId === Number(selectedTeam);
+        Number(player.team_id) === Number(selectedTeam);
 
       return matchesSearch && matchesTeam;
     });
-  }, [searchTerm, selectedTeam]);
+  }, [players, searchTerm, selectedTeam]);
 
   return (
     <>
       <CricketNavbar />
 
       <main className="cricket-players-page">
-
-        {/* Header */}
         <section className="cricket-players-header">
-          <span className="cricket-section-badge">
-            🏏 BCL CRICKET
-          </span>
-
+          <span className="cricket-section-badge">🏏 BCL CRICKET</span>
           <h1>Cricket Players</h1>
-
           <p>
             Players participating in Baharagora Champions League.
           </p>
         </section>
 
-        {/* Filters */}
         <section className="cricket-player-filters">
-
           <div className="cricket-player-search">
             <span>🔎</span>
-
             <input
               type="text"
               placeholder="Search player..."
               value={searchTerm}
-              onChange={(event) =>
-                setSearchTerm(event.target.value)
-              }
+              onChange={(event) => setSearchTerm(event.target.value)}
             />
           </div>
 
           <select
             className="cricket-player-team-filter"
             value={selectedTeam}
-            onChange={(event) =>
-              setSelectedTeam(event.target.value)
-            }
+            onChange={(event) => setSelectedTeam(event.target.value)}
           >
-            <option value="ALL">
-              All Teams
-            </option>
+            <option value="ALL">All Teams</option>
 
-            {cricketTeams.map((team) => (
-              <option
-                value={team.id}
-                key={team.id}
-              >
+            {teams.map((team) => (
+              <option value={team.id} key={team.id}>
                 {team.name}
               </option>
             ))}
           </select>
-
         </section>
 
-        {/* Result count */}
-        <div className="cricket-player-result-count">
-          Showing{" "}
-          <strong>{filteredPlayers.length}</strong>{" "}
-          player
-          {filteredPlayers.length !== 1 ? "s" : ""}
-        </div>
+        {!loading && !error && (
+          <div className="cricket-player-result-count">
+            Showing <strong>{filteredPlayers.length}</strong> player
+            {filteredPlayers.length !== 1 ? "s" : ""}
+          </div>
+        )}
 
-        {/* Players */}
-        <section className="cricket-players-grid">
+        {loading ? (
+          <div className="cricket-no-players">
+            <div>🏏</div>
+            <h2>Loading Players...</h2>
+            <p>Fetching the latest player data.</p>
+          </div>
+        ) : error ? (
+          <div className="cricket-no-players">
+            <h2>Unable to Load Players</h2>
+            <p>{error}</p>
+          </div>
+        ) : (
+          <section className="cricket-players-grid">
+            {filteredPlayers.length === 0 ? (
+              <div className="cricket-no-players">
+                <div>👤</div>
+                <h2>No Players Found</h2>
+                <p>Try changing your search or team filter.</p>
+              </div>
+            ) : (
+              filteredPlayers.map((player) => {
+                const team = teamMap.get(Number(player.team_id));
 
-          {filteredPlayers.length === 0 ? (
-            <div className="cricket-no-players">
-
-              <div>👤</div>
-
-              <h2>No Players Found</h2>
-
-              <p>
-                Try changing your search or team filter.
-              </p>
-
-            </div>
-          ) : (
-            filteredPlayers.map((player) => {
-              const team = getTeam(player.teamId);
-
-              return (
-                <div
-                  className="cricket-player-list-card"
-                  key={player.id}
-                >
-
-                  {/* Jersey */}
-                  <div className="cricket-player-list-number">
-                    #{player.jerseyNumber}
-                  </div>
-
-                  {/* Avatar */}
-                  <div className="cricket-player-list-avatar">
-                    👤
-                  </div>
-
-                  {/* Info */}
-                  <div className="cricket-player-list-info">
-
-                    <h2>{player.name}</h2>
-
-                    <span className="cricket-player-position">
-                      {player.role}
-                    </span>
-
-                    <div className="cricket-player-team-name">
-                      🏏 {team?.name || "Unknown Team"}
+                return (
+                  <div
+                    className="cricket-player-list-card"
+                    key={player.id}
+                  >
+                    <div className="cricket-player-list-number">
+                      #{player.jersey_number ?? "—"}
                     </div>
 
+                    <div className="cricket-player-list-avatar">
+                      {player.photo_url ? (
+                        <img
+                          src={player.photo_url}
+                          alt={player.player_name}
+                          onError={(event) => {
+                            event.currentTarget.style.display = "none";
+                          }}
+                        />
+                      ) : (
+                        "👤"
+                      )}
+                    </div>
+
+                    <div className="cricket-player-list-info">
+                      <h2>{player.player_name}</h2>
+
+                      <span className="cricket-player-position">
+                        {player.playing_role || "Player"}
+                      </span>
+
+                      <div className="cricket-player-team-name">
+                        🏏 {team?.name || "Unknown Team"}
+                      </div>
+                    </div>
+
+                    <div className="cricket-player-team-badge">
+                      {team?.short_name || "N/A"}
+                    </div>
                   </div>
+                );
+              })
+            )}
+          </section>
+        )}
 
-                  {/* Team short name */}
-                  <div className="cricket-player-team-badge">
-                    {team?.shortName || "N/A"}
-                  </div>
-
-                </div>
-              );
-            })
-          )}
-
-        </section>
-
-        {/* Bottom */}
         <section className="cricket-players-bottom">
-
-          <Link
-            to="/cricket"
-            className="cricket-back-button"
-          >
+          <Link to="/cricket" className="cricket-back-button">
             ← Back to Cricket Home
           </Link>
-
         </section>
-
       </main>
     </>
   );
