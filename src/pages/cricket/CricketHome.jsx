@@ -10,6 +10,7 @@ import {
 import { cricketResults } from "../../data/cricket/results";
 import { cricketStandings } from "../../data/cricket/standings";
 import CricketHero3D from "../../components/cricket/CricketHero3D";
+import PlacementMedia from "../../components/media/PlacementMedia";
 import "./CricketHome.css";
 
 function CricketHome() {
@@ -448,6 +449,8 @@ function CricketHome() {
             </Link>
           </div>
         </section>
+
+        <PlacementMedia placement="cricket" />
 
         {/* CTA */}
         <section className="cricket-home-cta">

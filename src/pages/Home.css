@@ -8047,7 +8047,9 @@
   color: #22c55e;
 }
 
-
+.auction_sec h1{
+  font-size: 4rem;
+}
 
 
 .antigravity-background {
@@ -8083,6 +8085,9 @@
   .antigravity-background {
     opacity: 0.7;
   }
+  .auction_sec h1 {
+    font-size: 3rem;
+}
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -30,7 +30,7 @@ import { announcements } from "../data/home/announcements";
 
 import { sponsors } from "../data/sponsors/sponsors";
 import AntigravityBackground from "../components/home/AntigravityBackground.jsx";
-
+import PlacementMedia from "../components/media/PlacementMedia";
 import "./Home.css";
 
 function Home() {
@@ -499,7 +499,7 @@ useEffect(() => {
 
     <div className="home-hero-overlay"></div>
 
-    <div className="home-hero-content">
+    <div className="home-hero-content auction_sec" >
 
       <div className="home-hero-kicker">
         BCL CRICKET 2026
@@ -3231,6 +3231,8 @@ useEffect(() => {
   </div>
 
 </footer>
+
+{/* <PlacementMedia placement="home" /> */}
 
     </div>
   );

@@ -6,6 +6,8 @@ import { footballTeams } from "../../data/football/teams";
 import { footballPlayers } from "../../data/football/players";
 import { footballMatches } from "../../data/football/footballMatches";
 import { footballStandings } from "../../data/football/standings";
+import PlacementMedia from "../../components/media/PlacementMedia";
+
 
 import "./FootballHome.css";
 
@@ -560,6 +562,8 @@ const liveMatches = footballMatches.filter(
           </div>
 
         </section>
+
+        <PlacementMedia placement="football" />
 
         {/* FINAL CTA */}
         <section className="football-home-cta">

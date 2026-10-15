@@ -13,6 +13,7 @@ import {
   ShieldCheck,
   LogOut,
   Radio,
+  Image,
 } from "lucide-react";
 import "./AdminDashboard.css";
 
@@ -73,6 +74,15 @@ const adminSections = [
   icon: Users,
   path: "/admin/cricket-players",
   label: "Manage Cricket Players",
+},
+
+{
+  title: "Media Management",
+  description:
+    "Upload photos and videos, manage categories, and control what appears on the website.",
+  icon: Image,
+  path: "/admin/media",
+  label: "Manage Media",
 },
 
 ];
@@ -138,6 +148,11 @@ const handleSignOut = async () => {
           <Link to="/" className="admin-nav-link">
             <ArrowUpRight size={19} />
             View Website
+          </Link>
+
+          <Link to="/admin/media" className="admin-nav-link">
+          <Image size={19} />
+          Media Management
           </Link>
         </nav>
 

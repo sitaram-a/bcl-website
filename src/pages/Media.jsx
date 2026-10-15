@@ -13,7 +13,8 @@ import {
   Expand,
 } from "lucide-react";
 
-import { photos, videos, mediaCategories, mediaStats } from "../data/media";
+import { photos, videos, mediaCategories } from "../data/media";
+import { supabase } from "../lib/supabase";
 import "./Media.css";
 
 function Thumb({ item, children }) {
@@ -51,14 +52,93 @@ function Media() {
   const [category, setCategory] = useState("All");
   const [lightbox, setLightbox] = useState(null); // index in filteredPhotos
   const [activeVideo, setActiveVideo] = useState(null);
+  const [supabaseMedia, setSupabaseMedia] = useState([]);
+
+  // Load public media uploaded through Admin > Media Management.
+  // The local gallery remains available if the request fails.
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadPublishedMedia() {
+      try {
+        const { data, error } = await supabase
+          .from("bcl_media")
+          .select("id, title, description, media_type, category, public_url, thumbnail_url, placement, is_published, sort_order, created_at")
+          .eq("is_published", true)
+          .contains("placement", ["media"])
+          .order("sort_order", { ascending: true })
+          .order("created_at", { ascending: false });
+
+        if (error) throw error;
+        if (cancelled) return;
+
+        const mapped = (data || [])
+          .filter((item) => item.public_url)
+          .map((item) => {
+            const date = item.created_at
+              ? new Date(item.created_at).toLocaleDateString(undefined, {
+                  year: "numeric", month: "short", day: "numeric"
+                })
+              : "BCL";
+            const common = {
+              id: `supabase-${item.id}`,
+              title: item.title || "BCL Media",
+              description: item.description || "",
+              category: item.category || "Events",
+              date,
+              tone: 5,
+              src: item.public_url,
+              thumb: item.thumbnail_url || undefined,
+              isSupabase: true,
+              mediaType: item.media_type,
+            };
+            return item.media_type === "video"
+              ? { ...common, duration: "", views: "" }
+              : { ...common, size: "" };
+          });
+
+        setSupabaseMedia(mapped);
+      } catch (error) {
+        console.error("Unable to load published BCL media from Supabase:", error);
+        if (!cancelled) setSupabaseMedia([]);
+      }
+    }
+
+    loadPublishedMedia();
+    return () => { cancelled = true; };
+  }, []);
+
+  const remotePhotos = useMemo(
+    () => supabaseMedia.filter((item) => item.mediaType === "image" && item.src),
+    [supabaseMedia]
+  );
+  const remoteVideos = useMemo(
+    () => supabaseMedia.filter((item) => item.mediaType === "video"),
+    [supabaseMedia]
+  );
+  const allPhotos = useMemo(() => [...photos, ...remotePhotos], [remotePhotos]);
+  const allVideos = useMemo(() => [...videos, ...remoteVideos], [remoteVideos]);
+  const allCategories = useMemo(() => [
+    "All",
+    ...new Set([
+      ...mediaCategories.filter((item) => item !== "All"),
+      ...supabaseMedia.map((item) => item.category).filter(Boolean),
+    ]),
+  ], [supabaseMedia]);
+  const currentMediaStats = useMemo(() => [
+    { label: "Photos", value: String(allPhotos.length) },
+    { label: "Videos", value: String(allVideos.length) },
+    { label: "Seasons", value: "3" },
+    { label: "Champions", value: "3" },
+  ], [allPhotos.length, allVideos.length]);
 
   const filteredPhotos = useMemo(
-    () => photos.filter((p) => category === "All" || p.category === category),
-    [category]
+    () => allPhotos.filter((p) => category === "All" || p.category === category),
+    [allPhotos, category]
   );
   const filteredVideos = useMemo(
-    () => videos.filter((v) => category === "All" || v.category === category),
-    [category]
+    () => allVideos.filter((v) => category === "All" || v.category === category),
+    [allVideos, category]
   );
 
   const next = useCallback(
@@ -111,7 +191,7 @@ function Media() {
           </p>
 
           <div className="media-stats">
-            {mediaStats.map((s) => (
+            {currentMediaStats.map((s) => (
               <div key={s.label} className="media-stat">
                 <strong>{s.value}</strong>
                 <span>{s.label}</span>
@@ -145,7 +225,7 @@ function Media() {
         </div>
 
         <div className="media-filters">
-          {mediaCategories.map((c) => (
+          {allCategories.map((c) => (
             <button
               key={c}
               className={category === c ? "active" : ""}
