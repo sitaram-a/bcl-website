@@ -9,6 +9,7 @@ import {
 } from "../../services/cricketService";
 import { cricketResults } from "../../data/cricket/results";
 import { cricketStandings } from "../../data/cricket/standings";
+import CricketHero3D from "../../components/cricket/CricketHero3D";
 import "./CricketHome.css";
 
 function CricketHome() {
@@ -132,6 +133,7 @@ function CricketHome() {
       <div className="cricket-home-page">
         {/* HERO */}
         <section className="cricket-home-hero">
+            <CricketHero3D />
           <div className="cricket-home-hero-content">
             <div className="cricket-home-logo">
               <img src={cricketLogo} alt="BCL Cricket" />

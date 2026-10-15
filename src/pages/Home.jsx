@@ -29,6 +29,7 @@ import { announcements } from "../data/home/announcements";
 
 
 import { sponsors } from "../data/sponsors/sponsors";
+import AntigravityBackground from "../components/home/AntigravityBackground.jsx";
 
 import "./Home.css";
 
@@ -324,6 +325,12 @@ useEffect(() => {
   return (
     <div className="home-page">
 
+ {/* ONE shared animation for the entire page */}
+  <AntigravityBackground />
+      {/* <div className="home-antigravity-layer">
+    <AntigravityBackground />
+  </div> */}
+
      {/* ================= HERO SECTION ================= */}
 {/* ================= BCL SEASON 5 HERO CAROUSEL ================= */}
 <section className="home-hero">
@@ -346,6 +353,8 @@ useEffect(() => {
       playsInline
       preload="auto"
     />
+
+ {/* <AntigravityBackground /> */}
 
     <div className="home-hero-overlay"></div>
 
@@ -418,6 +427,8 @@ useEffect(() => {
       className="home-hero-image"
     />
 
+     {/* <AntigravityBackground /> */}
+
     <div className="home-hero-overlay"></div>
 
     <div className="home-hero-content">
@@ -483,6 +494,8 @@ useEffect(() => {
       alt="BCL Cricket Auction 2026"
       className="home-hero-image"
     />
+
+ {/* <AntigravityBackground /> */}
 
     <div className="home-hero-overlay"></div>
 
@@ -597,6 +610,10 @@ useEffect(() => {
 
 {/* ================= BCL SEASON 5 TEAM POSTERS ================= */}
 <section className="home-poster-showcase">
+
+{/* <div className="home-poster-particles">
+    <AntigravityBackground />
+  </div> */}
 
   <div className="home-section-container">
 
@@ -929,6 +946,11 @@ useEffect(() => {
 
 {/* ================= BCL VIDEOS (Hotstar style) ================= */}
 <section className="home-video-section">
+  
+  {/* <div className="home-video-particles">
+    <AntigravityBackground />
+  </div> */}
+
   <div className="home-section-container">
 
     <div className="home-video-heading">
@@ -1040,7 +1062,7 @@ useEffect(() => {
 
     <div className="home-section-heading">
       <span>EXPLORE BCL</span>
-      <h2>Choose Your Sport</h2>
+      <h2 className="choose">Choose Your Sport</h2>
       <p>
         Follow all the action from the BCL Football and Cricket tournaments.
       </p>
@@ -1456,6 +1478,10 @@ useEffect(() => {
 {/* ================= CRICKET AUCTION HIGHLIGHT ================= */}
       {activeAnnouncement && (
         <section className="live-section">
+
+          {/* <div className="home-section-particles">
+      <AntigravityBackground />
+    </div> */}
           <div className="section-heading light-heading">
             <span>UPCOMING EVENT</span>
             <h2>{activeAnnouncement.title}</h2>
@@ -1495,6 +1521,10 @@ useEffect(() => {
       ================================================= */}
 
       <section className="live-section">
+
+        {/* <div className="home-section-particles">
+    <AntigravityBackground />
+  </div> */}
 
         <div className="section-heading light-heading">
 
@@ -1577,7 +1607,11 @@ useEffect(() => {
       
 {/* ================= BCL COUNTDOWN TIMER ================= */}
 <section className="home-countdown-section">
-  <div className="home-countdown-content">
+
+  {/* <div className="home-section-particles">
+    <AntigravityBackground />
+  </div> */}
+  <div className="home-countdown-content home-section-foreground">
     <span className="home-countdown-eyebrow">
       THE COUNTDOWN IS ON
     </span>
@@ -2033,7 +2067,7 @@ useEffect(() => {
 
     <div className="home-section-heading">
       <span>LEAGUE TABLE</span>
-      <h2>Championship Standings</h2>
+      <h2 className="choose">Championship Standings</h2>
       <p>
         Track team performance and points throughout the BCL 2026 season.
       </p>
@@ -2232,7 +2266,7 @@ useEffect(() => {
     <div className="home-section-heading">
       <span>BCL 2026 PARTNERS</span>
 
-      <h2>Our Official Sponsors</h2>
+      <h2 className="choose">Our Official Sponsors</h2>
 
       <p>
         BCL is proudly supported by businesses and partners

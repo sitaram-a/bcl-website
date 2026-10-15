@@ -163,7 +163,7 @@ function CricketSeason4History() {
                 HISTORICAL MATCHES
               </span>
 
-              <h2>
+              <h2 className="choose">
                 BCL Season 4 Matches
               </h2>
 

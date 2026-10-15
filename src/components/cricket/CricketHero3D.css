@@ -1,0 +1,117 @@
+
+.bcl-3d-scene {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  isolation: isolate;
+
+  --pointer-x: 0;
+  --pointer-y: 0;
+}
+
+.bcl-3d-glow {
+  position: absolute;
+  width: min(70vw, 680px);
+  aspect-ratio: 1;
+  left: 52%;
+  top: 50%;
+  transform:
+    translate(
+      calc(-50% + var(--pointer-x) * 10px),
+      calc(-50% + var(--pointer-y) * 8px)
+    );
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(205, 18, 42, 0.2) 0%,
+    rgba(117, 9, 25, 0.12) 34%,
+    transparent 70%
+  );
+  filter: blur(18px);
+  animation: bclGlowPulse 5s ease-in-out infinite;
+}
+
+.bcl-3d-ball {
+  position: absolute;
+  inset: 0;
+  transform:
+    translate(
+      calc(var(--pointer-x) * 7px),
+      calc(var(--pointer-y) * 5px)
+    );
+  transition: transform 180ms ease-out;
+}
+
+.bcl-3d-ball canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.bcl-3d-vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(5, 7, 13, 0.82) 0%,
+      rgba(5, 7, 13, 0.42) 38%,
+      rgba(5, 7, 13, 0.04) 72%,
+      rgba(5, 7, 13, 0.25) 100%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(5, 7, 13, 0.35),
+      transparent 35%,
+      rgba(5, 7, 13, 0.1)
+    );
+  z-index: 1;
+}
+
+@keyframes bclGlowPulse {
+  0%,
+  100% {
+    opacity: 0.65;
+    scale: 0.94;
+  }
+
+  50% {
+    opacity: 1;
+    scale: 1.06;
+  }
+}
+
+@media (max-width: 768px) {
+  .bcl-3d-glow {
+    width: 100vw;
+    left: 62%;
+    opacity: 0.75;
+  }
+
+  .bcl-3d-vignette {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(5, 7, 13, 0.74),
+        rgba(5, 7, 13, 0.22)
+      ),
+      linear-gradient(
+        0deg,
+        rgba(5, 7, 13, 0.4),
+        transparent 55%
+      );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bcl-3d-glow {
+    animation: none;
+  }
+
+  .bcl-3d-ball {
+    transition: none;
+  }
+}

@@ -558,3 +558,26 @@
 .cricket-live-home-button:hover {
   background: #a91f1f;
 }
+
+.cricket-home-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: linear-gradient(135deg, #043c2a, #075e3b 55%, #0a241d);
+  color: white;
+  padding: 65px 20px;
+}
+
+/* Cinematic 3D layer behind the existing hero content */
+.cricket-home-hero > .bcl-3d-scene {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Keep the logo, text, and buttons above the animation */
+.cricket-home-hero > .cricket-home-hero-content {
+  position: relative;
+  z-index: 2;
+}

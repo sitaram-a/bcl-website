@@ -1,0 +1,33 @@
+
+.antigravity-background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  background: transparent;
+  border: 0;
+  outline: 0;
+}
+
+.antigravity-background canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+
+/* Keep the particle effect subtle on smaller screens. */
+@media (max-width: 650px) {
+  .antigravity-background {
+    opacity: 0.7;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .antigravity-background {
+    opacity: 0.55;
+  }
+}
