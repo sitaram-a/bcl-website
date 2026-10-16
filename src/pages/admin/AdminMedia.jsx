@@ -63,6 +63,13 @@ const placementOptions = [
 
 ];
 
+const cardSizeOptions = [
+  { value: "square", label: "Square — compact" },
+  { value: "tall", label: "Tall — portrait" },
+  { value: "wide", label: "Wide — landscape" },
+  { value: "large", label: "Large — double size" },
+];
+
 function AdminMedia() {
 
   const [items, setItems] = useState([]);
@@ -86,6 +93,8 @@ function AdminMedia() {
   const [placements, setPlacements] = useState(["media"]);
 
   const [published, setPublished] = useState(false);
+  const [cardSize, setCardSize] = useState("square");
+  const [editCardSize, setEditCardSize] = useState("square");
   const [editingItem, setEditingItem] = useState(null);
   const [editTitle, setEditTitle] = useState("");
   const [editDescription, setEditDescription] = useState("");
@@ -144,6 +153,8 @@ function AdminMedia() {
     setPlacements(["media"]);
 
     setPublished(false);
+
+    setCardSize("square");
 
     const input = document.getElementById("bcl-media-file");
 
@@ -333,6 +344,8 @@ function AdminMedia() {
 
         category,
 
+        card_size: cardSize,
+
         storage_path: uploadedPath,
 
         public_url: publicData.publicUrl,
@@ -382,6 +395,7 @@ function AdminMedia() {
     setEditTitle(item.title || "");
     setEditDescription(item.description || "");
     setEditCategory(item.category || "General");
+    setEditCardSize(item.card_size || "square");
     setEditPlacements(Array.isArray(item.placement) ? item.placement : []);
     setEditThumbnailUrl(item.thumbnail_url || "");
     setEditPublished(Boolean(item.is_published));
@@ -395,6 +409,7 @@ function AdminMedia() {
     setEditTitle("");
     setEditDescription("");
     setEditCategory("General");
+    setEditCardSize("square");
     setEditPlacements(["media"]);
     setEditThumbnailUrl("");
     setEditPublished(false);
@@ -429,6 +444,7 @@ function AdminMedia() {
           title: editTitle.trim(),
           description: editDescription.trim() || null,
           category: editCategory,
+          card_size: editCardSize,
           placement: editPlacements,
           thumbnail_url: editThumbnailUrl.trim() || null,
           is_published: editPublished,
@@ -742,6 +758,20 @@ function AdminMedia() {
 
           </label>
 
+          <label className="admin-media-field">
+  Card size
+  <select
+    value={cardSize}
+    onChange={(event) => setCardSize(event.target.value)}
+  >
+    {cardSizeOptions.map((option) => (
+      <option key={option.value} value={option.value}>
+        {option.label}
+      </option>
+    ))}
+  </select>
+</label>
+
           <label className="admin-media-field admin-media-full">
 
             Description
@@ -885,6 +915,22 @@ function AdminMedia() {
                 {categories.map((option) => <option key={option} value={option}>{option}</option>)}
               </select>
             </label>
+
+
+<label className="admin-media-field">
+  Card size
+  <select
+    value={editCardSize}
+    onChange={(event) => setEditCardSize(event.target.value)}
+  >
+    {cardSizeOptions.map((option) => (
+      <option key={option.value} value={option.value}>
+        {option.label}
+      </option>
+    ))}
+  </select>
+</label>
+
             <label className="admin-media-field admin-media-full">
               Description
               <textarea value={editDescription} onChange={(event) => setEditDescription(event.target.value)} rows={3} maxLength={2000} />
