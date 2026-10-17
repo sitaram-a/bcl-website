@@ -303,7 +303,7 @@ function Media() {
           <div className="media-emblem-ring">
            <div className="media-emblem">
   <img
-    src="src/assets/logo/bcl-cricket-logo.png"
+    src="/assets/bcl-cricket-logo-BZutZKje.png"
     alt="Baharagora Champions League logo"
     className="media-bcl-logo"
   />
