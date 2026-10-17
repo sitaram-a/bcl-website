@@ -480,72 +480,63 @@ useEffect(() => {
   </div>
 
 
-  {/* ================= HERO SLIDE 3 — AUCTION COMPLETED ================= */}
-  <div
-    className={
-      activeHeroSlide === 2
-        ? "home-hero-slide active"
-        : "home-hero-slide"
-    }
-  >
+{/* ================= HERO SLIDE 3 — THE ROAD TO GLORY ================= */}
+<div
+  className={
+    activeHeroSlide === 2
+      ? "home-hero-slide active"
+      : "home-hero-slide"
+  }
+>
+  <img
+    src="/media/photos/posters/season5_start_from.png"
+    alt="BCL Season 5 — The Road to Glory"
+    className="home-hero-image"
+  />
 
-    <img
-      src="/media/photos/posters/bcl_poster.png"
-      alt="BCL Cricket Auction 2026"
-      className="home-hero-image"
-    />
+  <div className="home-hero-overlay"></div>
 
- {/* <AntigravityBackground /> */}
-
-    <div className="home-hero-overlay"></div>
-
-    <div className="home-hero-content auction_sec" >
-
-      <div className="home-hero-kicker">
-        BCL CRICKET 2026
-      </div>
-
-      <h1>
-        AUCTION <span>COMPLETED</span>
-      </h1>
-
-      <div className="home-hero-sports">
-        🏆 TEAMS REVEALED
-      </div>
-
-      <p className="home-hero-description">
-        The BCL Season 5 auction has been successfully completed.
-        Teams and player selections are now complete.
-      </p>
-
-      <div className="home-hero-schedule">
-
-        <div className="home-hero-schedule-card">
-          <strong>📅 DATE</strong>
-          <span>27 SEPTEMBER 2026</span>
-        </div>
-
-        <div className="home-hero-schedule-card">
-          <strong>📍 VENUE</strong>
-          <span>BIDYANATH PALACE</span>
-        </div>
-
-      </div>
-
-      <div className="home-hero-actions">
-
-        <Link
-          to="/cricket"
-          className="home-hero-btn home-hero-btn-cricket"
-        >
-          🏏 View Cricket Teams
-        </Link>
-
-      </div>
-
+  <div className="home-hero-content auction_sec">
+    <div className="home-hero-kicker">
+      BAHARAGORA CHAMPIONS LEAGUE
     </div>
 
+    <h1>
+      THE ROAD <span>TO GLORY</span>
+    </h1>
+
+    <div className="home-hero-sports">
+      🏏 CRICKET • 🏆 CHAMPIONSHIP
+    </div>
+
+    <p className="home-hero-description">
+      Eight teams. One trophy. A battle for glory.
+      Get ready for the excitement of BCL Season 5!
+    </p>
+
+    <div className="home-hero-schedule">
+      <div className="home-hero-schedule-card">
+        <strong>🏏 THE TEAMS</strong>
+        <span>READY FOR BATTLE</span>
+      </div>
+
+      <div className="home-hero-schedule-card">
+        <strong>🏆 THE MISSION</strong>
+        <span>WIN THE TITLE</span>
+      </div>
+    </div>
+
+    <div className="home-hero-actions">
+      <Link
+        to="/cricket"
+        className="home-hero-btn home-hero-btn-cricket"
+      >
+        🏏 Explore Cricket
+      </Link>
+    </div>
   </div>
+</div>
+
 
 
   {/* ================= HERO NAVIGATION ================= */}

@@ -301,9 +301,13 @@ function Media() {
 
         <div className="media-hero-emblem" aria-hidden="true">
           <div className="media-emblem-ring">
-            <Trophy size={56} strokeWidth={1.1} />
-            <span>BCL</span>
-            <small>SEASON 05</small>
+           <div className="media-emblem">
+  <img
+    src="src/assets/logo/bcl-cricket-logo.png"
+    alt="Baharagora Champions League logo"
+    className="media-bcl-logo"
+  />
+</div>
           </div>
         </div>
 
