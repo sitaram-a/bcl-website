@@ -35,6 +35,7 @@ import AdminLiveScores from "../pages/admin/AdminLiveScores";
 import AdminCricketTeams from "../pages/admin/AdminCricketTeams";
 import AdminCricketPlayers from "../pages/admin/AdminCricketPlayers";
 import AdminMedia from "../pages/admin/AdminMedia";
+import AdminUsers from "../pages/admin/AdminUsers";
 
 function Results() {
   return <h1>Results</h1>;
@@ -49,6 +50,8 @@ function AppRoutes() {
 {/* Protected admin routes */}
 <Route element={<AdminRoute />}>
   <Route path="/admin" element={<AdminDashboard />} />
+
+<Route path="/admin/users" element={<AdminUsers />} />
 
   <Route
   path="/admin/cricket-teams"

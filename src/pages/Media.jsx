@@ -62,6 +62,7 @@ function Media() {
   const [activeVideo, setActiveVideo] = useState(null);
   const [supabaseMedia, setSupabaseMedia] = useState([]);
   const [mediaLoading, setMediaLoading] = useState(true);
+  
 
   useEffect(() => {
     let cancelled = false;
@@ -79,8 +80,21 @@ function Media() {
           .contains("placement", ["media"])
           .order("created_at", { ascending: false });
 
+        console.log("[BCL Media] Supabase error:", error);
+        console.log("[BCL Media] Returned rows:", data?.length ?? 0);
+        console.log("[BCL Media] Data:", data);
+
         if (error) throw error;
         if (cancelled) return;
+
+        const { data: userResult, error: userError } =
+  await supabase.auth.getUser();
+
+console.log(
+  "[BCL Media] User:",
+  userResult?.user ? "authenticated" : "anonymous"
+);
+console.log("[BCL Media] Auth check error:", userError);
 
         const mapped = (data || [])
           .filter((item) => item.public_url)
@@ -239,6 +253,8 @@ function Media() {
       ? size
       : "square";
   };
+
+  
 
   return (
     <main className="media-page">

@@ -17,4 +17,5 @@ export const homePosters = [
 { id: 16, title: "Team Gajraj", src: "/media/photos/player-auction-list/Gajraj-Chakulia.jpeg", category: "Teams" },
 { id: 17, title: "RR Thunder Star", src: "/media/photos/player-auction-list/RR-Thunder-Star.jpeg", category: "Teams" },
 { id: 18, title: "REMEMBER THE DATE", src: "/media/photos/posters/REMEMBER_THE_ DATE.jpg", category: "Teams" },
+{ id: 19, title: "50rs cash prize for every catch", src: "https://ngflfcxmlpquiooyiqap.supabase.co/storage/v1/object/public/bcl-media/fc32b1d3-d5f6-4b82-9d4c-c226240dbbc1/1792658898028-72cc97e8-8a15-4e6f-af23-29906539f9a0-50rs_catch_prize_for_every_catch.jpg", category: "Teams" },
 ];

@@ -5,6 +5,7 @@ import { supabase } from "../../lib/supabase";
 import {
   LayoutDashboard,
   Users,
+  UserCog,
   Trophy,
   CalendarDays,
   CalendarClock,
@@ -25,6 +26,14 @@ const adminSections = [
     path: "/registration",
     label: "Manage Teams",
   },
+  {
+  title: "User Management",
+  description:
+    "View registered users, review account details, and manage user access securely.",
+  icon: UserCog,
+  path: "/admin/users",
+  label: "Manage Users",
+},
   {
     title: "Football Matches",
     description: "View football fixtures, results, and standings.",
@@ -118,6 +127,11 @@ const handleSignOut = async () => {
           <Link to="/admin" className="admin-nav-link active">
             <LayoutDashboard size={19} />
             Dashboard
+          </Link>
+
+          <Link to="/admin/users" className="admin-nav-link">
+          <UserCog size={19} />
+          User Management
           </Link>
 
           <Link to="/registration" className="admin-nav-link">
