@@ -36,6 +36,7 @@ import AdminCricketTeams from "../pages/admin/AdminCricketTeams";
 import AdminCricketPlayers from "../pages/admin/AdminCricketPlayers";
 import AdminMedia from "../pages/admin/AdminMedia";
 import AdminUsers from "../pages/admin/AdminUsers";
+import AdminPosters from "../pages/admin/AdminPosters";
 
 function Results() {
   return <h1>Results</h1>;
@@ -73,6 +74,7 @@ function AppRoutes() {
   />
 
   <Route path="/admin/media" element={<AdminMedia />} />
+  <Route path="/admin/posters" element={<AdminPosters />} />
 </Route>
 
 <Route path="/admin/login" element={<AdminLogin />} />

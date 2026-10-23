@@ -1,0 +1,366 @@
+
+.poster-admin-page {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 32px 24px 56px;
+  color: #172033;
+}
+
+.poster-admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.poster-admin-header h1 {
+  margin: 4px 0 8px;
+  font-size: clamp(26px, 4vw, 36px);
+  color: #f0fdf4;
+}
+
+.poster-admin-eyebrow {
+  margin: 0;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.poster-admin-subtitle {
+  margin: 0;
+  color: #64748b;
+}
+
+.poster-admin-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border: 1px solid #dbe2ea;
+  border-radius: 8px;
+  color: #f0fdf4;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.poster-admin-back:hover {
+  background: #f1f5f9;
+  color: #172033;
+}
+
+.poster-admin-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.poster-admin-stats > div {
+  padding: 20px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.poster-admin-stats span,
+.poster-admin-stats strong {
+  display: block;
+}
+
+.poster-admin-stats span {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.poster-admin-stats strong {
+  margin-top: 8px;
+  font-size: 28px;
+}
+
+.poster-admin-form-section,
+.poster-admin-list-section {
+  margin-bottom: 30px;
+  padding: 24px;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  background: #fff;
+}
+
+.poster-admin-section-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.poster-admin-section-heading h2 {
+  margin: 0;
+  font-size: 21px;
+}
+
+.poster-admin-refresh {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  padding: 8px 12px;
+  border: 1px solid #dbe2ea;
+  border-radius: 7px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.poster-admin-form {
+  display: grid;
+  gap: 18px;
+}
+
+.poster-admin-form > label,
+.poster-admin-form-row > label {
+  display: grid;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.poster-admin-form input:not([type="checkbox"]),
+.poster-admin-form select {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #fff;
+  color: #172033;
+  font: inherit;
+  font-weight: 400;
+}
+
+.poster-admin-form input:focus,
+.poster-admin-form select:focus {
+  outline: 2px solid #93c5fd;
+  outline-offset: 1px;
+}
+
+.poster-admin-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.poster-admin-checkbox {
+  display: flex !important;
+  align-items: center;
+  gap: 10px !important;
+  font-weight: 500 !important;
+}
+
+.poster-admin-checkbox input {
+  width: 18px;
+  height: 18px;
+}
+
+.poster-admin-preview {
+  display: grid;
+  gap: 10px;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.poster-admin-preview img {
+  display: block;
+  width: min(100%, 380px);
+  max-height: 300px;
+  object-fit: contain;
+  object-position: left center;
+  border-radius: 8px;
+  background: #f1f5f9;
+}
+
+.poster-admin-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.poster-admin-form-actions button,
+.poster-admin-card-actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 10px 13px;
+  border: 1px solid #dbe2ea;
+  border-radius: 8px;
+  background: #fff;
+  color: #172033;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.poster-admin-form-actions button:first-child {
+  border-color: #172033;
+  background: #172033;
+  color: #fff;
+}
+
+.poster-admin-form-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.poster-admin-form-actions .poster-admin-cancel {
+  background: #f8fafc;
+  color: #172033;
+}
+
+.poster-admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.poster-admin-card {
+  overflow: hidden;
+  min-width: 0;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.poster-admin-image-wrap {
+  position: relative;
+  height: 210px;
+  background: #f1f5f9;
+}
+
+.poster-admin-image-wrap img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.poster-admin-status-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 5px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.poster-admin-status-badge.published {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.poster-admin-status-badge.hidden {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.poster-admin-card-content {
+  padding: 15px;
+}
+
+.poster-admin-card-content h3 {
+  margin: 0 0 8px;
+  overflow-wrap: anywhere;
+  font-size: 16px;
+}
+
+.poster-admin-card-content p {
+  margin: 0 0 14px;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.poster-admin-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.poster-admin-card-actions button:hover,
+.poster-admin-refresh:hover {
+  background: #f1f5f9;
+}
+
+.poster-admin-card-actions .poster-admin-delete {
+  color: #b91c1c;
+}
+
+.poster-admin-message {
+  margin: 0 0 20px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  overflow-wrap: anywhere;
+}
+
+.poster-admin-message.error {
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+.poster-admin-message.success {
+  background: #f0fdf4;
+  color: #166534;
+}
+
+.poster-admin-empty,
+.poster-admin-status {
+  padding: 24px;
+  color: #64748b;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .poster-admin-page {
+    padding: 22px 14px 40px;
+  }
+
+  .poster-admin-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .poster-admin-stats {
+    gap: 8px;
+  }
+
+  .poster-admin-stats > div {
+    padding: 12px;
+  }
+
+  .poster-admin-stats span {
+    font-size: 12px;
+  }
+
+  .poster-admin-stats strong {
+    font-size: 23px;
+  }
+
+  .poster-admin-form-section,
+  .poster-admin-list-section {
+    padding: 16px;
+  }
+
+  .poster-admin-form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .poster-admin-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .poster-admin-image-wrap {
+    height: 240px;
+  }
+}

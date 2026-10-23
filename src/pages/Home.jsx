@@ -6,7 +6,8 @@ import cricketLogo from "../assets/logo/bcl-cricket-logo.png";
 import cricketball from "../assets/icons/cricket-ball.png";
 import { Download, Eye } from "lucide-react";
 import { registerVisitorAndGetCount } from "../lib/visitorCounter";
-import { homePosters } from "../data/home/posters";
+// import { homePosters } from "../data/home/posters";
+import { getHomePosters } from "../services/siteContentService";
 import { bclVideos } from "../data/home/videos";
 
 import { advertisements } from "../data/advertisements/advertisements";
@@ -45,9 +46,42 @@ function Home() {
 const [showAdvertisement, setShowAdvertisement] = useState(false);
 const [currentAdvertisementIndex, setCurrentAdvertisementIndex] = useState(0);
 const [activeVideo, setActiveVideo] = useState(null);
+// const [activePoster, setActivePoster] = useState(null);
+// const [activePosterIndex, setActivePosterIndex] = useState(0);
+
+const [homePosters, setHomePosters] = useState([]);
 const [activePoster, setActivePoster] = useState(null);
 const [activePosterIndex, setActivePosterIndex] = useState(0);
+const [postersLoading, setPostersLoading] = useState(true);
 const [activeHeroSlide, setActiveHeroSlide] = useState(0);
+
+
+useEffect(() => {
+  let cancelled = false;
+
+  async function loadPosters() {
+    try {
+      const posters = await getHomePosters();
+
+      if (!cancelled) {
+        setHomePosters(posters);
+        setActivePosterIndex(0);
+      }
+    } catch (error) {
+      console.error("Failed to load homepage posters:", error);
+    } finally {
+      if (!cancelled) {
+        setPostersLoading(false);
+      }
+    }
+  }
+
+  loadPosters();
+
+  return () => {
+    cancelled = true;
+  };
+}, []);
 
 const nextPoster = () => {
   setActivePosterIndex((currentIndex) =>
@@ -63,6 +97,7 @@ const previousPoster = () => {
   );
 };
 
+// Automatically change posters every 5 seconds
 useEffect(() => {
   if (homePosters.length <= 1) return;
 
@@ -73,7 +108,7 @@ useEffect(() => {
   }, 5000);
 
   return () => clearInterval(posterInterval);
-}, []);
+}, [homePosters.length]);
 
 
 useEffect(() => {

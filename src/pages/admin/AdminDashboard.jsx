@@ -15,6 +15,7 @@ import {
   LogOut,
   Radio,
   Image,
+  Images,
 } from "lucide-react";
 import "./AdminDashboard.css";
 
@@ -94,6 +95,15 @@ const adminSections = [
   label: "Manage Media",
 },
 
+{
+  title: "Poster Management",
+  description:
+    "Add, edit, reorder, publish, hide, and delete homepage posters.",
+  icon: Images,
+  path: "/admin/posters",
+  label: "Manage Posters",
+},
+
 ];
 
 
@@ -168,6 +178,12 @@ const handleSignOut = async () => {
           <Image size={19} />
           Media Management
           </Link>
+
+          <Link to="/admin/posters" className="admin-nav-link">
+          <Images size={19} />
+          Poster Management
+          </Link>
+          
         </nav>
 
         <div className="admin-sidebar-note">
