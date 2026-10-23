@@ -471,3 +471,119 @@
     min-width: 130px;
   }
 }
+
+
+.admin-users-header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-users-create-button,
+.admin-users-create-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 10px 16px;
+  border: 1px solid #166534;
+  border-radius: 9px;
+  background: #166534;
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.admin-users-create-button:disabled,
+.admin-users-create-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.admin-users-create-panel {
+  margin: 20px 0;
+  padding: 22px;
+  border: 1px solid var(--border-color, #e5e7eb);
+  border-radius: 14px;
+  background: var(--card-background, #fff);
+}
+
+.admin-users-create-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.admin-users-create-heading h2 {
+  margin: 0 0 6px;
+}
+
+.admin-users-create-heading p,
+.admin-users-create-note {
+  color: #64748b;
+  font-size: 13px;
+}
+
+.admin-users-create-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.admin-users-create-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.admin-users-create-form label {
+  display: grid;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.admin-users-create-form input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 400;
+}
+
+.admin-users-create-note {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+
+.admin-users-create-submit {
+  justify-self: start;
+}
+
+@media (max-width: 640px) {
+  .admin-users-header-actions {
+    width: 100%;
+  }
+
+  .admin-users-create-form {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .admin-users-create-panel {
+    padding: 16px;
+  }
+}

@@ -388,3 +388,46 @@
   }
 
 }
+
+
+.cricket-season-info {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin: 28px 0 20px;
+}
+
+.cricket-season-info > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.cricket-season-info span {
+  font-size: 11px;
+  letter-spacing: 1px;
+  opacity: 0.75;
+}
+
+.cricket-season-info strong {
+  font-size: 16px;
+}
+
+.cricket-season-note {
+  line-height: 1.7;
+  margin: 18px 0 24px;
+}
+
+@media (max-width: 600px) {
+  .cricket-season-info {
+    grid-template-columns: 1fr;
+  }
+
+  .cricket-season-info > div {
+    padding: 14px;
+  }
+}

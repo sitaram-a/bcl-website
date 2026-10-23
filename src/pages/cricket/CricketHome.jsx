@@ -218,7 +218,7 @@ function CricketHome() {
           </p>
         )}
 
-        {/* MATCH CENTER */}
+        MATCH CENTER
         <section className="cricket-home-section">
           <div className="cricket-section-heading">
             <div>
@@ -281,60 +281,37 @@ function CricketHome() {
               )}
             </div>
 
-            {/* LATEST RESULT — EXISTING LOCAL DATA */}
-            <div className="cricket-home-match-card">
-              <div className="cricket-home-match-header">
-                <span>🏆 LATEST RESULT</span>
-                <span className="cricket-finished-label">FINISHED</span>
-              </div>
+            
+{/* LATEST RESULT — TOURNAMENT STARTS 25 OCTOBER */}
+<div className="cricket-home-match-card">
+  <div className="cricket-home-match-header">
+    <span>🏆 LATEST RESULT</span>
+    <span className="cricket-finished-label">COMING SOON</span>
+  </div>
 
-              {latestResult ? (
-                <>
-                  <div className="cricket-home-match-date">
-                    {latestResult.date}
-                  </div>
+  <div className="cricket-home-empty">
+    <div style={{ fontSize: "42px", marginBottom: "12px" }}>
+      🏏
+    </div>
 
-                  <div className="cricket-home-result">
-                    <div>
-                      <strong>
-                        {getTeam(latestResult.team1Id)?.short_name || "TBD"}
-                      </strong>
-                      <span>
-                        {getTeam(latestResult.team1Id)?.name || "Team TBD"}
-                      </span>
-                      <b>{latestResult.score1}</b>
-                    </div>
+    <h3 style={{ marginBottom: "10px" }}>
+      BCL Cricket Starts 25 October
+    </h3>
 
-                    <div className="cricket-result-vs">VS</div>
+    <p style={{ lineHeight: "1.7", marginBottom: "18px" }}>
+      Match results will appear here once the tournament begins.
+      Stay tuned for scores and match updates!
+    </p>
 
-                    <div>
-                      <strong>
-                        {getTeam(latestResult.team2Id)?.short_name || "TBD"}
-                      </strong>
-                      <span>
-                        {getTeam(latestResult.team2Id)?.name || "Team TBD"}
-                      </span>
-                      <b>{latestResult.score2}</b>
-                    </div>
-                  </div>
+    <Link
+      to="/cricket/fixtures"
+      className="cricket-home-card-button"
+    >
+      View Fixtures →
+    </Link>
+  </div>
+</div>
 
-                  <div className="cricket-home-venue">
-                    📍 {latestResult.venue}
-                  </div>
-
-                  <Link
-                    to="/cricket/results"
-                    className="cricket-home-card-button"
-                  >
-                    View Results →
-                  </Link>
-                </>
-              ) : (
-                <div className="cricket-home-empty">
-                  No completed matches
-                </div>
-              )}
-            </div>
           </div>
         </section>
 

@@ -13,6 +13,8 @@ import {
   Clock3,
   ShieldPlus,
   ShieldMinus,
+  UserPlus,
+  X,
 } from "lucide-react";
 import { supabase } from "../../lib/supabase";
 import "./AdminUsers.css";
@@ -39,63 +41,67 @@ export default function AdminUsers() {
   const [currentUserId, setCurrentUserId] = useState(null);
   const [actionLoadingId, setActionLoadingId] = useState(null);
 
+const [showCreateForm, setShowCreateForm] = useState(false);
+const [newUserEmail, setNewUserEmail] = useState("");
+const [newUserPassword, setNewUserPassword] = useState("");
+const [creatingUser, setCreatingUser] = useState(false);
   
   
-const testRoleFunction = async () => {
-  setErrorMessage("");
-  setSuccessMessage("");
+// const testRoleFunction = async () => {
+//   setErrorMessage("");
+//   setSuccessMessage("");
 
-  try {
-    const {
-      data: { session },
-      error: sessionError,
-    } = await supabase.auth.getSession();
+//   try {
+//     const {
+//       data: { session },
+//       error: sessionError,
+//     } = await supabase.auth.getSession();
 
-    if (sessionError) throw sessionError;
-    if (!session) throw new Error("Please sign in first.");
+//     if (sessionError) throw sessionError;
+//     if (!session) throw new Error("Please sign in first.");
 
-    const { data, error } = await supabase.functions.invoke(
-      "manage-user-role",
-      {
-        body: {
-          user_id: "00000000-0000-4000-8000-000000000000",
-          action: "grant",
-        },
-        headers: {
-          Authorization: `Bearer ${session.access_token}`,
-        },
-      }
-    );
+//     const { data, error } = await supabase.functions.invoke(
+//       "manage-user-role",
+//       {
+//         body: {
+//           user_id: "00000000-0000-4000-8000-000000000000",
+//           action: "grant",
+//         },
+//         headers: {
+//           Authorization: `Bearer ${session.access_token}`,
+//         },
+//       }
+//     );
 
-    const status = error?.context?.status;
+//     const status = error?.context?.status;
 
-    if (status === 404) {
-      setSuccessMessage(
-        "Authorization test passed: the function rejected the nonexistent user (HTTP 404). No role was changed."
-      );
-      return;
-    }
+//     if (status === 404) {
+//       setSuccessMessage(
+//         "Authorization test passed: the function rejected the nonexistent user (HTTP 404). No role was changed."
+//       );
+//       return;
+//     }
 
-    if (error) {
-      throw new Error(
-        `Test returned HTTP ${status ?? "unknown"}: ${error.message}`
-      );
-    }
+//     if (error) {
+//       throw new Error(
+//         `Test returned HTTP ${status ?? "unknown"}: ${error.message}`
+//       );
+//     }
 
-    if (data?.success === false && /not found/i.test(data.error || "")) {
-      setSuccessMessage(
-        "Authorization test passed: the function rejected the nonexistent user. No role was changed."
-      );
-      return;
-    }
+//     if (data?.success === false && /not found/i.test(data.error || "")) {
+//       setSuccessMessage(
+//         "Authorization test passed: the function rejected the nonexistent user. No role was changed."
+//       );
+//       return;
+//     }
 
-    throw new Error(
-      "Unexpected response. Do not attempt any role changes; inspect the function logs."
-    );
-  } catch (error) {
-    setErrorMessage(error.message || "Authorization test failed.");
-  }
-};
+//     throw new Error(
+//       "Unexpected response. Do not attempt any role changes; inspect the function logs."
+//     );
+//   } catch (error) {
+//     setErrorMessage(error.message || "Authorization test failed.");
+//   }
+// };
 
 
 
@@ -209,6 +215,135 @@ const testRoleFunction = async () => {
     }
   };
 
+  
+const handleConfirmEmail = async (user) => {
+  const confirmed = window.confirm(
+    `Confirm the email for ${user.email}? This will allow the account to sign in without email verification.`
+  );
+
+  if (!confirmed) return;
+
+  setActionLoadingId(user.id);
+  setErrorMessage("");
+  setSuccessMessage("");
+
+  try {
+    const {
+      data: { session },
+      error: sessionError,
+    } = await supabase.auth.getSession();
+
+    if (sessionError || !session?.access_token) {
+      throw new Error("Your session has expired. Please log in again.");
+    }
+
+    const { data, error } = await supabase.functions.invoke(
+      "create-user",
+      {
+        body: {
+          action: "confirm",
+          user_id: user.id,
+        },
+        headers: {
+          Authorization: `Bearer ${session.access_token}`,
+        },
+      }
+    );
+
+    if (error) {
+      throw new Error(
+        data?.error || error.message || "Could not confirm the email."
+      );
+    }
+
+    if (!data?.success) {
+      throw new Error(data?.error || "Could not confirm the email.");
+    }
+
+    setSuccessMessage(`Email confirmed for ${user.email}.`);
+    await loadUsers();
+  } catch (error) {
+    setErrorMessage(
+      error instanceof Error
+        ? error.message
+        : "An unexpected error occurred."
+    );
+  } finally {
+    setActionLoadingId(null);
+  }
+};
+
+
+  
+const handleCreateUser = async (event) => {
+  event.preventDefault();
+  setErrorMessage("");
+  setSuccessMessage("");
+
+  const email = newUserEmail.trim();
+
+  if (!email || newUserPassword.length < 12) {
+    setErrorMessage("Enter an email and a password of at least 12 characters.");
+    return;
+  }
+
+  setCreatingUser(true);
+
+  try {
+    const {
+      data: { session },
+      error: sessionError,
+    } = await supabase.auth.getSession();
+
+    if (sessionError) throw sessionError;
+    if (!session) {
+      throw new Error("Your session has expired. Please sign in again.");
+    }
+
+    const { data, error } = await supabase.functions.invoke("create-user", {
+      body: {
+        email,
+        password: newUserPassword,
+      },
+      headers: {
+        Authorization: `Bearer ${session.access_token}`,
+      },
+    });
+
+    if (error) {
+      let message = error.message || "Unable to create the account.";
+
+      try {
+        const response = error.context;
+        if (response && typeof response.json === "function") {
+          const details = await response.json();
+          if (details?.error) message = details.error;
+        }
+      } catch {
+        // Keep the original error message.
+      }
+
+      throw new Error(message);
+    }
+
+    if (!data?.success) {
+      throw new Error(data?.error || "Unable to create the account.");
+    }
+
+    setSuccessMessage(data.message || "User account created successfully.");
+    setNewUserEmail("");
+    setNewUserPassword("");
+    setShowCreateForm(false);
+
+    await loadUsers();
+  } catch (error) {
+    setErrorMessage(error.message || "Unable to create the account.");
+  } finally {
+    setCreatingUser(false);
+  }
+};
+
+
   const filteredUsers = useMemo(() => {
     const query = searchTerm.trim().toLowerCase();
 
@@ -237,30 +372,116 @@ const testRoleFunction = async () => {
           <p>View registered accounts and administrator access.</p>
         </div>
 
-        <button
-          className="admin-users-refresh"
-          type="button"
-          onClick={loadUsers}
-          disabled={loading || Boolean(actionLoadingId)}
-        >
-          <RefreshCw
-            size={16}
-            className={loading ? "admin-users-spinning" : ""}
-          />
-          {loading ? "Loading…" : "Refresh"}
-        </button>
+       
+<div className="admin-users-header-actions">
+  <button
+    type="button"
+    className="admin-users-create-button"
+    onClick={() => {
+      setErrorMessage("");
+      setSuccessMessage("");
+      setShowCreateForm((previous) => !previous);
+    }}
+    disabled={loading || creatingUser}
+  >
+    <UserPlus size={16} />
+    Create User
+  </button>
+
+  <button
+    className="admin-users-refresh"
+    type="button"
+    onClick={loadUsers}
+    disabled={loading || Boolean(actionLoadingId) || creatingUser}
+  >
+    <RefreshCw
+      size={16}
+      className={loading ? "admin-users-spinning" : ""}
+    />
+    {loading ? "Loading…" : "Refresh"}
+  </button>
+</div>
+
 
                 
-        <button
+        {/* <button
         type="button"
         className="admin-users-refresh"
         onClick={testRoleFunction}
         disabled={loading || Boolean(actionLoadingId)}
         >
         Test role endpoint
-        </button>
+        </button> */}
 
       </header>
+
+      
+{showCreateForm && (
+  <section className="admin-users-create-panel">
+    <div className="admin-users-create-heading">
+      <div>
+        <h2>Create a user account</h2>
+        <p>New accounts receive normal User access by default.</p>
+      </div>
+
+      <button
+        type="button"
+        className="admin-users-create-close"
+        onClick={() => setShowCreateForm(false)}
+        disabled={creatingUser}
+        aria-label="Close create user form"
+      >
+        <X size={18} />
+      </button>
+    </div>
+
+    <form onSubmit={handleCreateUser} className="admin-users-create-form">
+      <label>
+        Email address
+        <input
+          type="email"
+          value={newUserEmail}
+          onChange={(event) => setNewUserEmail(event.target.value)}
+          placeholder="test@example.com"
+          autoComplete="off"
+          maxLength={254}
+          required
+          disabled={creatingUser}
+        />
+      </label>
+
+      <label>
+        Temporary password
+        <input
+          type="password"
+          value={newUserPassword}
+          onChange={(event) => setNewUserPassword(event.target.value)}
+          placeholder="At least 12 characters"
+          autoComplete="new-password"
+          minLength={12}
+          maxLength={128}
+          required
+          disabled={creatingUser}
+        />
+      </label>
+
+      <p className="admin-users-create-note">
+        Keep the password private. Email verification may be required before
+        the new user can sign in.
+      </p>
+
+      <button
+        type="submit"
+        className="admin-users-create-submit"
+        disabled={creatingUser}
+      >
+        <UserPlus size={16} />
+        {creatingUser ? "Creating account…" : "Create account"}
+      </button>
+    </form>
+  </section>
+)}
+
 
       {errorMessage && (
         <div className="admin-users-error" role="alert">
@@ -430,6 +651,21 @@ const testRoleFunction = async () => {
                               {isBusy ? "Updating…" : "Grant Admin"}
                             </button>
                           )}
+
+                                                
+                        {user.email_confirmed_at == null && (
+                        <button
+                            type="button"
+                            className="admin-users-role-action"
+                            onClick={() => handleConfirmEmail(user)}
+                            disabled={actionLoadingId === user.id}
+                        >
+                            {actionLoadingId === user.id
+                            ? "Processing..."
+                            : "Confirm Email"}
+                        </button>
+                        )}
+
                         </div>
                       </td>
                     </tr>
