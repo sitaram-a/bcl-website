@@ -30,6 +30,7 @@
 .website-pages-header h1 {
   margin: 6px 0;
   font-size: clamp(28px, 4vw, 38px);
+  color: #e2e8f0;
 }
 
 .website-pages-header p,
@@ -51,7 +52,11 @@
 
 .website-pages-back {
   border: 1px solid #dbe2ea;
-  color: #172033;
+  color: #ffffff;
+}
+.website-pages-back:hover{
+    color: #172033;
+    background-color: #ffffff;
 }
 
 .website-pages-panel {
@@ -202,4 +207,34 @@
   .website-page-actions {
     justify-content: flex-start;
   }
+}
+
+/* React Quill layout adjustments in Admin Panel */
+.quill-label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.quill-wrapper {
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  overflow: hidden;
+}
+
+.quill-wrapper .ql-container {
+  min-height: 220px;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.quill-wrapper .ql-toolbar {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid #cbd5e1;
+  background: #f8fafc;
 }

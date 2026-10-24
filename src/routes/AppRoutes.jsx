@@ -23,6 +23,7 @@ import CricketLiveScore from "../pages/cricket/CricketLiveScore";
 import CricketMatchDetails from "../pages/cricket/CricketMatchDetails";
 import CricketSeason4History from "../pages/cricket/CricketSeason4History";
 import CricketSeason4Match from "../pages/cricket/CricketSeason4Match";
+import DynamicPage from "../pages/DynamicPage";
 
 import Media from "../pages/Media";
 import Registration from "../pages/Registration";
@@ -90,6 +91,7 @@ function AppRoutes() {
 </Route>
 
 <Route path="/:slug" element={<WebsitePage />} />
+<Route path="/pages/:slug" element={<DynamicPage />} />
 <Route path="/admin/login" element={<AdminLogin />} />
 
 

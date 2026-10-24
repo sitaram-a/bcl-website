@@ -1,8 +1,10 @@
 
 import { useEffect, useState } from "react";
+
+import { ArrowLeft, Plus, Save, Pencil, Trash2, Eye, EyeOff, RefreshCw } from "lucide-react";
 import { supabase } from "../../lib/supabase";
 import "./AdminHomepageContent.css";
-
+import { Link } from "react-router-dom";
 const EMPTY_FORM = {
   content_type: "hero_slide",
   title: "",
@@ -162,6 +164,10 @@ function AdminHomepageContent() {
           <h1>Homepage Content</h1>
           <p>Manage hero slides, announcements and featured content.</p>
         </div>
+
+        <Link to="/admin" className="website-pages-back">
+          <ArrowLeft size={17} /> Dashboard
+        </Link>
       </header>
 
       {notice && (
