@@ -1,0 +1,78 @@
+.website-page {
+  min-height: 100vh;
+  /* Lighter glow in the center fading smoothly into the deep #0b1020 tone */
+  background: radial-gradient(circle at center, #1b264f 0%, #0b1020 70%);
+  background-attachment: fixed;
+  color: #172033;
+}
+
+.website-page-main {
+  width: min(100% - 32px, 1100px);
+  min-height: auto;
+  margin: 0 auto;
+  padding: 48px 0 72px;
+  background: transparent; /* Removes any conflicting background color blocks */
+}
+
+.website-page-article {
+  padding: clamp(28px, 5vw, 64px);
+  background: #ffffff;
+  border: 1px solid #e5e9f2;
+  border-radius: 18px;
+  box-shadow: 0 12px 36px rgba(20, 35, 70, 0.07);
+}
+
+.website-page-eyebrow {
+  margin: 0 0 14px;
+  color: #b45309;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.website-page-article h1 {
+  margin: 0 0 24px;
+  color: #12264a;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  line-height: 1.15;
+}
+
+.website-page-content {
+  color: #45516a;
+  font-size: 1.05rem;
+  line-height: 1.85;
+  overflow-wrap: anywhere;
+}
+
+.website-page-content p {
+  margin: 0 0 18px;
+}
+
+.website-page-message {
+  padding: 48px 20px;
+  text-align: center;
+}
+
+.website-page-home-link {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  background: #12264a;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .website-page-main {
+    width: calc(100% - 24px);
+    padding-top: 24px;
+  }
+
+  .website-page-article {
+    padding: 26px 22px;
+    border-radius: 14px;
+  }
+}

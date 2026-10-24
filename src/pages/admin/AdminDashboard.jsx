@@ -16,6 +16,7 @@ import {
   Radio,
   Image,
   Images,
+  FileText,
 } from "lucide-react";
 import "./AdminDashboard.css";
 
@@ -104,6 +105,24 @@ const adminSections = [
   label: "Manage Posters",
 },
 
+{
+  title: "Website Pages CMS",
+  description:
+    "Create, edit, publish, and manage About, Contact, Rules, and FAQ pages.",
+  icon: FileText,
+  path: "/admin/website-pages",
+  label: "Manage Website Pages",
+},
+
+{
+  title: "Homepage Content CMS",
+  description:
+    "Manage hero slides, announcements and featured content",
+  icon: ClipboardList,
+  path: "/admin/homepage-content",
+  label: "Manage homepage content",
+},
+
 ];
 
 
@@ -183,7 +202,7 @@ const handleSignOut = async () => {
           <Images size={19} />
           Poster Management
           </Link>
-          
+
         </nav>
 
         <div className="admin-sidebar-note">

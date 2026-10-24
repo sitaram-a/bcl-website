@@ -31,7 +31,8 @@ import { announcements } from "../data/home/announcements";
 
 import { sponsors } from "../data/sponsors/sponsors";
 import AntigravityBackground from "../components/home/AntigravityBackground.jsx";
-import PlacementMedia from "../components/media/PlacementMedia";
+// import PlacementMedia from "../components/media/PlacementMedia";
+import { getHomepageContent } from "../services/homepageContentService";
 import "./Home.css";
 
 function Home() {
@@ -54,7 +55,7 @@ const [activePoster, setActivePoster] = useState(null);
 const [activePosterIndex, setActivePosterIndex] = useState(0);
 const [postersLoading, setPostersLoading] = useState(true);
 const [activeHeroSlide, setActiveHeroSlide] = useState(0);
-
+const [cmsHeroSlides, setCmsHeroSlides] = useState([]);
 
 useEffect(() => {
   let cancelled = false;
@@ -82,6 +83,29 @@ useEffect(() => {
     cancelled = true;
   };
 }, []);
+
+useEffect(() => {
+  let cancelled = false;
+
+  async function loadHeroSlides() {
+    const slides = await getHomepageContent("hero_slide");
+
+    if (!cancelled) {
+      setCmsHeroSlides(slides);
+    }
+  }
+
+  loadHeroSlides();
+
+  return () => {
+    cancelled = true;
+  };
+}, [])
+const fallbackHeroSlideCount = 3;
+const heroSlideCount =
+  cmsHeroSlides.length > 0
+    ? cmsHeroSlides.length
+    : fallbackHeroSlideCount;
 
 const nextPoster = () => {
   setActivePosterIndex((currentIndex) =>
@@ -114,12 +138,12 @@ useEffect(() => {
 useEffect(() => {
   const heroInterval = setInterval(() => {
     setActiveHeroSlide((currentSlide) =>
-      (currentSlide + 1) % 3
+      (currentSlide + 1) % heroSlideCount
     );
   }, 12000);
 
   return () => clearInterval(heroInterval);
-}, []);
+}, [heroSlideCount]);
 
 useEffect(() => {
   const firstAdTimeout = setTimeout(() => {
@@ -309,7 +333,7 @@ const cricketLiveTeam2 = cricketLiveMatch
 
 
   
-  const tournamentDate = new Date("2026-10-25T00:00:00+05:30").getTime();
+  const tournamentDate = new Date("2026-10-25T10:00:00+05:30").getTime();
 
   const [timeLeft, setTimeLeft] = useState(() => {
     const difference = tournamentDate - Date.now();
@@ -370,6 +394,66 @@ useEffect(() => {
 {/* ================= BCL SEASON 5 HERO CAROUSEL ================= */}
 <section className="home-hero">
 
+    {cmsHeroSlides.length > 0 ? (
+    cmsHeroSlides.map((slide, index) => (
+      <div
+        key={slide.id}
+        className={
+          activeHeroSlide === index
+            ? "home-hero-slide active"
+            : "home-hero-slide"
+        }
+      >
+        {slide.media_url &&
+        /\.(mp4|webm)(\?.*)?$/i.test(slide.media_url) ? (
+          <video
+            className="home-hero-video"
+            src={slide.media_url}
+            autoPlay
+            muted
+            loop
+            playsInline
+          />
+        ) : slide.media_url ? (
+          <img
+            className="home-hero-image"
+            src={slide.media_url}
+            alt={slide.title || "BCL hero"}
+          />
+        ) : null}
+
+        <div className="home-hero-overlay"></div>
+
+        <div className="home-hero-content">
+          <div className="home-hero-kicker">
+            {slide.subtitle || "BAHARAGORA CHAMPIONS LEAGUE"}
+          </div>
+
+          <h1 className="home-cms-hero-title">
+  {slide.title}
+</h1>
+
+          {slide.description && (
+            <p className="home-hero-description">
+              {slide.description}
+            </p>
+          )}
+
+          {slide.button_text && (
+            <div className="home-hero-actions">
+              <Link
+                to={slide.button_url || "/cricket"}
+                className="home-hero-btn home-hero-btn-cricket"
+              >
+                {slide.button_text}
+              </Link>
+            </div>
+          )}
+        </div>
+      </div>
+    ))
+  ) : (
+<>
   {/* ================= HERO SLIDE 1 — VIDEO ================= */}
   <div
     className={
@@ -571,8 +655,8 @@ useEffect(() => {
     </div>
   </div>
 </div>
-
-
+</>
+ )}
 
   {/* ================= HERO NAVIGATION ================= */}
 
@@ -580,12 +664,12 @@ useEffect(() => {
     type="button"
     className="home-hero-arrow home-hero-arrow-left"
     onClick={() =>
-      setActiveHeroSlide((currentSlide) =>
-        currentSlide === 0
-          ? 2
-          : currentSlide - 1
-      )
-    }
+  setActiveHeroSlide((currentSlide) =>
+    currentSlide === 0
+      ? heroSlideCount - 1
+      : currentSlide - 1
+  )
+}
     aria-label="Previous hero slide"
   >
     ‹
@@ -595,12 +679,11 @@ useEffect(() => {
   <button
     type="button"
     className="home-hero-arrow home-hero-arrow-right"
-    onClick={() =>
-      setActiveHeroSlide(
-        (currentSlide) =>
-          (currentSlide + 1) % 3
-      )
-    }
+   onClick={() =>
+  setActiveHeroSlide(
+    (currentSlide) => (currentSlide + 1) % heroSlideCount
+  )
+}
     aria-label="Next hero slide"
   >
     ›
@@ -611,7 +694,7 @@ useEffect(() => {
 
   <div className="home-hero-indicators">
 
-    {[0, 1, 2].map((index) => (
+    {Array.from({ length: heroSlideCount }, (_, index) => index).map((index) => (
       <button
         key={index}
         type="button"

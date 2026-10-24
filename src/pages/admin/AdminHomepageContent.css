@@ -1,0 +1,159 @@
+
+.admin-home-content {
+  width: min(100% - 32px, 1100px);
+  margin: 0 auto;
+  padding: 32px 0 64px;
+  color: #172033;
+}
+
+.admin-home-content-header {
+  margin-bottom: 24px;
+}
+
+.admin-home-content-eyebrow {
+  margin-bottom: 8px;
+  color: #b45309;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.admin-home-content-header h1 {
+  margin: 0 0 10px;
+  font-size: clamp(28px, 4vw, 38px);
+}
+
+.admin-home-content-form,
+.admin-home-content-list {
+  margin-bottom: 28px;
+  padding: 24px;
+  background: #fff;
+  border: 1px solid #e3e8f1;
+  border-radius: 14px;
+}
+
+.admin-home-content-form h2,
+.admin-home-content-list h2 {
+  margin-top: 0;
+}
+
+.admin-home-content-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 18px;
+  font-weight: 600;
+}
+
+.admin-home-content-form input:not([type="checkbox"]),
+.admin-home-content-form select,
+.admin-home-content-form textarea {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #fff;
+  color: #172033;
+  font: inherit;
+}
+
+.admin-home-content-form textarea {
+  resize: vertical;
+}
+
+.admin-home-content-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.admin-home-content-form .admin-home-content-checkbox {
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-home-content-checkbox input {
+  width: 18px;
+  height: 18px;
+}
+
+.admin-home-content-actions,
+.admin-home-content-item-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.admin-home-content button {
+  padding: 10px 15px;
+  border: 0;
+  border-radius: 8px;
+  background: #12366b;
+  color: white;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-home-content button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.admin-home-content button.secondary {
+  background: #e8edf5;
+  color: #24334d;
+}
+
+.admin-home-content button.danger {
+  background: #b42318;
+}
+
+.admin-home-content-notice {
+  margin: 16px 0;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: #eef4ff;
+  overflow-wrap: anywhere;
+}
+
+.admin-home-content-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 18px 0;
+  border-top: 1px solid #e5eaf2;
+}
+
+.admin-home-content-item h3 {
+  margin: 8px 0;
+}
+
+.admin-home-content-item p {
+  margin: 6px 0;
+}
+
+.admin-home-content-item small {
+  color: #64748b;
+}
+
+.admin-home-content-type {
+  color: #9a5200;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+@media (max-width: 700px) {
+  .admin-home-content-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .admin-home-content-item {
+    flex-direction: column;
+  }
+}

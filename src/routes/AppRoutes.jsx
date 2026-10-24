@@ -26,6 +26,7 @@ import CricketSeason4Match from "../pages/cricket/CricketSeason4Match";
 
 import Media from "../pages/Media";
 import Registration from "../pages/Registration";
+import WebsitePage from "../pages/WebsitePage";
 
 import AdminDashboard from "../pages/admin/AdminDashboard";
 import AdminLogin from "../pages/admin/AdminLogin";
@@ -37,6 +38,8 @@ import AdminCricketPlayers from "../pages/admin/AdminCricketPlayers";
 import AdminMedia from "../pages/admin/AdminMedia";
 import AdminUsers from "../pages/admin/AdminUsers";
 import AdminPosters from "../pages/admin/AdminPosters";
+import AdminWebsitePages from "../pages/admin/AdminWebsitePages";
+import AdminHomepageContent from "../pages/admin/AdminHomepageContent";
 
 function Results() {
   return <h1>Results</h1>;
@@ -75,8 +78,18 @@ function AppRoutes() {
 
   <Route path="/admin/media" element={<AdminMedia />} />
   <Route path="/admin/posters" element={<AdminPosters />} />
+  <Route
+  path="/admin/website-pages"
+  element={<AdminWebsitePages />}
+/>
+<Route
+  path="/admin/homepage-content"
+  element={<AdminHomepageContent />}
+/>
+
 </Route>
 
+<Route path="/:slug" element={<WebsitePage />} />
 <Route path="/admin/login" element={<AdminLogin />} />
 
 

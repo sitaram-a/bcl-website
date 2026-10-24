@@ -56,6 +56,10 @@ function Navbar() {
             Home
           </Link>
 
+          <Link to="/about" className="nav-link">
+            About
+          </Link>
+
           {/* SPORTS DROPDOWN */}
           <div className="sports-dropdown">
 
@@ -134,6 +138,10 @@ function Navbar() {
 
           <Link to="/" onClick={closeMobileMenu}>
             Home
+          </Link>
+
+          <Link to="/about" className="nav-link">
+            About
           </Link>
 
           <button

@@ -1,0 +1,3405 @@
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+import footballLogo from "../assets/logo/bcl-football-logo.png";
+import cricketLogo from "../assets/logo/bcl-cricket-logo.png";
+import cricketball from "../assets/icons/cricket-ball.png";
+import { Download, Eye } from "lucide-react";
+import { registerVisitorAndGetCount } from "../lib/visitorCounter";
+// import { homePosters } from "../data/home/posters";
+import { getHomePosters } from "../services/siteContentService";
+import { bclVideos } from "../data/home/videos";
+
+import { advertisements } from "../data/advertisements/advertisements";
+
+import { footballTeams } from "../data/football/teams";
+import { cricketTeams } from "../data/cricket/teams";
+
+import { footballFixtures } from "../data/football/fixtures";
+import { cricketFixtures } from "../data/cricket/fixtures";
+
+import { footballResults } from "../data/football/results";
+import { cricketResults } from "../data/cricket/results";
+
+import { footballStandings } from "../data/football/standings";
+import { cricketStandings } from "../data/cricket/standings";
+
+import { footballMatches } from "../data/football/footballMatches";
+import { cricketLiveMatches } from "../data/cricket/liveMatches";
+import { announcements } from "../data/home/announcements";
+
+
+import { sponsors } from "../data/sponsors/sponsors";
+import AntigravityBackground from "../components/home/AntigravityBackground.jsx";
+import PlacementMedia from "../components/media/PlacementMedia";
+import "./Home.css";
+
+function Home() {
+
+    const titleSponsor = sponsors.find(
+  (sponsor) =>
+    sponsor.active &&
+    sponsor.level === "TITLE SPONSOR"
+);
+
+// const [showAdvertisement, setShowAdvertisement] = useState(true);
+const [showAdvertisement, setShowAdvertisement] = useState(false);
+const [currentAdvertisementIndex, setCurrentAdvertisementIndex] = useState(0);
+const [activeVideo, setActiveVideo] = useState(null);
+const [activePoster, setActivePoster] = useState(null);
+const [activePosterIndex, setActivePosterIndex] = useState(0);
+
+const [activeHeroSlide, setActiveHeroSlide] = useState(0);
+
+const nextPoster = () => {
+  setActivePosterIndex((currentIndex) =>
+    (currentIndex + 1) % homePosters.length
+  );
+};
+
+const previousPoster = () => {
+  setActivePosterIndex((currentIndex) =>
+    currentIndex === 0
+      ? homePosters.length - 1
+      : currentIndex - 1
+  );
+};
+
+useEffect(() => {
+  if (homePosters.length <= 1) return;
+
+  const posterInterval = setInterval(() => {
+    setActivePosterIndex((currentIndex) =>
+      (currentIndex + 1) % homePosters.length
+    );
+  }, 5000);
+
+  return () => clearInterval(posterInterval);
+}, []);
+
+
+useEffect(() => {
+  const heroInterval = setInterval(() => {
+    setActiveHeroSlide((currentSlide) =>
+      (currentSlide + 1) % 3
+    );
+  }, 12000);
+
+  return () => clearInterval(heroInterval);
+}, []);
+
+useEffect(() => {
+  const firstAdTimeout = setTimeout(() => {
+    setShowAdvertisement(true);
+  }, 30 * 1000);
+
+  const adInterval = setInterval(() => {
+    setCurrentAdvertisementIndex((currentIndex) => {
+      const activeAdvertisements = advertisements.filter(
+        (advertisement) => advertisement.active
+      );
+
+      if (activeAdvertisements.length === 0) {
+        return 0;
+      }
+
+      return (currentIndex + 1) % activeAdvertisements.length;
+    });
+
+    setShowAdvertisement(true);
+  }, 300 * 1000);
+
+  return () => {
+    clearTimeout(firstAdTimeout);
+    clearInterval(adInterval);
+  };
+}, []);
+
+
+const activeAdvertisements = advertisements.filter(
+  (advertisement) => advertisement.active
+);
+
+const currentAdvertisement =
+  activeAdvertisements[currentAdvertisementIndex];
+  /* =====================================================
+     LIVE MATCH DATA
+  ===================================================== */
+
+  const footballLiveMatch = footballMatches.find(
+    (match) => match.status === "LIVE"
+  );
+
+  const cricketLiveMatch = cricketLiveMatches.find(
+    (match) => match.status === "LIVE"
+  );
+
+  /* =====================================================
+     TEAM HELPERS
+  ===================================================== */
+
+  const getFootballTeam = (teamId) =>
+    footballTeams.find((team) => team.id === teamId);
+
+  const getCricketTeam = (teamId) =>
+    cricketTeams.find((team) => team.id === teamId);
+
+
+const getCricketFixtureTeam = (teamName) => {
+  const normalizedName = teamName?.trim().toUpperCase();
+
+  const aliases = {
+    "BAHARAGORA KINGS": ["BAHARAGORA KINGS", "BAHARAGORA"],
+    "BAHARAGORA ROYALS": ["BAHARAGORA ROYALS", "ROYALS"],
+    "DIGBARDA PITCH PANTHERS": [
+      "DIGBARDA PITCH PANTHERS",
+      "PANTHERS",
+    ],
+    "TEAM GAJRAJ": ["TEAM GAJRAJ", "GAJRAJ", "GAJRAJ CKU"],
+    "KESHARDA SUPER KINGS": [
+      "KESHARDA SUPER KINGS",
+      "KESHARDA SUPER KING",
+      "KESHARDA",
+    ],
+    "KHANDAMOUDA WARRIORS": [
+      "KHANDAMOUDA WARRIORS",
+      "KHANDAMOUDA WARRIOR",
+      "KHANDAMOUDA",
+    ],
+    "SAKARA ROYALS": ["SAKARA ROYALS", "SAKRA ROYALS", "SAKARA"],
+    "RR THUNDER STAR": ["RR THUNDER STAR", "RR THUNDER", "R.R THUNDER"],
+  };
+
+  return cricketTeams.find((team) => {
+    const canonicalName = team.name?.trim().toUpperCase();
+    const shortName = team.shortName?.trim().toUpperCase();
+
+    return (
+      canonicalName === normalizedName ||
+      shortName === normalizedName ||
+      (aliases[canonicalName] || []).includes(normalizedName)
+    );
+  });
+};
+
+    
+  const activeAnnouncement = announcements.find((a) => a.active);
+
+const footballLiveTeam1 = footballLiveMatch
+  ? getFootballTeam(footballLiveMatch.team1Id)
+  : null;
+
+const footballLiveTeam2 = footballLiveMatch
+  ? getFootballTeam(footballLiveMatch.team2Id)
+  : null;
+
+const cricketLiveTeam1 = cricketLiveMatch
+  ? getCricketTeam(cricketLiveMatch.team1Id)
+  : null;
+
+const cricketLiveTeam2 = cricketLiveMatch
+  ? getCricketTeam(cricketLiveMatch.team2Id)
+  : null;
+
+  /* =====================================================
+     UPCOMING MATCHES
+  ===================================================== */
+
+  const upcomingFootballMatches = footballMatches.filter(
+    (match) => match.status === "UPCOMING"
+  );
+
+  const footballTeamCount = footballTeams.length;
+  const cricketTeamCount = cricketTeams.length;
+  const totalTeams = footballTeamCount + cricketTeamCount;
+
+
+  /* =====================================================
+     SCROLL-REVEAL ANIMATIONS
+  ===================================================== */
+
+  useEffect(() => {
+    const revealSelectors = [
+      ".home-section-heading",
+      ".home-tournament-item",
+      ".home-stat-card",
+      ".home-sport-card",
+      ".home-live-match-card",
+      ".live-match-card",
+      ".home-upcoming-card",
+      ".home-result-card",
+      ".home-standing-card",
+      ".home-media-card",
+      ".home-follow-card",
+      ".home-cta-content",
+    ];
+
+    const elements = Array.from(
+      document.querySelectorAll(revealSelectors.join(","))
+    );
+
+    if (elements.length === 0) return;
+
+    const staggerCounters = new Map();
+
+    elements.forEach((el) => {
+      el.classList.add("reveal-up");
+
+      const parent = el.parentElement;
+      const count = staggerCounters.get(parent) ?? 0;
+      staggerCounters.set(parent, count + 1);
+
+      el.style.transitionDelay = `${Math.min(count, 6) * 0.09}s`;
+    });
+
+    if (!("IntersectionObserver" in window)) {
+      elements.forEach((el) => el.classList.add("in-view"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -60px 0px" }
+    );
+
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
+
+  
+  const tournamentDate = new Date("2026-10-25T00:00:00+05:30").getTime();
+
+  const [timeLeft, setTimeLeft] = useState(() => {
+    const difference = tournamentDate - Date.now();
+    return Math.max(0, difference);
+  });
+
+  useEffect(() => {
+    const updateCountdown = () => {
+      setTimeLeft(Math.max(0, tournamentDate - Date.now()));
+    };
+
+    updateCountdown();
+
+    const timer = setInterval(updateCountdown, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+  const hours = Math.floor(
+    (timeLeft / (1000 * 60 * 60)) % 24
+  );
+  const minutes = Math.floor((timeLeft / (1000 * 60)) % 60);
+  const seconds = Math.floor((timeLeft / 1000) % 60);
+
+
+const [visitorCount, setVisitorCount] = useState(null);
+
+useEffect(() => {
+  let active = true;
+
+  registerVisitorAndGetCount()
+    .then((count) => {
+      if (active) {
+        setVisitorCount(count);
+      }
+    })
+    .catch((error) => {
+      console.error("Failed to load BCL visitor count:", error);
+    });
+
+  return () => {
+    active = false;
+  };
+}, []);
+
+
+  return (
+    <div className="home-page">
+
+ {/* ONE shared animation for the entire page */}
+  <AntigravityBackground />
+      {/* <div className="home-antigravity-layer">
+    <AntigravityBackground />
+  </div> */}
+
+     {/* ================= HERO SECTION ================= */}
+{/* ================= BCL SEASON 5 HERO CAROUSEL ================= */}
+<section className="home-hero">
+
+  {/* ================= HERO SLIDE 1 — VIDEO ================= */}
+  <div
+    className={
+      activeHeroSlide === 0
+        ? "home-hero-slide active"
+        : "home-hero-slide"
+    }
+  >
+
+    <video
+      className="home-hero-video"
+      src="/media/videos/bcl-season-5-promo.mp4"
+      autoPlay
+      muted
+      loop
+      playsInline
+      preload="auto"
+    />
+
+ {/* <AntigravityBackground /> */}
+
+    <div className="home-hero-overlay"></div>
+
+    <div className="home-hero-content">
+
+      <div className="home-hero-kicker">
+        BAHARAGORA CHAMPIONS LEAGUE
+      </div>
+
+      <h1>
+        SEASON <span>5</span>
+      </h1>
+
+      <div className="home-hero-sports">
+        🏏 CRICKET
+      </div>
+
+      <p className="home-hero-description">
+        The battle for the BCL Season 5 championship begins
+        on 25 October at Baharagora Stadium.
+      </p>
+
+      <div className="home-hero-actions">
+
+        <Link
+          to="/cricket"
+          className="home-hero-btn home-hero-btn-cricket"
+        >
+          🏏 Explore Cricket
+        </Link>
+
+      </div>
+
+      <div className="home-hero-features">
+
+        <div className="home-hero-feature">
+          <strong>🏏 SEASON 5</strong>
+          <span>BCL Cricket</span>
+        </div>
+
+        <div className="home-hero-feature">
+          <strong>📅 25 OCTOBER</strong>
+          <span>Tournament Starts</span>
+        </div>
+
+        <div className="home-hero-feature">
+          <strong>📍 BAHARAGORA</strong>
+          <span>Stadium</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  {/* ================= HERO SLIDE 2 — SEASON 5 ================= */}
+  <div
+    className={
+      activeHeroSlide === 1
+        ? "home-hero-slide active"
+        : "home-hero-slide"
+    }
+  >
+
+    <img
+      src="/media/photos/posters/season5_start_from.png"
+      alt="Baharagora Champions League Season 5"
+      className="home-hero-image"
+    />
+
+     {/* <AntigravityBackground /> */}
+
+    <div className="home-hero-overlay"></div>
+
+    <div className="home-hero-content">
+
+      <div className="home-hero-kicker">
+        BAHARAGORA CHAMPIONS LEAGUE
+      </div>
+
+      <h1>
+        BCL <span>SEASON 5</span>
+      </h1>
+
+      <div className="home-hero-sports">
+        🏏 CRICKET
+      </div>
+
+      <p className="home-hero-description">
+        Eight teams. Four match days. One championship.
+        Get ready for the biggest cricket battle in Baharagora.
+      </p>
+
+      <div className="home-hero-schedule">
+
+        <div className="home-hero-schedule-card">
+          <strong>GROUP A</strong>
+          <span>25 & 27 OCTOBER</span>
+        </div>
+
+        <div className="home-hero-schedule-card">
+          <strong>GROUP B</strong>
+          <span>26 & 28 OCTOBER</span>
+        </div>
+
+      </div>
+
+      <div className="home-hero-actions">
+
+        <Link
+          to="/cricket"
+          className="home-hero-btn home-hero-btn-cricket"
+        >
+          🏏 View Cricket
+        </Link>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+{/* ================= HERO SLIDE 3 — THE ROAD TO GLORY ================= */}
+<div
+  className={
+    activeHeroSlide === 2
+      ? "home-hero-slide active"
+      : "home-hero-slide"
+  }
+>
+  <img
+    src="/media/photos/posters/season5_start_from.png"
+    alt="BCL Season 5 — The Road to Glory"
+    className="home-hero-image"
+  />
+
+  <div className="home-hero-overlay"></div>
+
+  <div className="home-hero-content auction_sec">
+    <div className="home-hero-kicker">
+      BAHARAGORA CHAMPIONS LEAGUE
+    </div>
+
+    <h1>
+      THE ROAD <span>TO GLORY</span>
+    </h1>
+
+    <div className="home-hero-sports">
+      🏏 CRICKET • 🏆 CHAMPIONSHIP
+    </div>
+
+    <p className="home-hero-description">
+      Eight teams. One trophy. A battle for glory.
+      Get ready for the excitement of BCL Season 5!
+    </p>
+
+    <div className="home-hero-schedule">
+      <div className="home-hero-schedule-card">
+        <strong>🏏 THE TEAMS</strong>
+        <span>READY FOR BATTLE</span>
+      </div>
+
+      <div className="home-hero-schedule-card">
+        <strong>🏆 THE MISSION</strong>
+        <span>WIN THE TITLE</span>
+      </div>
+    </div>
+
+    <div className="home-hero-actions">
+      <Link
+        to="/cricket"
+        className="home-hero-btn home-hero-btn-cricket"
+      >
+        🏏 Explore Cricket
+      </Link>
+    </div>
+  </div>
+</div>
+
+
+
+  {/* ================= HERO NAVIGATION ================= */}
+
+  <button
+    type="button"
+    className="home-hero-arrow home-hero-arrow-left"
+    onClick={() =>
+      setActiveHeroSlide((currentSlide) =>
+        currentSlide === 0
+          ? 2
+          : currentSlide - 1
+      )
+    }
+    aria-label="Previous hero slide"
+  >
+    ‹
+  </button>
+
+
+  <button
+    type="button"
+    className="home-hero-arrow home-hero-arrow-right"
+    onClick={() =>
+      setActiveHeroSlide(
+        (currentSlide) =>
+          (currentSlide + 1) % 3
+      )
+    }
+    aria-label="Next hero slide"
+  >
+    ›
+  </button>
+
+
+  {/* ================= HERO DOTS ================= */}
+
+  <div className="home-hero-indicators">
+
+    {[0, 1, 2].map((index) => (
+      <button
+        key={index}
+        type="button"
+        className={
+          activeHeroSlide === index
+            ? "home-hero-indicator active"
+            : "home-hero-indicator"
+        }
+        onClick={() => setActiveHeroSlide(index)}
+        aria-label={`Show hero slide ${index + 1}`}
+        aria-current={
+          activeHeroSlide === index
+            ? "true"
+            : undefined
+        }
+      />
+    ))}
+
+  </div>
+
+</section>
+
+{/* ================= BCL SEASON 5 TEAM POSTERS ================= */}
+<section className="home-poster-showcase">
+
+{/* <div className="home-poster-particles">
+    <AntigravityBackground />
+  </div> */}
+
+  <div className="home-section-container">
+
+    <div className="home-section-heading">
+      <span>BCL SEASON 5</span>
+
+      <h2>Teams & Franchise Posters</h2>
+
+      <p>
+        Explore the official BCL 2026 franchises, team posters
+        and the grand auction details.
+      </p>
+    </div>
+
+
+    <div className="home-poster-carousel">
+
+      <button
+        type="button"
+        className="home-poster-arrow home-poster-arrow-left"
+        onClick={previousPoster}
+        aria-label="Previous poster"
+      >
+        ‹
+      </button>
+
+
+      <div className="home-poster-track">
+
+        {homePosters.map((poster, index) => {
+
+          const position =
+            index === activePosterIndex
+              ? "active"
+              : index ===
+                  (activePosterIndex - 1 + homePosters.length) %
+                    homePosters.length
+                ? "previous"
+                : index ===
+                    (activePosterIndex + 1) %
+                      homePosters.length
+                  ? "next"
+                  : "hidden";
+
+          return (
+            <div
+              key={poster.id}
+              className={`home-poster-slide ${position}`}
+              onClick={() => {
+                if (position === "active") {
+                  setActivePoster(poster);
+                } else if (position === "previous") {
+                  previousPoster();
+                } else if (position === "next") {
+                  nextPoster();
+                }
+              }}
+            >
+
+              <div className="home-poster-card">
+
+                <img
+                  src={poster.src}
+                  alt={poster.title}
+                  loading="lazy"
+                />
+
+                <div className="home-poster-overlay">
+
+                  <span className="home-poster-category">
+                    {poster.category}
+                  </span>
+
+                  <h3>
+                    {poster.title}
+                  </h3>
+
+                  <span className="home-poster-view">
+                    View Poster →
+                  </span>
+                    <a
+                    href={poster.src}
+                    download
+                    className="home-poster-download"
+                    onClick={(event) => event.stopPropagation()}
+                    aria-label={`Download ${poster.title}`}
+                    title="Download Poster"
+                    >
+                    <Download size={18} strokeWidth={2.2} />
+                    </a>
+
+                </div>
+
+              </div>
+
+            </div>
+          );
+        })}
+
+      </div>
+
+
+      <button
+        type="button"
+        className="home-poster-arrow home-poster-arrow-right"
+        onClick={nextPoster}
+        aria-label="Next poster"
+      >
+        ›
+      </button>
+
+    </div>
+
+
+    {/* Carousel dots */}
+
+    <div className="home-poster-dots">
+
+      {homePosters.map((poster, index) => (
+        <button
+          key={poster.id}
+          type="button"
+          className={
+            index === activePosterIndex
+              ? "home-poster-dot active"
+              : "home-poster-dot"
+          }
+          onClick={() => setActivePosterIndex(index)}
+          aria-label={`Show ${poster.title}`}
+          aria-current={
+            index === activePosterIndex
+              ? "true"
+              : undefined
+          }
+        />
+      ))}
+
+    </div>
+
+
+    <div className="home-poster-counter">
+      <strong>
+        {activePosterIndex + 1}
+      </strong>
+      <span>/</span>
+      <span>{homePosters.length}</span>
+    </div>
+
+  </div>
+
+</section>
+
+{/* ================= BCL MAIN SPONSOR ================= */}
+
+{titleSponsor && (
+  <section className="home-main-sponsor">
+    <div className="home-section-container">
+
+      <div className="home-main-sponsor-card">
+
+        <div className="home-main-sponsor-label">
+          <span>🏆</span>
+          <strong>POWERED BY</strong>
+        </div>
+
+        <div className="home-main-sponsor-content">
+
+          <div className="home-main-sponsor-logo">
+            {titleSponsor.logo ? (
+              <img
+                src={titleSponsor.logo}
+                alt={`${titleSponsor.name} logo`}
+              />
+            ) : (
+              <>
+                <span>YOUR</span>
+                <strong>SPONSOR</strong>
+              </>
+            )}
+          </div>
+
+          <div className="home-main-sponsor-text">
+
+            <span>
+              {titleSponsor.level}
+            </span>
+
+            <h2>
+              {titleSponsor.name}
+            </h2>
+
+            <p>
+              Proudly supporting the Baharagora
+              Champions League 2026.
+            </p>
+
+          </div>
+
+          {titleSponsor.website &&
+            titleSponsor.website !== "#" && (
+              <a
+                href={titleSponsor.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="home-main-sponsor-button"
+              >
+                Visit Sponsor →
+              </a>
+            )}
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+)}
+
+
+
+     {/* ================= TOURNAMENT INFO STRIP ================= */}
+<section className="home-tournament-info" style={{display:"none"}}>
+  <div className="home-tournament-info-container">
+
+    <div className="home-tournament-item">
+      <div className="home-tournament-icon">🏆</div>
+      <div>
+        <strong>BCL 2026</strong>
+        <span>Bahargora Champions League</span>
+      </div>
+    </div>
+
+    <div className="home-tournament-item">
+      <div className="home-tournament-icon">⚽</div>
+      <div>
+        <strong>FOOTBALL</strong>
+        <span>Championship</span>
+      </div>
+    </div>
+
+    <div className="home-tournament-item">
+      <div className="home-tournament-icon">🏏</div>
+      <div>
+        <strong>CRICKET</strong>
+        <span>Championship</span>
+      </div>
+    </div>
+
+    <div className="home-tournament-item">
+      <div className="home-tournament-icon">👥</div>
+      <div>
+        <strong>8 TEAMS</strong>
+        <span>Competing</span>
+      </div>
+    </div>
+
+    <div className="home-tournament-item">
+      <div className="home-tournament-icon">📅</div>
+      <div>
+        <strong>2026</strong>
+        <span>Tournament Season</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{/* ================= TOURNAMENT STATISTICS ================= */}
+<section className="home-tournament-stats">
+  <div className="home-section-container">
+
+    <div className="home-tournament-stats-grid">
+
+      <div className="home-stat-card">
+        <div className="home-stat-icon">🏆</div>
+
+        <div className="home-stat-content">
+          <strong>BCL 2026</strong>
+          <span>Tournament</span>
+        </div>
+      </div>
+
+
+      <div className="home-stat-card">
+        <div className="home-stat-icon">⚽</div>
+
+        <div className="home-stat-content">
+          <strong>{footballTeamCount}</strong>
+          <span>Football Teams</span>
+        </div>
+      </div>
+
+
+      <div className="home-stat-card">
+        <div className="home-stat-icon">🏏</div>
+
+        <div className="home-stat-content">
+          <strong>{cricketTeamCount}</strong>
+          <span>Cricket Teams</span>
+        </div>
+      </div>
+
+
+      <div className="home-stat-card">
+        <div className="home-stat-icon">👥</div>
+
+        <div className="home-stat-content">
+          <strong>{totalTeams}</strong>
+          <span>Total Teams</span>
+        </div>
+      </div>
+
+
+      <div className="home-stat-card">
+        <div className="home-stat-icon">📅</div>
+
+        <div className="home-stat-content">
+          <strong>2026</strong>
+          <span>Season</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+
+
+{/* ================= BCL VIDEOS (Hotstar style) ================= */}
+<section className="home-video-section">
+  
+  {/* <div className="home-video-particles">
+    <AntigravityBackground />
+  </div> */}
+
+  <div className="home-section-container">
+
+    <div className="home-video-heading">
+      <div>
+        <span className="home-video-kicker">▶️ WATCH BCL</span>
+        <h2>Latest Videos</h2>
+      </div>
+      <Link to="/media" className="home-video-view-all">
+        View All →
+      </Link>
+    </div>
+
+    <div className="home-video-row">
+      {bclVideos.map((video) => (
+        <div
+          className="home-video-card"
+          key={video.id}
+          onClick={() => setActiveVideo(video)}
+        >
+          <div className="home-video-thumb-wrap">
+            {video.thumbnail ? (
+              <img
+                src={video.thumbnail}
+                alt={video.title}
+                className="home-video-thumb"
+              />
+            ) : (
+              <video
+                className="home-video-thumb"
+                src={video.src}
+                muted
+                preload="metadata"
+              />
+            )}
+
+            <div className="home-video-play-overlay">
+              <span className="home-video-play-icon">▶</span>
+            </div>
+
+            {video.duration && (
+              <span className="home-video-duration">{video.duration}</span>
+            )}
+
+            <span className="home-video-category-badge">
+              {video.category}
+            </span>
+          </div>
+
+          <div className="home-video-info">
+            <h4>{video.title}</h4>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+{/* ================= VIDEO PLAYER MODAL ================= */}
+{activeVideo && (
+  <div
+    className="home-video-modal-overlay"
+    onClick={() => setActiveVideo(null)}
+  >
+    <div
+      className="home-video-modal"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <button
+        className="home-video-modal-close"
+        onClick={() => setActiveVideo(null)}
+        aria-label="Close video"
+      >
+        ×
+      </button>
+
+      <div className="home-video-modal-player">
+        {activeVideo.type === "youtube" ? (
+          <iframe
+            src={`https://www.youtube.com/embed/${activeVideo.youtubeId}?autoplay=1`}
+            title={activeVideo.title}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          />
+        ) : (
+          <video
+            src={activeVideo.src}
+            controls
+            autoPlay
+            playsInline
+          />
+        )}
+      </div>
+
+      <div className="home-video-modal-info">
+        <h3>{activeVideo.title}</h3>
+        <span>{activeVideo.category}</span>
+      </div>
+    </div>
+  </div>
+)}
+
+
+
+      {/* ================= SPORTS SECTION ================= */}
+<section className="home-sports-section">
+
+  <div className="home-section-container">
+
+    <div className="home-section-heading">
+      <span>EXPLORE BCL</span>
+      <h2 className="choose">Choose Your Sport</h2>
+      <p>
+        Follow all the action from the BCL Football and Cricket tournaments.
+      </p>
+    </div>
+
+
+    <div className="home-sports-grid">
+
+      {/* FOOTBALL CARD */}
+      <div className="home-sport-card home-sport-football">
+
+        <div className="home-sport-card-top">
+
+          <img
+            src={footballLogo}
+            alt="BCL Football"
+            className="home-sport-logo"
+          />
+
+          <div className="home-sport-badge">
+            ⚽ FOOTBALL
+          </div>
+
+        </div>
+
+
+        <div className="home-sport-card-content">
+
+          <h3>BCL Football</h3>
+
+          <p>
+            Follow live football matches, fixtures, results,
+            teams, players and league standings.
+          </p>
+
+
+          <div className="home-sport-features">
+
+            <span>🔴 Live Scores</span>
+            <span>📅 Fixtures</span>
+            <span>🏆 Results</span>
+            <span>📊 Standings</span>
+
+          </div>
+
+
+          <Link
+            to="/football"
+            className="home-sport-button"
+          >
+            Explore Football
+            <span>→</span>
+          </Link>
+
+        </div>
+
+      </div>
+
+
+      {/* CRICKET CARD */}
+      <div className="home-sport-card home-sport-cricket">
+
+        <div className="home-sport-card-top">
+
+          <img
+            src={cricketLogo}
+            alt="BCL Cricket"
+            className="home-sport-logo"
+          />
+
+          <div className="home-sport-badge">
+            🏏 CRICKET
+          </div>
+
+        </div>
+
+
+        <div className="home-sport-card-content">
+
+          <h3>BCL Cricket</h3>
+
+          <p>
+            Follow live cricket matches, fixtures, results,
+            teams, players and tournament standings.
+          </p>
+
+
+          <div className="home-sport-features">
+
+            <span>🔴 Live Scores</span>
+            <span>📅 Fixtures</span>
+            <span>🏆 Results</span>
+            <span>📊 Standings</span>
+
+          </div>
+
+
+          <Link
+            to="/cricket"
+            className="home-sport-button"
+          >
+            Explore Cricket
+            <span>→</span>
+          </Link>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+    {/*  ================= LIVE MATCHES =================
+<section className="home-live-highlight">
+
+  <div className="home-section-container">
+
+    <div className="home-live-heading">
+
+      <div>
+        <span className="home-live-kicker">
+          🔴 LIVE NOW
+        </span>
+
+        <h2>Live Matches</h2>
+
+        <p>
+          Follow the action from the BCL tournament.
+        </p>
+      </div>
+
+      <Link
+        to="/football/live-score"
+        className="home-live-view-all"
+      >
+        View Live Scores →
+      </Link>
+
+    </div>
+
+
+    <div className="home-live-highlight-grid">
+
+      {/* ================= FOOTBALL LIVE ================= */}
+      {/*{footballLiveMatch && (
+        <div className="home-live-match-card home-live-football">
+
+          <div className="home-live-card-header">
+
+            <span>⚽ FOOTBALL</span>
+
+            <strong>
+              🔴 LIVE
+            </strong>
+
+          </div>
+
+
+          <div className="home-live-teams">
+
+            <div className="home-live-team">
+
+              <strong>
+                {footballLiveTeam1?.name || "Team A"}
+              </strong>
+
+              <span>
+                {footballLiveMatch.score1 ?? 0}
+              </span>
+
+            </div>
+
+
+            <div className="home-live-vs">
+              VS
+            </div>
+
+
+            <div className="home-live-team">
+
+              <strong>
+                {footballLiveTeam2?.name || "Team B"}
+              </strong>
+
+              <span>
+                {footballLiveMatch.score2 ?? 0}
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div className="home-live-match-meta">
+
+            <span>
+              ⏱ {footballLiveMatch.minute ?? 0}'
+            </span>
+
+            <span>
+              🏟 {footballLiveMatch.venue}
+            </span>
+
+          </div>
+
+
+          <Link
+            to="/football/live-score"
+            className="home-live-score-button"
+          >
+            View Live Score →
+          </Link>
+
+        </div>
+      )}
+
+
+      {/* ================= CRICKET LIVE ================= */}
+       {/*{cricketLiveMatch && (
+        <div className="home-live-match-card home-live-cricket">
+
+          <div className="home-live-card-header">
+
+            <span>🏏 CRICKET</span>
+
+            <strong>
+              🔴 LIVE
+            </strong>
+
+          </div>
+
+
+          <div className="home-cricket-live-score">
+
+            <div className="home-cricket-team">
+
+              <strong>
+                {cricketLiveTeam1?.name || "Team A"}
+              </strong>
+
+              <span>
+                {cricketLiveMatch.innings?.[0]?.runs ?? 0}/
+                {cricketLiveMatch.innings?.[0]?.wickets ?? 0}
+              </span>
+
+              <small>
+                {cricketLiveMatch.innings?.[0]?.overs || "0.0"} overs
+              </small>
+
+            </div>
+
+
+            <div className="home-cricket-vs">
+              VS
+            </div>
+
+
+            <div className="home-cricket-team">
+
+              <strong>
+                {cricketLiveTeam2?.name || "Team B"}
+              </strong>
+
+              <span>
+                {cricketLiveMatch.innings?.[1]?.runs ?? 0}/
+                {cricketLiveMatch.innings?.[1]?.wickets ?? 0}
+              </span>
+
+              <small>
+                {cricketLiveMatch.innings?.[1]?.overs || "0.0"} overs
+              </small>
+
+            </div>
+
+          </div>
+
+
+          <div className="home-live-match-meta">
+
+            <span>
+              🏟 {cricketLiveMatch.venue}
+            </span>
+
+            <span>
+              🏏 Innings {cricketLiveMatch.currentInnings || 1}
+            </span>
+
+          </div>
+
+
+          <Link
+            to="/cricket/live-score"
+            className="home-live-score-button"
+          >
+            View Live Score →
+          </Link>
+
+        </div>
+      )}
+
+    </div>
+
+  </div>
+
+</section> */}
+
+
+{/* ================= BCL ADVERTISEMENT ================= */}
+
+{showAdvertisement && currentAdvertisement && (
+  <div className="home-ad-popup-overlay">
+
+    <div className="home-ad-popup">
+
+      <button
+        type="button"
+        className="home-ad-popup-close"
+        onClick={() => setShowAdvertisement(false)}
+        aria-label="Close advertisement"
+      >
+        ×
+      </button>
+
+      <div className="home-ad-popup-label">
+        ADVERTISEMENT
+      </div>
+
+      <a
+        href={currentAdvertisement.link}
+        className="home-ad-popup-link"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img
+          src={currentAdvertisement.image}
+          alt={`${currentAdvertisement.name} Advertisement`}
+          className="home-ad-popup-image"
+        />
+      </a>
+
+      {/* Advertisement Controls */}
+      {activeAdvertisements.length > 1 && (
+        <div className="home-ad-popup-controls">
+
+          <button
+            type="button"
+            className="home-ad-popup-nav"
+            onClick={() => {
+              setCurrentAdvertisementIndex((currentIndex) =>
+                currentIndex === 0
+                  ? activeAdvertisements.length - 1
+                  : currentIndex - 1
+              );
+            }}
+            aria-label="Previous advertisement"
+          >
+            ← Previous
+          </button>
+
+          <div className="home-ad-popup-dots">
+
+            {activeAdvertisements.map((advertisement, index) => (
+              <button
+                key={advertisement.id}
+                type="button"
+                className={
+                  index === currentAdvertisementIndex
+                    ? "home-ad-popup-dot active"
+                    : "home-ad-popup-dot"
+                }
+                onClick={() => {
+                  setCurrentAdvertisementIndex(index);
+                }}
+                aria-label={`Show advertisement ${index + 1}`}
+                aria-current={
+                  index === currentAdvertisementIndex
+                    ? "true"
+                    : undefined
+                }
+              >
+                <span></span>
+              </button>
+            ))}
+
+          </div>
+
+          <button
+            type="button"
+            className="home-ad-popup-nav"
+            onClick={() => {
+              setCurrentAdvertisementIndex((currentIndex) =>
+                (currentIndex + 1) %
+                activeAdvertisements.length
+              );
+            }}
+            aria-label="Next advertisement"
+          >
+            Next →
+          </button>
+
+        </div>
+      )}
+
+    </div>
+
+  </div>
+)}
+
+{/* ================= CRICKET AUCTION HIGHLIGHT ================= */}
+      {activeAnnouncement && (
+        <section className="live-section">
+
+          {/* <div className="home-section-particles">
+      <AntigravityBackground />
+    </div> */}
+          <div className="section-heading light-heading">
+            <span>UPCOMING EVENT</span>
+            <h2>{activeAnnouncement.title}</h2>
+          </div>
+
+          <div className="live-match-card" style={{ padding: "30px", textAlign: "center", background: "linear-gradient(135deg, #111 0%, #1f1f1f 100%)", color: "#fff", border: "1px solid rgba(255,215,0,0.3)" }}>
+            <div className="live-match-header" style={{ justifyContent: "center", marginBottom: "20px" }}>
+              <span className="live-badge" style={{ background: "#f59e0b", color: "#000", fontWeight: "bold" }}>
+                🔔 {activeAnnouncement.subtitle}
+              </span>
+            </div>
+
+            <h3 style={{ fontSize: "1.8rem", marginBottom: "10px", color: "#facc15" }}>
+              🏏 BCL Cricket Auction & Teams Reveal
+            </h3>
+            <p style={{ fontSize: "1.05rem", color: "#d1d5db", maxWidth: "600px", margin: "0 auto 20px auto" }}>
+              {activeAnnouncement.description}
+            </p>
+
+            <div style={{ display: "flex", justifyContent: "center", gap: "30px", flexWrap: "wrap", marginBottom: "25px", fontSize: "0.95rem" }}>
+              <div>📅 <strong>Date:</strong> 27 September 2026</div>
+              <div>📍 <strong>Venue:</strong> Bidyanath Palace</div>
+            </div>
+
+            <div style={{ marginTop: "15px" }}>
+              <Link to="/cricket" className="sport-button" style={{ background: "#f59e0b", color: "#000", padding: "10px 25px", borderRadius: "6px", fontWeight: "600", textDecoration: "none" }}>
+                View Cricket Teams →
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
+
+
+      {/* =================================================
+          LIVE MATCH STREAM
+      ================================================= */}
+
+      <section className="live-section">
+
+        {/* <div className="home-section-particles">
+    <AntigravityBackground />
+  </div> */}
+
+        <div className="section-heading light-heading">
+
+          <span>LIVE NOW</span>
+
+          <h2>
+            Live Match & Auction Stream
+          </h2>
+
+        </div>
+
+
+        <div className="live-match-card">
+
+          <div className="live-match-header">
+
+            <span className="live-badge">
+
+              <span className="live-dot"></span>
+
+              LIVE STREAM
+
+            </span>
+
+            <span className="match-type">
+              🏆 BCL Match Day
+            </span>
+
+          </div>
+
+
+          <div
+            className="home-youtube-container"
+            style={{
+              position: "relative",
+              width: "100%",
+              aspectRatio: "16/9",
+              background: "#000"
+            }}
+          >
+
+            <iframe
+              src="https://www.youtube.com/embed/ncuYbscxq9g?si=nxeayM-Xcli9LwCY"
+              title="BCL Live Stream"
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                border: 0
+              }}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+
+          </div>
+
+
+          <div
+            className="live-match-footer"
+            style={{ marginTop: "15px" }}
+          >
+
+            <span>
+              📍 Baharagora Stadium
+            </span>
+
+            <Link to="/media">
+              More Videos →
+            </Link>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      
+{/* ================= BCL COUNTDOWN TIMER ================= */}
+<section className="home-countdown-section">
+
+  {/* <div className="home-section-particles">
+    <AntigravityBackground />
+  </div> */}
+  <div className="home-countdown-content home-section-foreground">
+    <span className="home-countdown-eyebrow">
+      THE COUNTDOWN IS ON
+    </span>
+
+    <h2>BCL Cricket 2026</h2>
+
+    <p className="home-countdown-description">
+      The battle for BCL glory begins on 25 October!
+    </p>
+
+    {timeLeft > 0 ? (
+      <div className="home-countdown-timer">
+        <div className="home-countdown-unit">
+          <strong>{days.toString().padStart(2, "0")}</strong>
+          <span>Days</span>
+        </div>
+
+        <div className="home-countdown-unit">
+          <strong>{hours.toString().padStart(2, "0")}</strong>
+          <span>Hours</span>
+        </div>
+
+        <div className="home-countdown-unit">
+          <strong>{minutes.toString().padStart(2, "0")}</strong>
+          <span>Minutes</span>
+        </div>
+
+        <div className="home-countdown-unit">
+          <strong>{seconds.toString().padStart(2, "0")}</strong>
+          <span>Seconds</span>
+        </div>
+      </div>
+    ) : (
+      <p className="home-countdown-started">
+        The tournament has started!
+      </p>
+    )}
+
+    <p className="home-countdown-venue">
+      <span>📍</span> Baharagora Stadium
+    </p>
+  </div>
+</section>
+
+
+{/* ================= BCL CRICKET TEAMS ================= */}
+<section className="home-cricket-teams-section">
+  <div className="home-section-container">
+    <div className="home-section-heading home-cricket-teams-heading">
+      <div>
+        <span>MEET THE TEAMS</span>
+        <h2>BCL Cricket 2026 Teams</h2>
+        <p>
+          Eight teams. One trophy. The battle for BCL glory begins here.
+        </p>
+      </div>
+    </div>
+
+    <div className="home-cricket-teams-grid">
+      {cricketTeams.map((team) => (
+        <article className="home-cricket-team-card" key={team.id}>
+          <div className="home-cricket-team-logo-wrap">
+            <img
+              src={team.logo}
+              alt={`${team.name} logo`}
+              className="home-cricket-team-logo"
+              loading="lazy"
+            />
+          </div>
+
+          <h3>{team.name}</h3>
+
+          {team.city && (
+            <p className="home-cricket-team-city">
+              {team.city}
+            </p>
+          )}
+
+          <Link
+            to="/cricket/fixtures"
+            className="home-cricket-team-link"
+          >
+            View Fixtures <span>→</span>
+          </Link>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+
+{/* ================= BCL CRICKET 2026 BANNER ================= */}
+<section className="home-tournament-banner">
+  <div className="home-tournament-banner-content">
+    <span className="home-tournament-eyebrow">
+      🏏 THE BIGGEST CRICKET CELEBRATION
+    </span>
+
+    <h2>
+      BAHARAGORA <span>CHAMPIONS LEAGUE</span>
+    </h2>
+
+    <p className="home-tournament-edition">
+      BCL CRICKET 2026
+    </p>
+
+    <div className="home-tournament-details">
+      <div>
+        <span className="home-tournament-detail-icon">📅</span>
+        <div>
+          <strong>25–30 October 2026</strong>
+          <small>Tournament Dates</small>
+        </div>
+      </div>
+
+      <div>
+        <span className="home-tournament-detail-icon">🏟️</span>
+        <div>
+          <strong>Baharagora Stadium</strong>
+          <small>Match Venue</small>
+        </div>
+      </div>
+    </div>
+
+    <a href="/cricket/fixtures" className="home-tournament-cta">
+      EXPLORE FIXTURES <span>→</span>
+    </a>
+  </div>
+
+  <div className="home-tournament-decoration" aria-hidden="true">
+    <span> BCL </span>
+    <span>2026</span>
+  </div>
+</section>
+     
+{/* ================= UPCOMING MATCHES ================= */}
+<section className="home-upcoming-section">
+  <div className="home-section-container">
+    <div className="home-section-heading home-upcoming-heading">
+      <div>
+        <span>COMING UP</span>
+        <h2>Upcoming Matches</h2>
+        <p>
+          Don't miss the upcoming BCL Cricket 2026 matches.
+        </p>
+      </div>
+    </div>
+
+    <div className="home-upcoming-list">
+      {/* ================= CRICKET FIXTURES ================= */}
+      {cricketFixtures.length > 0 ? (
+        cricketFixtures.slice(0, 3).map((match) => (
+          <div
+            className="home-upcoming-card"
+            key={`cricket-${match.id}`}
+          >
+            <div className="home-upcoming-date">
+              <strong>{formatMatchDate(match.date)}</strong>
+              <span>{formatMatchTime(match.time)}</span>
+            </div>
+
+            <div className="home-upcoming-sport cricket">
+              🏏 CRICKET
+            </div>
+
+
+
+            
+<div className="home-upcoming-teams">
+  {(() => {
+    const team1 = getCricketFixtureTeam(match.team1);
+    const team2 = getCricketFixtureTeam(match.team2);
+
+    return (
+      <>
+        <div className="home-upcoming-team">
+          {team1?.logo && (
+            <img
+              src={team1.logo}
+              alt={`${team1.name} logo`}
+              className="home-upcoming-team-logo"
+            />
+          )}
+          <strong>{match.team1}</strong>
+        </div>
+
+        <span className="home-upcoming-vs">VS</span>
+
+        <div className="home-upcoming-team">
+          {team2?.logo && (
+            <img
+              src={team2.logo}
+              alt={`${team2.name} logo`}
+              className="home-upcoming-team-logo"
+            />
+          )}
+          <strong>{match.team2}</strong>
+        </div>
+      </>
+    );
+  })()}
+</div>
+
+            <div className="home-upcoming-venue">
+              🏟 {match.venue}
+            </div>
+
+            <Link
+              to="/cricket/fixtures"
+              className="home-upcoming-link"
+            >
+              View Fixture →
+            </Link>
+          </div>
+        ))
+      ) : (
+        <div className="empty-home-message">
+          <div style={{ fontSize: "36px", marginBottom: "10px" }}>
+            🏏
+          </div>
+
+          <h3>BCL Cricket 2026</h3>
+
+          <p>Tournament starts on 25 October 2026.</p>
+
+          <span>Fixtures will be announced soon.</span>
+        </div>
+      )}
+    </div>
+  </div>
+</section>
+
+
+      {/* ================= RESULTS ================= */}
+{/*<section className="home-results-section">
+
+  <div className="home-section-container">
+
+    <div className="home-section-heading">
+
+      <span>RECENT ACTION</span>
+
+      <h2>Latest Results</h2>
+
+      <p>
+        Check the latest completed BCL Football and Cricket matches.
+      </p>
+
+    </div>
+
+
+    <div className="home-results-grid">
+
+      {/* ================= FOOTBALL RESULT ================= */}
+
+       {/* {footballResults.slice(0, 1).map((result) => {
+
+        const team1 = getFootballTeam(result.team1Id);
+        const team2 = getFootballTeam(result.team2Id);
+
+        return (
+          <div
+            className="home-result-card home-result-football"
+            key={`football-result-${result.id}`}
+          >
+
+            <div className="home-result-header">
+
+              <span>
+                ⚽ FOOTBALL
+              </span>
+
+              <strong>
+                FINAL
+              </strong>
+
+            </div>
+
+
+            <div className="home-result-body">
+
+              <div className="home-result-date">
+
+                {formatMatchDate(result.date)}
+
+              </div>
+
+
+              <div className="home-result-teams">
+
+                <div className="home-result-team">
+
+                  <strong>
+                    {team1?.name || "Team A"}
+                  </strong>
+
+                  <span>
+                    {result.score1 ?? 0}
+                  </span>
+
+                </div>
+
+
+                <div className="home-result-vs">
+                  FT
+                </div>
+
+
+                <div className="home-result-team">
+
+                  <strong>
+                    {team2?.name || "Team B"}
+                  </strong>
+
+                  <span>
+                    {result.score2 ?? 0}
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <div className="home-result-venue">
+
+                🏟 {result.venue}
+
+              </div>
+
+
+              <Link
+                to="/results"
+                className="home-result-link"
+              >
+                View All Results →
+              </Link>
+
+            </div>
+
+          </div>
+        );
+      })}
+
+
+      {/* ================= CRICKET RESULT ================= */}
+
+      {/*{cricketResults.slice(0, 1).map((result) => {
+
+        const team1 = getCricketTeam(result.team1Id);
+        const team2 = getCricketTeam(result.team2Id);
+
+        return (
+          <div
+            className="home-result-card home-result-cricket"
+            key={`cricket-result-${result.id}`}
+          >
+
+            <div className="home-result-header">
+
+              <span>
+                🏏 CRICKET
+              </span>
+
+              <strong>
+                FINAL
+              </strong>
+
+            </div>
+
+
+            <div className="home-result-body">
+
+              <div className="home-result-date">
+
+                {formatMatchDate(result.date)}
+
+              </div>
+
+
+              <div className="home-result-teams">
+
+                <div className="home-result-team">
+
+                  <strong>
+                    {team1?.name || "Team A"}
+                  </strong>
+
+                  <span className="home-cricket-result-score">
+                    {result.score1}
+                  </span>
+
+                </div>
+
+
+                <div className="home-result-vs">
+                  VS
+                </div>
+
+
+                <div className="home-result-team">
+
+                  <strong>
+                    {team2?.name || "Team B"}
+                  </strong>
+
+                  <span className="home-cricket-result-score">
+                    {result.score2}
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <div className="home-result-venue">
+
+                🏟 {result.venue}
+
+              </div>
+
+
+              <Link
+                to="/cricket/results"
+                className="home-result-link"
+              >
+                View All Results →
+              </Link>
+
+            </div>
+
+          </div>
+        );
+      })}
+
+
+      {footballResults.length === 0 &&
+        cricketResults.length === 0 && (
+          <div className="empty-home-message">
+            No match results available.
+          </div>
+        )}
+
+    </div>
+
+  </div>
+
+</section>*/}
+
+
+      {/* ================= STANDINGS ================= */}
+<section className="home-standings-section">
+  <div className="home-section-container">
+
+    <div className="home-section-heading">
+      <span>LEAGUE TABLE</span>
+      <h2 className="choose">Championship Standings</h2>
+      <p>
+        Track team performance and points throughout the BCL 2026 season.
+      </p>
+    </div>
+
+    <div className="home-standings-grid">
+
+      {/* ================= FOOTBALL STANDINGS ================= */}
+     {/* <div className="home-standing-card home-standing-football">
+
+        <div className="home-standing-header">
+          <div>
+            <span>⚽ FOOTBALL</span>
+            <h3>League Standings</h3>
+          </div>
+
+          <Link
+            to="/football/standings"
+            className="home-standing-header-link"
+          >
+            Full Table →
+          </Link>
+        </div>
+
+        <div className="home-standing-table-wrapper">
+          <table className="home-standing-table">
+
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>TEAM</th>
+                <th>P</th>
+                <th>W</th>
+                <th>L</th>
+                <th>PTS</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {footballStandings.slice(0, 4).map((standing) => {
+                const team = getFootballTeam(standing.teamId);
+
+                return (
+                  <tr key={`football-standing-${standing.teamId}`}>
+
+                    <td>
+                      <span
+                        className={`home-standing-position position-${standing.position}`}
+                      >
+                        {standing.position}
+                      </span>
+                    </td>
+
+                    <td>
+                      <div className="home-standing-team">
+                        <strong>
+                          {team?.name || "Team"}
+                        </strong>
+                      </div>
+                    </td>
+
+                    <td>{standing.played}</td>
+                    <td>{standing.won}</td>
+                    <td>{standing.lost}</td>
+
+                    <td>
+                      <strong className="home-standing-points">
+                        {standing.points}
+                      </strong>
+                    </td>
+
+                  </tr>
+                );
+              })}
+            </tbody>
+
+          </table>
+        </div>
+
+        <div className="home-standing-footer">
+          <Link
+            to="/football/standings"
+            className="home-standing-button home-standing-button-football"
+          >
+            View Football Standings
+            <span>→</span>
+          </Link>
+        </div>
+
+      </div>
+
+
+      {/* ================= CRICKET STANDINGS ================= */}
+      <div className="home-standing-card home-standing-cricket">
+
+        <div className="home-standing-header">
+          <div>
+            <span>🏏 CRICKET</span>
+            <h3>Tournament Standings</h3>
+          </div>
+
+          <Link
+            to="/cricket/standings"
+            className="home-standing-header-link"
+          >
+            Full Table →
+          </Link>
+        </div>
+
+        <div className="home-standing-table-wrapper">
+          <table className="home-standing-table">
+
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>TEAM</th>
+                <th>P</th>
+                <th>W</th>
+                <th>L</th>
+                <th>PTS</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {cricketStandings.map((standing) => {
+                const team = getCricketTeam(standing.teamId);
+
+                return (
+                  <tr key={`cricket-standing-${standing.teamId}`}>
+
+                    <td>
+                      <span
+                        className={`home-standing-position position-${standing.position}`}
+                      >
+                        {standing.position}
+                      </span>
+                    </td>
+
+                    
+<td>
+  <div className="home-standing-team">
+    {team?.logo && (
+      <img
+  src={team.logo}
+  alt={`${team.name} logo`}
+  className="home-standing-team-logo"
+  loading="lazy"
+/>
+    )}
+
+    <strong>{team?.name || "Team"}</strong>
+  </div>
+</td>
+
+                    <td>{standing.played}</td>
+                    <td>{standing.won}</td>
+                    <td>{standing.lost}</td>
+
+                    <td>
+                      <strong className="home-standing-points">
+                        {standing.points}
+                      </strong>
+                    </td>
+
+                  </tr>
+                );
+              })}
+            </tbody>
+
+          </table>
+        </div>
+
+        <div className="home-standing-footer">
+          <Link
+            to="/cricket/standings"
+            className="home-standing-button home-standing-button-cricket"
+          >
+            View Cricket Standings
+            <span>→</span>
+          </Link>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+{/* ================= BCL OFFICIAL SPONSORS ================= */}
+
+<section className="home-sponsors-section">
+  <div className="home-section-container">
+
+    <div className="home-section-heading">
+      <span>BCL 2026 PARTNERS</span>
+
+      <h2 className="choose">Our Official Sponsors</h2>
+
+      <p>
+        BCL is proudly supported by businesses and partners
+        helping us grow local sports in Baharagora.
+      </p>
+    </div>
+
+    {/* TITLE SPONSOR */}
+    {sponsors.some(
+      (sponsor) =>
+        sponsor.active &&
+        sponsor.category === "TITLE"
+    ) && (
+      <div className="home-sponsor-group">
+
+        <div className="home-sponsor-group-title">
+          <span>🏆</span>
+          <h3>Title Sponsor</h3>
+        </div>
+
+        <div className="home-sponsors-grid">
+
+          {sponsors
+            .filter(
+              (sponsor) =>
+                sponsor.active &&
+                sponsor.category === "TITLE"
+            )
+            .map((sponsor) => (
+              <div
+                className="home-sponsor-card home-sponsor-title-card"
+                key={sponsor.id}
+              >
+
+                <div className="home-sponsor-logo">
+                  {sponsor.logo ? (
+                    <img
+                      src={sponsor.logo}
+                      alt={`${sponsor.name} logo`}
+                    />
+                  ) : (
+                    <span>LOGO</span>
+                  )}
+                </div>
+
+                <div className="home-sponsor-info">
+                  <span>{sponsor.level}</span>
+
+                  <h3>{sponsor.name}</h3>
+
+                  <p>{sponsor.categoryLabel}</p>
+                </div>
+
+                {sponsor.website &&
+                  sponsor.website !== "#" && (
+                    <a
+                      href={sponsor.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Visit Website →
+                    </a>
+                  )}
+
+              </div>
+            ))}
+
+        </div>
+      </div>
+    )}
+
+    {/* GOLD SPONSORS */}
+    {sponsors.some(
+      (sponsor) =>
+        sponsor.active &&
+        sponsor.category === "GOLD"
+    ) && (
+      <div className="home-sponsor-group">
+
+        <div className="home-sponsor-group-title">
+          <span>🥇</span>
+          <h3>Gold Sponsors</h3>
+        </div>
+
+        <div className="home-sponsors-grid">
+
+          {sponsors
+            .filter(
+              (sponsor) =>
+                sponsor.active &&
+                sponsor.category === "GOLD"
+            )
+            .map((sponsor) => (
+              <div
+                className="home-sponsor-card"
+                key={sponsor.id}
+              >
+
+                <div className="home-sponsor-logo">
+                  {sponsor.logo ? (
+                    <img
+                      src={sponsor.logo}
+                      alt={`${sponsor.name} logo`}
+                    />
+                  ) : (
+                    <span>LOGO</span>
+                  )}
+                </div>
+
+                <div className="home-sponsor-info">
+                  <span>{sponsor.level}</span>
+                  <h3>{sponsor.name}</h3>
+                  <p>{sponsor.categoryLabel}</p>
+                </div>
+
+              </div>
+            ))}
+
+        </div>
+      </div>
+    )}
+
+    {/* SILVER SPONSORS */}
+    {sponsors.some(
+      (sponsor) =>
+        sponsor.active &&
+        sponsor.category === "SILVER"
+    ) && (
+      <div className="home-sponsor-group">
+
+        <div className="home-sponsor-group-title">
+          <span>🥈</span>
+          <h3>Silver Sponsors</h3>
+        </div>
+
+        <div className="home-sponsors-grid">
+
+          {sponsors
+            .filter(
+              (sponsor) =>
+                sponsor.active &&
+                sponsor.category === "SILVER"
+            )
+            .map((sponsor) => (
+              <div
+                className="home-sponsor-card"
+                key={sponsor.id}
+              >
+
+                <div className="home-sponsor-logo">
+                  {sponsor.logo ? (
+                    <img
+                      src={sponsor.logo}
+                      alt={`${sponsor.name} logo`}
+                    />
+                  ) : (
+                    <span>LOGO</span>
+                  )}
+                </div>
+
+                <div className="home-sponsor-info">
+                  <span>{sponsor.level}</span>
+                  <h3>{sponsor.name}</h3>
+                  <p>{sponsor.categoryLabel}</p>
+                </div>
+
+              </div>
+            ))}
+
+        </div>
+      </div>
+    )}
+
+    {/* OFFICIAL PARTNERS */}
+    {sponsors.some(
+      (sponsor) =>
+        sponsor.active &&
+        sponsor.category === "PARTNER"
+    ) && (
+      <div className="home-sponsor-group">
+
+        <div className="home-sponsor-group-title">
+          <span>🤝</span>
+          <h3>Official Partners</h3>
+        </div>
+
+        <div className="home-sponsors-grid">
+
+          {sponsors
+            .filter(
+              (sponsor) =>
+                sponsor.active &&
+                sponsor.category === "PARTNER"
+            )
+            .map((sponsor) => (
+              <div
+                className="home-sponsor-card"
+                key={sponsor.id}
+              >
+
+                <div className="home-sponsor-logo">
+                  {sponsor.logo ? (
+                    <img
+                      src={sponsor.logo}
+                      alt={`${sponsor.name} logo`}
+                    />
+                  ) : (
+                    <span>LOGO</span>
+                  )}
+                </div>
+
+                <div className="home-sponsor-info">
+                  <span>{sponsor.level}</span>
+                  <h3>{sponsor.name}</h3>
+                  <p>{sponsor.categoryLabel}</p>
+                </div>
+
+              </div>
+            ))}
+
+        </div>
+      </div>
+    )}
+
+    <div className="home-sponsors-bottom">
+      <p>Interested in sponsoring BCL 2026?</p>
+
+      <a
+        href="#"
+        className="home-sponsors-contact"
+      >
+        Become a Sponsor →
+      </a>
+    </div>
+
+  </div>
+</section>
+
+      {/* =================================================
+    BCL MEDIA
+================================================= */}
+
+<section className="home-media-showcase">
+
+  <div className="home-section-container">
+
+    <div className="home-section-heading home-media-heading">
+
+      <span>BCL MEDIA</span>
+
+      <h2>
+        Experience the BCL Action
+      </h2>
+
+      <p>
+        Follow BCL moments, match highlights, tournament videos
+        and updates across our social platforms.
+      </p>
+
+    </div>
+
+
+    <div className="home-media-grid">
+
+
+      {/* ================= INSTAGRAM ================= */}
+
+      <div className="home-media-card home-media-instagram">
+
+        <div className="home-media-card-top">
+
+          <div className="home-media-icon">
+            📸
+          </div>
+
+          <div className="home-media-platform">
+
+            <span>FOLLOW US ON</span>
+
+            <strong>
+              Instagram
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div className="home-media-card-content">
+
+          <h3>
+            BCL on Instagram
+          </h3>
+
+          <p>
+            Watch BCL Reels, match moments, player highlights,
+            team updates and tournament promotions.
+          </p>
+
+
+          <div className="home-media-tags">
+
+            <span>🎬 Reels</span>
+
+            <span>📸 Photos</span>
+
+            <span>🔥 Highlights</span>
+
+          </div>
+
+
+          <a
+            href="https://www.instagram.com/bcl.__official?stkn=MWl2MmY3YTExY28zOA%3D%3D"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="home-media-button"
+          >
+            Follow on Instagram
+
+            <span>
+              ↗
+            </span>
+
+          </a>
+
+        </div>
+
+      </div>
+
+
+      {/* ================= YOUTUBE ================= */}
+
+      <div className="home-media-card home-media-youtube">
+
+        <div className="home-media-card-top">
+
+          <div className="home-media-icon">
+            ▶️
+          </div>
+
+          <div className="home-media-platform">
+
+            <span>WATCH US ON</span>
+
+            <strong>
+              YouTube
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div className="home-media-card-content">
+
+          <h3>
+            BCL on YouTube
+          </h3>
+
+          <p>
+            Watch match highlights, tournament videos,
+            interviews and special BCL content.
+          </p>
+
+
+          <div className="home-media-tags">
+
+            <span>🎥 Videos</span>
+
+            <span>🏆 Highlights</span>
+
+            <span>🔴 Live</span>
+
+          </div>
+
+
+          <a
+            href="https://www.youtube.com/@AdityaSports"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="home-media-button"
+          >
+            Watch BCL Videos
+
+            <span>
+              ↗
+            </span>
+
+          </a>
+
+        </div>
+
+      </div>
+
+
+      {/* ================= BCL MEDIA ================= */}
+
+      <div className="home-media-card home-media-videos">
+
+        <div className="home-media-card-top">
+
+          <div className="home-media-icon">
+            📷
+          </div>
+
+          <div className="home-media-platform">
+
+            <span>TOURNAMENT</span>
+
+            <strong>
+              BCL Media
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div className="home-media-card-content">
+
+          <h3>
+            Matchday Memories
+          </h3>
+
+          <p>
+            Explore BCL matchday photos, tournament moments
+            and special content from Baharagora.
+          </p>
+
+
+          <div className="home-media-tags">
+
+            <span>⚽ Football</span>
+
+            <span>🏏 Cricket</span>
+
+            <span>📸 Photos</span>
+
+          </div>
+
+
+          <Link
+            to="/media"
+            className="home-media-button"
+          >
+            Explore BCL Media
+
+            <span>
+              →
+            </span>
+
+          </Link>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+{/* =================================================
+    WHY FOLLOW BCL
+================================================= */}
+
+<section className="home-follow-section">
+
+  <div className="home-section-container">
+
+    <div className="home-section-heading">
+
+      <span>FOLLOW THE TOURNAMENT</span>
+
+      <h2>
+        Why Follow BCL?
+      </h2>
+
+      <p>
+        Everything you need to stay connected with the
+        Baharagora Champions League.
+      </p>
+
+    </div>
+
+
+    <div className="home-follow-grid">
+
+
+      {/* LIVE UPDATES */}
+
+      <div className="home-follow-card">
+
+        <div className="home-follow-icon">
+          🔴
+        </div>
+
+        <div className="home-follow-content">
+
+          <h3>
+            Live Updates
+          </h3>
+
+          <p>
+            Follow live football and cricket match scores
+            and important match updates.
+          </p>
+
+          <Link
+            to="/football/live-score"
+            className="home-follow-link"
+          >
+            View Live Scores →
+          </Link>
+
+        </div>
+
+      </div>
+
+
+      {/* FIXTURES */}
+
+      <div className="home-follow-card">
+
+        <div className="home-follow-icon">
+          📅
+        </div>
+
+        <div className="home-follow-content">
+
+          <h3>
+            Fixtures
+          </h3>
+
+          <p>
+            Check upcoming BCL matches, dates, venues
+            and scheduled match times.
+          </p>
+
+          <Link
+            to="/fixtures"
+            className="home-follow-link"
+          >
+            View Fixtures →
+          </Link>
+
+        </div>
+
+      </div>
+
+
+      {/* STANDINGS */}
+
+      <div className="home-follow-card">
+
+        <div className="home-follow-icon">
+          📊
+        </div>
+
+        <div className="home-follow-content">
+
+          <h3>
+            Standings
+          </h3>
+
+          <p>
+            Track team performance, points, wins and
+            league positions throughout the tournament.
+          </p>
+
+          <Link
+            to="/football/standings"
+            className="home-follow-link"
+          >
+            View Standings →
+          </Link>
+
+        </div>
+
+      </div>
+
+
+      {/* RESULTS */}
+
+      <div className="home-follow-card">
+
+        <div className="home-follow-icon">
+          🏆
+        </div>
+
+        <div className="home-follow-content">
+
+          <h3>
+            Results
+          </h3>
+
+          <p>
+            Check completed football and cricket matches
+            and their final scores.
+          </p>
+
+          <Link
+            to="/results"
+            className="home-follow-link"
+          >
+            View Results →
+          </Link>
+
+        </div>
+
+      </div>
+
+
+      {/* TEAMS & PLAYERS */}
+
+      <div className="home-follow-card">
+
+        <div className="home-follow-icon">
+          👥
+        </div>
+
+        <div className="home-follow-content">
+
+          <h3>
+            Teams & Players
+          </h3>
+
+          <p>
+            Explore participating BCL teams and discover
+            the players representing them.
+          </p>
+
+          <Link
+            to="/teams"
+            className="home-follow-link"
+          >
+            Explore Teams →
+          </Link>
+
+        </div>
+
+      </div>
+
+
+      {/* MEDIA */}
+
+      <div className="home-follow-card">
+
+        <div className="home-follow-icon">
+          📸
+        </div>
+
+        <div className="home-follow-content">
+
+          <h3>
+            BCL Media
+          </h3>
+
+          <p>
+            Watch tournament videos, explore photos,
+            reels and memorable BCL moments.
+          </p>
+
+          <Link
+            to="/media"
+            className="home-follow-link"
+          >
+            Explore Media →
+          </Link>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+{/* =================================================
+    BCL TOURNAMENT CTA
+================================================= */}
+
+<section className="home-cta-section">
+
+  <div className="home-cta-overlay"></div>
+
+  <div className="home-cta-content">
+
+    <div className="home-cta-kicker">
+      BAHARAGORA CHAMPIONS LEAGUE
+    </div>
+
+    <div className="home-cta-trophy">
+      🏆
+    </div>
+
+    <h2>
+      Be Part of BCL <span>2026</span>
+    </h2>
+
+    <p>
+      Follow every match, support every team and
+      experience the excitement of Baharagora's
+      biggest local sporting tournament.
+    </p>
+
+
+    <div className="home-cta-actions">
+
+      <Link
+        to="/football"
+        className="home-cta-button home-cta-football"
+      >
+        ⚽ Explore Football
+        <span>→</span>
+      </Link>
+
+      <Link
+        to="/cricket"
+        className="home-cta-button home-cta-cricket"
+      >
+        🏏 Explore Cricket
+        <span>→</span>
+      </Link>
+
+    </div>
+
+
+    <div className="home-cta-features">
+
+      <span>
+        🔴 Live Scores
+      </span>
+
+      <span>
+        📅 Fixtures
+      </span>
+
+      <span>
+        🏆 Results
+      </span>
+
+      <span>
+        📊 Standings
+      </span>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+      {/* =================================================
+    BCL FOOTER
+================================================= */}
+
+
+
+<footer className="bcl-footer">
+
+  <div className="footer-container">
+
+
+    {/* ================= BRAND ================= */}
+
+    <div className="footer-brand">
+
+      <div className="footer-brand-logo">
+        🏆
+      </div>
+
+      <div className="footer-brand-title">
+        <h2>
+          BCL <span>2026</span>
+        </h2>
+
+        <p>
+          Baharagora Champions League
+        </p>
+      </div>
+
+      <div className="footer-sports">
+        <span>⚽ Football</span>
+        <span>🏏 Cricket</span>
+      </div>
+
+      <p className="footer-brand-description">
+        Celebrating local sporting talent and bringing
+        the excitement of football and cricket to Baharagora.
+      </p>
+
+    </div>
+
+
+    {/* ================= QUICK LINKS ================= */}
+
+    <div className="footer-links">
+
+      <h4>
+        Quick Links
+      </h4>
+
+      <Link to="/football/live-score">
+        🔴 Live Scores
+      </Link>
+
+      <Link to="/fixtures">
+        📅 Fixtures
+      </Link>
+
+      <Link to="/results">
+        🏆 Results
+      </Link>
+
+      <Link to="/football/standings">
+        📊 Standings
+      </Link>
+
+    </div>
+
+
+    {/* ================= BCL SPORTS ================= */}
+
+    <div className="footer-links">
+
+      <h4>
+        BCL Sports
+      </h4>
+
+      <Link to="/football">
+        ⚽ Football
+      </Link>
+
+      <Link to="/cricket">
+        🏏 Cricket
+      </Link>
+
+      <Link to="/teams">
+        👥 Teams
+      </Link>
+
+      <Link to="/players">
+        ⭐ Players
+      </Link>
+
+      <Link to="/media">
+        📸 Media
+      </Link>
+
+    </div>
+
+
+    {/* ================= CONNECT ================= */}
+
+    <div className="footer-contact">
+
+      <h4>
+        Connect With BCL
+      </h4>
+
+      <p>
+        Follow BCL for match updates,
+        highlights and tournament news.
+      </p>
+
+
+      <div className="footer-social-links">
+
+        <a
+          href="https://www.instagram.com/bcl.__official?stkn=MWl2MmY3YTExY28zOA%3D%3D"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          📸 Instagram
+        </a>
+
+        <a
+          href="https://www.youtube.com/@AdityaSports"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          ▶️ YouTube
+        </a>
+
+      </div>
+
+
+      <div className="footer-location">
+        📍 Baharagora, Jharkhand
+      </div>
+
+    </div>
+  </div>
+
+ <div className="footer-development">
+  <div className="footer-development-icon">💻</div>
+
+  <div>
+    <span className="footer-development-label">
+      WEBSITE DEVELOPMENT
+    </span>
+
+    <h3>Need a Website for Your Business or Event?</h3>
+
+    <p>
+      Have a website development requirement? Get in touch for
+      custom websites for businesses, tournaments, events and
+      organizations.
+    </p>
+
+    <div className="footer-development-contact">
+      <a href="mailto:sitaram.hembrom123@gmail.com">
+        ✉️ sitaram.hembrom123@gmail.com
+      </a>
+
+      <a href="tel:+917004941312">
+        📞 +91 70049 41312
+      </a>
+    </div>
+  </div>
+</div>
+
+
+  <div className="home-visitor-counter" aria-label="Website visitor count">
+    <Eye size={18} aria-hidden="true" />
+    <span>
+      Visitors:{" "}
+      {visitorCount === null
+        ? "Loading..."
+        : visitorCount.toLocaleString("en-IN")}
+    </span>
+  </div>
+
+  {/* ================= FOOTER BOTTOM ================= */}
+
+  <div className="footer-bottom">
+
+    <div className="footer-bottom-content">
+
+      <p>
+        © {new Date().getFullYear()} Baharagora Champions League.
+        All rights reserved.
+      </p>
+
+      <p className="footer-developed">
+
+        Developed by
+        <strong>
+          Hembram
+        </strong>
+
+      </p>
+
+    </div>
+
+  </div>
+
+</footer>
+
+{/* <PlacementMedia placement="home" /> */}
+
+    </div>
+  );
+}
+
+
+/* =====================================================
+   MATCH CARD
+===================================================== */
+
+function MatchCard({
+  sport,
+  date,
+  time,
+  team1,
+  team2,
+  venue
+}) {
+
+  return (
+
+    <div className="match-card">
+
+      <div className="match-card-top">
+
+        <span>
+          {sport}
+        </span>
+
+        <span>
+          {formatMatchDate(date)}
+        </span>
+
+      </div>
+
+
+      <div className="match-teams">
+
+        <strong>
+          {team1}
+        </strong>
+
+        <span>
+          VS
+        </span>
+
+        <strong>
+          {team2}
+        </strong>
+
+      </div>
+
+
+      <div className="match-info">
+
+        <span>
+          ⏰ {time}
+        </span>
+
+        <span>
+          📍 {venue}
+        </span>
+
+      </div>
+
+    </div>
+
+  );
+}
+
+
+/* =====================================================
+   RESULT CARD
+===================================================== */
+
+function ResultCard({
+  sport,
+  team1,
+  score1,
+  team2,
+  score2,
+  date
+}) {
+
+  return (
+
+    <div className="result-card">
+
+      <div className="result-top">
+
+        <span>
+          {sport}
+        </span>
+
+        <span>
+          {formatMatchDate(date)}
+        </span>
+
+      </div>
+
+
+      <div className="result-teams">
+
+        <div>
+
+          <strong>
+            {team1}
+          </strong>
+
+          <b>
+            {score1}
+          </b>
+
+        </div>
+
+
+        <div>
+
+          <strong>
+            {team2}
+          </strong>
+
+          <b>
+            {score2}
+          </b>
+
+        </div>
+
+      </div>
+
+
+      <div className="result-status">
+        Final
+      </div>
+      
+    </div>
+
+  );
+}
+
+
+/* =====================================================
+   DATE FORMATTER
+===================================================== */
+
+function formatMatchDate(date) {
+
+  if (!date) {
+    return "";
+  }
+
+  return new Date(`${date}T00:00:00`).toLocaleDateString(
+    "en-IN",
+    {
+      day: "2-digit",
+      month: "short",
+      year: "numeric"
+    }
+  ).toUpperCase();
+}
+
+function formatMatchTime(time) {
+  if (!time) return "";
+
+  const [hours, minutes] = time.split(":");
+
+  const date = new Date();
+  date.setHours(Number(hours), Number(minutes), 0, 0);
+
+  return date.toLocaleTimeString("en-IN", {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  });
+}
+
+export default Home;

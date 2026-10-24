@@ -6629,7 +6629,8 @@
 .home-hero-content h1 {
   margin: 0 0 12px;
 
-  font-size: clamp(3.2rem, 7vw, 6.5rem);
+  /* font-size: clamp(3.2rem, 7vw, 6.5rem); */
+  font-size: clamp(3.2rem, 7vw, 4.5rem);
 
   line-height: 0.95;
 
@@ -8094,4 +8095,22 @@
   .antigravity-background {
     opacity: 0.5;
   }
+}
+
+
+/* CMS hero title: white-to-blue gradient */
+.home-cms-hero-title {
+  color: #ffffff;
+  /* background: linear-gradient(
+    90deg,
+    #ffffff 0%,
+    #dbeafe 35%,
+    #60a5fa 65%,
+    #2563eb 100%
+  ); */
+      background: linear-gradient(90deg, #ffffff 0%, #ffffff 35%, #ffffff 65%, #2563eb 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
 }
