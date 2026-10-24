@@ -8114,3 +8114,78 @@
   -webkit-text-fill-color: transparent;
   text-shadow: none;
 }
+
+/* =========================================================
+   FIX HERO BANNER FOR MOBILE DEVICES
+========================================================= */
+
+@media (max-width: 768px) {
+  .home-hero {
+    min-height: 480px;
+    height: 60vh; /* Responsive height instead of fixed large height */
+    max-height: 550px;
+  }
+
+  .home-hero-image,
+  .home-hero-video {
+    object-fit: cover; /* Ensures the graphic covers the area without distortion */
+    object-position: center top; /* Focuses on the top/center of your banner poster */
+  }
+
+  .home-hero-content {
+    padding: 40px 15px 60px;
+    justify-content: flex-end; /* Pushes content slightly down so it doesn't crowd the top navbar */
+    text-align: center;
+  }
+
+  .home-hero-content h1 {
+    font-size: clamp(2.2rem, 9vw, 3.2rem); /* Scales down the massive text for mobile */
+    line-height: 1.1;
+  }
+
+  .home-hero-description {
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limits description lines on small screens if too long */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .home-hero-actions {
+    margin-bottom: 15px;
+  }
+
+  .home-hero-btn {
+    padding: 10px 20px;
+    font-size: 0.85rem;
+    min-height: 42px;
+  }
+
+  /* Adjust arrow navigation positioning for mobile screens */
+  .home-hero-arrow {
+    width: 34px;
+    height: 34px;
+    font-size: 1.3rem;
+  }
+  
+  .home-hero-arrow-left {
+    left: 8px;
+  }
+
+  .home-hero-arrow-right {
+    right: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-hero {
+    min-height: 380px;
+    height: 50vh;
+    background-color: #061a32; /* Matches your dark theme branding */
+  }
+
+  .home-hero-image {
+    object-fit: contain; /* Keeps the entire image visible without cropping */
+  }
+}
