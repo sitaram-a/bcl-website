@@ -1,6 +1,5 @@
-
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabase";
 import {
   LayoutDashboard,
@@ -20,126 +19,141 @@ import {
 } from "lucide-react";
 import "./AdminDashboard.css";
 
-const adminSections = [
+const allAdminSections = [
+  {
+    title: "User Management",
+    description: "View registered users, review account details, and manage user access securely.",
+    icon: UserCog,
+    path: "/admin/users",
+    label: "Manage Users",
+    mainAdminOnly: true,
+  },
   {
     title: "Team Management",
     description: "View and manage participating teams.",
     icon: Users,
     path: "/registration",
     label: "Manage Teams",
+    mainAdminOnly: false,
   },
   {
-  title: "User Management",
-  description:
-    "View registered users, review account details, and manage user access securely.",
-  icon: UserCog,
-  path: "/admin/users",
-  label: "Manage Users",
-},
-  {
-    title: "Football Matches",
-    description: "View football fixtures, results, and standings.",
-    icon: Trophy,
-    path: "/football",
-    label: "View Football",
+    title: "Cricket Fixture Management",
+    description: "Add fixtures, edit match schedules, reschedule games, and manage match status.",
+    icon: CalendarClock,
+    path: "/admin/cricket-fixtures",
+    label: "Manage Fixtures",
+    mainAdminOnly: false,
   },
   {
-    title: "Cricket Matches",
-    description: "View cricket fixtures, results, and standings.",
-    icon: CalendarDays,
-    path: "/cricket",
-    label: "View Cricket",
-  },{
-  title: "Cricket Fixture Management",
-  description:
-    "Add fixtures, edit match schedules, reschedule games, and manage match status.",
-  icon: CalendarClock,
-  path: "/admin/cricket-fixtures",
-  label: "Manage Fixtures",
-},
-{
-  title: "Live Match Control",
-  description: "Update live scores, runs, wickets, overs, and match status in real time.",
-  icon: Radio,
-  path: "/admin/live-scores",
-  label: "Manage Live Scores",
-},
+    title: "Live Match Control",
+    description: "Update live scores, runs, wickets, overs, and match status in real time.",
+    icon: Radio,
+    path: "/admin/live-scores",
+    label: "Manage Live Scores",
+    mainAdminOnly: false,
+  },
+  {
+    title: "Cricket Team Management",
+    description: "Manage cricket teams, logos, captains, and active status.",
+    icon: Users,
+    path: "/admin/cricket-teams",
+    label: "Manage Cricket Teams",
+    mainAdminOnly: false,
+  },
+  {
+    title: "Cricket Player Management",
+    description: "Manage player profiles, team assignments, jersey numbers, and roles.",
+    icon: Users,
+    path: "/admin/cricket-players",
+    label: "Manage Cricket Players",
+    mainAdminOnly: false,
+  },
+  {
+    title: "Media Management",
+    description: "Upload photos and videos, manage categories, and control what appears on the website.",
+    icon: Image,
+    path: "/admin/media",
+    label: "Manage Media",
+    mainAdminOnly: false,
+  },
+  {
+    title: "Poster Management",
+    description: "Add, edit, reorder, publish, hide, and delete homepage posters.",
+    icon: Images,
+    path: "/admin/posters",
+    label: "Manage Posters",
+    mainAdminOnly: false,
+  },
+  {
+    title: "Website Pages CMS",
+    description: "Create, edit, publish, and manage About, Contact, Rules, and FAQ pages.",
+    icon: FileText,
+    path: "/admin/website-pages",
+    label: "Manage Website Pages",
+    mainAdminOnly: true,
+  },
+  {
+    title: "Homepage Content CMS",
+    description: "Manage hero slides, announcements and featured content",
+    icon: ClipboardList,
+    path: "/admin/homepage-content",
+    label: "Manage homepage content",
+    mainAdminOnly: true,
+  },
   {
     title: "Registrations",
     description: "Open the existing registration page.",
     icon: ClipboardList,
     path: "/registration",
     label: "View Registration",
+    mainAdminOnly: false,
   },
-  {
-  title: "Cricket Team Management",
-  description: "Manage cricket teams, logos, captains, and active status.",
-  icon: Users,
-  path: "/admin/cricket-teams",
-  label: "Manage Cricket Teams",
-},
-
-{
-  title: "Cricket Player Management",
-  description: "Manage player profiles, team assignments, jersey numbers, and roles.",
-  icon: Users,
-  path: "/admin/cricket-players",
-  label: "Manage Cricket Players",
-},
-
-{
-  title: "Media Management",
-  description:
-    "Upload photos and videos, manage categories, and control what appears on the website.",
-  icon: Image,
-  path: "/admin/media",
-  label: "Manage Media",
-},
-
-{
-  title: "Poster Management",
-  description:
-    "Add, edit, reorder, publish, hide, and delete homepage posters.",
-  icon: Images,
-  path: "/admin/posters",
-  label: "Manage Posters",
-},
-
-{
-  title: "Website Pages CMS",
-  description:
-    "Create, edit, publish, and manage About, Contact, Rules, and FAQ pages.",
-  icon: FileText,
-  path: "/admin/website-pages",
-  label: "Manage Website Pages",
-},
-
-{
-  title: "Homepage Content CMS",
-  description:
-    "Manage hero slides, announcements and featured content",
-  icon: ClipboardList,
-  path: "/admin/homepage-content",
-  label: "Manage homepage content",
-},
-
 ];
 
-
 function AdminDashboard() {
+  const navigate = useNavigate();
+  const [isMainAdmin, setIsMainAdmin] = useState(false);
+  const [loadingRole, setLoadingRole] = useState(true);
 
-const navigate = useNavigate();
+  useEffect(() => {
+    async function checkRole() {
+      try {
+        // You can check via a specific rpc or metadata. 
+        // Assuming is_bcl_admin returns true for admins, let's also check if they are the designated main admin email or have a specific role flag.
+        const { data: { user } } = await supabase.auth.getUser();
+        
+        // Example check: Main admin can be identified by a specific email or database flag. 
+        // Replace 'sitaram.hembrom123@gmail.com' with your actual Main Admin email or check a user metadata role.
+        const mainAdminEmail = "sitaram.hembrom123@gmail.com"; 
+        if (user && user.email === mainAdminEmail) {
+          setIsMainAdmin(true);
+        } else {
+          // Alternatively, check via an RPC function if you have role separation in your DB:
+          // const { data: roleData } = await supabase.rpc("get_user_role");
+          // setIsMainAdmin(roleData === 'main_admin');
+          setIsMainAdmin(false); 
+        }
+      } catch (err) {
+        console.error("Error checking admin role:", err);
+      } finally {
+        setLoadingRole(false);
+      }
+    }
+    checkRole();
+  }, []);
 
-const handleSignOut = async () => {
-  const { error } = await supabase.auth.signOut();
+  const handleSignOut = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      alert("Unable to sign out. Please try again.");
+      return;
+    }
+    navigate("/admin/login", { replace: true });
+  };
 
-  if (error) {
-    alert("Unable to sign out. Please try again.");
-    return;
-  }
-
-  navigate("/admin/login", { replace: true });
-};
+  const filteredSections = allAdminSections.filter(
+    (section) => !section.mainAdminOnly || isMainAdmin
+  );
 
   return (
     <div className="admin-dashboard">
@@ -148,7 +162,7 @@ const handleSignOut = async () => {
           <Trophy size={28} />
           <span>
             BCL
-            <small>ADMIN PANEL</small>
+            <small>{isMainAdmin ? "MAIN ADMIN" : "STAFF PORTAL"}</small>
           </span>
         </Link>
 
@@ -158,51 +172,60 @@ const handleSignOut = async () => {
             Dashboard
           </Link>
 
-          <Link to="/admin/users" className="admin-nav-link">
-          <UserCog size={19} />
-          User Management
+          {isMainAdmin && (
+            <Link to="/admin/users" className="admin-nav-link">
+              <UserCog size={19} />
+              User Management
+            </Link>
+          )}
+
+          <Link to="/admin/cricket-fixtures" className="admin-nav-link">
+            <CalendarClock size={19} />
+            Manage Fixtures
           </Link>
 
-          <Link to="/registration" className="admin-nav-link">
-            <Users size={19} />
-            Registrations
+          <Link to="/admin/live-scores" className="admin-nav-link">
+            <Radio size={19} />
+            Live Match Control
           </Link>
 
           <Link to="/admin/cricket-teams" className="admin-nav-link">
-          <Users size={19} />
-          Cricket Teams
-          </Link>
-
-          <Link to="/football" className="admin-nav-link">
-            <Trophy size={19} />
-            Football
-          </Link>
-
-          <Link to="/cricket" className="admin-nav-link">
-            <CalendarDays size={19} />
-            Cricket
+            <Users size={19} />
+            Cricket Teams
           </Link>
 
           <Link to="/admin/cricket-players" className="admin-nav-link">
-          <Users size={19} />
-          Cricket Players
+            <Users size={19} />
+            Cricket Players
           </Link>
+
+          <Link to="/admin/media" className="admin-nav-link">
+            <Image size={19} />
+            Media Management
+          </Link>
+
+          <Link to="/admin/posters" className="admin-nav-link">
+            <Images size={19} />
+            Poster Management
+          </Link>
+
+          {isMainAdmin && (
+            <>
+              <Link to="/admin/website-pages" className="admin-nav-link">
+                <FileText size={19} />
+                Website Pages CMS
+              </Link>
+              <Link to="/admin/homepage-content" className="admin-nav-link">
+                <ClipboardList size={19} />
+                Homepage CMS
+              </Link>
+            </>
+          )}
 
           <Link to="/" className="admin-nav-link">
             <ArrowUpRight size={19} />
             View Website
           </Link>
-
-          <Link to="/admin/media" className="admin-nav-link">
-          <Image size={19} />
-          Media Management
-          </Link>
-
-          <Link to="/admin/posters" className="admin-nav-link">
-          <Images size={19} />
-          Poster Management
-          </Link>
-
         </nav>
 
         <div className="admin-sidebar-note">
@@ -215,35 +238,29 @@ const handleSignOut = async () => {
         <header className="admin-header">
           <div>
             <p className="admin-eyebrow">TOURNAMENT CONTROL</p>
-            <h1>Admin Dashboard</h1>
+            <h1>{isMainAdmin ? "Main Admin Dashboard" : "Staff Control Panel"}</h1>
             <p className="admin-subtitle">
-              Manage your BCL tournament from one place.
+              {isMainAdmin ? "Full system control and user management." : "Manage fixtures, scores, teams, and media."}
             </p>
           </div>
-
-          
 
           <Link to="/" className="admin-view-site">
             View Website <ArrowUpRight size={16} />
           </Link>
 
-          <button
-  type="button"
-  className="admin-signout-button"
-  onClick={handleSignOut}
->
-  <LogOut size={16} />
-  Sign Out
-</button>
+          <button type="button" className="admin-signout-button" onClick={handleSignOut}>
+            <LogOut size={16} /> Sign Out
+          </button>
         </header>
 
         <section className="admin-welcome">
           <div>
             <span className="admin-welcome-tag">BCL MANAGEMENT</span>
-            <h2>Welcome to the control room</h2>
+            <h2>Welcome back, {isMainAdmin ? "Main Administrator" : "Staff Member"}</h2>
             <p>
-              Manage teams, review registrations, and access cricket
-              and football sections.
+              {isMainAdmin 
+                ? "You have full privileges to manage users, content, and tournament operations." 
+                : "You have access to fixture controls, live scoring, team rosters, and media uploads."}
             </p>
           </div>
           <Trophy size={70} />
@@ -253,12 +270,12 @@ const handleSignOut = async () => {
           <div className="admin-section-heading">
             <div>
               <h2>Management Sections</h2>
-              <p>Choose an area to manage.</p>
+              <p>Choose an area to manage based on your permissions.</p>
             </div>
           </div>
 
           <div className="admin-card-grid">
-            {adminSections.map((section) => {
+            {filteredSections.map((section) => {
               const Icon = section.icon;
 
               return (
@@ -279,11 +296,6 @@ const handleSignOut = async () => {
             })}
           </div>
         </section>
-
-        <p className="admin-disclaimer">
-          Dashboard preview · Live statistics and management actions
-          will be connected in the next steps.
-        </p>
       </main>
     </div>
   );
