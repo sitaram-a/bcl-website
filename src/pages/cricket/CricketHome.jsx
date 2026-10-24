@@ -218,7 +218,7 @@ function CricketHome() {
           </p>
         )}
 
-        MATCH CENTER
+        {/* MATCH CENTER */}
         <section className="cricket-home-section">
           <div className="cricket-section-heading">
             <div>
