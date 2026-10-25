@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import CricketNavbar from "../../components/cricket/CricketNavbar";
 import { cricketStandings } from "../../data/cricket/standings";
@@ -6,7 +7,46 @@ import "./CricketStandings.css";
 
 function CricketStandings() {
   const getTeam = (teamId) => {
-    return cricketTeams.find((team) => team.id === teamId);
+    return cricketTeams.find(
+      (team) => Number(team.id) === Number(teamId)
+    );
+  };
+
+  const formatNRR = (nrr) => {
+    if (
+      nrr === null ||
+      nrr === undefined ||
+      nrr === "" ||
+      String(nrr).toLowerCase() === "provisional"
+    ) {
+      return "—";
+    }
+
+    const value = Number(nrr);
+
+    if (!Number.isFinite(value)) {
+      return "—";
+    }
+
+    return `${value > 0 ? "+" : ""}${value.toFixed(3)}`;
+  };
+
+  const getNRRClass = (nrr) => {
+    const value = Number(nrr);
+
+    if (
+      nrr === null ||
+      nrr === undefined ||
+      nrr === "" ||
+      !Number.isFinite(value)
+    ) {
+      return "unverified";
+    }
+
+    if (value > 0) return "positive";
+    if (value < 0) return "negative";
+
+    return "neutral";
   };
 
   return (
@@ -14,7 +54,6 @@ function CricketStandings() {
       <CricketNavbar />
 
       <main className="cricket-standings-page">
-
         {/* Header */}
         <section className="cricket-standings-header">
           <span className="cricket-section-badge">
@@ -28,24 +67,19 @@ function CricketStandings() {
           </p>
         </section>
 
-        {/* Table */}
+        {/* Standings Table */}
         <section className="cricket-standings-container">
-
           {cricketStandings.length === 0 ? (
             <div className="cricket-no-standings">
               <div>🏏</div>
-
               <h2>No Standings Available</h2>
-
               <p>
                 The points table will appear once matches are played.
               </p>
             </div>
           ) : (
             <div className="cricket-table-wrapper">
-
               <table className="cricket-standings-table">
-
                 <thead>
                   <tr>
                     <th>POS</th>
@@ -54,6 +88,7 @@ function CricketStandings() {
                     <th>W</th>
                     <th>L</th>
                     <th>PTS</th>
+                    <th>NRR</th>
                   </tr>
                 </thead>
 
@@ -63,7 +98,6 @@ function CricketStandings() {
 
                     return (
                       <tr key={standing.teamId}>
-
                         {/* Position */}
                         <td>
                           <span
@@ -80,12 +114,12 @@ function CricketStandings() {
                         {/* Team */}
                         <td>
                           <div className="cricket-standing-team">
-
                             <div className="cricket-standing-logo">
                               {team?.logo ? (
                                 <img
                                   src={team.logo}
                                   alt={team.name}
+                                  loading="lazy"
                                 />
                               ) : (
                                 "🏏"
@@ -101,7 +135,6 @@ function CricketStandings() {
                                 {team?.shortName || ""}
                               </span>
                             </div>
-
                           </div>
                         </td>
 
@@ -125,21 +158,32 @@ function CricketStandings() {
                           </strong>
                         </td>
 
+                        {/* Net Run Rate */}
+                        <td>
+                          <strong
+                            className={`cricket-nrr ${getNRRClass(
+                              standing.nrr
+                            )}`}
+                            title={
+                              getNRRClass(standing.nrr) === "unverified"
+                                ? "NRR has not been verified yet"
+                                : "Net Run Rate"
+                            }
+                          >
+                            {formatNRR(standing.nrr)}
+                          </strong>
+                        </td>
                       </tr>
                     );
                   })}
                 </tbody>
-
               </table>
-
             </div>
           )}
-
         </section>
 
         {/* Legend */}
         <section className="cricket-standings-legend">
-
           <div>
             <strong>P</strong>
             <span>Played</span>
@@ -160,20 +204,23 @@ function CricketStandings() {
             <span>Points</span>
           </div>
 
+          <div>
+            <strong>NRR</strong>
+            <span>Net Run Rate</span>
+          </div>
         </section>
 
-        {/* Bottom */}
-        <section className="cricket-standings-bottom">
+        <p className="cricket-nrr-note">
+          NRR is displayed only when a numeric value is available.
+          A dash (—) means the value is not verified.
+        </p>
 
-          <Link
-            to="/cricket"
-            className="cricket-back-button"
-          >
+        {/* Back Button */}
+        <section className="cricket-standings-bottom">
+          <Link to="/cricket" className="cricket-back-button">
             ← Back to Cricket Home
           </Link>
-
         </section>
-
       </main>
     </>
   );

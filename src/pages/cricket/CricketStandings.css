@@ -402,3 +402,123 @@
     gap: 15px;
   }
 }
+
+
+/* Net Run Rate column */
+
+.cricket-nrr {
+  display: inline-block;
+  font-size: 0.95rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.cricket-nrr.positive {
+  color: #16a34a;
+}
+
+.cricket-nrr.negative {
+  color: #dc2626;
+}
+
+.cricket-nrr.neutral {
+  color: #64748b;
+}
+
+.cricket-nrr.unverified {
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.cricket-nrr-note {
+  margin: 12px 4px 0;
+  color: #64748b;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+/* Keep the table usable on mobile */
+.cricket-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.cricket-standings-table {
+  width: 100%;
+  min-width: 610px;
+  border-collapse: collapse;
+}
+
+.cricket-standings-table th,
+.cricket-standings-table td {
+  padding: 15px 13px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.cricket-standings-table th:nth-child(2),
+.cricket-standings-table td:nth-child(2) {
+  text-align: left;
+}
+
+.cricket-standing-team {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 190px;
+}
+
+.cricket-standing-team > div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cricket-standing-team strong {
+  white-space: normal;
+}
+
+.cricket-standing-logo {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.cricket-standing-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@media (max-width: 600px) {
+  .cricket-standings-table th,
+  .cricket-standings-table td {
+    padding: 12px 10px;
+    font-size: 0.84rem;
+  }
+
+  .cricket-nrr {
+    font-size: 0.84rem;
+  }
+
+  .cricket-standing-logo {
+    width: 34px;
+    height: 34px;
+  }
+
+  .cricket-standing-team {
+    gap: 9px;
+    min-width: 175px;
+  }
+
+  .cricket-nrr-note {
+    font-size: 0.78rem;
+  }
+}
