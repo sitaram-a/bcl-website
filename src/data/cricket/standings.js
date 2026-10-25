@@ -2,16 +2,16 @@
 export const cricketStandings = [
   {
     position: 1,
-    teamId: 1,
-    played: 0,
-    won: 0,
+    teamId: 1, // Baharagora Kings
+    played: 1,
+    won: 1,
     lost: 0,
-    points: 0,
-    nrr: "0.000",
+    points: 2,
+    nrr: "3.700",
   },
   {
     position: 2,
-    teamId: 2,
+    teamId: 5, // Kesharda Super Kings
     played: 0,
     won: 0,
     lost: 0,
@@ -20,7 +20,7 @@ export const cricketStandings = [
   },
   {
     position: 3,
-    teamId: 3,
+    teamId: 4, // Team Gajraj
     played: 0,
     won: 0,
     lost: 0,
@@ -29,7 +29,7 @@ export const cricketStandings = [
   },
   {
     position: 4,
-    teamId: 4,
+    teamId: 2, // Baharagora Royals
     played: 0,
     won: 0,
     lost: 0,
@@ -38,7 +38,7 @@ export const cricketStandings = [
   },
   {
     position: 5,
-    teamId: 5,
+    teamId: 3, // Digbarda Pitch Panthers
     played: 0,
     won: 0,
     lost: 0,
@@ -47,7 +47,7 @@ export const cricketStandings = [
   },
   {
     position: 6,
-    teamId: 6,
+    teamId: 6, // Khandamouda Warriors
     played: 0,
     won: 0,
     lost: 0,
@@ -56,16 +56,16 @@ export const cricketStandings = [
   },
   {
     position: 7,
-    teamId: 7,
-    played: 0,
+    teamId: 7, // Sakara Royals
+    played: 1,
     won: 0,
-    lost: 0,
+    lost: 1,
     points: 0,
-    nrr: "0.000",
+    nrr: "-3.700",
   },
   {
     position: 8,
-    teamId: 8,
+    teamId: 8, // RR Thunder Star
     played: 0,
     won: 0,
     lost: 0,

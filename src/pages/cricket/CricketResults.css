@@ -431,3 +431,258 @@
     padding: 14px;
   }
 }
+
+
+.result-scorecard {
+  width: 100%;
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 24px;
+  background: #fff;
+  color: #172033;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  box-shadow: 0 12px 35px rgba(15, 23, 42, 0.08);
+}
+
+.result-tournament-label {
+  color: #0d9488;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.result-match-status {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: #dcfce7;
+  color: #166534;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.result-teams {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 18px;
+  margin: 24px 0;
+}
+
+.result-team {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.result-team:last-child {
+  text-align: right;
+}
+
+.result-team h2 {
+  margin: 0;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+}
+
+.result-team strong {
+  font-size: clamp(1.6rem, 4vw, 2.3rem);
+  line-height: 1.1;
+}
+
+.result-team span {
+  color: #64748b;
+  font-size: 0.85rem;
+}
+
+.result-vs {
+  color: #94a3b8;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.result-winner {
+  padding: 13px;
+  border-radius: 10px;
+  background: #ecfdf5;
+  color: #047857;
+  text-align: center;
+  font-weight: 800;
+}
+
+.result-match-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0 26px;
+}
+
+.result-match-meta p {
+  margin: 0;
+  padding: 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 9px;
+  line-height: 1.6;
+  font-size: 0.9rem;
+}
+
+.result-innings-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: #f1f5f9;
+  border-radius: 10px 10px 0 0;
+}
+
+.result-innings-heading h2 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.result-table-title {
+  margin: 22px 0 10px;
+  font-size: 1rem;
+}
+
+.result-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+}
+
+.result-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.86rem;
+  white-space: nowrap;
+}
+
+.result-table th,
+.result-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: right;
+}
+
+.result-table th:first-child,
+.result-table td:first-child {
+  text-align: left;
+}
+
+.result-table thead {
+  background: #f8fafc;
+  color: #475569;
+}
+
+.result-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.result-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.result-extras {
+  color: #475569;
+}
+
+.result-total {
+  background: #ecfdf5;
+  font-weight: 800;
+}
+
+.result-fall-wickets {
+  margin-top: 24px;
+  padding: 16px;
+  background: #f8fafc;
+  border-radius: 10px;
+}
+
+.result-fall-wickets h3,
+.result-second-innings h3 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+
+.result-fall-wickets p,
+.result-second-innings p {
+  margin: 0;
+  color: #64748b;
+  line-height: 1.7;
+  font-size: 0.9rem;
+}
+
+.result-second-innings {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 18px;
+  padding: 18px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+}
+
+.result-official-link {
+  display: inline-flex;
+  margin-top: 22px;
+  padding: 12px 18px;
+  border-radius: 9px;
+  background: #0f766e;
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.result-official-link:hover {
+  background: #115e59;
+}
+
+@media (max-width: 600px) {
+  .result-scorecard {
+    padding: 14px;
+    border-radius: 12px;
+  }
+
+  .result-teams {
+    gap: 8px;
+  }
+
+  .result-team h2 {
+    font-size: 0.9rem;
+  }
+
+  .result-match-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .result-table th,
+  .result-table td {
+    padding: 10px;
+  }
+
+  .result-official-link {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+
+.result-team-logo {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+  margin-bottom: 8px;
+}
+
+@media (max-width: 600px) {
+  .result-team-logo {
+    width: 42px;
+    height: 42px;
+  }
+}
