@@ -7,8 +7,29 @@ import { supabase } from "../../lib/supabase";
 import { cricketTeams } from "../../data/cricket/teams";
 import "./CricketLiveScore.css";
 
-const CRICHEROES_SCORECARD_URL =
-  "https://cricheroes.com/scorecard/27884163/baharagora-champions-league-season-5/baharagora-kings-vs-sakra-royals/summary";
+const CRICHEROES_SCORECARDS = [
+  {
+    id: 1,
+    title: "Match 1",
+    teams: "Baharagora Kings vs Sakara Royals",
+    result: "Baharagora Kings won by 37 runs",
+    url: "https://cricheroes.com/scorecard/27884163/baharagora-champions-league-season-5/baharagora-kings-vs-sakra-royals/summary",
+  },
+  {
+    id: 2,
+    title: "Match 2",
+    teams: "Kesharda Super Kings vs Gajraj 11",
+    result: "Kesharda Super Kings won by 39 runs (DLS)",
+    url: "",
+  },
+  {
+    id: 3,
+    title: "Match 3",
+    teams: "Sakra Royals vs Gajraj 11",
+    result: "Gajraj 11 won by 7 wickets",
+    url: "https://cricheroes.com/scorecard/27815334/baharagora-champions-league-season-5/sakra-royals-vs-gajraj-11/scorecard",
+  },
+];
 
 function getTeamName(teamId) {
   const team = cricketTeams.find(
@@ -18,9 +39,7 @@ function getTeamName(teamId) {
   return team?.name || team?.shortName || "";
 }
 
-/* CricHeroes opens in a new tab.
-   No iframe is used because CricHeroes blocks embedding. */
-function CricHeroesScorecard() {
+function CricHeroesScorecards() {
   return (
     <section className="cricheroes-scorecard-section">
       <div className="cricheroes-scorecard-heading">
@@ -28,24 +47,47 @@ function CricHeroesScorecard() {
           <span className="cricheroes-scorecard-label">
             BCL SEASON 5
           </span>
-
-          <h2>Full Match Scorecard</h2>
-          <p>Baharagora Kings vs Sakra Royals</p>
+          <h2>Official Match Scorecards</h2>
+          <p>View completed match scorecards on CricHeroes.</p>
         </div>
+      </div>
 
-        <a
-          href={CRICHEROES_SCORECARD_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="cricheroes-scorecard-link"
-        >
-          Open Full Scorecard
-          <ExternalLink size={18} />
-        </a>
+      <div className="cricheroes-match-list">
+        {CRICHEROES_SCORECARDS.map((match) => (
+          <article
+            className="cricheroes-match-card"
+            key={match.id}
+          >
+            <div className="cricheroes-match-info">
+              <span className="cricheroes-match-number">
+                {match.title}
+              </span>
+              <h3>{match.teams}</h3>
+              <p>{match.result}</p>
+            </div>
+
+            {match.url ? (
+              <a
+                href={match.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="cricheroes-scorecard-link"
+              >
+                Open Scorecard
+                <ExternalLink size={17} />
+              </a>
+            ) : (
+              <span className="cricheroes-scorecard-unavailable">
+                Link not available
+              </span>
+            )}
+          </article>
+        ))}
       </div>
 
       <p className="cricheroes-scorecard-fallback">
-        View the official scorecard directly on CricHeroes.
+        Official scorecards open in a new tab. They are not embedded
+        because CricHeroes blocks iframe embedding.
       </p>
     </section>
   );
@@ -54,7 +96,7 @@ function CricHeroesScorecard() {
 function CricketLiveScore() {
   const [liveMatch, setLiveMatch] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [lastUpdated, setLastUpdated] = useState(new Date());
+  const [lastUpdated, setLastUpdated] = useState(null);
 
   useEffect(() => {
     let active = true;
@@ -91,7 +133,7 @@ function CricketLiveScore() {
           return;
         }
 
-        if (data && data.match) {
+        if (data?.match) {
           setLiveMatch({
             id: data.match.id,
             matchType: data.match.stage || "BCL Match",
@@ -178,9 +220,7 @@ function CricketLiveScore() {
       } catch (err) {
         console.error("Unexpected error loading live match:", err);
 
-        if (active) {
-          setLoading(false);
-        }
+        if (active) setLoading(false);
       }
     }
 
@@ -195,9 +235,7 @@ function CricketLiveScore() {
           schema: "public",
           table: "cricket_live_scores",
         },
-        () => {
-          fetchLiveMatch();
-        }
+        fetchLiveMatch
       )
       .subscribe();
 
@@ -216,14 +254,12 @@ function CricketLiveScore() {
     return (
       <>
         <CricketNavbar />
-
         <main className="cricket-live-page">
           <section className="cricket-live-empty">
             <div className="cricket-live-empty-icon">⏳</div>
             <h1>Loading Live Scores...</h1>
           </section>
-
-          <CricHeroesScorecard />
+          <CricHeroesScorecards />
         </main>
       </>
     );
@@ -233,16 +269,13 @@ function CricketLiveScore() {
     return (
       <>
         <CricketNavbar />
-
         <main className="cricket-live-page">
           <section className="cricket-live-empty">
             <div className="cricket-live-empty-icon">🏏</div>
             <h1>No Live Match</h1>
-
             <p>
               There are currently no cricket matches being played live.
             </p>
-
             <Link
               to="/cricket"
               className="cricket-live-back-button"
@@ -251,7 +284,7 @@ function CricketLiveScore() {
             </Link>
           </section>
 
-          <CricHeroesScorecard />
+          <CricHeroesScorecards />
         </main>
       </>
     );
@@ -291,23 +324,17 @@ function CricketLiveScore() {
 
       <main className="cricket-live-page">
         <section className="cricket-live-header">
-          <span className="cricket-live-badge">
-            🔴 LIVE NOW
-          </span>
-
+          <span className="cricket-live-badge">🔴 LIVE NOW</span>
           <h1>Cricket Live Score</h1>
-
           <p>
             Live match updates from Baharagora Champions League.
           </p>
-
           <div className="cricket-live-refresh">
             <span className="refresh-dot"></span>
             {" "}Real-time Supabase Sync Active
           </div>
         </section>
 
-        {/* LIVE SCORE CARD */}
         <section className="cricket-live-score-card">
           <div className="cricket-live-match-top">
             <span>🏏 {liveMatch.matchType}</span>
@@ -323,14 +350,11 @@ function CricketLiveScore() {
           <div className="cricket-live-teams">
             <div className="cricket-live-team">
               <div className="cricket-live-team-logo">🏏</div>
-
               <h2>{team1?.shortName || liveMatch.team1Name}</h2>
               <p>{team1?.name || liveMatch.team1Name}</p>
-
               <div className="cricket-live-score">
                 {innings1?.runs ?? 0}/{innings1?.wickets ?? 0}
               </div>
-
               <span className="cricket-live-overs">
                 {innings1?.overs ?? "0.0"} overs
               </span>
@@ -342,14 +366,11 @@ function CricketLiveScore() {
 
             <div className="cricket-live-team">
               <div className="cricket-live-team-logo">🏏</div>
-
               <h2>{team2?.shortName || liveMatch.team2Name}</h2>
               <p>{team2?.name || liveMatch.team2Name}</p>
-
               <div className="cricket-live-score">
                 {innings2?.runs ?? 0}/{innings2?.wickets ?? 0}
               </div>
-
               <span className="cricket-live-overs">
                 {innings2?.overs ?? "0.0"} overs
               </span>
@@ -368,7 +389,6 @@ function CricketLiveScore() {
           )}
         </section>
 
-        {/* MATCH SITUATION */}
         <section className="cricket-live-section">
           <div className="cricket-live-section-title">
             <div>
@@ -432,7 +452,6 @@ function CricketLiveScore() {
           </div>
         </section>
 
-        {/* BATTERS AND BOWLERS */}
         <section className="cricket-live-section">
           <div className="cricket-live-section-title">
             <div>
@@ -441,7 +460,6 @@ function CricketLiveScore() {
             </div>
           </div>
 
-          {/* BATTERS */}
           <div
             className="cricket-scorecard-block"
             style={{ marginBottom: "2rem" }}
@@ -451,10 +469,7 @@ function CricketLiveScore() {
                 <span>BATTERS</span>
                 <h3>{battingTeam?.name || "Batting Team"}</h3>
               </div>
-
-              <strong>
-                {currentRuns}/{currentWickets}
-              </strong>
+              <strong>{currentRuns}/{currentWickets}</strong>
             </div>
 
             <div className="cricket-batting-table">
@@ -473,15 +488,11 @@ function CricketLiveScore() {
                 </p>
               ) : (
                 liveMatch.batting.map((batter, index) => (
-                  <div
-                    className="cricket-batting-row"
-                    key={index}
-                  >
+                  <div className="cricket-batting-row" key={index}>
                     <div className="cricket-batter-name">
                       <strong>{batter.player}</strong>
                       <span>{batter.status}</span>
                     </div>
-
                     <strong>{batter.runs}</strong>
                     <span>{batter.balls}</span>
                     <span>{batter.fours}</span>
@@ -493,14 +504,12 @@ function CricketLiveScore() {
             </div>
           </div>
 
-          {/* BOWLERS */}
           <div className="cricket-scorecard-block">
             <div className="cricket-scorecard-heading">
               <div>
                 <span>BOWLERS</span>
                 <h3>Bowling Figures</h3>
               </div>
-
               <strong>LIVE</strong>
             </div>
 
@@ -520,10 +529,7 @@ function CricketLiveScore() {
                 </p>
               ) : (
                 liveMatch.bowling.map((bowler, index) => (
-                  <div
-                    className="cricket-bowling-row"
-                    key={index}
-                  >
+                  <div className="cricket-bowling-row" key={index}>
                     <strong>{bowler.player}</strong>
                     <span>{bowler.overs}</span>
                     <span>{bowler.maidens}</span>
@@ -537,7 +543,6 @@ function CricketLiveScore() {
           </div>
         </section>
 
-        {/* PARTNERSHIP */}
         <section className="cricket-live-section">
           <div className="cricket-partnership-card">
             <div className="cricket-partnership-header">
@@ -545,7 +550,6 @@ function CricketLiveScore() {
                 <span>CURRENT PARTNERSHIP</span>
                 <h3>{liveMatch.partnership.runs ?? 0} Runs</h3>
               </div>
-
               <div className="cricket-partnership-icon">🤝</div>
             </div>
 
@@ -554,12 +558,10 @@ function CricketLiveScore() {
                 <span>RUNS</span>
                 <strong>{liveMatch.partnership.runs ?? 0}</strong>
               </div>
-
               <div>
                 <span>BALLS</span>
                 <strong>{liveMatch.partnership.balls ?? 0}</strong>
               </div>
-
               <div>
                 <span>RUN RATE</span>
                 <strong>
@@ -570,17 +572,16 @@ function CricketLiveScore() {
           </div>
         </section>
 
-        {/* RECENT BALLS */}
-        {liveMatch.lastOver && liveMatch.lastOver.length > 0 && (
+        {liveMatch.lastOver.length > 0 && (
           <section className="cricket-live-section">
             <div className="cricket-live-section-title">
               <div>
                 <span>RECENT BALLS</span>
                 <h2>Last Over</h2>
               </div>
-
               <span>
-                Last updated: {lastUpdated.toLocaleTimeString()}
+                Last updated:{" "}
+                {lastUpdated?.toLocaleTimeString() || "Updating..."}
               </span>
             </div>
 
@@ -603,7 +604,6 @@ function CricketLiveScore() {
           </section>
         )}
 
-        {/* LIVE COMMENTARY */}
         <section className="cricket-live-section">
           <div className="cricket-live-section-title">
             <div>
@@ -641,7 +641,6 @@ function CricketLiveScore() {
                     <div className="cricket-commentary-top">
                       <strong>{event.text}</strong>
                     </div>
-
                     <p>{event.description}</p>
                   </div>
                 </div>
@@ -650,8 +649,7 @@ function CricketLiveScore() {
           </div>
         </section>
 
-        {/* CRICHEROES SCORECARD: EXTERNAL LINK ONLY, NO IFRAME */}
-        <CricHeroesScorecard />
+        <CricHeroesScorecards />
 
         <section className="cricket-live-bottom">
           <Link

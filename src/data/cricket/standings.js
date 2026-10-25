@@ -12,20 +12,20 @@ export const cricketStandings = [
   {
     position: 2,
     teamId: 5, // Kesharda Super Kings
-    played: 0,
-    won: 0,
+    played: 1,
+    won: 1,
     lost: 0,
-    points: 0,
-    nrr: "0.000",
+    points: 2,
+    nrr: "Provisional",
   },
   {
     position: 3,
     teamId: 4, // Team Gajraj
-    played: 0,
-    won: 0,
-    lost: 0,
-    points: 0,
-    nrr: "0.000",
+    played: 2,
+    won: 1,
+    lost: 1,
+    points: 2,
+    nrr: "Provisional",
   },
   {
     position: 4,
@@ -57,11 +57,11 @@ export const cricketStandings = [
   {
     position: 7,
     teamId: 7, // Sakara Royals
-    played: 1,
+    played: 2,
     won: 0,
-    lost: 1,
+    lost: 2,
     points: 0,
-    nrr: "-3.700",
+    nrr: "Provisional",
   },
   {
     position: 8,
