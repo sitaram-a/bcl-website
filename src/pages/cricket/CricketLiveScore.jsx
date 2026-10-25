@@ -20,14 +20,14 @@ const CRICHEROES_SCORECARDS = [
     title: "Match 2",
     teams: "Kesharda Super Kings vs Gajraj 11",
     result: "Kesharda Super Kings won by 39 runs (DLS)",
-    url: "",
+    url: "https://cricheroes.com/scorecard/27815332/baharagora-champions-league-season-5/kesharda-super-kings-vs-gajraj-11/summary",
   },
   {
     id: 3,
     title: "Match 3",
-    teams: "Sakra Royals vs Gajraj 11",
+    teams: "Sakara Royals vs Gajraj 11",
     result: "Gajraj 11 won by 7 wickets",
-    url: "https://cricheroes.com/scorecard/27815334/baharagora-champions-league-season-5/sakra-royals-vs-gajraj-11/scorecard",
+    url: "https://cricheroes.com/scorecard/27815334/baharagora-champions-league-season-5/sakra-royals-vs-gajraj-11/summary",
   },
 ];
 

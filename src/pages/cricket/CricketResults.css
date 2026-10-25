@@ -1,688 +1,713 @@
-/* ================================
-   CRICKET RESULTS PAGE
-================================ */
+
+/* =========================================
+   BCL SEASON 5 — CRICKET RESULTS
+   File: src/pages/cricket/CricketResults.css
+========================================= */
 
 .cricket-results-page {
+  --bcl-green: #087f5b;
+  --bcl-green-dark: #065f46;
+  --bcl-green-light: #d1fae5;
+  --bcl-gold: #f5b82e;
+  --bcl-text: #102a22;
+  --bcl-muted: #64748b;
+  --bcl-border: #e2e8f0;
+  --bcl-surface: #ffffff;
+  --bcl-background: #f5f8f6;
+
   min-height: 100vh;
-  background: #f4faf7;
-  padding-bottom: 60px;
+  padding: 36px 5% 64px;
+  background: var(--bcl-background);
+  color: var(--bcl-text);
+  box-sizing: border-box;
 }
 
-/* ================================
-   HEADER
-================================ */
+.cricket-results-page *,
+.cricket-results-page *::before,
+.cricket-results-page *::after {
+  box-sizing: border-box;
+}
+
+/* PAGE HEADER */
 
 .cricket-results-header {
   max-width: 1100px;
-  margin: 0 auto;
-
-  padding: 55px 20px 30px;
-
+  margin: 0 auto 36px;
+  padding: 42px 24px;
   text-align: center;
+  color: #ffffff;
+  background:
+    radial-gradient(
+      circle at 85% 15%,
+      rgba(245, 184, 46, 0.2),
+      transparent 30%
+    ),
+    linear-gradient(135deg, #063b2c 0%, #087f5b 60%, #0b986b 100%);
+  border-radius: 24px;
+  box-shadow: 0 14px 35px rgba(6, 95, 70, 0.14);
 }
 
 .cricket-section-badge {
-  display: inline-block;
-
-  padding: 7px 14px;
-
-  border-radius: 20px;
-
-  background: #dff7ea;
-  color: #075e3b;
-
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding: 8px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
   font-size: 12px;
   font-weight: 800;
-
-  letter-spacing: 0.8px;
+  letter-spacing: 1.4px;
 }
 
 .cricket-results-header h1 {
-  margin: 15px 0 8px;
-
-  color: #064d31;
-
-  font-size: 38px;
-  font-weight: 800;
-}
-
-.cricket-results-header p {
   margin: 0;
-
-  color: #66756d;
-
-  font-size: 16px;
+  font-size: clamp(30px, 5vw, 48px);
+  line-height: 1.15;
+  font-weight: 900;
+  letter-spacing: -1.4px;
 }
 
-/* ================================
-   RESULTS LIST
-================================ */
-
-.cricket-results-list {
-  max-width: 900px;
-
-  margin: 0 auto;
-
-  padding: 10px 20px;
+.cricket-results-header > p {
+  max-width: 600px;
+  margin: 14px auto 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 15px;
+  line-height: 1.7;
 }
 
-/* ================================
-   RESULT CARD
-================================ */
+/* SUMMARY STATS */
 
-.cricket-result-card {
-  background: white;
-
-  border: 1px solid #dcece4;
-
-  border-radius: 18px;
-
-  padding: 24px;
-
-  margin-bottom: 20px;
-
-  box-shadow: 0 8px 25px rgba(0, 80, 45, 0.07);
-
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.cricket-result-card:hover {
-  transform: translateY(-3px);
-
-  box-shadow: 0 12px 30px rgba(0, 80, 45, 0.12);
-}
-
-/* ================================
-   TOP
-================================ */
-
-.cricket-result-top {
-  display: flex;
-
-  justify-content: space-between;
-
-  align-items: center;
-
-  margin-bottom: 18px;
-}
-
-.cricket-result-status {
-  background: #e1f5e9;
-
-  color: #087443;
-
-  padding: 6px 12px;
-
-  border-radius: 20px;
-
-  font-size: 11px;
-
-  font-weight: 800;
-}
-
-.cricket-result-id {
-  color: #84928b;
-
-  font-size: 12px;
-}
-
-/* ================================
-   DATE
-================================ */
-
-.cricket-result-date {
-  text-align: center;
-
-  margin-bottom: 25px;
-
-  color: #075e3b;
-
-  font-size: 14px;
-
-  font-weight: 700;
-}
-
-/* ================================
-   TEAMS
-================================ */
-
-.cricket-result-teams {
+.cricket-results-summary {
   display: grid;
-
-  grid-template-columns: 1fr auto 1fr;
-
-  align-items: center;
-
-  gap: 25px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  max-width: 650px;
+  margin: 30px auto 0;
 }
 
-.cricket-result-team {
-  text-align: center;
-}
-
-.cricket-result-logo {
-  width: 70px;
-  height: 70px;
-
-  margin: 0 auto 10px;
-
-  border-radius: 50%;
-
-  background: #e9f7ef;
-
+.cricket-results-summary > div {
   display: flex;
-
+  flex-direction: column;
   align-items: center;
+  gap: 5px;
+  padding: 17px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.09);
+}
 
-  justify-content: center;
-
+.cricket-results-summary strong {
+  color: #ffffff;
   font-size: 30px;
-
-  overflow: hidden;
+  line-height: 1;
+  font-weight: 900;
 }
 
-.cricket-result-logo img {
-  width: 100%;
-  height: 100%;
-
-  object-fit: contain;
-}
-
-.cricket-result-team h2 {
-  margin: 0;
-
-  color: #16372a;
-
-  font-size: 18px;
-}
-
-.cricket-result-team span {
-  display: block;
-
-  margin-top: 4px;
-
-  color: #829089;
-
+.cricket-results-summary span {
+  color: rgba(255, 255, 255, 0.78);
   font-size: 12px;
-
   font-weight: 600;
 }
 
-/* ================================
-   SCORE
-================================ */
+/* MATCH LIST */
 
-.cricket-result-score {
-  text-align: center;
-
-  min-width: 190px;
-}
-
-.cricket-score-numbers {
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  gap: 12px;
-}
-
-.cricket-score-numbers strong {
-  color: #064d31;
-
-  font-size: 26px;
-
-  font-weight: 800;
-}
-
-.cricket-score-numbers span {
-  color: #a2aea8;
-
-  font-size: 18px;
-}
-
-.cricket-final-label {
-  margin-top: 7px;
-
-  color: #7a8881;
-
-  font-size: 10px;
-
-  font-weight: 800;
-
-  letter-spacing: 1px;
-}
-
-/* ================================
-   VENUE
-================================ */
-
-.cricket-result-venue {
-  margin-top: 25px;
-
-  padding-top: 16px;
-
-  border-top: 1px solid #edf3ef;
-
-  text-align: center;
-
-  color: #697970;
-
-  font-size: 13px;
-}
-
-/* ================================
-   EMPTY STATE
-================================ */
-
-.cricket-no-results {
-  background: white;
-
-  border: 1px solid #dcece4;
-
-  border-radius: 18px;
-
-  padding: 55px 20px;
-
-  text-align: center;
-}
-
-.cricket-no-results > div {
-  font-size: 45px;
-}
-
-.cricket-no-results h2 {
-  margin: 15px 0 8px;
-
-  color: #164a35;
-}
-
-.cricket-no-results p {
-  margin: 0;
-
-  color: #78877f;
-}
-
-/* ================================
-   BOTTOM
-================================ */
-
-.cricket-results-bottom {
-  max-width: 900px;
-
-  margin: 20px auto 0;
-
-  padding: 0 20px;
-}
-
-.cricket-back-button {
-  display: inline-block;
-
-  padding: 10px 16px;
-
-  background: #075e3b;
-
-  color: white;
-
-  border-radius: 8px;
-
-  text-decoration: none;
-
-  font-size: 13px;
-
-  font-weight: 700;
-
-  transition: background 0.2s ease;
-}
-
-.cricket-back-button:hover {
-  background: #064c30;
-}
-
-/* ================================
-   MOBILE
-================================ */
-
-@media (max-width: 600px) {
-
-  .cricket-results-header {
-    padding-top: 35px;
-  }
-
-  .cricket-results-header h1 {
-    font-size: 30px;
-  }
-
-  .cricket-result-card {
-    padding: 18px;
-  }
-
-  .cricket-result-teams {
-    gap: 8px;
-  }
-
-  .cricket-result-logo {
-    width: 58px;
-    height: 58px;
-
-    font-size: 24px;
-  }
-
-  .cricket-result-team h2 {
-    font-size: 15px;
-  }
-
-  .cricket-result-score {
-    min-width: 110px;
-  }
-
-  .cricket-score-numbers {
-    gap: 6px;
-  }
-
-  .cricket-score-numbers strong {
-    font-size: 19px;
-  }
-
-}
-
-
-.cricket-season-info {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
-  margin: 28px 0 20px;
-}
-
-.cricket-season-info > div {
+.cricket-results-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 18px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.06);
-}
-
-.cricket-season-info span {
-  font-size: 11px;
-  letter-spacing: 1px;
-  opacity: 0.75;
-}
-
-.cricket-season-info strong {
-  font-size: 16px;
-}
-
-.cricket-season-note {
-  line-height: 1.7;
-  margin: 18px 0 24px;
-}
-
-@media (max-width: 600px) {
-  .cricket-season-info {
-    grid-template-columns: 1fr;
-  }
-
-  .cricket-season-info > div {
-    padding: 14px;
-  }
-}
-
-
-.result-scorecard {
-  width: 100%;
-  max-width: 1050px;
+  gap: 18px;
+  max-width: 1100px;
   margin: 0 auto;
+}
+
+/* TOOLBAR AND FILTERS */
+
+.cricket-results-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-bottom: 4px;
+}
+
+.cricket-results-toolbar h2 {
+  margin: 0;
+  color: var(--bcl-text);
+  font-size: 25px;
+  font-weight: 850;
+  letter-spacing: -0.6px;
+}
+
+.cricket-results-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cricket-results-filters button {
+  min-height: 40px;
+  padding: 10px 15px;
+  border: 1px solid var(--bcl-border);
+  border-radius: 999px;
+  background: #ffffff;
+  color: #475569;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 750;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.cricket-results-filters button:hover {
+  border-color: var(--bcl-green);
+  color: var(--bcl-green-dark);
+}
+
+.cricket-results-filters button.active {
+  border-color: var(--bcl-green);
+  background: var(--bcl-green);
+  color: #ffffff;
+}
+
+/* MATCH CARD */
+
+.result-scorecard.result-match-card {
+  width: 100%;
+  min-width: 0;
   padding: 24px;
-  background: #fff;
-  color: #172033;
-  border: 1px solid #e2e8f0;
-  border-radius: 18px;
-  box-shadow: 0 12px 35px rgba(15, 23, 42, 0.08);
+  overflow: hidden;
+  border: 1px solid var(--bcl-border);
+  border-radius: 20px;
+  background: var(--bcl-surface);
+  box-shadow: 0 5px 18px rgba(15, 23, 42, 0.035);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.result-scorecard.result-match-card:hover {
+  border-color: #b7dfce;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.07);
+  transform: translateY(-2px);
+}
+
+.result-card-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 18px;
 }
 
 .result-tournament-label {
-  color: #0d9488;
-  font-size: 0.76rem;
-  font-weight: 800;
-  letter-spacing: 1px;
+  color: var(--bcl-muted);
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 1.1px;
 }
 
 .result-match-status {
-  display: inline-block;
-  margin-top: 12px;
-  padding: 5px 10px;
-  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+  padding: 6px 11px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 0.5px;
+}
+
+.result-match-status.status-finished,
+.result-match-status.status-completed {
   background: #dcfce7;
   color: #166534;
-  font-size: 0.72rem;
-  font-weight: 800;
 }
+
+.result-match-status.status-live {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.result-match-status.status-upcoming,
+.result-match-status.status-scheduled {
+  background: #e2e8f0;
+  color: #475569;
+}
+
+.result-match-date {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 22px;
+  color: var(--bcl-muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* TEAM SCORE DISPLAY */
 
 .result-teams {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: minmax(0, 1fr) 52px minmax(0, 1fr);
   align-items: center;
-  gap: 18px;
-  margin: 24px 0;
+  gap: 12px;
+  padding: 20px 12px;
+  border-radius: 16px;
+  background: #f8faf9;
 }
 
 .result-team {
   display: flex;
+  min-width: 0;
   flex-direction: column;
-  gap: 7px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
-.result-team:last-child {
-  text-align: right;
+.result-team-logo {
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 12px;
+  object-fit: contain;
 }
 
 .result-team h2 {
-  margin: 0;
-  font-size: clamp(1rem, 2vw, 1.3rem);
+  max-width: 100%;
+  margin: 0 0 12px;
+  overflow-wrap: anywhere;
+  color: var(--bcl-text);
+  font-size: clamp(12px, 1.8vw, 16px);
+  font-weight: 850;
+  line-height: 1.4;
 }
 
-.result-team strong {
-  font-size: clamp(1.6rem, 4vw, 2.3rem);
-  line-height: 1.1;
+.result-team > strong {
+  color: var(--bcl-green-dark);
+  font-size: clamp(23px, 3.3vw, 34px);
+  font-weight: 900;
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
 }
 
-.result-team span {
+.result-team > span {
+  margin-top: 7px;
+  color: var(--bcl-muted);
+  font-size: 12px;
+}
+
+.result-team .result-pending-score {
+  min-height: 28px;
   color: #64748b;
-  font-size: 0.85rem;
+  font-size: 12px;
+  font-weight: 650;
 }
 
 .result-vs {
-  color: #94a3b8;
-  font-size: 0.8rem;
-  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  margin: 0 auto;
+  border: 1px solid #dbe5df;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 900;
 }
+
+/* RESULT AND FIXTURE STATUS */
 
 .result-winner {
-  padding: 13px;
-  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 18px;
+  padding: 13px 15px;
+  border: 1px solid #a7f3d0;
+  border-radius: 12px;
   background: #ecfdf5;
-  color: #047857;
-  text-align: center;
+  color: #065f46;
+  font-size: 13px;
   font-weight: 800;
+  line-height: 1.6;
+  text-align: center;
 }
 
+.result-winner svg {
+  flex-shrink: 0;
+  color: #b77900;
+}
+
+.result-fixture-status {
+  margin-top: 18px;
+  padding: 13px 15px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #f8fafc;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* OPTIONAL MATCH INFORMATION */
+
 .result-match-meta {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-  margin: 18px 0 26px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin-top: 15px;
 }
 
 .result-match-meta p {
   margin: 0;
-  padding: 12px;
-  border: 1px solid #e2e8f0;
-  border-radius: 9px;
+  color: var(--bcl-muted);
+  font-size: 12px;
   line-height: 1.6;
-  font-size: 0.9rem;
 }
 
-.result-innings-heading {
+.result-match-meta strong {
+  color: #334155;
+}
+
+/* SCORECARD ACTION */
+
+.result-card-actions {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: flex-end;
   gap: 12px;
-  padding: 16px;
-  background: #f1f5f9;
-  border-radius: 10px 10px 0 0;
-}
-
-.result-innings-heading h2 {
-  margin: 0;
-  font-size: 1rem;
-}
-
-.result-table-title {
-  margin: 22px 0 10px;
-  font-size: 1rem;
-}
-
-.result-table-wrap {
-  width: 100%;
-  overflow-x: auto;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
-}
-
-.result-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.86rem;
-  white-space: nowrap;
-}
-
-.result-table th,
-.result-table td {
-  padding: 12px 14px;
-  border-bottom: 1px solid #e2e8f0;
-  text-align: right;
-}
-
-.result-table th:first-child,
-.result-table td:first-child {
-  text-align: left;
-}
-
-.result-table thead {
-  background: #f8fafc;
-  color: #475569;
-}
-
-.result-table tbody tr:last-child td {
-  border-bottom: 0;
-}
-
-.result-table tbody tr:hover {
-  background: #f8fafc;
-}
-
-.result-extras {
-  color: #475569;
-}
-
-.result-total {
-  background: #ecfdf5;
-  font-weight: 800;
-}
-
-.result-fall-wickets {
-  margin-top: 24px;
-  padding: 16px;
-  background: #f8fafc;
-  border-radius: 10px;
-}
-
-.result-fall-wickets h3,
-.result-second-innings h3 {
-  margin: 0 0 8px;
-  font-size: 1rem;
-}
-
-.result-fall-wickets p,
-.result-second-innings p {
-  margin: 0;
-  color: #64748b;
-  line-height: 1.7;
-  font-size: 0.9rem;
-}
-
-.result-second-innings {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-  margin-top: 18px;
-  padding: 18px;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
+  margin-top: 20px;
+  padding-top: 17px;
+  border-top: 1px solid #edf0f2;
 }
 
 .result-official-link {
   display: inline-flex;
-  margin-top: 22px;
-  padding: 12px 18px;
-  border-radius: 9px;
-  background: #0f766e;
-  color: white;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 44px;
+  padding: 11px 17px;
+  border: 1px solid var(--bcl-green);
+  border-radius: 11px;
+  background: var(--bcl-green);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.4;
+  text-align: center;
   text-decoration: none;
-  font-weight: 700;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .result-official-link:hover {
-  background: #115e59;
+  border-color: var(--bcl-green-dark);
+  background: var(--bcl-green-dark);
 }
 
-@media (max-width: 600px) {
-  .result-scorecard {
-    padding: 14px;
-    border-radius: 12px;
+.result-official-link svg {
+  flex-shrink: 0;
+}
+
+.result-scorecard-pending {
+  color: var(--bcl-muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* LOADING AND EMPTY STATES */
+
+.cricket-results-message {
+  margin: 0;
+  padding: 25px;
+  border: 1px solid var(--bcl-border);
+  border-radius: 16px;
+  background: #ffffff;
+  color: var(--bcl-muted);
+  text-align: center;
+}
+
+.cricket-no-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 48px 20px;
+  border: 1px solid var(--bcl-border);
+  border-radius: 18px;
+  background: #ffffff;
+  text-align: center;
+}
+
+.cricket-no-results > svg {
+  color: var(--bcl-green);
+}
+
+.cricket-no-results h2 {
+  margin: 0;
+  color: var(--bcl-text);
+  font-size: 21px;
+}
+
+.cricket-no-results p {
+  margin: 0;
+  color: var(--bcl-muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* BOTTOM NAVIGATION */
+
+.cricket-results-bottom {
+  display: flex;
+  justify-content: center;
+  max-width: 1100px;
+  margin: 32px auto 0;
+}
+
+.cricket-back-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 12px 20px;
+  border: 1px solid var(--bcl-border);
+  border-radius: 12px;
+  background: #ffffff;
+  color: var(--bcl-green-dark);
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.cricket-back-button:hover {
+  border-color: var(--bcl-green);
+  background: #ecfdf5;
+}
+
+/* TABLET */
+
+@media (max-width: 768px) {
+  .cricket-results-page {
+    padding: 24px 4% 44px;
+  }
+
+  .cricket-results-header {
+    padding: 34px 18px;
+    border-radius: 20px;
+  }
+
+  .cricket-results-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .cricket-results-filters {
+    width: 100%;
+  }
+
+  .cricket-results-filters button {
+    flex: 1 1 auto;
+  }
+
+  .result-scorecard.result-match-card {
+    padding: 19px;
+    border-radius: 17px;
+  }
+
+  .result-team-logo {
+    width: 54px;
+    height: 54px;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 480px) {
+  .cricket-results-page {
+    padding: 18px 12px 36px;
+  }
+
+  .cricket-results-header {
+    margin-bottom: 26px;
+    padding: 30px 15px;
+    border-radius: 17px;
+  }
+
+  .cricket-results-header h1 {
+    font-size: 30px;
+    letter-spacing: -0.8px;
+  }
+
+  .cricket-results-header > p {
+    font-size: 13px;
+  }
+
+  .cricket-results-summary {
+    gap: 7px;
+    margin-top: 24px;
+  }
+
+  .cricket-results-summary > div {
+    padding: 13px 5px;
+    border-radius: 10px;
+  }
+
+  .cricket-results-summary strong {
+    font-size: 25px;
+  }
+
+  .cricket-results-summary span {
+    font-size: 10px;
+    text-align: center;
+  }
+
+  .cricket-results-toolbar h2 {
+    font-size: 21px;
+  }
+
+  .cricket-results-filters {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cricket-results-filters button {
+    width: 100%;
+    padding: 10px 8px;
+    font-size: 11px;
+  }
+
+  .result-scorecard.result-match-card {
+    padding: 15px 12px;
+    border-radius: 15px;
+  }
+
+  .result-card-topline {
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .result-tournament-label {
+    font-size: 9px;
+    letter-spacing: 0.7px;
+  }
+
+  .result-match-status {
+    min-height: 25px;
+    padding: 5px 8px;
+    font-size: 9px;
+  }
+
+  .result-match-date {
+    align-items: flex-start;
+    margin-bottom: 15px;
+    font-size: 11px;
   }
 
   .result-teams {
-    gap: 8px;
+    grid-template-columns: minmax(0, 1fr) 34px minmax(0, 1fr);
+    gap: 5px;
+    padding: 18px 5px;
+    border-radius: 12px;
+  }
+
+  .result-team-logo {
+    width: 43px;
+    height: 43px;
+    margin-bottom: 9px;
   }
 
   .result-team h2 {
-    font-size: 0.9rem;
+    margin-bottom: 9px;
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+  .result-team > strong {
+    font-size: 23px;
+  }
+
+  .result-team > span {
+    font-size: 10px;
+  }
+
+  .result-team .result-pending-score {
+    font-size: 10px;
+  }
+
+  .result-vs {
+    width: 32px;
+    height: 32px;
+    font-size: 9px;
+  }
+
+  .result-winner,
+  .result-fixture-status {
+    gap: 6px;
+    margin-top: 13px;
+    padding: 11px 9px;
+    font-size: 11px;
   }
 
   .result-match-meta {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+    gap: 6px;
   }
 
-  .result-table th,
-  .result-table td {
-    padding: 10px;
+  .result-match-meta p {
+    font-size: 11px;
+  }
+
+  .result-card-actions {
+    justify-content: stretch;
+    margin-top: 15px;
+    padding-top: 13px;
   }
 
   .result-official-link {
-    display: flex;
-    justify-content: center;
+    width: 100%;
+    min-height: 44px;
+    padding: 11px 10px;
+    font-size: 11px;
+  }
+
+  .result-scorecard-pending {
+    font-size: 11px;
     text-align: center;
   }
 }
 
+/* ACCESSIBILITY */
 
-.result-team-logo {
-  width: 58px;
-  height: 58px;
-  object-fit: contain;
-  margin-bottom: 8px;
-}
-
-@media (max-width: 600px) {
-  .result-team-logo {
-    width: 42px;
-    height: 42px;
+@media (prefers-reduced-motion: reduce) {
+  .cricket-results-page *,
+  .cricket-results-page *::before,
+  .cricket-results-page *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
   }
 }
