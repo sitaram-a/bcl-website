@@ -1,68 +1,137 @@
 
 export const cricketResults = [
+  // DAY 1 — 25 OCTOBER 2026
   {
     id: 1,
     team1Id: 1,
     team2Id: 7,
-
     team1Name: "BAHARAGORA KINGS",
     team2Name: "SAKARA ROYALS",
-
     score1: "164/7",
     overs1: "10.0",
     score2: "127/6",
     overs2: "10.0",
-
     date: "2026-10-25",
     venue: "Baharagora, Chatshila",
     status: "FINISHED",
-
     result: "Baharagora Kings won by 37 runs",
     toss: "Sakara Royals opted to field",
     playerOfMatch: "Subhendu Das",
+    scorecardUrl:
+      "https://cricheroes.com/scorecard/27884163/baharagora-champions-league-season-5/baharagora-kings-vs-sakra-royals/summary",
   },
-
   {
     id: 2,
     team1Id: 5,
     team2Id: 4,
-
     team1Name: "KESHARDA SUPER KINGS",
     team2Name: "GAJRAJ 11",
-
     score1: "181/2",
     overs1: "10.0",
     score2: "142/7",
     overs2: "10.0",
-
     date: "2026-10-25",
     venue: "Baharagora, Chatshila",
     status: "FINISHED",
-
     result: "Kesharda Super Kings won by 39 runs (DLS)",
     toss: "Gajraj 11 opted to field",
     playerOfMatch: "Not confirmed",
+    scorecardUrl:
+      "https://cricheroes.com/scorecard/27815332/baharagora-champions-league-season-5/kesharda-super-kings-vs-gajraj-11/summary",
   },
-
   {
     id: 3,
     team1Id: 7,
     team2Id: 4,
-
     team1Name: "SAKARA ROYALS",
     team2Name: "GAJRAJ 11",
-
     score1: "119/2",
     overs1: "10.0",
     score2: "121/3",
     overs2: "8.4",
-
     date: "2026-10-25",
     venue: "Baharagora, Chatshila",
     status: "FINISHED",
-
     result: "Gajraj 11 won by 7 wickets",
     toss: "Gajraj 11 opted to field",
     playerOfMatch: "Parmit Singh",
+    scorecardUrl:
+      "https://cricheroes.com/scorecard/27815334/baharagora-champions-league-season-5/sakra-royals-vs-gajraj-11/summary",
+  },
+
+  // DAY 2 — 26 OCTOBER 2026
+  {
+    id: 4,
+    team1Id: 2,
+    team2Id: 8,
+    team1Name: "BAHARAGORA ROYALS",
+    team2Name: "RR THUNDER STAR",
+    score1: "111/10",
+    overs1: "9.4",
+    score2: "77/10",
+    overs2: "10.0",
+    date: "2026-10-26",
+    venue: "Baharagora, Ghatsila",
+    status: "FINISHED",
+    result: "Baharagora Royals won by 34 runs",
+    toss: "",
+    playerOfMatch: "",
+    scorecardUrl:
+      "https://cricheroes.com/scorecard/27815346/baharagora-champions-league-season-5/baharagora-royals-vs-r&r-thunder-star/summary",
+  },
+  {
+    id: 5,
+    team1Id: 1,
+    team2Id: 7,
+    team1Name: "BAHARAGORA KINGS",
+    team2Name: "SAKARA ROYALS",
+    score1: "",
+    overs1: "",
+    score2: "",
+    overs2: "",
+    date: "2026-10-26",
+    venue: "Baharagora, Ghatsila",
+    status: "ABANDONED",
+    result: "Match abandoned (player)",
+    toss: "",
+    playerOfMatch: "",
+  },
+  {
+    id: 6,
+    team1Id: 3,
+    team2Id: 2,
+    team1Name: "DIGBARDA PITCH PANTHERS",
+    team2Name: "BAHARAGORA ROYALS",
+    score1: "148/6",
+    overs1: "10.0",
+    score2: "149/3",
+    overs2: "9.2",
+    date: "2026-10-26",
+    venue: "Baharagora, Ghatsila",
+    status: "FINISHED",
+    result: "Baharagora Royals won by 7 wickets",
+    toss: "",
+    playerOfMatch: "",
+    scorecardUrl:
+      "https://cricheroes.com/scorecard/27815339/baharagora-champions-league-season-5/digbarda-pitch-panthers-vs-baharagora-royals/summary",
+  },
+  {
+    id: 7,
+    team1Id: 6,
+    team2Id: 8,
+    team1Name: "KHANDAMOUDA WARRIORS",
+    team2Name: "RR THUNDER STAR",
+    score1: "83/6",
+    overs1: "10.0",
+    score2: "88/1",
+    overs2: "6.2",
+    date: "2026-10-26",
+    venue: "Baharagora, Ghatsila",
+    status: "FINISHED",
+    result: "RR Thunder Star won by 9 wickets",
+    toss: "",
+    playerOfMatch: "",
+    scorecardUrl:
+      "https://cricheroes.com/scorecard/27815336/baharagora-champions-league-season-5/khandamouda-warriors-vs-r&r-thunder-star/summary",
   },
 ];

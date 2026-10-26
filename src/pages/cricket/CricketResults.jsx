@@ -1,5 +1,5 @@
 
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ExternalLink, CalendarDays, Trophy } from "lucide-react";
 import CricketNavbar from "../../components/cricket/CricketNavbar";
@@ -8,11 +8,11 @@ import { cricketTeams } from "../../data/cricket/teams";
 import { getCricketFixtures } from "../../services/cricketService";
 import "./CricketResults.css";
 
-const OFFICIAL_SCORECARDS = {
-  1: "https://cricheroes.com/scorecard/27884163/baharagora-champions-league-season-5/baharagora-kings-vs-sakra-royals/summary",
-  2: "https://cricheroes.com/scorecard/27815332/baharagora-champions-league-season-5/kesharda-super-kings-vs-gajraj-11/summary",
-  3: "https://cricheroes.com/scorecard/27815334/baharagora-champions-league-season-5/sakra-royals-vs-gajraj-11/summary",
-};
+// const OFFICIAL_SCORECARDS = {
+//   1: "https://cricheroes.com/scorecard/27884163/baharagora-champions-league-season-5/baharagora-kings-vs-sakra-royals/summary",
+//   2: "https://cricheroes.com/scorecard/27815332/baharagora-champions-league-season-5/kesharda-super-kings-vs-gajraj-11/summary",
+//   3: "https://cricheroes.com/scorecard/27815334/baharagora-champions-league-season-5/sakra-royals-vs-gajraj-11/summary",
+// };
 
 function getTeam(teamId, fallbackName) {
   const team = cricketTeams.find(
@@ -43,7 +43,7 @@ function CricketResults() {
   const [fixtureLoading, setFixtureLoading] = useState(true);
   const [filter, setFilter] = useState("ALL");
 
-  useMemo(() => {
+  useEffect(() => {
     let active = true;
 
     async function loadFixtures() {
@@ -124,9 +124,15 @@ function CricketResults() {
 
     if (filter === "LIVE") return status === "LIVE";
 
-    if (filter === "UPCOMING") {
-      return !["FINISHED", "COMPLETED", "LIVE"].includes(status);
-    }
+   if (filter === "UPCOMING") {
+  return ![
+    "FINISHED",
+    "COMPLETED",
+    "LIVE",
+    "ABANDONED",
+    "CANCELLED",
+  ].includes(status);
+}
 
     return true;
   });
@@ -226,10 +232,7 @@ function CricketResults() {
               status === "COMPLETED";
 
             const scorecardUrl =
-              OFFICIAL_SCORECARDS[match.id] ||
-              match.scorecardUrl ||
-              match.scorecard_url ||
-              "";
+  match.scorecardUrl || match.scorecard_url || "";
 
             return (
               <article
@@ -245,10 +248,14 @@ function CricketResults() {
                     className={`result-match-status status-${status.toLowerCase()}`}
                   >
                     {status === "FINISHED" || status === "COMPLETED"
-                      ? "COMPLETED"
-                      : status === "LIVE"
-                        ? "🔴 LIVE"
-                        : "UPCOMING"}
+  ? "COMPLETED"
+  : status === "LIVE"
+    ? "🔴 LIVE"
+    : status === "ABANDONED"
+      ? "ABANDONED"
+      : status === "CANCELLED"
+        ? "CANCELLED"
+        : "UPCOMING"}
                   </span>
                 </div>
 

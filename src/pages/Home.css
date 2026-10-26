@@ -7314,6 +7314,9 @@
   text-decoration: none;
   transition: filter 0.2s ease, transform 0.2s ease;
 }
+.home-upcoming-status{
+  color: #ffffff;
+}
 
 .home-upcoming-link:hover {
   filter: brightness(1.1);
