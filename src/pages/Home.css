@@ -7302,7 +7302,7 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  width: 100%;
+  /* width: 100%; */
   margin-top: auto;
   padding: 12px 14px;
   border: 1px solid rgba(245, 215, 123, 0.35);
@@ -8189,3 +8189,4 @@
     object-fit: contain; /* Keeps the entire image visible without cropping */
   }
 }
+

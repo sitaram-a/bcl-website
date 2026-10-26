@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-
+// import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import footballLogo from "../assets/logo/bcl-football-logo.png";
 import cricketLogo from "../assets/logo/bcl-cricket-logo.png";
 import cricketball from "../assets/icons/cricket-ball.png";
@@ -202,39 +202,37 @@ const currentAdvertisement =
     cricketTeams.find((team) => team.id === teamId);
 
 
+
 const getCricketFixtureTeam = (teamName) => {
-  const normalizedName = teamName?.trim().toUpperCase();
+  if (!teamName) return undefined;
+
+  const normalize = (value) =>
+    value?.trim().toUpperCase().replace(/[.\s_-]+/g, "") || "";
 
   const aliases = {
-    "BAHARAGORA KINGS": ["BAHARAGORA KINGS", "BAHARAGORA"],
-    "BAHARAGORA ROYALS": ["BAHARAGORA ROYALS", "ROYALS"],
-    "DIGBARDA PITCH PANTHERS": [
-      "DIGBARDA PITCH PANTHERS",
-      "PANTHERS",
-    ],
-    "TEAM GAJRAJ": ["TEAM GAJRAJ", "GAJRAJ", "GAJRAJ CKU"],
-    "KESHARDA SUPER KINGS": [
-      "KESHARDA SUPER KINGS",
-      "KESHARDA SUPER KING",
-      "KESHARDA",
-    ],
-    "KHANDAMOUDA WARRIORS": [
-      "KHANDAMOUDA WARRIORS",
-      "KHANDAMOUDA WARRIOR",
-      "KHANDAMOUDA",
-    ],
-    "SAKARA ROYALS": ["SAKARA ROYALS", "SAKRA ROYALS", "SAKARA"],
-    "RR THUNDER STAR": ["RR THUNDER STAR", "RR THUNDER", "R.R THUNDER"],
+    "BAHARAGORA KINGS": ["BAHARAGORA"],
+    "BAHARAGORA ROYALS": ["ROYALS"],
+    "DIGBARDA PITCH PANTHERS": ["PANTHERS"],
+    "TEAM GAJRAJ": ["GAJRAJ", "GAJRAJ CKU"],
+    "KESHARDA SUPER KINGS": ["KESHARDA SUPER KING", "KESHARDA"],
+    "KHANDAMOUDA WARRIORS": ["KHANDAMOUDA WARRIOR", "KHANDAMOUDA"],
+    "SAKARA ROYALS": ["SAKRA ROYALS", "SAKARA"],
+    "RR THUNDER STAR": ["RR THUNDER", "R.R THUNDER"],
   };
 
+  const normalizedName = normalize(teamName);
+
   return cricketTeams.find((team) => {
-    const canonicalName = team.name?.trim().toUpperCase();
-    const shortName = team.shortName?.trim().toUpperCase();
+    const canonicalName = normalize(team.name);
+    const shortName = normalize(team.shortName || team.short_name);
+
+    const teamAliases = (aliases[team.name?.trim().toUpperCase()] || [])
+      .map(normalize);
 
     return (
       canonicalName === normalizedName ||
       shortName === normalizedName ||
-      (aliases[canonicalName] || []).includes(normalizedName)
+      teamAliases.includes(normalizedName)
     );
   });
 };
@@ -380,6 +378,42 @@ useEffect(() => {
   };
 }, []);
 
+
+const upcomingCricketFixtures = useMemo(() => {
+  const now = new Date();
+
+  const istNow = new Date(
+    now.toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
+  );
+
+  return [...cricketFixtures]
+    .filter((match) => {
+      const status = match.status?.toUpperCase();
+
+      if (status !== "UPCOMING" && status !== "SCHEDULED") {
+        return false;
+      }
+
+      // Fixture date/time is interpreted as Indian Standard Time.
+      const matchDateTime = new Date(
+        `${match.date}T${match.time || "00:00"}:00+05:30`
+      );
+
+      return matchDateTime > now;
+    })
+    .sort((a, b) => {
+      const dateA = new Date(
+        `${a.date}T${a.time || "00:00"}:00+05:30`
+      );
+
+      const dateB = new Date(
+        `${b.date}T${b.time || "00:00"}:00+05:30`
+      );
+
+      return dateA - dateB;
+    })
+    .slice(0, 3);
+}, []);
 
   return (
     <div className="home-page">
@@ -1863,95 +1897,114 @@ useEffect(() => {
       <div>
         <span>COMING UP</span>
         <h2>Upcoming Matches</h2>
-        <p>
-          Don't miss the upcoming BCL Cricket 2026 matches.
-        </p>
+        <p>Don't miss the upcoming BCL Cricket 2026 matches.</p>
       </div>
+
+      <Link to="/cricket/fixtures" className="home-upcoming-link">
+        All Fixtures →
+      </Link>
     </div>
 
     <div className="home-upcoming-list">
-      {/* ================= CRICKET FIXTURES ================= */}
-      {cricketFixtures.length > 0 ? (
-        cricketFixtures.slice(0, 3).map((match) => (
-          <div
-            className="home-upcoming-card"
-            key={`cricket-${match.id}`}
-          >
-            <div className="home-upcoming-date">
-              <strong>{formatMatchDate(match.date)}</strong>
-              <span>{formatMatchTime(match.time)}</span>
-            </div>
+      {upcomingCricketFixtures.length > 0 ? (
+        upcomingCricketFixtures.map((match) => {
+          const team1 = getCricketFixtureTeam(match.team1);
+          const team2 = getCricketFixtureTeam(match.team2);
 
-            <div className="home-upcoming-sport cricket">
-              🏏 CRICKET
-            </div>
+          return (
+            <article className="home-upcoming-card" key={match.id}>
+              <div className="home-upcoming-card-top">
+                <span className="home-upcoming-sport cricket">
+                  🏏 CRICKET
+                </span>
 
+                <span className="home-upcoming-status">
+                  UPCOMING
+                </span>
+              </div>
 
+              <div className="home-upcoming-date">
+                <strong>{formatMatchDate(match.date)}</strong>
+                <span>{formatMatchTime(match.time)}</span>
+              </div>
 
-            
-<div className="home-upcoming-teams">
-  {(() => {
-    const team1 = getCricketFixtureTeam(match.team1);
-    const team2 = getCricketFixtureTeam(match.team2);
+              <div className="home-upcoming-teams">
+                <div className="home-upcoming-team">
+                  {team1?.logo ? (
+                    <img
+                      src={team1.logo}
+                      alt={`${team1.name} logo`}
+                      className="home-upcoming-team-logo"
+                    />
+                  ) : (
+                    <span className="home-upcoming-team-placeholder">
+                      🏏
+                    </span>
+                  )}
 
-    return (
-      <>
-        <div className="home-upcoming-team">
-          {team1?.logo && (
-            <img
-              src={team1.logo}
-              alt={`${team1.name} logo`}
-              className="home-upcoming-team-logo"
-            />
-          )}
-          <strong>{match.team1}</strong>
-        </div>
+                  <strong>
+                    {team1?.name || match.team1 || "Team TBD"}
+                  </strong>
+                </div>
 
-        <span className="home-upcoming-vs">VS</span>
+                <span className="home-upcoming-vs">VS</span>
 
-        <div className="home-upcoming-team">
-          {team2?.logo && (
-            <img
-              src={team2.logo}
-              alt={`${team2.name} logo`}
-              className="home-upcoming-team-logo"
-            />
-          )}
-          <strong>{match.team2}</strong>
-        </div>
-      </>
-    );
-  })()}
-</div>
+                <div className="home-upcoming-team">
+                  {team2?.logo ? (
+                    <img
+                      src={team2.logo}
+                      alt={`${team2.name} logo`}
+                      className="home-upcoming-team-logo"
+                    />
+                  ) : (
+                    <span className="home-upcoming-team-placeholder">
+                      🏏
+                    </span>
+                  )}
 
-            <div className="home-upcoming-venue">
-              🏟 {match.venue}
-            </div>
+                  <strong>
+                    {team2?.name || match.team2 || "Team TBD"}
+                  </strong>
+                </div>
+              </div>
 
-            <Link
-              to="/cricket/fixtures"
-              className="home-upcoming-link"
-            >
-              View Fixture →
-            </Link>
-          </div>
-        ))
+              <div className="home-upcoming-venue">
+                📍 {match.venue || "Venue to be announced"}
+              </div>
+
+              <Link
+                to="/cricket/fixtures"
+                className="home-upcoming-link"
+              >
+                View Fixture →
+              </Link>
+            </article>
+          );
+        })
       ) : (
         <div className="empty-home-message">
           <div style={{ fontSize: "36px", marginBottom: "10px" }}>
             🏏
           </div>
 
-          <h3>BCL Cricket 2026</h3>
+          <h3>No Upcoming Matches</h3>
 
-          <p>Tournament starts on 25 October 2026.</p>
+          <p>
+            Check the fixtures page for the latest BCL Cricket schedule.
+          </p>
 
-          <span>Fixtures will be announced soon.</span>
+          <Link
+            to="/cricket/fixtures"
+            className="home-upcoming-link"
+          >
+            View All Fixtures →
+          </Link>
         </div>
       )}
     </div>
   </div>
 </section>
+
 
 
       {/* ================= RESULTS ================= */}
