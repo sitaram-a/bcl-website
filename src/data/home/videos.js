@@ -1,6 +1,17 @@
 export const bclVideos = [
+
+{
+  id: 1,
+  title: "🔴 Highlight | Baharagora Champions League 2026",
+  thumbnail: "https://img.youtube.com/vi/B9FT-0VAp3Y/hqdefault.jpg",
+  duration: "05:08:38",
+  category: "Cricket",
+  type: "youtube",
+  youtubeId: "B9FT-0VAp3Y",
+},
+
   {
-     id: 1,
+     id: 2,
     title: "BCL Season 5 Cricket",
     thumbnail: "/media/videos/BCL-season-5.png", // optional poster image
     duration: "0:56", // update to actual duration
@@ -9,8 +20,8 @@ export const bclVideos = [
     src: "/media/videos/BCL-season-5-1.mp4",
   },
   {
-    id: 2,
-    title: "🔴 LIVE DAY 1 | Baharagora Champions League 2022",
+    id: 3,
+    title: "🔴 Highlight DAY 1 | Baharagora Champions League 2022",
     thumbnail: "https://img.youtube.com/vi/dLrA56t2Chc/hqdefault.jpg",
     duration: "4:55:09",
     category: "Highlights",
@@ -18,7 +29,7 @@ export const bclVideos = [
     youtubeId: "dLrA56t2Chc",
   },
   {
-    id: 3,
+    id: 4,
     title: "⚡Baharagora FC 🆚 Bineet Warrior",
     thumbnail: "https://img.youtube.com/vi/Mlm3wDcL8h4/hqdefault.jpg",
     duration: "43:44",
@@ -27,7 +38,7 @@ export const bclVideos = [
     youtubeId: "Mlm3wDcL8h4",
   },
   {
-    id: 4,
+    id: 5,
     title: "FINAL DAY BAHARAGORA CHAMPIONS LEAGUE 2025",
     thumbnail: "https://img.youtube.com/vi/bSz6gfTXLpo/hqdefault.jpg",
     duration: "43:44",
