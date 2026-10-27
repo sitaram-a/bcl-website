@@ -2189,7 +2189,7 @@ const upcomingCricketFixtures = useMemo(() => {
 
 
       {/* ================= STANDINGS ================= */}
-<section className="home-standings-section">
+{/* <section className="home-standings-section">
   <div className="home-section-container">
 
     <div className="home-section-heading">
@@ -2200,7 +2200,7 @@ const upcomingCricketFixtures = useMemo(() => {
       </p>
     </div>
 
-    <div className="home-standings-grid">
+    <div className="home-standings-grid"> */}
 
       {/* ================= FOOTBALL STANDINGS ================= */}
      {/* <div className="home-standing-card home-standing-football">
@@ -2288,7 +2288,7 @@ const upcomingCricketFixtures = useMemo(() => {
 
 
       {/* ================= CRICKET STANDINGS ================= */}
-      <div className="home-standing-card home-standing-cricket">
+      {/* <div className="home-standing-card home-standing-cricket">
 
         <div className="home-standing-header">
           <div>
@@ -2379,10 +2379,10 @@ const upcomingCricketFixtures = useMemo(() => {
 
       </div>
 
-    </div>
+    </div> 
 
   </div>
-</section>
+</section> */}
 
 
 {/* ================= BCL OFFICIAL SPONSORS ================= */}
