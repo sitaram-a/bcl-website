@@ -27,7 +27,7 @@ import { cricketStandings } from "../data/cricket/standings";
 import { footballMatches } from "../data/football/footballMatches";
 import { cricketLiveMatches } from "../data/cricket/liveMatches";
 import { announcements } from "../data/home/announcements";
-
+import CricketPointsTable from "./cricket/CricketPointsTable";
 
 import { sponsors } from "../data/sponsors/sponsors";
 import AntigravityBackground from "../components/home/AntigravityBackground.jsx";
@@ -1619,13 +1619,13 @@ const upcomingCricketFixtures = useMemo(() => {
 )}
 
 {/* ================= CRICKET AUCTION HIGHLIGHT ================= */}
-      {activeAnnouncement && (
-        <section className="live-section">
+      {/* {activeAnnouncement && (
+        <section className="live-section"> */}
 
           {/* <div className="home-section-particles">
       <AntigravityBackground />
     </div> */}
-          <div className="section-heading light-heading">
+          {/* <div className="section-heading light-heading">
             <span>UPCOMING EVENT</span>
             <h2>{activeAnnouncement.title}</h2>
           </div>
@@ -1656,7 +1656,7 @@ const upcomingCricketFixtures = useMemo(() => {
             </div>
           </div>
         </section>
-      )}
+      )} */}
 
 
       {/* =================================================
@@ -1748,57 +1748,22 @@ const upcomingCricketFixtures = useMemo(() => {
 
 
       
-{/* ================= BCL COUNTDOWN TIMER ================= */}
-<section className="home-countdown-section">
-
-  {/* <div className="home-section-particles">
-    <AntigravityBackground />
-  </div> */}
-  <div className="home-countdown-content home-section-foreground">
-    <span className="home-countdown-eyebrow">
-      THE COUNTDOWN IS ON
+{/* ================= BCL CRICKET POINTS TABLE ================= */}
+<section className="home-points-section">
+  <div className="home-points-content">
+    <span className="home-points-eyebrow">
+      BAHARAGORA CHAMPIONS LEAGUE
     </span>
 
     <h2>BCL Cricket 2026</h2>
 
-    <p className="home-countdown-description">
-      The battle for BCL glory begins on 25 October!
+    <p className="home-points-description">
+      Group standings and the race for the championship.
     </p>
 
-    {timeLeft > 0 ? (
-      <div className="home-countdown-timer">
-        <div className="home-countdown-unit">
-          <strong>{days.toString().padStart(2, "0")}</strong>
-          <span>Days</span>
-        </div>
-
-        <div className="home-countdown-unit">
-          <strong>{hours.toString().padStart(2, "0")}</strong>
-          <span>Hours</span>
-        </div>
-
-        <div className="home-countdown-unit">
-          <strong>{minutes.toString().padStart(2, "0")}</strong>
-          <span>Minutes</span>
-        </div>
-
-        <div className="home-countdown-unit">
-          <strong>{seconds.toString().padStart(2, "0")}</strong>
-          <span>Seconds</span>
-        </div>
-      </div>
-    ) : (
-      <p className="home-countdown-started">
-        The tournament has started!
-      </p>
-    )}
-
-    <p className="home-countdown-venue">
-      <span>📍</span> Baharagora Stadium
-    </p>
+    <CricketPointsTable />
   </div>
 </section>
-
 
 {/* ================= BCL CRICKET TEAMS ================= */}
 <section className="home-cricket-teams-section">

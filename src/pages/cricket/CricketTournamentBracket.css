@@ -1,0 +1,582 @@
+.bcl-playoffs-page {
+  --bcl-gold: #fbbf24;
+  --bcl-green: #16a34a;
+  --bcl-blue: #142d52;
+  --bcl-text: #f8fafc;
+  --bcl-muted: #b8c7dc;
+  --bcl-line: rgba(251, 191, 36, 0.8);
+  width: 100%;
+  padding: 28px 20px 50px;
+  color: var(--bcl-text);
+  overflow: hidden;
+}
+
+/* ---------- Hero ---------- */
+.bcl-playoffs-hero {
+  position: relative;
+  isolation: isolate;
+  text-align: center;
+  padding: 30px 10px 30px;
+}
+
+.bcl-hero-glow {
+  position: absolute;
+  z-index: -1;
+  width: 280px;
+  height: 180px;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(251, 191, 36, 0.12);
+  filter: blur(65px);
+  border-radius: 50%;
+  animation: bcl-glow 4s ease-in-out infinite alternate;
+}
+
+.bcl-playoffs-logo {
+  display: block;
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin: 0 auto 18px;
+  animation: bcl-logo-enter 0.8s ease both;
+}
+
+.bcl-season-label {
+  color: var(--bcl-gold);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.bcl-playoffs-hero h1 {
+  margin: 12px 0;
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1.1;
+  font-weight: 950;
+}
+
+.bcl-playoffs-hero h1 span {
+  color: var(--bcl-gold);
+}
+
+.bcl-playoffs-hero > p {
+  margin: 0;
+  color: var(--bcl-muted);
+}
+
+.bcl-hero-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 24px auto 0;
+  max-width: 300px;
+}
+
+.bcl-hero-line span {
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(90deg, transparent, var(--bcl-gold));
+}
+
+.bcl-hero-line span:last-child {
+  transform: rotate(180deg);
+}
+
+.bcl-hero-line i {
+  font-size: 1.7rem;
+  font-style: normal;
+}
+
+/* ---------- Bracket layout ---------- */
+.bcl-bracket-wrap {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.bcl-bracket {
+  display: flex;
+  align-items: stretch;
+  gap: 44px;
+}
+
+.bcl-col {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.bcl-col-final {
+  flex: 1.15 1 0;
+}
+
+.bcl-col-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 18px;
+  padding: 9px 12px;
+  text-align: center;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.bcl-col-head strong {
+  color: var(--bcl-gold);
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  font-weight: 900;
+}
+
+.bcl-col-head span {
+  color: var(--bcl-muted);
+  font-size: 0.72rem;
+}
+
+.bcl-col-head-gold {
+  background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.18), transparent);
+  border-color: rgba(251, 191, 36, 0.5);
+}
+
+.bcl-col-body {
+  flex: 1;
+  min-height: 640px;
+  display: flex;
+  flex-direction: column;
+}
+
+.bcl-col-qualifiers,
+.bcl-col-round1 {
+  justify-content: stretch;
+}
+
+.bcl-col-center {
+  justify-content: center;
+}
+
+/* Qualifier pairs */
+.bcl-pair {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 12px;
+}
+
+/* bracket "]" joining two qualifiers */
+.bcl-pair::after {
+  content: "";
+  position: absolute;
+  right: -22px;
+  top: 25%;
+  bottom: 25%;
+  width: 22px;
+  border: 1px solid var(--bcl-line);
+  border-left: none;
+}
+
+/* line out of the bracket toward the match */
+.bcl-pair::before {
+  content: "";
+  position: absolute;
+  right: -44px;
+  top: 50%;
+  width: 22px;
+  height: 1px;
+  background: var(--bcl-line);
+}
+
+/* Round slots hold a match box */
+.bcl-round-slot {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.bcl-col-round1 .bcl-round-slot {
+  flex: 1;
+}
+
+/* connector entering a match from the left */
+.bcl-from-left::before {
+  content: "";
+  position: absolute;
+  left: -22px;
+  top: 50%;
+  width: 22px;
+  height: 1px;
+  background: var(--bcl-line);
+}
+
+/* Day-5 matches 01 & 02 → joined bracket into Playoff 03 */
+.bcl-col-round1 {
+  position: relative;
+}
+
+.bcl-col-round1::after {
+  content: "";
+  position: absolute;
+  right: -22px;
+  top: 25%;
+  bottom: 25%;
+  width: 22px;
+  border: 1px solid var(--bcl-line);
+  border-left: none;
+}
+
+.bcl-col-round1 .bcl-round-slot::after {
+  content: "";
+  position: absolute;
+  right: -22px;
+  top: 50%;
+  width: 22px;
+  height: 1px;
+  background: var(--bcl-line);
+}
+
+.bcl-col-round1 .bcl-round-slot.bcl-from-left::before {
+  display: block;
+}
+
+/* Playoff 03 → Final */
+.bcl-to-right::after {
+  content: "";
+  position: absolute;
+  right: -44px;
+  top: 50%;
+  width: 44px;
+  height: 1px;
+  background: var(--bcl-line);
+}
+
+.bcl-col-round1 .bcl-from-left::before {
+  left: -22px;
+}
+
+/* ---------- Team slot (parallelogram style) ---------- */
+.bcl-slot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 42px;
+  padding: 0 52px 0 14px;
+  background: linear-gradient(90deg, #1f4278, #17315a);
+  border-left: 4px solid var(--bcl-green);
+  clip-path: polygon(0 0, 100% 0, 97% 100%, 0 100%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.bcl-slot-tag {
+  flex-shrink: 0;
+  padding: 3px 7px;
+  background: var(--bcl-gold);
+  color: #112542;
+  font-size: 0.58rem;
+  font-weight: 900;
+  letter-spacing: 0.6px;
+  clip-path: polygon(8% 0, 100% 0, 92% 100%, 0 100%);
+}
+
+.bcl-slot-name {
+  min-width: 0;
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+  line-height: 1.2;
+}
+
+.bcl-slot-flag {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 38px;
+  background: #fff;
+  clip-path: polygon(22% 0, 100% 0, 78% 100%, 0 100%);
+}
+
+/* ---------- Match box ---------- */
+.bcl-match {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  background: rgba(8, 24, 52, 0.55);
+  overflow: hidden;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+  animation: bcl-card-enter 0.65s ease both;
+}
+
+.bcl-match:hover {
+  transform: translateY(-3px);
+  border-color: rgba(251, 191, 36, 0.7);
+}
+
+.bcl-match-label {
+  padding: 8px 12px;
+  background: linear-gradient(90deg, var(--bcl-gold), #f59e0b);
+  color: #112542;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-align: center;
+}
+
+.bcl-final-ribbon {
+  padding: 10px 12px;
+  background: linear-gradient(90deg, var(--bcl-gold), #f59e0b);
+  color: #112542;
+  font-size: 1.3rem;
+  font-weight: 950;
+  letter-spacing: 6px;
+  text-align: center;
+}
+
+.bcl-match-time {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 12px 4px;
+  color: #86efac;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.7px;
+}
+
+.bcl-match-time strong {
+  color: white;
+  font-size: 0.85rem;
+}
+
+.bcl-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4ade80;
+  animation: bcl-pulse 1.8s infinite;
+}
+
+.bcl-match-teams {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 12px 10px;
+}
+
+.bcl-match-vs {
+  color: var(--bcl-gold);
+  font-size: 0.7rem;
+  font-weight: 900;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+.bcl-match-venue {
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.2);
+  color: var(--bcl-muted);
+  font-size: 0.72rem;
+  text-align: center;
+}
+
+.bcl-match-final {
+  border-color: rgba(251, 191, 36, 0.6);
+  box-shadow: 0 0 35px rgba(251, 191, 36, 0.12);
+}
+
+.bcl-match-final .bcl-match-time strong {
+  color: var(--bcl-gold);
+}
+
+/* ---------- Champion banner ---------- */
+.bcl-champion-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-top: 22px;
+  text-align: center;
+}
+
+.bcl-champion-banner span {
+  color: var(--bcl-muted);
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+}
+
+.bcl-champion-banner strong {
+  color: var(--bcl-gold);
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 950;
+  animation: bcl-trophy-glow 2.5s ease-in-out infinite;
+}
+
+.bcl-fixture-disclaimer {
+  max-width: 850px;
+  margin: 35px auto 0;
+  color: var(--bcl-muted);
+  font-size: 0.8rem;
+  line-height: 1.7;
+  text-align: center;
+}
+
+/* ---------- Animations ---------- */
+@keyframes bcl-card-enter {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bcl-logo-enter {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes bcl-pulse {
+  50% { opacity: 0.35; transform: scale(0.75); }
+}
+
+@keyframes bcl-glow {
+  from { opacity: 0.45; }
+  to { opacity: 1; }
+}
+
+@keyframes bcl-trophy-glow {
+  50% { text-shadow: 0 0 18px rgba(251, 191, 36, 0.55); }
+}
+
+/* ---------- Tablet / mobile: stacked rounds with vertical gold connectors ---------- */
+@media (max-width: 1100px) {
+  .bcl-bracket {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .bcl-col,
+  .bcl-col-final {
+    flex: none;
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  /* room on the right for the brackets */
+  .bcl-col-body {
+    min-height: 0;
+    gap: 16px;
+    padding-right: 26px;
+  }
+
+  .bcl-col-final .bcl-col-body,
+  .bcl-col-center {
+    padding-right: 0;
+  }
+
+  .bcl-pair {
+    flex: none;
+    gap: 8px;
+  }
+
+  .bcl-col-round1 .bcl-round-slot {
+    flex: none;
+  }
+
+  /* hide the desktop horizontal connectors */
+  .bcl-pair::before,
+  .bcl-from-left::before,
+  .bcl-col-round1 .bcl-from-left::before,
+  .bcl-to-right::after {
+    display: none !important;
+  }
+
+  /* gold "]" bracket joining the two qualifiers of a pair */
+  .bcl-pair::after {
+    display: block;
+    right: -14px;
+    top: 21px;
+    bottom: 21px;
+    width: 14px;
+  }
+
+  /* gold "]" bracket joining Day 5 match 01 and 02 */
+  .bcl-col-round1::after {
+    display: block;
+    right: 12px;
+    top: 25%;
+    bottom: 25%;
+    width: 14px;
+  }
+
+  .bcl-col-round1 .bcl-round-slot::after {
+    display: block;
+    right: -14px;
+    width: 14px;
+  }
+
+  /* vertical gold line + arrow between sections */
+  .bcl-col + .bcl-col::before {
+    content: "";
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(180deg, var(--bcl-line), var(--bcl-gold));
+    box-shadow: 0 0 10px rgba(251, 191, 36, 0.35);
+  }
+
+  .bcl-col + .bcl-col::after {
+    content: "";
+    position: absolute;
+    top: -9px;
+    left: calc(50% - 4px);
+    width: 8px;
+    height: 8px;
+    border-right: 1px solid var(--bcl-gold);
+    border-bottom: 1px solid var(--bcl-gold);
+    transform: rotate(45deg);
+  }
+}
+
+@media (max-width: 500px) {
+  .bcl-playoffs-page {
+    padding: 12px 12px 35px;
+  }
+
+  .bcl-playoffs-hero {
+    padding-top: 25px;
+  }
+
+  .bcl-playoffs-logo {
+    width: 80px;
+    height: 80px;
+  }
+
+  .bcl-slot {
+    padding-right: 44px;
+  }
+
+  .bcl-slot-name {
+    font-size: 0.78rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bcl-playoffs-page *,
+  .bcl-playoffs-page *::before,
+  .bcl-playoffs-page *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

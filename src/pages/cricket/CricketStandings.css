@@ -436,6 +436,7 @@
   color: #64748b;
   font-size: 0.85rem;
   line-height: 1.6;
+  text-align: center;
 }
 
 /* Keep the table usable on mobile */
@@ -521,4 +522,25 @@
   .cricket-nrr-note {
     font-size: 0.78rem;
   }
+}
+
+
+.cricket-group-heading {
+  margin-bottom: 16px;
+}
+
+.cricket-group-heading h2 {
+  margin: 0 0 6px;
+  font-size: clamp(1.35rem, 3vw, 1.8rem);
+  font-weight: 800;
+}
+
+.cricket-group-heading p {
+  margin: 0;
+  opacity: 0.8;
+  line-height: 1.5;
+}
+
+.cricket-standings-container + .cricket-standings-container {
+  margin-top: 32px;
 }
