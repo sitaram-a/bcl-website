@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-// import { useEffect, useState } from "react";
-import { useEffect, useMemo, useState } from "react";
+// import { useState } from "react";
+import { useEffect, useMemo, useState,  useRef } from "react";
 import footballLogo from "../assets/logo/bcl-football-logo.png";
 import cricketLogo from "../assets/logo/bcl-cricket-logo.png";
 import cricketball from "../assets/icons/cricket-ball.png";
@@ -413,6 +413,33 @@ const upcomingCricketFixtures = useMemo(() => {
       return dateA - dateB;
     })
     .slice(0, 3);
+}, []);
+
+const videoRowRef = useRef(null);
+
+useEffect(() => {
+  const row = videoRowRef.current;
+  if (!row) return;
+
+  const handleWheel = (event) => {
+    // Only intercept if scrolling vertically more than horizontally
+    if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
+      const atStart = row.scrollLeft === 0 && event.deltaY < 0;
+      const atEnd = Math.ceil(row.scrollLeft + row.clientWidth) >= row.scrollWidth && event.deltaY > 0;
+
+      // If we aren't at the extreme boundaries, prevent vertical scroll and pan horizontally
+      if (!atStart && !atEnd) {
+        event.preventDefault();
+        row.scrollLeft += event.deltaY;
+      }
+    }
+  };
+
+  row.addEventListener("wheel", handleWheel, { passive: false });
+
+  return () => {
+    row.removeEventListener("wheel", handleWheel);
+  };
 }, []);
 
   return (
@@ -1087,31 +1114,32 @@ const upcomingCricketFixtures = useMemo(() => {
 
 
 
-{/* ================= BCL VIDEOS (Hotstar style) ================= */}
+
+{/* ================= BCL VIDEOS ================= */}
 <section className="home-video-section">
-  
-  {/* <div className="home-video-particles">
-    <AntigravityBackground />
-  </div> */}
-
   <div className="home-section-container">
-
     <div className="home-video-heading">
       <div>
-        <span className="home-video-kicker">▶️ WATCH BCL</span>
+        <span className="home-video-kicker">▶ WATCH BCL</span>
         <h2>Latest Videos</h2>
       </div>
+
       <Link to="/media" className="home-video-view-all">
         View All →
       </Link>
     </div>
 
-    <div className="home-video-row">
-      {bclVideos.map((video) => (
-        <div
+    <div
+  className="home-video-row"
+  ref={videoRowRef}
+>
+  {bclVideos.map((video) => (
+        <button
+          type="button"
           className="home-video-card"
           key={video.id}
           onClick={() => setActiveVideo(video)}
+          aria-label={`Play ${video.title}`}
         >
           <div className="home-video-thumb-wrap">
             {video.thumbnail ? (
@@ -1119,6 +1147,7 @@ const upcomingCricketFixtures = useMemo(() => {
                 src={video.thumbnail}
                 alt={video.title}
                 className="home-video-thumb"
+                loading="lazy"
               />
             ) : (
               <video
@@ -1134,7 +1163,9 @@ const upcomingCricketFixtures = useMemo(() => {
             </div>
 
             {video.duration && (
-              <span className="home-video-duration">{video.duration}</span>
+              <span className="home-video-duration">
+                {video.duration}
+              </span>
             )}
 
             <span className="home-video-category-badge">
@@ -1145,12 +1176,12 @@ const upcomingCricketFixtures = useMemo(() => {
           <div className="home-video-info">
             <h4>{video.title}</h4>
           </div>
-        </div>
+        </button>
       ))}
     </div>
-
   </div>
 </section>
+
 
 {/* ================= VIDEO PLAYER MODAL ================= */}
 {activeVideo && (
@@ -1709,8 +1740,9 @@ const upcomingCricketFixtures = useMemo(() => {
             }}
           >
 {/* https://www.youtube.com/embed/B9FT-0VAp3Y?si=bfCJ0GH2Lcp0xWkD */}
+{/* https://www.youtube.com/embed/ud-WjnTDbek?si=3NhWz5saZhMm6A19 */}
             <iframe
-              src="https://www.youtube.com/embed/ud-WjnTDbek?si=3NhWz5saZhMm6A19"
+              src="https://www.youtube.com/embed/hz4D0sXHYcI?si=s4uZdlIdnNL0zciF"
               title="BCL Live Stream"
               style={{
                 position: "absolute",

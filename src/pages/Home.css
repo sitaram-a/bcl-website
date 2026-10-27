@@ -8357,3 +8357,221 @@
 .home-cricket-points-tables .cricket-losses {
   color: #b91c1c !important;
 }
+
+
+/* ================= BCL VIDEO CAROUSEL ================= */
+
+.home-video-section {
+  padding: 48px 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+.home-video-section .home-section-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+.home-video-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.home-video-kicker {
+  color: #fbbf24;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.home-video-heading h2 {
+  margin: 8px 0 0;
+  color: #fff;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 900;
+}
+
+.home-video-view-all {
+  flex-shrink: 0;
+  color: #fbbf24;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.home-video-view-all:hover {
+  color: #fff;
+}
+
+.home-video-row {
+  display: flex;
+  gap: 18px;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 4px 2px 18px;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: #fbbf24 rgba(255, 255, 255, 0.1);
+}
+
+/* .home-video-card {
+  flex: 0 0 clamp(240px, 30vw, 340px);
+  min-width: 0;
+  scroll-snap-align: start;
+} */
+
+.home-video-card {
+  flex: 0 0 clamp(240px, 30vw, 340px);
+  min-width: 0;
+   scroll-snap-align: start;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  text-align: left;
+  cursor: pointer;
+  scroll-snap-align: start;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.home-video-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(251, 191, 36, 0.7);
+}
+
+.home-video-thumb-wrap {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #142d52;
+}
+
+.home-video-thumb {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.home-video-card:hover .home-video-thumb {
+  transform: scale(1.04);
+}
+
+.home-video-play-overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.home-video-play-icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #fbbf24;
+  color: #142d52;
+  font-size: 1.1rem;
+  transition: transform 0.2s ease;
+}
+
+.home-video-card:hover .home-video-play-icon {
+  transform: scale(1.12);
+}
+
+.home-video-duration,
+.home-video-category-badge {
+  position: absolute;
+  bottom: 10px;
+  padding: 5px 8px;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.78);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.home-video-duration {
+  right: 10px;
+}
+
+.home-video-category-badge {
+  left: 10px;
+}
+
+.home-video-info {
+  padding: 14px;
+}
+
+.home-video-info h4 {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  color: #f8fafc;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+@media (max-width: 600px) {
+  .home-video-section .home-section-container {
+    padding: 0 14px;
+  }
+
+  .home-video-row {
+    gap: 12px;
+  }
+
+  .home-video-card {
+    flex-basis: 78%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-video-row {
+    scroll-behavior: auto;
+  }
+
+  .home-video-card,
+  .home-video-thumb,
+  .home-video-play-icon {
+    transition: none;
+  }
+}
+
+.home-video-row {
+  display: flex;
+  gap: 18px;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 4px 2px 18px;
+
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+
+  scrollbar-width: thin;
+  scrollbar-color: #fbbf24 rgba(255, 255, 255, 0.1);
+}
+
+.home-video-card {
+  flex: 0 0 clamp(240px, 30vw, 340px);
+  scroll-snap-align: start;
+}
