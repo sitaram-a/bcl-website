@@ -8,103 +8,153 @@ import "./CricketTournamentBracket.css";
 
 const VENUE = "Baharagora Stadium";
 
+
 const STAGES = [
   {
     id: "qualifiers",
     no: "01",
-    chip: "Qualifiers",
+    chip: "Group Stage",
     kicker: "LEAGUE STAGE",
-    title: "Qualifiers",
-    sub: "Top 2 from each group advance",
+    title: "Group Qualifiers",
+    sub: "Top 2 teams from each group advance",
     type: "groups",
     groups: [
       {
         name: "GROUP A",
         slots: [
-          { tag: "GROUP A", name: "Top 1", goes: "Advances to Playoff 01" },
-          { tag: "GROUP A", name: "Top 2", goes: "Advances to Playoff 02" },
+          { tag: "GROUP A", name: "Top 1", goes: "Advances to Semi-Final 01" },
+          { tag: "GROUP A", name: "Top 2", goes: "Advances to Semi-Final 02" },
         ],
       },
       {
         name: "GROUP B",
         slots: [
-          { tag: "GROUP B", name: "Top 1", goes: "Advances to Playoff 01" },
-          { tag: "GROUP B", name: "Top 2", goes: "Advances to Playoff 02" },
+          { tag: "GROUP B", name: "Top 1", goes: "Advances to Semi-Final 01" },
+          { tag: "GROUP B", name: "Top 2", goes: "Advances to Semi-Final 02" },
         ],
       },
     ],
   },
+
   {
-    id: "playoffs",
+    id: "day4",
     no: "02",
-    chip: "Playoffs",
-    kicker: "DAY 5 · THURSDAY",
-    title: "Playoffs",
-    sub: "29 October 2026",
+    chip: "Day 4",
+    kicker: "TUESDAY · 3 NOVEMBER 2026",
+    title: "League Matches",
+    sub: "Day 4 · Three matches",
     type: "matches",
     matches: [
       {
-        label: "PLAYOFF 01",
-        date: "THURSDAY, 29 OCTOBER 2026",
+        label: "LEAGUE MATCH 01",
+        date: "TUESDAY, 3 NOVEMBER 2026",
         time: "10:00 AM",
         teams: [
-          { tag: "GROUP A", name: "Top 1" },
-          { tag: "GROUP B", name: "Top 1" },
+          { tag: "TEAM 01", name: "Digbarda Pitch Panther" },
+          { tag: "TEAM 02", name: "Khandamouda Warrior" },
         ],
       },
       {
-        label: "PLAYOFF 02",
-        date: "THURSDAY, 29 OCTOBER 2026",
+        label: "LEAGUE MATCH 02",
+        date: "TUESDAY, 3 NOVEMBER 2026",
         time: "12:00 PM",
         teams: [
-          { tag: "GROUP A", name: "Top 2" },
-          { tag: "GROUP B", name: "Top 2" },
+          { tag: "TEAM 01", name: "R.R Thunder" },
+          { tag: "TEAM 02", name: "Digbarda Pitch Panther" },
+        ],
+      },
+      {
+        label: "LEAGUE MATCH 03",
+        date: "TUESDAY, 3 NOVEMBER 2026",
+        time: "2:00 PM",
+        teams: [
+          { tag: "TEAM 01", name: "Baharagora Royal" },
+          { tag: "TEAM 02", name: "Khandamouda Warriors" },
         ],
       },
     ],
   },
+
   {
-    id: "decider",
+    id: "day5",
     no: "03",
-    chip: "Decider",
-    kicker: "DAY 5 · THURSDAY",
-    title: "The Decider",
-    sub: "29 October 2026 · 2:30 PM",
+    chip: "Day 5",
+    kicker: "WEDNESDAY · 4 NOVEMBER 2026",
+    title: "Remaining League Match",
+    sub: "Day 5 · One match",
     type: "matches",
     matches: [
       {
-        label: "PLAYOFF 03",
-        date: "THURSDAY, 29 OCTOBER 2026",
-        time: "2:30 PM",
+        label: "LEAGUE MATCH 04",
+        date: "WEDNESDAY, 4 NOVEMBER 2026",
+        time: "9:30 AM",
         teams: [
-          { tag: "PLAYOFF", name: "Loser of Match 1" },
-          { tag: "PLAYOFF", name: "Winner of Match 2" },
+          { tag: "TEAM 01", name: "Kesharda Super Kings" },
+          { tag: "TEAM 02", name: "Sakra Royals" },
         ],
       },
     ],
   },
+
   {
-    id: "final",
+    id: "finalday",
     no: "04",
-    chip: "Final",
-    kicker: "DAY 6 · FRIDAY",
-    title: "The Grand Final",
-    sub: "30 October 2026 · 12:00 PM",
+    chip: "Final Day",
+    kicker: "THURSDAY · 5 NOVEMBER 2026",
+    title: "Championship Day",
+    sub: "Day 6 · The road to the BCL trophy",
     type: "matches",
     final: true,
     matches: [
       {
-        label: "CHAMPIONSHIP FINAL",
-        date: "FRIDAY, 30 OCTOBER 2026",
-        time: "12:00 PM",
+        label: "REMAINING LEAGUE MATCH",
+        date: "THURSDAY, 5 NOVEMBER 2026",
+        time: "9:00 AM",
         teams: [
-          { tag: "FINALIST 01", name: "Winner of Playoff 01" },
-          { tag: "FINALIST 02", name: "Winner of Playoff 03" },
+          { tag: "TEAM 01", name: "Baharagora Kings" },
+          { tag: "TEAM 02", name: "Gajraj 11" },
+        ],
+      },
+      {
+        label: "SEMI-FINAL 01",
+        date: "THURSDAY, 5 NOVEMBER 2026",
+        time: "9:30 AM",
+        teams: [
+          { tag: "GROUP A", name: "Top 1 (Group A)" },
+          { tag: "GROUP B", name: "Top 1 (Group B)" },
+        ],
+      },
+      {
+        label: "SEMI-FINAL 02",
+        date: "THURSDAY, 5 NOVEMBER 2026",
+        time: "10:30 AM",
+        teams: [
+          { tag: "GROUP A", name: "Top 2 (Group A)" },
+          { tag: "GROUP B", name: "Top 2 (Group B)" },
+        ],
+      },
+      {
+        label: "ELIMINATOR",
+        date: "THURSDAY, 5 NOVEMBER 2026",
+        time: "11:30 AM",
+        teams: [
+          { tag: "TBD", name: "To be confirmed" },
+          { tag: "TBD", name: "To be confirmed" },
+        ],
+      },
+      {
+        label: "BCL CHAMPIONSHIP FINAL",
+        date: "THURSDAY, 5 NOVEMBER 2026",
+        time: "2:00 PM",
+        teams: [
+          { tag: "FINALIST 01", name: "Finalist 1" },
+          { tag: "FINALIST 02", name: "Finalist 2" },
         ],
       },
     ],
   },
 ];
+
 
 const clamp = (v, min, max) => Math.min(Math.max(v, min), max);
 
