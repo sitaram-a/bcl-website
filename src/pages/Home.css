@@ -8575,3 +8575,162 @@
   flex: 0 0 clamp(240px, 30vw, 340px);
   scroll-snap-align: start;
 }
+
+
+/* BCL MATCH RESCHEDULE ANNOUNCEMENT */
+.home-match-announcement {
+  width: 100%;
+  padding: 28px 5%;
+  position: relative;
+  z-index: 2;
+}
+
+.home-match-announcement-inner {
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 28px 32px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 190, 70, 0.4);
+  border-left: 5px solid #f59e0b;
+  border-radius: 16px;
+  background: linear-gradient(120deg, #211b12, #302315, #171717);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+  color: #fff;
+}
+
+.home-announcement-icon {
+  width: 58px;
+  height: 58px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(245, 158, 11, 0.15);
+  font-size: 28px;
+  animation: announcementPulse 2s infinite;
+}
+
+.home-announcement-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.home-announcement-label {
+  color: #fbbf24;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.home-announcement-content h2 {
+  margin: 7px 0;
+  color: #fff;
+  font-size: clamp(1.25rem, 2.5vw, 1.8rem);
+  font-weight: 900;
+}
+
+.home-announcement-content p {
+  margin: 0;
+  color: #e5e5e5;
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+.home-announcement-content p strong {
+  color: #fbbf24;
+}
+
+.home-announcement-thanks {
+  display: block;
+  margin-top: 9px;
+  color: #bdbdbd;
+  font-size: 0.85rem;
+}
+
+.home-announcement-date {
+  min-width: 115px;
+  padding-left: 24px;
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home-announcement-date span {
+  color: #fbbf24;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.home-announcement-date strong {
+  color: #fff;
+  font-size: 3rem;
+  line-height: 1.1;
+  font-weight: 900;
+}
+
+.home-announcement-date b {
+  color: #fbbf24;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+}
+
+@keyframes announcementPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+@media (max-width: 650px) {
+  .home-match-announcement {
+    padding: 20px 4%;
+  }
+
+  .home-match-announcement-inner {
+    padding: 22px 18px;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .home-announcement-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 22px;
+  }
+
+  .home-announcement-content {
+    flex: 1 1 calc(100% - 60px);
+  }
+
+  .home-announcement-content p {
+    font-size: 0.85rem;
+  }
+
+  .home-announcement-date {
+    width: 100%;
+    padding: 14px 0 0;
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    flex-direction: row;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .home-announcement-date strong {
+    font-size: 2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-announcement-icon {
+    animation: none;
+  }
+}

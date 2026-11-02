@@ -778,6 +778,39 @@ useEffect(() => {
 
 </section>
 
+
+{/* ================= BCL MATCH RESCHEDULE ANNOUNCEMENT ================= */}
+<section className="home-match-announcement">
+  <div className="home-match-announcement-inner">
+    <div className="home-announcement-icon">📢</div>
+
+    <div className="home-announcement-content">
+      <span className="home-announcement-label">
+        IMPORTANT TOURNAMENT UPDATE
+      </span>
+
+      <h2>BCL Season 5 Matches Rescheduled</h2>
+
+      <p>
+        Due to Cyclone Arnab and the prevailing weather conditions,
+        the remaining matches of Baharagora Champions League Season 5
+        will resume from <strong>3 November 2026</strong>.
+      </p>
+
+      <span className="home-announcement-thanks">
+        Thank you for your understanding and support!
+      </span>
+    </div>
+
+    <div className="home-announcement-date">
+      <span>RESUMES FROM</span>
+      <strong>03</strong>
+      <b>NOV 2026</b>
+    </div>
+  </div>
+</section>
+
+
 {/* ================= BCL SEASON 5 TEAM POSTERS ================= */}
 <section className="home-poster-showcase">
 
@@ -1844,6 +1877,8 @@ useEffect(() => {
 
 
 {/* ================= BCL CRICKET 2026 BANNER ================= */}
+
+{/* ================= BCL TOURNAMENT BANNER ================= */}
 <section className="home-tournament-banner">
   <div className="home-tournament-banner-content">
     <span className="home-tournament-eyebrow">
@@ -1855,15 +1890,20 @@ useEffect(() => {
     </h2>
 
     <p className="home-tournament-edition">
-      BCL CRICKET 2026
+      BCL SEASON 5 · CRICKET 2026
     </p>
+
+    <div className="home-tournament-rescheduled">
+      <span>📢</span>
+      Remaining matches rescheduled due to Cyclone Arnab
+    </div>
 
     <div className="home-tournament-details">
       <div>
         <span className="home-tournament-detail-icon">📅</span>
         <div>
-          <strong>25–30 October 2026</strong>
-          <small>Tournament Dates</small>
+          <strong>25 October – 5 November 2026</strong>
+          <small>Revised Tournament Schedule</small>
         </div>
       </div>
 
@@ -1877,15 +1917,16 @@ useEffect(() => {
     </div>
 
     <a href="/cricket/fixtures" className="home-tournament-cta">
-      EXPLORE FIXTURES <span>→</span>
+      VIEW UPDATED FIXTURES <span>→</span>
     </a>
   </div>
 
   <div className="home-tournament-decoration" aria-hidden="true">
-    <span> BCL </span>
+    <span>BCL</span>
     <span>2026</span>
   </div>
 </section>
+
      
 {/* ================= UPCOMING MATCHES ================= */}
 <section className="home-upcoming-section">
