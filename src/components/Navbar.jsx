@@ -2,8 +2,9 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 
-import cricketLogo from "../assets/logo/bcl-cricket-logo.png";
-import footballLogo from "../assets/logo/bcl-football-logo.png";
+// import cricketLogo from "../assets/logo/bcl-cricket-logo.png";
+// import footballLogo from "../assets/logo/bcl-football-logo.png";
+import bclLogo from "../assets/logo/BCL_Logo.png";
 
 import "./Navbar.css";
 
@@ -26,14 +27,14 @@ function Navbar() {
 
           <div className="bcl-logos">
 
-            <img
+            {/* <img
               src={footballLogo}
               alt="BCL Football"
               className="bcl-logo football-logo"
-            />
+            /> */}
 
             <img
-              src={cricketLogo}
+              src={bclLogo}
               alt="BCL Cricket"
               className="bcl-logo cricket-logo"
             />

@@ -134,4 +134,25 @@ export const cricketResults = [
     scorecardUrl:
       "https://cricheroes.com/scorecard/27815336/baharagora-champions-league-season-5/khandamouda-warriors-vs-r&r-thunder-star/summary",
   },
+
+    // DAY 3 — 27 OCTOBER 2026
+  {
+    id: 8,
+    team1Id: 5,
+    team2Id: 1,
+    team1Name: "KESHARDA SUPER KINGS",
+    team2Name: "BAHARAGORA KINGS",
+    score1: "120/6",
+    overs1: "10.0",
+    score2: "93/7",
+    overs2: "10.0",
+    date: "2026-10-27",
+    venue: "Baharagora, Chatshila",
+    status: "FINISHED",
+    result: "Kesharda Super Kings won by 27 runs",
+    toss: "Baharagora Kings opted to field",
+    playerOfMatch: "Suraj",
+    scorecardUrl:
+      "https://cricheroes.com/scorecard/27815348/baharagora-champions-league-season-5/kesharda-super-kings-vs-baharagora-kings/summary",
+  },
 ];
