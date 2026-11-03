@@ -780,7 +780,7 @@ useEffect(() => {
 
 
 {/* ================= BCL MATCH RESCHEDULE ANNOUNCEMENT ================= */}
-<section className="home-match-announcement">
+{/* <section className="home-match-announcement">
   <div className="home-match-announcement-inner">
     <div className="home-announcement-icon">📢</div>
 
@@ -808,7 +808,7 @@ useEffect(() => {
       <b>NOV 2026</b>
     </div>
   </div>
-</section>
+</section> */}
 
 
 {/* ================= BCL SEASON 5 TEAM POSTERS ================= */}
@@ -1774,8 +1774,10 @@ useEffect(() => {
           >
 {/* https://www.youtube.com/embed/B9FT-0VAp3Y?si=bfCJ0GH2Lcp0xWkD */}
 {/* https://www.youtube.com/embed/ud-WjnTDbek?si=3NhWz5saZhMm6A19 */}
+{/* https://www.youtube.com/embed/hz4D0sXHYcI?si=s4uZdlIdnNL0zciF */}
+
             <iframe
-              src="https://www.youtube.com/embed/hz4D0sXHYcI?si=s4uZdlIdnNL0zciF"
+              src="https://www.youtube.com/embed/tnO53UEqb4E?si=6MbilXAOU8odKqZc"
               title="BCL Live Stream"
               style={{
                 position: "absolute",
