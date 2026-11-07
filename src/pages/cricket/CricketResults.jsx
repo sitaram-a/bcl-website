@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { ExternalLink, CalendarDays, Trophy } from "lucide-react";
 import CricketNavbar from "../../components/cricket/CricketNavbar";
@@ -7,12 +7,6 @@ import { cricketResults } from "../../data/cricket/results";
 import { cricketTeams } from "../../data/cricket/teams";
 import { getCricketFixtures } from "../../services/cricketService";
 import "./CricketResults.css";
-
-// const OFFICIAL_SCORECARDS = {
-//   1: "https://cricheroes.com/scorecard/27884163/baharagora-champions-league-season-5/baharagora-kings-vs-sakra-royals/summary",
-//   2: "https://cricheroes.com/scorecard/27815332/baharagora-champions-league-season-5/kesharda-super-kings-vs-gajraj-11/summary",
-//   3: "https://cricheroes.com/scorecard/27815334/baharagora-champions-league-season-5/sakra-royals-vs-gajraj-11/summary",
-// };
 
 function getTeam(teamId, fallbackName) {
   const team = cricketTeams.find(
@@ -28,7 +22,8 @@ function getTeam(teamId, fallbackName) {
 function formatDate(date) {
   if (!date) return "Date to be announced";
 
-  const parsed = new Date(date);
+  const parsed = new Date(`${date}T00:00:00`);
+
   if (Number.isNaN(parsed.getTime())) return date;
 
   return parsed.toLocaleDateString("en-IN", {
@@ -36,6 +31,22 @@ function formatDate(date) {
     month: "short",
     year: "numeric",
   });
+}
+
+function getStatusLabel(status) {
+  switch (status) {
+    case "FINISHED":
+    case "COMPLETED":
+      return "COMPLETED";
+    case "LIVE":
+      return "🔴 LIVE";
+    case "ABANDONED":
+      return "ABANDONED";
+    case "CANCELLED":
+      return "CANCELLED";
+    default:
+      return "UPCOMING";
+  }
 }
 
 function CricketResults() {
@@ -55,6 +66,7 @@ function CricketResults() {
         }
       } catch (error) {
         console.error("Unable to load cricket fixtures:", error);
+
         if (active) setFixtures([]);
       } finally {
         if (active) setFixtureLoading(false);
@@ -68,74 +80,131 @@ function CricketResults() {
     };
   }, []);
 
-  const resultMatches = cricketResults.map((result) => ({
-    ...result,
-    source: "result",
-    matchId: result.id,
-  }));
-
-  const completedFixtureIds = new Set(
-    resultMatches.map((match) => String(match.matchId))
+  const resultMatches = useMemo(
+    () =>
+      cricketResults.map((result) => ({
+        ...result,
+        source: "result",
+        matchId: result.id,
+      })),
+    []
   );
 
-  const remainingMatches = fixtures
-    .filter((fixture) => {
-      const status = String(fixture.status || "").toUpperCase();
+  const completedFixtureKeys = useMemo(
+    () =>
+      new Set(
+        resultMatches.map(
+          (match) =>
+            `${match.date}|${match.team1Id}|${match.team2Id}`
+        )
+      ),
+    [resultMatches]
+  );
 
-      return (
-        status !== "FINISHED" &&
-        status !== "COMPLETED" &&
-        !completedFixtureIds.has(String(fixture.id))
-      );
-    })
-    .map((fixture) => ({
-      ...fixture,
-      source: "fixture",
-      matchId: fixture.id,
-      team1Id: fixture.team1Id ?? fixture.team1_id,
-      team2Id: fixture.team2Id ?? fixture.team2_id,
-      team1Name:
-        fixture.team1Name ||
-        fixture.team1_name ||
-        fixture.team1_placeholder,
-      team2Name:
-        fixture.team2Name ||
-        fixture.team2_name ||
-        fixture.team2_placeholder,
-      date: fixture.date || fixture.match_date,
-      time: fixture.time || fixture.match_time,
-      status: fixture.status || "UPCOMING",
-    }));
+  const remainingMatches = useMemo(
+    () =>
+      fixtures
+        .filter((fixture) => {
+          const status = String(fixture.status || "").toUpperCase();
 
-  const allMatches = [
-    ...resultMatches,
-    ...remainingMatches,
-  ];
+          const finished = [
+            "FINISHED",
+            "COMPLETED",
+            "ABANDONED",
+            "CANCELLED",
+          ].includes(status);
 
-  const filteredMatches = allMatches.filter((match) => {
-    const status = String(match.status || "").toUpperCase();
+          const team1Id = fixture.team1Id ?? fixture.team1_id;
+          const team2Id = fixture.team2Id ?? fixture.team2_id;
+          const date = fixture.date || fixture.match_date;
 
-    if (filter === "COMPLETED") {
-      return (
-        status === "FINISHED" ||
-        status === "COMPLETED"
-      );
-    }
+          const fixtureKey = `${date}|${team1Id}|${team2Id}`;
 
-    if (filter === "LIVE") return status === "LIVE";
+          return (
+            !finished &&
+            !completedFixtureKeys.has(fixtureKey)
+          );
+        })
+        .map((fixture) => ({
+          ...fixture,
+          source: "fixture",
+          matchId: fixture.id,
+          team1Id: fixture.team1Id ?? fixture.team1_id,
+          team2Id: fixture.team2Id ?? fixture.team2_id,
+          team1Name:
+            fixture.team1Name ||
+            fixture.team1_name ||
+            fixture.team1 ||
+            fixture.team1_placeholder,
+          team2Name:
+            fixture.team2Name ||
+            fixture.team2_name ||
+            fixture.team2 ||
+            fixture.team2_placeholder,
+          date: fixture.date || fixture.match_date,
+          time: fixture.time || fixture.match_time,
+          status: fixture.status || "UPCOMING",
+        })),
+    [fixtures, completedFixtureKeys]
+  );
 
-   if (filter === "UPCOMING") {
-  return ![
-    "FINISHED",
-    "COMPLETED",
-    "LIVE",
-    "ABANDONED",
-    "CANCELLED",
-  ].includes(status);
-}
+  const allMatches = useMemo(
+    () => [...resultMatches, ...remainingMatches],
+    [resultMatches, remainingMatches]
+  );
 
-    return true;
-  });
+  const filteredMatches = useMemo(
+    () =>
+      allMatches
+        .filter((match) => {
+          const status = String(match.status || "UPCOMING").toUpperCase();
+
+          if (filter === "COMPLETED") {
+            return (
+              status === "FINISHED" ||
+              status === "COMPLETED"
+            );
+          }
+
+          if (filter === "LIVE") {
+            return status === "LIVE";
+          }
+
+          if (filter === "UPCOMING") {
+            return ![
+              "FINISHED",
+              "COMPLETED",
+              "LIVE",
+              "ABANDONED",
+              "CANCELLED",
+            ].includes(status);
+          }
+
+          return true;
+        })
+        .sort((a, b) => {
+          const dateA = new Date(a.date || "9999-12-31");
+          const dateB = new Date(b.date || "9999-12-31");
+
+          return dateB - dateA;
+        }),
+    [allMatches, filter]
+  );
+
+  const completedCount = resultMatches.filter((match) =>
+    ["FINISHED", "COMPLETED"].includes(
+      String(match.status).toUpperCase()
+    )
+  ).length;
+
+  const liveCount = resultMatches.filter(
+    (match) => String(match.status).toUpperCase() === "LIVE"
+  ).length;
+
+  const remainingCount = Math.max(
+    0,
+    16 - completedCount - liveCount
+  );
 
   return (
     <>
@@ -150,7 +219,8 @@ function CricketResults() {
           <h1>Season 5 Match Centre</h1>
 
           <p>
-            All 16 matches of Baharagora Champions League Season 5.
+            All matches and results of Baharagora Champions League
+            Season 5.
           </p>
 
           <div className="cricket-results-summary">
@@ -158,12 +228,14 @@ function CricketResults() {
               <strong>16</strong>
               <span>Total Matches</span>
             </div>
+
             <div>
-              <strong>{resultMatches.length}</strong>
+              <strong>{completedCount}</strong>
               <span>Results Added</span>
             </div>
+
             <div>
-              <strong>{Math.max(0, 16 - resultMatches.length)}</strong>
+              <strong>{remainingCount}</strong>
               <span>Remaining</span>
             </div>
           </div>
@@ -179,9 +251,7 @@ function CricketResults() {
                   <button
                     key={item}
                     type="button"
-                    className={
-                      filter === item ? "active" : ""
-                    }
+                    className={filter === item ? "active" : ""}
                     onClick={() => setFilter(item)}
                   >
                     {item === "ALL"
@@ -218,6 +288,7 @@ function CricketResults() {
               match.team1Id,
               match.team1Name
             );
+
             const team2 = getTeam(
               match.team2Id,
               match.team2Name
@@ -232,7 +303,9 @@ function CricketResults() {
               status === "COMPLETED";
 
             const scorecardUrl =
-  match.scorecardUrl || match.scorecard_url || "";
+              match.scorecardUrl ||
+              match.scorecard_url ||
+              "";
 
             return (
               <article
@@ -247,22 +320,17 @@ function CricketResults() {
                   <span
                     className={`result-match-status status-${status.toLowerCase()}`}
                   >
-                    {status === "FINISHED" || status === "COMPLETED"
-  ? "COMPLETED"
-  : status === "LIVE"
-    ? "🔴 LIVE"
-    : status === "ABANDONED"
-      ? "ABANDONED"
-      : status === "CANCELLED"
-        ? "CANCELLED"
-        : "UPCOMING"}
+                    {getStatusLabel(status)}
                   </span>
                 </div>
 
                 <div className="result-match-date">
                   <CalendarDays size={15} />
                   {formatDate(match.date)}
-                  {match.time && ` · ${String(match.time).slice(0, 5)}`}
+
+                  {match.time &&
+                    ` · ${String(match.time).slice(0, 5)}`}
+
                   {match.venue && ` · ${match.venue}`}
                 </div>
 
@@ -333,6 +401,10 @@ function CricketResults() {
                     <Trophy size={17} />
                     {match.result || "Match completed"}
                   </div>
+                ) : status === "ABANDONED" ? (
+                  <div className="result-fixture-status">
+                    Match abandoned
+                  </div>
                 ) : (
                   <div className="result-fixture-status">
                     {status === "LIVE"
@@ -382,7 +454,10 @@ function CricketResults() {
         </section>
 
         <section className="cricket-results-bottom">
-          <Link to="/cricket" className="cricket-back-button">
+          <Link
+            to="/cricket"
+            className="cricket-back-button"
+          >
             ← Back to Cricket Home
           </Link>
         </section>

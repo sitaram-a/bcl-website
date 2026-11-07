@@ -1,5 +1,7 @@
-import { useEffect, useMemo, useState } from "react";
+
+import { useEffect, useMemo, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
+import { RefreshCw, CalendarDays, MapPin } from "lucide-react";
 import CricketNavbar from "../../components/cricket/CricketNavbar";
 import { supabase } from "../../lib/supabase";
 import { getCricketTeams } from "../../services/cricketService";
@@ -33,7 +35,8 @@ function getFixtureStage(fixture) {
 
   if (
     fixture.stage === "SEMI-FINAL" ||
-    fixture.stage === "PLAYOFF"
+    fixture.stage === "PLAYOFF" ||
+    fixture.stage === "ELIMINATOR"
   ) {
     return "PLAYOFF";
   }
@@ -52,8 +55,8 @@ function getMatchDayTitle(day, fixtures) {
   }
 
   if (
-    stages.some(
-      (stage) => stage === "SEMI-FINAL" || stage === "PLAYOFF"
+    stages.some((stage) =>
+      ["SEMI-FINAL", "PLAYOFF", "ELIMINATOR"].includes(stage)
     )
   ) {
     return `Day ${day} — Playoffs`;
@@ -77,82 +80,84 @@ function CricketFixtures() {
   const [error, setError] = useState("");
   const [refreshing, setRefreshing] = useState(false);
 
+  const loadFixtures = useCallback(async (isRefresh = false) => {
+    if (isRefresh) {
+      setRefreshing(true);
+    } else {
+      setLoading(true);
+    }
+
+    setError("");
+
+    try {
+      const [fixtureResult, teamData] = await Promise.all([
+        supabase
+          .from("cricket_matches")
+          .select(`
+            id,
+            match_day,
+            stage,
+            group_name,
+            team1_id,
+            team2_id,
+            team1_placeholder,
+            team2_placeholder,
+            match_date,
+            match_time,
+            venue,
+            status
+          `)
+          .order("match_date", { ascending: true })
+          .order("match_time", { ascending: true }),
+
+        getCricketTeams(),
+      ]);
+
+      if (fixtureResult.error) {
+        throw fixtureResult.error;
+      }
+
+      setTeams(
+        (teamData || []).filter((team) => team.is_active !== false)
+      );
+
+      setFixtures(
+        (fixtureResult.data || []).map((row) => ({
+          id: row.id,
+          day: Number(row.match_day),
+          stage: row.stage,
+          group: row.group_name,
+          team1Id: row.team1_id,
+          team2Id: row.team2_id,
+          team1Placeholder: row.team1_placeholder,
+          team2Placeholder: row.team2_placeholder,
+          date: row.match_date,
+          time: row.match_time?.slice(0, 5) || "",
+          venue: row.venue || "Venue to be announced",
+          status: String(row.status || "UPCOMING").toUpperCase(),
+        }))
+      );
+    } catch (fetchError) {
+      console.error("Failed to load cricket fixtures:", fetchError);
+
+      setError(
+        "We couldn't load the fixtures. Please refresh the page and try again."
+      );
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
+    }
+  }, []);
+
   useEffect(() => {
     let active = true;
 
-    async function loadFixtures(isRefresh = false) {
-      if (isRefresh) {
-        setRefreshing(true);
-      } else {
-        setLoading(true);
-      }
-
-      setError("");
-
-      try {
-        const [fixtureResult, teamData] = await Promise.all([
-          supabase
-            .from("cricket_matches")
-            .select(`
-              id,
-              match_day,
-              stage,
-              group_name,
-              team1_id,
-              team2_id,
-              team1_placeholder,
-              team2_placeholder,
-              match_date,
-              match_time,
-              venue,
-              status
-            `)
-            .order("match_date", { ascending: true })
-            .order("match_time", { ascending: true }),
-          getCricketTeams(),
-        ]);
-
-        if (!active) return;
-
-        if (fixtureResult.error) {
-          throw fixtureResult.error;
-        }
-
-        setTeams((teamData || []).filter((team) => team.is_active !== false));
-
-        setFixtures(
-          (fixtureResult.data || []).map((row) => ({
-            id: row.id,
-            day: Number(row.match_day),
-            stage: row.stage,
-            group: row.group_name,
-            team1Id: row.team1_id,
-            team2Id: row.team2_id,
-            team1Placeholder: row.team1_placeholder,
-            team2Placeholder: row.team2_placeholder,
-            date: row.match_date,
-            time: row.match_time?.slice(0, 5) || "",
-            venue: row.venue || "Venue to be announced",
-            status: row.status || "UPCOMING",
-          }))
-        );
-      } catch (fetchError) {
-        console.error("Failed to load cricket fixtures:", fetchError);
-
-        if (active) {
-          setError(
-            "We couldn't load the fixtures. Please refresh the page and try again."
-          );
-        }
-      } finally {
-        if (active) {
-          setLoading(false);
-          setRefreshing(false);
-        }
-      }
+    async function initialLoad() {
+      if (!active) return;
+      await loadFixtures();
     }
 
-    loadFixtures();
+    initialLoad();
 
     const channel = supabase
       .channel("public-cricket-fixtures")
@@ -163,7 +168,9 @@ function CricketFixtures() {
           schema: "public",
           table: "cricket_matches",
         },
-        () => loadFixtures(true)
+        () => {
+          if (active) loadFixtures(true);
+        }
       )
       .subscribe((status) => {
         if (status === "CHANNEL_ERROR") {
@@ -177,7 +184,7 @@ function CricketFixtures() {
       active = false;
       supabase.removeChannel(channel);
     };
-  }, []);
+  }, [loadFixtures]);
 
   const teamMap = useMemo(
     () => new Map(teams.map((team) => [Number(team.id), team])),
@@ -190,34 +197,41 @@ function CricketFixtures() {
 
   function getTeamName(fixture, side) {
     const teamId = side === 1 ? fixture.team1Id : fixture.team2Id;
+
     const placeholder =
-      side === 1 ? fixture.team1Placeholder : fixture.team2Placeholder;
+      side === 1
+        ? fixture.team1Placeholder
+        : fixture.team2Placeholder;
 
     return getTeam(teamId)?.name || placeholder || "TBD";
   }
 
   function getTeamLogo(teamId) {
-    const team = getTeam(teamId);
-    return team?.logo_url || "";
+    return getTeam(teamId)?.logo_url || "";
   }
 
-  const filteredFixtures = fixtures.filter((fixture) => {
-    const search = searchTerm.trim().toLowerCase();
-    const team1 = getTeamName(fixture, 1).toLowerCase();
-    const team2 = getTeamName(fixture, 2).toLowerCase();
-    const venue = fixture.venue.toLowerCase();
+  const filteredFixtures = useMemo(() => {
+    return fixtures.filter((fixture) => {
+      const search = searchTerm.trim().toLowerCase();
 
-    const matchesSearch =
-      !search ||
-      team1.includes(search) ||
-      team2.includes(search) ||
-      venue.includes(search);
+      const team1 = getTeamName(fixture, 1).toLowerCase();
+      const team2 = getTeamName(fixture, 2).toLowerCase();
+      const venue = fixture.venue.toLowerCase();
 
-    const stage = getFixtureStage(fixture);
-    const matchesStage = stageFilter === "ALL" || stage === stageFilter;
+      const matchesSearch =
+        !search ||
+        team1.includes(search) ||
+        team2.includes(search) ||
+        venue.includes(search);
 
-    return matchesSearch && matchesStage;
-  });
+      const stage = getFixtureStage(fixture);
+
+      const matchesStage =
+        stageFilter === "ALL" || stage === stageFilter;
+
+      return matchesSearch && matchesStage;
+    });
+  }, [fixtures, searchTerm, stageFilter, teamMap]);
 
   const matchDays = [
     ...new Set(filteredFixtures.map((fixture) => fixture.day)),
@@ -237,6 +251,14 @@ function CricketFixtures() {
           )}`
       : "Schedule to be announced";
 
+  const upcomingCount = fixtures.filter((fixture) =>
+    ["UPCOMING", "SCHEDULED"].includes(fixture.status)
+  ).length;
+
+  const completedCount = fixtures.filter((fixture) =>
+    ["FINISHED", "COMPLETED"].includes(fixture.status)
+  ).length;
+
   return (
     <>
       <CricketNavbar />
@@ -249,18 +271,40 @@ function CricketFixtures() {
 
           <h1>Match Fixtures</h1>
 
-          <p>Follow the official BCL Season 5 cricket schedule.</p>
+          <p>
+            Follow the updated BCL Season 5 cricket schedule.
+          </p>
 
           <div className="fixtures-summary">
-            <span>📍 Baharagora Stadium</span>
-            <span>🏏 {fixtures.length} Scheduled Matches</span>
+            <span>
+              <MapPin size={15} /> Baharagora Stadium
+            </span>
+
+            <span>
+              <CalendarDays size={15} /> {fixtures.length} Total Matches
+            </span>
+
+            <span>
+              🏏 {completedCount} Completed
+            </span>
+
+            <span>
+              ⏳ {upcomingCount} Upcoming
+            </span>
+
             <span>📅 {dateRange}</span>
           </div>
         </section>
 
-        <section className="fixture-controls" aria-label="Search and filter fixtures">
+        <section
+          className="fixture-controls"
+          aria-label="Search and filter fixtures"
+        >
           <div className="fixture-search">
-            <label htmlFor="fixture-search-input">Search matches</label>
+            <label htmlFor="fixture-search-input">
+              Search matches
+            </label>
+
             <input
               id="fixture-search-input"
               type="search"
@@ -271,7 +315,10 @@ function CricketFixtures() {
           </div>
 
           <div className="fixture-filter">
-            <label htmlFor="fixture-stage-filter">Filter by stage</label>
+            <label htmlFor="fixture-stage-filter">
+              Filter by stage
+            </label>
+
             <select
               id="fixture-stage-filter"
               value={stageFilter}
@@ -300,9 +347,13 @@ function CricketFixtures() {
           <button
             type="button"
             className="fixture-reset-button"
-            onClick={() => loadFixturesFromButton()}
+            onClick={() => loadFixtures(true)}
             disabled={refreshing}
           >
+            <RefreshCw
+              size={15}
+              className={refreshing ? "fixture-refresh-icon" : ""}
+            />
             {refreshing ? "Refreshing..." : "Refresh Fixtures"}
           </button>
         </section>
@@ -319,10 +370,12 @@ function CricketFixtures() {
           <div className="cricket-no-fixtures" role="alert">
             <h2>Unable to Load Fixtures</h2>
             <p>{error}</p>
+
             <button
               type="button"
               className="fixture-reset-button"
-              onClick={() => window.location.reload()}
+              onClick={() => loadFixtures(true)}
+              disabled={refreshing}
             >
               Retry
             </button>
@@ -333,7 +386,10 @@ function CricketFixtures() {
               <div className="cricket-no-fixtures">
                 <div>🔎</div>
                 <h2>No Matches Found</h2>
-                <p>Try another team name or change the selected stage.</p>
+                <p>
+                  Try another team name or change the selected stage.
+                </p>
+
                 <button
                   type="button"
                   className="fixture-reset-button"
@@ -352,11 +408,20 @@ function CricketFixtures() {
                   .sort((a, b) => a.time.localeCompare(b.time));
 
                 return (
-                  <section className="fixture-day-section" key={day}>
+                  <section
+                    className="fixture-day-section"
+                    key={day}
+                  >
                     <header className="fixture-day-header">
                       <div>
-                        <span className="fixture-day-label">BCL SEASON 5</span>
-                        <h2>{getMatchDayTitle(day, dayFixtures)}</h2>
+                        <span className="fixture-day-label">
+                          BCL SEASON 5
+                        </span>
+
+                        <h2>
+                          {getMatchDayTitle(day, dayFixtures)}
+                        </h2>
+
                         <p>{formatDate(dayFixtures[0].date)}</p>
                       </div>
 
@@ -372,19 +437,28 @@ function CricketFixtures() {
                         const team2 = getTeam(fixture.team2Id);
 
                         return (
-                          <article className="cricket-fixture-card" key={fixture.id}>
+                          <article
+                            className="cricket-fixture-card"
+                            key={fixture.id}
+                          >
                             <div className="cricket-fixture-top">
                               <span className="cricket-fixture-status">
                                 {fixture.status}
                               </span>
+
                               <span className="cricket-fixture-id">
                                 {getFixtureStage(fixture)}
                               </span>
                             </div>
 
                             <div className="cricket-fixture-date">
-                              <strong>{formatDate(fixture.date)}</strong>
-                              <span>{formatTime(fixture.time)}</span>
+                              <strong>
+                                {formatDate(fixture.date)}
+                              </strong>
+
+                              <span>
+                                {formatTime(fixture.time)}
+                              </span>
                             </div>
 
                             <div className="cricket-fixture-teams">
@@ -393,14 +467,18 @@ function CricketFixtures() {
                                   {getTeamLogo(fixture.team1Id) ? (
                                     <img
                                       src={getTeamLogo(fixture.team1Id)}
-                                      alt={team1?.name || "Team logo"}
+                                      alt={`${team1?.name || "Team"} logo`}
                                     />
                                   ) : (
                                     "🏏"
                                   )}
                                 </div>
+
                                 <h2>{getTeamName(fixture, 1)}</h2>
-                                {team1?.short_name && <span>{team1.short_name}</span>}
+
+                                {team1?.short_name && (
+                                  <span>{team1.short_name}</span>
+                                )}
                               </div>
 
                               <div className="cricket-fixture-vs">
@@ -412,14 +490,18 @@ function CricketFixtures() {
                                   {getTeamLogo(fixture.team2Id) ? (
                                     <img
                                       src={getTeamLogo(fixture.team2Id)}
-                                      alt={team2?.name || "Team logo"}
+                                      alt={`${team2?.name || "Team"} logo`}
                                     />
                                   ) : (
                                     "🏏"
                                   )}
                                 </div>
+
                                 <h2>{getTeamName(fixture, 2)}</h2>
-                                {team2?.short_name && <span>{team2.short_name}</span>}
+
+                                {team2?.short_name && (
+                                  <span>{team2.short_name}</span>
+                                )}
                               </div>
                             </div>
 
@@ -438,7 +520,10 @@ function CricketFixtures() {
         )}
 
         <section className="cricket-fixtures-bottom">
-          <Link to="/cricket" className="cricket-back-button">
+          <Link
+            to="/cricket"
+            className="cricket-back-button"
+          >
             ← Back to Cricket Home
           </Link>
         </section>

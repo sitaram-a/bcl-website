@@ -7520,12 +7520,21 @@
   overflow: hidden;
   border: 1px solid rgba(245, 215, 123, 0.3);
   border-radius: 22px;
+
+  /* Background image + readability overlay */
   background:
-    radial-gradient(ellipse at 85% 20%, rgba(35, 91, 145, 0.45), transparent 48%),
-    linear-gradient(120deg, #07111f 0%, #102945 60%, #142f4b 100%);
+    linear-gradient(
+      90deg,
+      rgba(4, 13, 29, 0.94) 0%,
+      rgba(4, 13, 29, 0.82) 48%,
+      rgba(4, 13, 29, 0.48) 100%
+    ),
+    url("/media/BCL_2026_Champions_Banner.jpg") center / cover no-repeat;
+
   box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
 }
 
+/* Decorative circle */
 .home-tournament-banner::before {
   content: "";
   position: absolute;
@@ -7576,6 +7585,20 @@
   font-size: 16px;
   font-weight: 700;
   letter-spacing: 4px;
+}
+
+.home-tournament-rescheduled {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 22px;
+  padding: 9px 13px;
+  border: 1px solid rgba(245, 215, 123, 0.35);
+  border-radius: 8px;
+  background: rgba(5, 15, 30, 0.65);
+  color: #f5d77b;
+  font-size: 12px;
+  font-weight: 700;
 }
 
 .home-tournament-details {
@@ -7665,6 +7688,7 @@
     margin: 24px 14px 0;
     padding: 34px 22px;
     border-radius: 16px;
+    background-position: center;
   }
 
   .home-tournament-eyebrow {
@@ -7679,6 +7703,11 @@
   .home-tournament-edition {
     font-size: 13px;
     letter-spacing: 3px;
+  }
+
+  .home-tournament-rescheduled {
+    font-size: 10px;
+    line-height: 1.5;
   }
 
   .home-tournament-details {
